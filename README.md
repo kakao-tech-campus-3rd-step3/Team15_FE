@@ -66,3 +66,48 @@ npm run dev
 3. 개발이 끝나면 PR 템플릿 형식에 맞춰 PR을 생성해주세요 (병합 방향은 `feature/*` -> `develop`)
 
 - **다른 사람의 PR이 올라오면 피어 리뷰를 해주세요.**
+
+---
+
+## 기술 스택
+
+### 주요 라이브러리
+
+- **상태 관리**
+  - [@tanstack/react-query](https://tanstack.com/query/latest)
+  - [zustand](https://github.com/pmndrs/zustand)
+
+- **라우팅**
+  - [react-router-dom](https://reactrouter.com/)
+
+- **스타일링**
+  - [tailwindcss](https://tailwindcss.com/)
+  - [@tailwindcss/vite](https://tailwindcss.com/docs/guides/vite)
+  - [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+
+- **폼 & 검증**
+  - [react-hook-form](https://react-hook-form.com/)
+  - [zod](https://zod.dev/)
+
+- **유틸리티**
+  - [axios](https://axios-http.com/)
+  - [dayjs](https://day.js.org/)
+  - [lucide-react](https://lucide.dev/)
+  - [dotenv](https://github.com/motdotla/dotenv)
+  - [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
+  - [@fullcalendar/react](https://fullcalendar.io/)
+  - [react-hot-toast](https://react-hot-toast.com/)
+
+### 테스트 & Mocking
+
+- [msw (Mock Service Worker)](https://mswjs.io/)
+
+### 개발 환경 & 코드 품질
+
+- [prettier](https://prettier.io/)
+- [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+- [husky](https://typicode.github.io/husky)
+- [lint-staged](https://github.com/okonet/lint-staged)
+- [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+---
