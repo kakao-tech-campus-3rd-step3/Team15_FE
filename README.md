@@ -111,3 +111,27 @@ npm run dev
 - [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped)
 
 ---
+
+## 프로젝트 구조 (FSD: Feature-Sliced Design)
+
+본 프로젝트는 **Feature-Sliced Design (FSD)** 아키텍처를 기반으로 구성되어 있습니다.
+
+### 주요 계층
+
+- **app/**  
+  애플리케이션 전역 설정 (Provider, Router, 전역 스타일 등)
+
+- **processes/**  
+  앱의 독립적인 큰 프로세스(예: 인증 흐름, 결제 플로우 등)
+
+- **pages/**  
+  라우팅 기준의 페이지 단위 (한 화면 단위, 여러 feature 조합)
+
+- **features/**  
+  사용자 가치를 가지는 독립 기능 단위 (ex: 로그인, 댓글 작성)
+
+- **entities/**  
+  비즈니스 도메인/핵심 모델 단위 (ex: User, Post, Mission)
+
+- **shared/**  
+  전역적으로 재사용 가능한 코드 (UI 컴포넌트, hooks, lib, utils 등)
