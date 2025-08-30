@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
 import "@testing-library/jest-dom";
-import { server } from "../mocks/server";
+import { server } from "../shared/api/mocks/server";
 
 beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
 afterEach(() => server.resetHandlers());
