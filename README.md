@@ -133,3 +133,54 @@ npm run dev
 
 - **shared/**  
   전역적으로 재사용 가능한 코드 (UI 컴포넌트, hooks, lib, utils 등)
+
+---
+
+## 환경 변수 및 개발 환경 설정
+
+### 1️. 환경 변수 파일 구성
+
+프로젝트 루트에 환경별 `.env` 파일을 생성합니다.
+
+```
+.env                 # 공통 환경 변수
+.env.development     # 개발 환경 전용
+.env.production      # 배포 환경 전용
+```
+
+**예시**
+
+```env
+# .env.development
+VITE_API_BASE_URL=http://localhost:3000
+VITE_USE_MOCK=true
+
+# .env.production
+VITE_API_BASE_URL=https://api.example.com
+VITE_USE_MOCK=false
+```
+
+- `VITE_` 접두사는 **Vite에서 env 변수를 인식**하도록 필수입니다.
+- `VITE_USE_MOCK` : MSW(Mock Service Worker) 활성화 여부 제어
+- `VITE_API_BASE_URL` : API 요청 기본 URL
+
+---
+
+### 2️. 환경 구분 사용 가이드
+
+```ts
+export const config = {
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000',
+  useMock: import.meta.env.VITE_USE_MOCK === true,
+} as const;
+
+export const isLocalStage = import.meta.env.MODE === 'development';
+export const isProductionStage = import.meta.env.MODE === 'production';
+```
+
+- config를 통해 정의된 환경 변수를 import 하여 사용 가능
+- Vite 기본 제공 환경 변수
+  - import.meta.env.MODE → 현재 모드 ("development" | "production" | "test")
+  - import.meta.env.DEV → 개발 서버 실행 중일 때 true
+  - import.meta.env.PROD → 빌드된 배포 환경일 때 true
+- 기본 제공되지만, 가독성과 명시적 표현을 위해 isLocalStage, isProductionStage 같은 헬퍼 변수를 정의해서 사용
