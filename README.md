@@ -137,9 +137,7 @@ npm run dev
 - **shared/**  
   전역적으로 재사용 가능한 코드 (UI 컴포넌트, hooks, lib, utils 등)
 
----
-
-### 구조화 단위
+### 하위 계층
 
 - **slice/**  
   비즈니스 도메인으로 코드 그룹화  
@@ -148,6 +146,8 @@ npm run dev
 - **segment/**  
   기술적인 목적에 따른 코드 그룹화  
   slice 내부 코드를 더 세분화하여 체계적으로 구성
+
+---
 
 ## 개발자 패널 (DevPanel)
 
@@ -161,7 +161,7 @@ UI/기능 테스트와 QA 편의성을 위해 항상 화면에 고정되어 표�
 
 <img width="284" height="592" alt="Image" src="https://github.com/user-attachments/assets/f88392d0-976e-4e51-8dd5-37b5b67f7e84" />
 
-### 📂 FSD 구조 내 위치
+---
 
 ## 환경 변수 및 개발 환경 설정
 
