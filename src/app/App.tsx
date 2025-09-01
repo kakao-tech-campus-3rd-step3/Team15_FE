@@ -1,5 +1,5 @@
-function App() {
-  return <div>App</div>;
-}
+import RouterProvider from './providers/router/RouterProvider';
 
-export default App;
+export default function App() {
+  return <RouterProvider />;
+}
