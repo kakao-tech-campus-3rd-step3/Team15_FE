@@ -1,0 +1,9 @@
+/* Tailwind CSS */
+@import 'tailwindcss';
+
+/* 전역 base 스타일 */
+@import './app/styles/base/_fonts.css';
+@import './app/styles/base/_globals.css';
+
+/* 전역 theme 스타일 */
+@import './app/styles/theme.css';

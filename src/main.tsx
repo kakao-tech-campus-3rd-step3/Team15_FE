@@ -1,9 +1,9 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import App from '@app/App.tsx';
 import { worker } from '@shared/api/mocks/browser.ts';
 import { config } from '@/shared/utils/config.ts';
-import '@/app/main.css';
+import './main.css';
 
 if (config.useMock) {
   worker.start({ onUnhandledRequest: 'bypass' });

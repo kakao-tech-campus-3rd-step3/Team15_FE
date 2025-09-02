@@ -117,7 +117,7 @@ npm run dev
 본 프로젝트는 **Feature-Sliced Design (FSD)** 아키텍처를 기반으로 구성되어 있습니다.
 ![FSD 구조 다이어그램](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fvscch6q7ej44oxkwensa.jpg)
 
-### 주요 계층
+### 상위 계층
 
 - **app/**  
   애플리케이션 전역 설정 (Provider, Router, 전역 스타일 등)
@@ -125,14 +125,41 @@ npm run dev
 - **pages/**  
   라우팅 기준의 페이지 단위 (한 화면 단위, 여러 feature 조합)
 
+- **widgets/**  
+  여러 feature·entity를 조합한 UI 블록 (예: 헤더, 사이드바, 댓글 목록)
+
 - **features/**  
-  사용자 가치를 가지는 독립 기능 단위 (ex: 로그인, 댓글 작성)
+  사용자 가치를 가지는 독립 기능 단위 (예: 로그인, 댓글 작성)
 
 - **entities/**  
-  비즈니스 도메인/핵심 모델 단위 (ex: User, Post, Mission)
+  비즈니스 도메인/핵심 모델 단위 (예: User, Post, Mission)
 
 - **shared/**  
   전역적으로 재사용 가능한 코드 (UI 컴포넌트, hooks, lib, utils 등)
+
+### 하위 계층
+
+- **slice/**  
+  비즈니스 도메인으로 코드 그룹화  
+  관련된 모든 코드를 한곳에 모아 높은 응집도를 달성하는 핵심 단위
+
+- **segment/**  
+  기술적인 목적에 따른 코드 그룹화  
+  slice 내부 코드를 더 세분화하여 체계적으로 구성
+
+---
+
+## 개발자 패널 (DevPanel)
+
+UI/기능 테스트와 QA 편의성을 위해 항상 화면에 고정되어 표시됩니다.
+
+### 제공 기능
+
+- **라우팅 패널**: 버튼 클릭 시 지정된 경로로 즉시 이동 (`react-router-dom` 기반)
+- **색상 패널**: 등록된 테마 색상 값 표시, 클릭 시 클립보드 복사
+- **글씨 크기 패널**: Tailwind `text-*` 클래스 미리보기, 클릭 시 실제 `px` 값 복사
+
+<img width="284" height="592" alt="Image" src="https://github.com/user-attachments/assets/f88392d0-976e-4e51-8dd5-37b5b67f7e84" />
 
 ---
 
