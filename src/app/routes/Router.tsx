@@ -1,7 +1,7 @@
-import DevPanel from '@/shared/ui/dev-panner/ui/DevPanel';
+import { DevPanel } from '@/shared/ui';
 import { BrowserRouter } from 'react-router-dom';
 
-function RouterProvider() {
+function Router() {
   return (
     <BrowserRouter>
       {/* <Routes>
@@ -13,4 +13,4 @@ function RouterProvider() {
   );
 }
 
-export default RouterProvider;
+export default Router;

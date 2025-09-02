@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useDevPanel } from '../model/useDevPanel';
 import { RoutingPanel } from './RoutingPanel';
 import { ColorPanel } from './ColorPanel';
 import { FontSizePanel } from './FontSizePanel';
+import { useDevPanel } from './useDevPanel';
 
-export default function DevPanel() {
+export function DevPanel() {
   //   if (import.meta.env.MODE !== 'development') return null; // dev에서만
 
   const { open, setOpen } = useDevPanel();
