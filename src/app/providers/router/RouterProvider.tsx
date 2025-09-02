@@ -1,4 +1,4 @@
-import DevPanel from '@/features/dev-panner/ui/DevPanel';
+import DevPanel from '@/shared/ui/dev-panner/ui/DevPanel';
 import { BrowserRouter } from 'react-router-dom';
 
 function RouterProvider() {

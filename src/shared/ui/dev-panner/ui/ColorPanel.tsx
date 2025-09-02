@@ -1,4 +1,4 @@
-import { COLOR_TOKENS } from '@/shared/config/theme';
+import { COLOR_TOKENS } from '@/shared/utils/theme';
 import { copyToClipboard } from '@/shared/lib/clipboard';
 import { useState } from 'react';
 

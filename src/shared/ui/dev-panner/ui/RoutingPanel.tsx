@@ -1,4 +1,4 @@
-import { ROUTE_LIST } from '@/shared/config/routes';
+import { ROUTE_LIST } from '@/shared/utils/routes';
 import { useNavigate } from 'react-router-dom';
 
 export function RoutingPanel() {
