@@ -1,5 +1,5 @@
-import { SIZES } from '@/shared/utils/typography';
-import { copyToClipboard } from '@/shared/lib/clipboard';
+import { SIZES } from '@/shared/config';
+import { copyToClipboard } from '@/shared/lib';
 import { useRef, useState } from 'react';
 
 /**

@@ -1,5 +1,5 @@
-import { COLOR_TOKENS } from '@/shared/utils/theme';
-import { copyToClipboard } from '@/shared/lib/clipboard';
+import { COLOR_TOKENS } from '@/shared/config';
+import { copyToClipboard } from '@/shared/lib';
 import { useState } from 'react';
 
 export function ColorPanel() {

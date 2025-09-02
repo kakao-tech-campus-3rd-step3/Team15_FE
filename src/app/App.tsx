@@ -1,4 +1,4 @@
-import RouterProvider from './providers/router/RouterProvider';
+import RouterProvider from './routes/Router';
 
 export default function App() {
   return <RouterProvider />;
