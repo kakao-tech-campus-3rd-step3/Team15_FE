@@ -17,9 +17,14 @@ function HeaderAuth() {
     <header className='bg-primary sticky top-0 z-40 w-full text-black'>
       <div className='mx-auto grid h-20 w-full max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-4 md:px-6'>
         {/* 좌측 네비게이션 */}
-        <nav className='col-start-1 hidden items-center gap-6 md:flex'>
+        <nav className='col-start-1 hidden items-center gap-3 md:flex'>
           {navItems.map((item) => (
-            <Button key={item.path} onClick={() => navigate(item.path)} variant='link' size='lg'>
+            <Button
+              key={item.path}
+              onClick={() => navigate(item.path)}
+              variant='link'
+              className='text-xl'
+            >
               {item.label}
             </Button>
           ))}
@@ -29,19 +34,18 @@ function HeaderAuth() {
         <div className='col-start-2 select-none justify-self-center'>
           <div className='flex items-center gap-2 text-4xl font-extrabold tracking-tight'>
             <span>휴쉼</span>
-            <span className='text-sm'></span>
           </div>
         </div>
 
         {/* 우측 유틸 */}
         <div className='col-start-3 flex items-center gap-4 justify-self-end'>
           {/* 검색 아이콘 버튼 */}
-          <div className='rounded-full hover:bg-black/5'>
+          <Button variant='outline' size='sm'>
             <Search className='h-6 w-6' />
-          </div>
+          </Button>
 
           {/* 로그인 버튼 (연한 테두리 pill) */}
-          <Button variant='outline' size='lg'>
+          <Button variant='outline' size='sm'>
             로그인
           </Button>
 
@@ -55,7 +59,7 @@ function HeaderAuth() {
                 </Avatar>
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
+            <DropdownMenuContent align='start'>
               <DropdownMenuItem>내 계정</DropdownMenuItem>
               <DropdownMenuItem>설정</DropdownMenuItem>
               <DropdownMenuItem>로그아웃</DropdownMenuItem>
