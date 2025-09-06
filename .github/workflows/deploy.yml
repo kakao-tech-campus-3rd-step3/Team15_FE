@@ -1,0 +1,30 @@
+name: git push into another repo to deploy to vercel
+
+on:
+  push:
+    branches: ['setting/deploy']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: creates output
+        run: sh ./build.sh
+
+      - name: Push output to personal repo
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.AUTO_ACTIONS }}
+        with:
+          source-directory: 'output'
+          destination-github-username: jinhyun71744
+          destination-repository-name: Team15_FE_Deploy
+          user-email: ${{ secrets.EMAIL }}
+          commit-message: ${{ github.event.commits[0].message || 'auto deploy'}}
+          target-branch: develop
+
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
