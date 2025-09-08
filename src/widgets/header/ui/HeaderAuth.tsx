@@ -13,7 +13,7 @@ import { useState } from 'react';
 
 function HeaderAuth() {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // 임시로 상태 추가
+  const [isLoggedIn] = useState(false); // 임시로 상태 추가
 
   return (
     <header className='sticky top-0 z-40 w-full bg-white text-black'>
