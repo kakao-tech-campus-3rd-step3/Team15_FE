@@ -9,9 +9,11 @@ import {
 } from '@/shared/ui/shadcn/dropdown-menu';
 import { useNavigate } from 'react-router-dom';
 import { navItems } from '../config/const';
+import { useState } from 'react';
 
 function HeaderAuth() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // 임시로 상태 추가
 
   return (
     <header className='sticky top-0 z-40 w-full bg-white text-black'>
@@ -37,35 +39,48 @@ function HeaderAuth() {
           </div>
         </div>
 
-        {/* 우측 유틸 */}
-        <div className='col-start-3 flex items-center gap-4 justify-self-end'>
-          {/* 검색 아이콘 버튼 */}
-          <Button variant='ghost' size='icon'>
-            <Search className='h-6 w-6' />
-          </Button>
+        {isLoggedIn ? (
+          <>
+            {/* 프로필 드롭다운 (로그인 시 표시) */}
+            <div className='col-start-3 flex items-center gap-4 justify-self-end'>
+              <Button variant='outline' size='sm'>
+                로그아웃
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className='ml-1 cursor-pointer'>
+                    <Avatar>
+                      <AvatarFallback>FE</AvatarFallback>
+                    </Avatar>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='start'>
+                  <DropdownMenuItem>내 계정</DropdownMenuItem>
+                  <DropdownMenuItem>설정</DropdownMenuItem>
+                  <DropdownMenuItem>로그아웃</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* 우측 유틸 */}
+            <div className='col-start-3 flex items-center gap-4 justify-self-end'>
+              {/* 검색 아이콘 버튼 */}
+              <Button variant='ghost' size='icon'>
+                <Search className='h-6 w-6' />
+              </Button>
 
-          {/* 로그인 버튼 (연한 테두리 pill) */}
-          <Button variant='outline' size='sm'>
-            로그인
-          </Button>
-
-          {/* 프로필 드롭다운 (로그인 시 표시) */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className='ml-1 cursor-pointer'>
-                <Avatar>
-                  {/* <AvatarImage src='/profile.png' /> */}
-                  <AvatarFallback>FE</AvatarFallback>
-                </Avatar>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='start'>
-              <DropdownMenuItem>내 계정</DropdownMenuItem>
-              <DropdownMenuItem>설정</DropdownMenuItem>
-              <DropdownMenuItem>로그아웃</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+              {/* 로그인 버튼 (연한 테두리 pill) */}
+              <Button variant='outline' size='sm'>
+                로그인
+              </Button>
+              <Button variant='outline' size='sm'>
+                회원가입
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </header>
   );
