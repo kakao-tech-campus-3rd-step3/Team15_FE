@@ -43,7 +43,7 @@ function HeaderAuth() {
           <>
             {/* 프로필 드롭다운 (로그인 시 표시) */}
             <div className='col-start-3 flex items-center gap-4 justify-self-end'>
-              <Button variant='outline' size='sm'>
+              <Button variant='destructive' size='sm'>
                 로그아웃
               </Button>
               <DropdownMenu>
