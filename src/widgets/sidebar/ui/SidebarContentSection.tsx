@@ -3,7 +3,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -13,7 +12,6 @@ function SidebarContentSection() {
   return (
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>메뉴</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {items.map((item) => (
