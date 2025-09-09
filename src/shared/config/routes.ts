@@ -22,7 +22,7 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
 export const items = [
   {
     title: '홈',
-    url: '/home',
+    url: '/',
     icon: Home,
   },
   {
