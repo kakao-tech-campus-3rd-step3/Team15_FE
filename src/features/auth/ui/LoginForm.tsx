@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
+import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
 
 export const LoginForm: React.FC = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -15,26 +16,22 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div>
-      <div className='mb-6'>
-        <label className='mb-2 block font-medium'>이메일</label>
-        <input
-          type='email'
-          placeholder='이메일을 입력해주세요'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-      </div>
-      <div className='mb-6'>
-        <label className='mb-2 block font-medium'>비밀번호</label>
-        <input
-          type='password'
-          placeholder='비밀번호를 입력해주세요'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-      </div>
+      <InputWithLabel
+        label='이메일'
+        type='email'
+        placeholder='이메일을 입력해주세요'
+        value={form.email}
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+      />
+
+      <InputWithLabel
+        label='비밀번호'
+        type='password'
+        placeholder='비밀번호를 입력해주세요'
+        value={form.password}
+        onChange={(e) => setForm({ ...form, password: e.target.value })}
+      />
+
       <div className='mb-6 flex items-center gap-2'>
         <input type='checkbox' id='remember' className='h-4 w-4' />
         <label htmlFor='remember' className='text-sm text-gray-600'>

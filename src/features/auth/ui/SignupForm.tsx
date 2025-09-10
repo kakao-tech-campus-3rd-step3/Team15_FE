@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
+import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
 
 export const SignupForm: React.FC = () => {
   const [form, setForm] = useState({
@@ -30,46 +31,38 @@ export const SignupForm: React.FC = () => {
 
   return (
     <div>
-      <div className='mb-4'>
-        <label className='mb-2 block font-medium'>이메일</label>
-        <input
-          type='email'
-          placeholder='kakao.tech@kakao.com'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-      </div>
-      <div className='mb-4'>
-        <label className='mb-2 block font-medium'>닉네임</label>
-        <input
-          type='text'
-          placeholder='사용할 닉네임을 입력해주세요'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.nickname}
-          onChange={(e) => setForm({ ...form, nickname: e.target.value })}
-        />
-      </div>
-      <div className='mb-4'>
-        <label className='mb-2 block font-medium'>비밀번호</label>
-        <input
-          type='password'
-          placeholder='8자 이상 영문, 숫자, 특수문자 포함'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-      </div>
-      <div className='mb-4'>
-        <label className='mb-2 block font-medium'>비밀번호 확인</label>
-        <input
-          type='password'
-          placeholder='비밀번호를 다시 입력해주세요'
-          className='w-full rounded-lg border-2 border-gray-200 px-4 py-3 focus:border-green-500 focus:outline-none'
-          value={form.passwordConfirm}
-          onChange={(e) => setForm({ ...form, passwordConfirm: e.target.value })}
-        />
-      </div>
+      <InputWithLabel
+        label='이메일'
+        type='email'
+        placeholder='이메일을 입력해주세요'
+        value={form.email}
+        onChange={(e) => setForm({ ...form, email: e.target.value })}
+      />
+
+      <InputWithLabel
+        label='닉네임'
+        type='text'
+        placeholder='사용할 닉네임을 입력해주세요'
+        value={form.nickname}
+        onChange={(e) => setForm({ ...form, nickname: e.target.value })}
+      />
+
+      <InputWithLabel
+        label='비밀번호'
+        type='password'
+        placeholder='8자 이상 영문, 숫자, 특수문자 포함'
+        value={form.password}
+        onChange={(e) => setForm({ ...form, password: e.target.value })}
+      />
+
+      <InputWithLabel
+        label='비밀번호 확인'
+        type='password'
+        placeholder='비밀번호를 다시 입력해주세요'
+        value={form.passwordConfirm}
+        onChange={(e) => setForm({ ...form, passwordConfirm: e.target.value })}
+      />
+
       <div className='mb-6 flex items-center gap-2'>
         <input
           type='checkbox'
