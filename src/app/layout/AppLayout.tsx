@@ -6,7 +6,7 @@ import { SideBar } from '@/widgets/sidebar';
 import { HeaderGuest, HeaderLogin } from '@/widgets/header';
 
 export default function AppLayout() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <>
       {isLoggedIn ? (

@@ -1,12 +1,5 @@
 import { Search } from 'lucide-react';
 import { Button } from '@/shared/ui/shadcn/button';
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/shared/ui/shadcn/dropdown-menu';
 import { useNavigate } from 'react-router-dom';
 import { navItems } from '../config/const';
 
@@ -48,23 +41,9 @@ export function HeaderGuest() {
           <Button variant='outline' size='sm'>
             로그인
           </Button>
-
-          {/* 프로필 드롭다운 (로그인 시 표시) */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className='ml-1 cursor-pointer'>
-                <Avatar>
-                  {/* <AvatarImage src='/profile.png' /> */}
-                  <AvatarFallback>FE</AvatarFallback>
-                </Avatar>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='start'>
-              <DropdownMenuItem>내 계정</DropdownMenuItem>
-              <DropdownMenuItem>설정</DropdownMenuItem>
-              <DropdownMenuItem>로그아웃</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <Button variant='outline' size='sm'>
+            회원가입
+          </Button>
         </div>
       </div>
     </header>
