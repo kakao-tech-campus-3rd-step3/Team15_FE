@@ -1,9 +1,7 @@
-'use client';
-
 import { LoginForm, SignupForm } from '@/features/auth';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/shadcn/tabs';
 
-export function AuthTabs() {
+export function AuthFormTabs() {
   return (
     <Tabs defaultValue='login' className='w-full'>
       {/* 탭 버튼 */}
