@@ -100,6 +100,7 @@ npm run dev
 
 ### 테스트 & Mocking
 
+- [Vitest](https://vitest.dev/)
 - [msw (Mock Service Worker)](https://mswjs.io/)
 
 ### 개발 환경 & 코드 품질
