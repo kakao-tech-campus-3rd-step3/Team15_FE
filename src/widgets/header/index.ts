@@ -1,1 +1,2 @@
-export * from './ui/Header';
+export * from './ui/HeaderGuest';
+export * from './ui/HeaderLogin';
