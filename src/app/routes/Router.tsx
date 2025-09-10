@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppLayout from '../layout/AppLayout';
 import { LandingPage } from '@/pages/landing';
 import { ROUTES } from '@/shared/config';
-import { AuthPage } from '@/pages/login';
+import { AuthPage } from '@/pages/auth';
 
 function Router() {
   return (
