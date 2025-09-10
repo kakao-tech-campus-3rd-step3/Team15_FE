@@ -1,36 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
 import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
+import { loginSchema, type LoginFormValues } from '../model/auth.schema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const LoginForm: React.FC = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  });
 
-  const handleLogin = () => {
-    if (!form.email || !form.password) {
-      alert('이메일과 비밀번호를 입력해주세요.');
-      return;
-    }
-    console.log('로그인 시도:', form);
+  const onSubmit = (data: LoginFormValues) => {
+    console.log('로그인 시도:', data);
     alert('로그인 기능은 백엔드 연동 후 구현됩니다.');
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <InputWithLabel
         label='이메일'
         type='email'
         placeholder='이메일을 입력해주세요'
-        value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
+        {...register('email')}
       />
+      {errors.email && <p className='mb-3 text-sm text-red-500'>{errors.email.message}</p>}
 
       <InputWithLabel
         label='비밀번호'
         type='password'
         placeholder='비밀번호를 입력해주세요'
-        value={form.password}
-        onChange={(e) => setForm({ ...form, password: e.target.value })}
+        {...register('password')}
       />
+      {errors.password && <p className='mb-3 text-sm text-red-500'>{errors.password.message}</p>}
 
       <div className='mb-6 flex items-center gap-2'>
         <input type='checkbox' id='remember' className='h-4 w-4' />
@@ -39,7 +44,7 @@ export const LoginForm: React.FC = () => {
         </label>
       </div>
       <button
-        onClick={handleLogin}
+        type='submit'
         className='w-full rounded-lg bg-gradient-to-br from-green-500 to-green-600 py-3 font-semibold text-white transition hover:shadow-lg'
       >
         로그인
@@ -57,6 +62,6 @@ export const LoginForm: React.FC = () => {
           비밀번호를 잊으셨나요?
         </a>
       </div>
-    </div>
+    </form>
   );
 };

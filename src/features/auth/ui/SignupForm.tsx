@@ -1,83 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
 import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
+import { useForm } from 'react-hook-form';
+import { signupSchema, type SignupFormValues } from '../model/auth.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const SignupForm: React.FC = () => {
-  const [form, setForm] = useState({
-    email: '',
-    nickname: '',
-    password: '',
-    passwordConfirm: '',
-    termsAgree: false,
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormValues>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const handleSignup = () => {
-    const { email, nickname, password, passwordConfirm, termsAgree } = form;
-    if (!email || !nickname || !password || !passwordConfirm) {
-      alert('모든 필드를 입력해주세요.');
-      return;
-    }
-    if (password !== passwordConfirm) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-    if (!termsAgree) {
-      alert('이용약관에 동의해주세요.');
-      return;
-    }
-    console.log('회원가입 시도:', form);
+  const onSubmit = (data: SignupFormValues) => {
+    console.log('회원가입 시도:', data);
     alert('회원가입 기능은 백엔드 연동 후 구현됩니다.');
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <InputWithLabel
         label='이메일'
         type='email'
         placeholder='이메일을 입력해주세요'
-        value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
+        {...register('email')}
       />
+      {errors.email && <p className='mb-3 text-sm text-red-500'>{errors.email.message}</p>}
 
       <InputWithLabel
         label='닉네임'
         type='text'
         placeholder='사용할 닉네임을 입력해주세요'
-        value={form.nickname}
-        onChange={(e) => setForm({ ...form, nickname: e.target.value })}
+        {...register('nickname')}
       />
+      {errors.nickname && <p className='mb-3 text-sm text-red-500'>{errors.nickname.message}</p>}
 
       <InputWithLabel
         label='비밀번호'
         type='password'
         placeholder='8자 이상 영문, 숫자, 특수문자 포함'
-        value={form.password}
-        onChange={(e) => setForm({ ...form, password: e.target.value })}
+        {...register('password')}
       />
+      {errors.password && <p className='mb-3 text-sm text-red-500'>{errors.password.message}</p>}
 
       <InputWithLabel
         label='비밀번호 확인'
         type='password'
         placeholder='비밀번호를 다시 입력해주세요'
-        value={form.passwordConfirm}
-        onChange={(e) => setForm({ ...form, passwordConfirm: e.target.value })}
+        {...register('passwordConfirm')}
       />
+      {errors.passwordConfirm && (
+        <p className='text-sm text-red-500'>{errors.passwordConfirm.message}</p>
+      )}
 
-      <div className='mb-6 flex items-center gap-2'>
-        <input
-          type='checkbox'
-          checked={form.termsAgree}
-          onChange={(e) => setForm({ ...form, termsAgree: e.target.checked })}
-          className='h-4 w-4'
-          id='terms'
-        />
+      <div className='mb-2 flex items-center gap-2'>
+        <input type='checkbox' {...register('termsAgree')} className='h-4 w-4' id='terms' />
         <label htmlFor='terms' className='text-sm text-gray-600'>
           이용약관 및 개인정보처리방침에 동의합니다
         </label>
       </div>
+      {errors.termsAgree && <p className='text-sm text-red-500'>{errors.termsAgree.message}</p>}
       <button
-        onClick={handleSignup}
-        className='w-full rounded-lg bg-gradient-to-br from-green-500 to-green-600 py-3 font-semibold text-white transition hover:shadow-lg'
+        type='submit'
+        className='mt-6 w-full rounded-lg bg-gradient-to-br from-green-500 to-green-600 py-3 font-semibold text-white transition hover:shadow-lg'
       >
         계정 만들기
       </button>
@@ -89,6 +76,6 @@ export const SignupForm: React.FC = () => {
       </div>
 
       <SocialLoginButtons />
-    </div>
+    </form>
   );
 };
