@@ -14,7 +14,7 @@ export const InputWithLabel = React.forwardRef<HTMLInputElement, InputWithLabelP
     const inputId = id || label.toLowerCase().replace(/\s+/g, '-');
 
     return (
-      <div className={`mb-2 grid w-full max-w-sm items-center gap-1 ${className || ''}`}>
+      <div className={`mb-2 grid w-full items-center gap-1 ${className || ''}`}>
         <Label htmlFor={inputId} className='mt-2 block text-base'>
           {label}
         </Label>
