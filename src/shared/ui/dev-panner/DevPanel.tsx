@@ -3,6 +3,7 @@ import { RoutingPanel } from './RoutingPanel';
 import { ColorPanel } from './ColorPanel';
 import { FontSizePanel } from './FontSizePanel';
 import { useDevPanel } from './useDevPanel';
+import LoginPanel from './LoginPanel';
 
 export function DevPanel() {
   //   if (import.meta.env.MODE !== 'development') return null; // dev에서만
@@ -38,6 +39,7 @@ export function DevPanel() {
       {open && (
         <div className='grid gap-3 bg-white p-3'>
           <RoutingPanel />
+          <LoginPanel />
           <ColorPanel />
           <FontSizePanel />
         </div>
