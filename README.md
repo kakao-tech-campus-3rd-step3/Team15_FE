@@ -166,7 +166,7 @@ UI/기능 테스트와 QA 편의성을 위해 항상 화면에 고정되어 표�
 - **색상 패널**: 등록된 테마 색상 값 표시, 클릭 시 클립보드 복사
 - **글씨 크기 패널**: Tailwind `text-*` 클래스 미리보기, 클릭 시 실제 `px` 값 복사
 
-<img width="284" height="592" alt="Image" src="https://github.com/user-attachments/assets/f88392d0-976e-4e51-8dd5-37b5b67f7e84" />
+<img width="277" height="790" alt="image" src="https://github.com/user-attachments/assets/62f493c8-afab-4549-bc75-ce4486c9c29f" />
 
 ---
 
