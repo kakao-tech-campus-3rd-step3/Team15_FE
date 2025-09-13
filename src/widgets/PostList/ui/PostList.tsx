@@ -7,7 +7,7 @@ export function PostList({ className }: { className?: string }) {
   if (isLoading) return <div className={className}>로딩 중…</div>;
 
   return (
-    <div className={className + ' grid gap-4 sm:grid-cols-2 lg:grid-cols-3'}>
+    <div className={className + ' grid gap-4 px-6 sm:grid-cols-2 lg:grid-cols-3'}>
       {data?.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}

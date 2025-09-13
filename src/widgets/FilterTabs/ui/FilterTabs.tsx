@@ -11,7 +11,7 @@ export function FilterTabs({ className }: { className?: string }) {
     <div
       role='tablist'
       aria-label='카테고리 필터'
-      className={clsx('flex flex-wrap gap-2', className)}
+      className={clsx('flex flex-wrap gap-2 px-6', className)}
     >
       {TABS.map((tab) => (
         <Button
