@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import type { Category as CategoryDto } from '@/features/filter-posts/api/getCategories';
 
-export type Category = '전체' | '진로취업' | '대인관계' | '사회생활' | '정신건강' | '가족' | '성';
+export type CategoryCode = CategoryDto['code'];
 
-export function useFilter(initial: Category = '전체') {
-  const [category, setCategory] = useState<Category>(initial);
+export function useFilter(initial: CategoryCode = 'ALL') {
+  const [category, setCategory] = useState<CategoryCode>(initial);
   return { category, setCategory } as const;
 }
