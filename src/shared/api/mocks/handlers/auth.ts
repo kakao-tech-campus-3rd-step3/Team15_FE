@@ -25,4 +25,28 @@ export const authHandlers = [
     console.log('리프레쉬');
     return HttpResponse.json({ accessToken: 'refreshed-mocked-token' }, { status: 200 });
   }),
+
+  // 회원가입
+  http.post('/api/user/signup', async ({ request }) => {
+    const body = await request.json();
+
+    // 타입 보장용
+    const { email, password } = body as {
+      email: string;
+      password: string;
+    };
+
+    // 간단한 유효성 검사 (mock 수준)
+    if (!email || !password) {
+      return HttpResponse.json({ message: '이메일과 비밀번호는 필수입니다.' }, { status: 400 });
+    }
+
+    // 이미 가입된 이메일 예시
+    if (email === 'taken@example.com') {
+      return HttpResponse.json({ message: '이미 사용 중인 이메일입니다.' }, { status: 409 });
+    }
+
+    // 성공 케이스
+    return new HttpResponse(null, { status: 201 });
+  }),
 ];
