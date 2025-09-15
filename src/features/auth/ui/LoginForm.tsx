@@ -4,8 +4,10 @@ import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
 import { loginSchema, type LoginFormValues } from '../model/auth.schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useLogin } from '../api/useLogin';
 
 export const LoginForm: React.FC = () => {
+  const loginMutation = useLogin();
   const {
     register,
     handleSubmit,
@@ -15,8 +17,7 @@ export const LoginForm: React.FC = () => {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    console.log('로그인 시도:', data);
-    alert('로그인 기능은 백엔드 연동 후 구현됩니다.');
+    loginMutation.mutate(data);
   };
 
   return (
