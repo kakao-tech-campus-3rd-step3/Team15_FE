@@ -37,9 +37,13 @@ axiosInstance.interceptors.response.use(
   (res) => res, //성공 응답 반환
   async (err) => {
     const originalRequest = err.config; //원래 요청 정보 저장
-
     // 401 에러 && 재요청 시도가 아닌 경우
     if (err.response?.status === 401 && !originalRequest._retry) {
+      if (err.response.data?.code === 'LOGIN_FAILED') {
+        // 로그인 실패: refresh 시도 NO
+        return Promise.reject(err);
+      }
+
       originalRequest._retry = true;
 
       try {

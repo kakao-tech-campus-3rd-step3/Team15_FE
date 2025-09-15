@@ -1,36 +1,40 @@
 import { create } from 'zustand';
 import { authService } from '../lib/authService';
+import { persist } from 'zustand/middleware';
 
 interface AuthState {
   isLoggedIn: boolean;
   accessToken: string | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (token: string) => Promise<void>;
   logout: () => void;
   refreshAccessToken: () => Promise<void>;
 }
-export const useAuthStore = create<AuthState>((set, get) => ({
-  isLoggedIn: false,
-  accessToken: null,
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set, get) => ({
+      isLoggedIn: false,
+      accessToken: null,
 
-  login: async (email, password) => {
-    const data = await authService.login({ email, password });
-    localStorage.setItem('accessToken', data.accessToken);
-    set({ accessToken: data.accessToken, isLoggedIn: true });
-  },
+      login: async (token: string) => {
+        localStorage.setItem('accessToken', token);
+        set({ accessToken: token, isLoggedIn: true });
+      },
 
-  logout: async () => {
-    await authService.logout();
-    localStorage.removeItem('accessToken');
-    set({ accessToken: null, isLoggedIn: false });
-  },
+      logout: async () => {
+        localStorage.removeItem('accessToken');
+        set({ accessToken: null, isLoggedIn: false });
+      },
 
-  refreshAccessToken: async () => {
-    try {
-      const data = await authService.refresh();
-      localStorage.setItem('accessToken', data.accessToken);
-      set({ accessToken: data.accessToken, isLoggedIn: true });
-    } catch {
-      get().logout();
-    }
-  },
-}));
+      refreshAccessToken: async () => {
+        try {
+          const data = await authService.refresh();
+          localStorage.setItem('accessToken', data.accessToken);
+          set({ accessToken: data.accessToken, isLoggedIn: true });
+        } catch {
+          get().logout();
+        }
+      },
+    }),
+    { name: 'auth-storage' },
+  ),
+);
