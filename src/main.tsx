@@ -5,7 +5,7 @@ import { worker } from '@shared/api/mocks/browser.ts';
 import { config } from '@/shared/config/appConfig';
 import './main.css';
 
-if (config.useMock === true) {
+if (config.useMock) {
   worker.start({ onUnhandledRequest: 'bypass' });
 }
 

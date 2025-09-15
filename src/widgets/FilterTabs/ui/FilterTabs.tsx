@@ -6,7 +6,6 @@ import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQue
 export function FilterTabs({ className }: { className?: string }) {
   const { category, setCategory } = useFilter();
   const { data } = useCategoriesQuery();
-
   if (!data || data.length === 0) {
     return null;
   }
