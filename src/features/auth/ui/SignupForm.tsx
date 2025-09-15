@@ -41,6 +41,8 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }: SignupFormP
             //api 명세 없음
             alert('회원가입 실패');
             console.log(error);
+          } else {
+            console.log('알 수 없는 에러', error);
           }
         },
       },
