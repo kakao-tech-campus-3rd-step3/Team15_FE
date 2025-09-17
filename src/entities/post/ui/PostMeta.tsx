@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/shadcn/button';
+import { YSButton } from '@/shared/ui';
 import { Heart, MessageCircle } from 'lucide-react';
 
 export function PostMeta({
@@ -14,7 +14,7 @@ export function PostMeta({
 }) {
   return (
     <div className='text-muted-foreground flex items-center justify-center gap-8 text-sm'>
-      <Button
+      <YSButton
         type='button'
         variant={'ghost'}
         onClick={onLike}
@@ -23,7 +23,7 @@ export function PostMeta({
       >
         <Heart className='h-5 w-5' />
         <span>{likes}</span>
-      </Button>
+      </YSButton>
       <div className='flex items-center gap-2 rounded-full px-2 py-1'>
         <MessageCircle className='h-5 w-5' />
         <span>{comments}</span>

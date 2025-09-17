@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { CategoryCode } from '@/entities/post/model/types';
-import { Button } from '@/shared/ui/shadcn/button';
+import { YSButton } from '@/shared/ui/';
 import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQuery';
 
 export function FilterTabs({
@@ -24,7 +24,7 @@ export function FilterTabs({
       className={clsx('flex flex-wrap gap-2 px-6', className)}
     >
       {data.map((tab) => (
-        <Button
+        <YSButton
           key={tab.code}
           onClick={() => setCategory(tab.code)}
           variant={category === tab.code ? 'default' : 'outline'}
@@ -34,7 +34,7 @@ export function FilterTabs({
           aria-selected={category === tab.code}
         >
           {tab.displayName}
-        </Button>
+        </YSButton>
       ))}
     </div>
   );
