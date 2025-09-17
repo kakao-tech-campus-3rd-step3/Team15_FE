@@ -4,8 +4,19 @@ import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
 import { useForm } from 'react-hook-form';
 import { signupSchema, type SignupFormValues } from '../model/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { postSignup } from '../api/postSignup';
+import { AxiosError } from 'axios';
 
-export const SignupForm: React.FC = () => {
+type SignupFormProps = {
+  onSuccess?: () => void;
+};
+
+export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }: SignupFormProps) => {
+  const { mutate: postSignupMutation } = useMutation({
+    mutationFn: postSignup,
+  });
+
   const {
     register,
     handleSubmit,
@@ -14,9 +25,28 @@ export const SignupForm: React.FC = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (data: SignupFormValues) => {
-    console.log('회원가입 시도:', data);
-    alert('회원가입 기능은 백엔드 연동 후 구현됩니다.');
+  const onSubmit = async (data: SignupFormValues) => {
+    postSignupMutation(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          alert('회원가입이 완료되었습니다. 로그인 탭으로 이동합니다.');
+          onSuccess?.();
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError) {
+            //api 명세 없음
+            alert('회원가입 실패');
+            console.log(error);
+          } else {
+            console.log('알 수 없는 에러', error);
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -28,14 +58,6 @@ export const SignupForm: React.FC = () => {
         {...register('email')}
       />
       {errors.email && <p className='mb-3 text-sm text-red-500'>{errors.email.message}</p>}
-
-      <InputWithLabel
-        label='닉네임'
-        type='text'
-        placeholder='사용할 닉네임을 입력해주세요'
-        {...register('nickname')}
-      />
-      {errors.nickname && <p className='mb-3 text-sm text-red-500'>{errors.nickname.message}</p>}
 
       <InputWithLabel
         label='비밀번호'

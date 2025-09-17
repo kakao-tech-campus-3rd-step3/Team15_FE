@@ -21,7 +21,6 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 const signupSchema = z
   .object({
     email: emailSchema,
-    nickname: z.string().min(2, '닉네임은 최소 2자 이상이어야 합니다.'),
     password: passwordSchema,
     passwordConfirm: z.string(),
     termsAgree: z.boolean().refine((v) => v === true, {
