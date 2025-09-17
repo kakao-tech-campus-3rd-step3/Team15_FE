@@ -1,7 +1,8 @@
+import type { CategoryCode } from '@/entities/post';
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
 
 export interface Category {
-  code: string;
+  code: CategoryCode;
   displayName: string;
 }
 

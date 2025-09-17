@@ -1,10 +1,17 @@
 import clsx from 'clsx';
-import { useFilter } from '../model/useFilter';
+import type { CategoryCode } from '@/entities/post/model/types';
 import { Button } from '@/shared/ui/shadcn/button';
 import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQuery';
 
-export function FilterTabs({ className }: { className?: string }) {
-  const { category, setCategory } = useFilter();
+export function FilterTabs({
+  className,
+  category,
+  setCategory,
+}: {
+  className?: string;
+  category: CategoryCode;
+  setCategory: (code: CategoryCode) => void;
+}) {
   const { data } = useCategoriesQuery();
   if (!data || data.length === 0) {
     return null;
