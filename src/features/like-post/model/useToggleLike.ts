@@ -1,8 +1,7 @@
 export function useToggleLike() {
   let pending = false;
-  const toggle = async (postId: number) => {
+  const toggle = async () => {
     pending = true;
-    postId;
     await new Promise((r) => setTimeout(r, 300));
     pending = false;
   };
