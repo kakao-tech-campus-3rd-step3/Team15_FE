@@ -1,6 +1,6 @@
 import { usePostsByCategoryQuery } from '@/entities/post/model/usePostsByCategoryQuery';
-import type { CategoryCode } from '@/entities/post/model/types';
 import { PostCard } from '@/widgets/PostCard';
+import type { PostListProps } from '../model/interface';
 
 export function PostList({
   className,
@@ -8,13 +8,7 @@ export function PostList({
   page = 0,
   size = 10,
   limit, // 기존 prop이 있으면 유지 가능. 다만 페이지네이션과는 충돌될 수 있어 권장 X
-}: {
-  className?: string;
-  code?: CategoryCode;
-  page?: number;
-  size?: number;
-  limit?: number;
-}) {
+}: PostListProps) {
   const { data, isLoading, isError } = usePostsByCategoryQuery({ code, page, size });
 
   if (isLoading) return <div className={className}>로딩 중…</div>;
