@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
   withCredentials: true, //클라이언트(브라우저)가 서버로 요청을 보낼 때 쿠키(refresh token)를 포함하도록 지정
 });
 

@@ -6,5 +6,5 @@ export type PostSignupParams = {
 };
 
 export const postSignup = async (params: PostSignupParams) => {
-  await axiosInstance.post('/user/signup', params);
+  await axiosInstance.post('/users/signup', params);
 };
