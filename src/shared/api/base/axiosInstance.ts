@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 });
 
 // 토큰이 필요 없는 경로 목록
-const publicPaths = ['/auth/login', '/auth/refresh'];
+const publicPaths = ['/auth/login', '/auth/refresh', '/'];
 
 axiosInstance.interceptors.request.use(
   (config) => {
