@@ -10,6 +10,7 @@ export function PostList({
   page = 0,
   size = 10,
   limit, // 기존 prop이 있으면 유지 가능. 다만 페이지네이션과는 충돌될 수 있어 권장 X
+  showPagination = true,
 }: PostListProps) {
   const [curPage, setCurPage] = useState(page);
   const { data, isLoading, isError } = usePostsByCategoryQuery({ code, page: curPage, size });
@@ -27,14 +28,16 @@ export function PostList({
       {list.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}
-      <div className='col-span-full mt-6 flex justify-center'>
-        <PaginationPosts
-          page={data.page} // 0-based (API 응답에 맞게)
-          totalPages={data.totalPages} // 전체 페이지 수
-          onChange={setCurPage} // 새 페이지(0-based)
-          windowSize={5}
-        />
-      </div>
+      {showPagination && (
+        <div className='col-span-full mt-6 flex justify-center'>
+          <PaginationPosts
+            page={data.page}
+            totalPages={data.totalPages}
+            onChange={setCurPage}
+            windowSize={5}
+          />
+        </div>
+      )}
     </div>
   );
 }

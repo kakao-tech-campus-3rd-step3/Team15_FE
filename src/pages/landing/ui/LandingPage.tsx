@@ -1,4 +1,3 @@
-import { ViewSwitch } from '@/features/switch-post-view';
 import { MorePostsButton } from '@/shared/ui';
 import { FilterTabs } from '@/widgets/FilterTabs';
 import { useFilter } from '@/widgets/FilterTabs/model/useFilter';
@@ -13,8 +12,7 @@ export function LandingPage() {
     <>
       <HeroSection />
       <FilterTabs category={category} setCategory={setCategory} />
-      <ViewSwitch />
-      <PostList className='mt-8' limit={6} code={category} />
+      <PostList className='mt-8' limit={6} code={category} showPagination={false} />
       <MorePostsButton to='/post' label='마음소식 더 보러가기' />
       <SupportBand />
     </>

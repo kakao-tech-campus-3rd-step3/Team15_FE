@@ -6,4 +6,5 @@ export interface PostListProps {
   page?: number;
   size?: number;
   limit?: number;
+  showPagination?: boolean;
 }
