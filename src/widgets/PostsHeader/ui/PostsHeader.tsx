@@ -13,9 +13,9 @@ export function PostsHeader() {
     <>
       <section className='space-y-6 pb-10 pt-10'>
         {/* 상단: 검색 / 타이틀 / 글쓰기 버튼 */}
-        <div className='grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr]'>
+        <div className='grid grid-cols-1 items-center gap-3 px-5 sm:grid-cols-[1fr_auto_1fr]'>
           {/* 좌측: 검색바 */}
-          <div className='sm:order-1'>
+          <div className='w-full max-w-xs sm:order-1'>
             <SearchInput />
           </div>
 
