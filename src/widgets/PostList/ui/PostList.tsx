@@ -18,7 +18,7 @@ export function PostList({
   const list = limit ? data.content.slice(0, limit) : data.content;
 
   return (
-    <div className={className + ' grid gap-4 px-6 sm:grid-cols-2 lg:grid-cols-3'}>
+    <div className={className + ' grid gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'}>
       {list.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}

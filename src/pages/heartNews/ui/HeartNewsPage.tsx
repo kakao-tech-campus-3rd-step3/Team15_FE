@@ -1,22 +1,18 @@
 import { ViewSwitch } from '@/features/switch-post-view';
-import { MorePostsButton } from '@/shared/ui';
 import { FilterTabs } from '@/widgets/FilterTabs';
 import { useFilter } from '@/widgets/FilterTabs/model/useFilter';
-import { HeroSection } from '@/widgets/HeroSection';
 import { PostList } from '@/widgets/PostList';
-import { SupportBand } from '@/widgets/SupportBand';
+import { PostsHeader } from '@/widgets/PostsHeader';
 
-export function LandingPage() {
+export function HeartNewsPage() {
   const { category, setCategory } = useFilter();
 
   return (
     <>
-      <HeroSection />
+      <PostsHeader />
       <FilterTabs category={category} setCategory={setCategory} />
       <ViewSwitch />
-      <PostList className='mt-8' limit={6} code={category} />
-      <MorePostsButton to='/post' label='마음소식 더 보러가기' />
-      <SupportBand />
+      <PostList className='mt-8' code={category} />
     </>
   );
 }
