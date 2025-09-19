@@ -1,9 +1,8 @@
-// src/widgets/PostsHeader/ui/PostsHeader.tsx
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
 import { SearchInput } from '@/features/search-posts';
 import { YSButton } from '@/shared/ui';
 
-export function PostsHeader() {
+export function PostStars() {
   const { data, isLoading, isError } = usePostStatsQuery();
 
   return (

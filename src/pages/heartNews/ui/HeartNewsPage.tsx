@@ -1,14 +1,14 @@
 import { useFilter } from '@/widgets/FilterTabs/model/useFilter';
 import { PostList } from '@/widgets/PostList';
-import { PostsHeader } from '@/widgets/PostsHeader';
 import { PostInfo } from '@/widgets/PostInfo/ui/PostInfo';
+import { PostStars } from '@/widgets/PostStats';
 
 export function HeartNewsPage() {
   const { category, setCategory } = useFilter();
 
   return (
     <>
-      <PostsHeader />
+      <PostStars />
 
       <PostInfo category={category} setCategory={setCategory} />
 
