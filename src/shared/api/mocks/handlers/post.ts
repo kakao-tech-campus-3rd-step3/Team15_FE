@@ -293,6 +293,84 @@ export const postHandlers = [
         commentCount: 0,
         createdAt: '2024-06-20T22:00:00Z',
       },
+      {
+        id: 21,
+        postCategory: 'STUDY',
+        postCategoryName: '학업',
+        title: '시험 준비 전략',
+        content:
+          '다가오는 시험을 대비해서 효율적인 공부 계획을 세우고 있습니다. 집중력을 높이는 방법과 휴식 시간 활용 팁도 공유할게요. 모두 화이팅입니다!',
+        author: 'study_master',
+        likeCount: 12,
+        viewCount: 85,
+        commentCount: 5,
+        createdAt: '2024-06-21T08:00:00Z',
+      },
+      {
+        id: 22,
+        postCategory: 'CAREER',
+        postCategoryName: '진로취업',
+        title: '이직 준비 중입니다',
+        content:
+          '현재 직장에서 이직을 고민하고 있는데, 좋은 회사 찾는 방법과 면접 준비에 관한 조언을 듣고 싶어요. 혹시 추천해주실 만한 자료나 경험 공유 부탁드립니다.',
+        author: 'job_hunter',
+        likeCount: 15,
+        viewCount: 95,
+        commentCount: 7,
+        createdAt: '2024-06-22T10:30:00Z',
+      },
+      {
+        id: 23,
+        postCategory: 'MENTAL',
+        postCategoryName: '정신건강',
+        title: '우울감 극복하기',
+        content:
+          '최근에 우울한 감정이 자주 찾아와서 일상생활에 지장이 많아요. 여러분은 어떻게 극복하셨나요? 상담이나 운동, 취미 등 도움이 된 방법을 공유해주시면 감사하겠습니다.',
+        author: 'hopeful_soul',
+        likeCount: 8,
+        viewCount: 60,
+        commentCount: 4,
+        createdAt: '2024-06-23T14:45:00Z',
+      },
+      {
+        id: 24,
+        postCategory: 'HOBBY',
+        postCategoryName: '취미',
+        title: '사진 찍기 좋아하는 사람?',
+        content:
+          '최근에 사진 찍는 취미를 시작했는데, 좋은 카메라 추천이나 촬영 팁 있으면 알려주세요. 자연 풍경 찍는 걸 좋아합니다. 함께 사진 공유도 해봐요!',
+        author: 'shutterbug',
+        likeCount: 5,
+        viewCount: 42,
+        commentCount: 2,
+        createdAt: '2024-06-24T16:00:00Z',
+      },
+      {
+        id: 25,
+        postCategory: 'FAMILY',
+        postCategoryName: '가족',
+        title: '가족과의 갈등 해결법',
+        content:
+          '가족 간에 작은 오해가 쌓여서 요즘 관계가 조금 불편해요. 어떻게 하면 서로 이해하고 화해할 수 있을지 경험담이나 조언 있으시면 나눠주세요.',
+        author: 'family_lover',
+        likeCount: 9,
+        viewCount: 75,
+        commentCount: 3,
+        createdAt: '2024-06-25T19:30:00Z',
+      },
+      {
+        id: 26,
+        postCategory: 'SOCIAL',
+        postCategoryName: '사회생활',
+        title: '직장 내 스트레스 관리',
+        content:
+          '직장에서 스트레스를 받는 일이 많아져서 힘들어요. 여러분은 스트레스 받을 때 어떻게 해소하시나요? 운동, 명상, 취미 등 다양한 방법을 공유해주시면 감사하겠습니다.',
+        author: 'stress_buster',
+        likeCount: 11,
+        viewCount: 88,
+        commentCount: 6,
+        createdAt: '2024-06-26T21:15:00Z',
+      },
     ];
 
     // Filter posts by category code if not 'ALL'
@@ -313,6 +391,13 @@ export const postHandlers = [
       totalElements,
       totalPages,
       last,
+    });
+  }),
+  http.get('/api/posts/stats', () => {
+    return HttpResponse.json({
+      totalCount: 977,
+      weekCount: 333,
+      todayCount: 234,
     });
   }),
 ];
