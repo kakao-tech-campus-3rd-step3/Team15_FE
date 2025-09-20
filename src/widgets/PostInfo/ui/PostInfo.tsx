@@ -1,24 +1,8 @@
-import { useState } from 'react';
-import { ParamsBar, type Params } from '@/features/filter-posts/ui/ParamsBar';
-import { useFilter } from '@/widgets/FilterTabs/model/useFilter';
+import { ParamsBar } from '@/features/filter-posts/ui/ParamsBar';
 import { ViewSwitch } from '@/features/switch-post-view';
 import type { Props } from '../model/type';
 
-export function PostInfo({ className, category: extCategory, setCategory: extSetCategory }: Props) {
-  const internal = useFilter();
-  const category = extCategory ?? internal.category;
-  const setCategory = extSetCategory ?? internal.setCategory;
-
-  const [params, setParams] = useState<Params>({
-    category: 'ALL',
-    keyword: '',
-    startDate: undefined,
-    endDate: undefined,
-    page: 0,
-    size: 10,
-    sort: 'createdAt,desc',
-  });
-
+export function PostInfo({ className, params, onParamsChange }: Props) {
   return (
     <div className={`flex items-center px-5 ${className ?? ''}`}>
       {/* 좌측: 탭 (가로 스크롤 허용) */}
@@ -26,12 +10,13 @@ export function PostInfo({ className, category: extCategory, setCategory: extSet
         <div className='min-w-max'>
           <ParamsBar
             value={params}
-            onChange={(patch) => setParams((p) => ({ ...p, ...patch }))}
+            onChange={(patch) => onParamsChange((p) => ({ ...p, ...patch }))}
             onApply={() => {
-              // TODO: 여기에 tanstack query 재요청(invalidate) 또는 상위 콜백 연결
+              // 필요 시 여기서 invalidateQueries 호출하거나 page를 0으로 덮어쓰기 등 트리거
+              onParamsChange((p) => ({ ...p }));
             }}
             onReset={() =>
-              setParams({
+              onParamsChange({
                 category: 'ALL',
                 keyword: '',
                 startDate: undefined,

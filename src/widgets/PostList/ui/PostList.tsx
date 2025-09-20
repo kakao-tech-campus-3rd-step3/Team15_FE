@@ -15,8 +15,6 @@ export function PostList({
   const [curPage, setCurPage] = useState(page);
   const { data, isLoading, isError } = usePostsByCategoryQuery({ code, page: curPage, size });
 
-  console.log(data);
-
   if (isLoading) return <div className={className}>로딩 중…</div>;
   if (isError || !data) return <div className={className}>데이터를 불러오지 못했습니다.</div>;
 

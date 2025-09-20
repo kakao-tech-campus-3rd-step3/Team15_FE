@@ -13,18 +13,7 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { useCategoriesQuery } from '../lib/useCategoriesQuery';
 import type { CategoryCode } from '@/entities/post';
-
-type SortKey = 'createdAt,desc' | 'createdAt,asc' | 'viewCount,desc' | 'likeCount,desc';
-
-export type Params = {
-  category: CategoryCode;
-  keyword: string;
-  startDate?: string; // yyyy-MM-dd
-  endDate?: string; // yyyy-MM-dd
-  page: number; // 0-based
-  size: number; // 10/20/30...
-  sort: SortKey;
-};
+import type { Params, SortKey } from '@/widgets/PostInfo/model/type';
 
 type Props = {
   value: Params;
