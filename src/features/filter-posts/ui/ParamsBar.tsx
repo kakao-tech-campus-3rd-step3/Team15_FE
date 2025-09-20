@@ -1,4 +1,3 @@
-// features/filter-posts/ui/ParamsBar.tsx
 import { Input } from '@/shared/ui/shadcn/input';
 import { Button } from '@/shared/ui/shadcn/button';
 import {
@@ -12,23 +11,13 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/shadcn/popo
 import { Calendar } from '@/shared/ui/shadcn/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
+import { useCategoriesQuery } from '../lib/useCategoriesQuery';
+import type { CategoryCode } from '@/entities/post';
 
 type SortKey = 'createdAt,desc' | 'createdAt,asc' | 'viewCount,desc' | 'likeCount,desc';
-type Category =
-  | 'ALL'
-  | 'FREE'
-  | 'NOTICE'
-  | 'STUDY'
-  | 'CAREER'
-  | 'RELATIONSHIP'
-  | 'SOCIAL'
-  | 'FAMILY'
-  | 'HOBBY'
-  | 'MENTAL'
-  | 'TROUBLE';
 
 export type Params = {
-  category: Category;
+  category: CategoryCode;
   keyword: string;
   startDate?: string; // yyyy-MM-dd
   endDate?: string; // yyyy-MM-dd
@@ -47,6 +36,10 @@ type Props = {
 
 export function ParamsBar({ value, onChange, onApply, onReset, className }: Props) {
   const pretty = (d?: string) => (d ? format(new Date(d), 'yyyy-MM-dd') : '기간 선택');
+  const { data } = useCategoriesQuery();
+  if (!data || data.length === 0) {
+    return null;
+  }
 
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className ?? ''}`}>
@@ -61,29 +54,15 @@ export function ParamsBar({ value, onChange, onApply, onReset, className }: Prop
       {/* 카테고리 */}
       <Select
         value={value.category}
-        onValueChange={(v) => onChange({ category: v as Category, page: 0 })}
+        onValueChange={(v) => onChange({ category: v as CategoryCode, page: 0 })}
       >
         <SelectTrigger className='w-[140px]'>
           <SelectValue placeholder='카테고리' />
         </SelectTrigger>
         <SelectContent>
-          {(
-            [
-              'ALL',
-              'FREE',
-              'NOTICE',
-              'STUDY',
-              'CAREER',
-              'RELATIONSHIP',
-              'SOCIAL',
-              'FAMILY',
-              'HOBBY',
-              'MENTAL',
-              'TROUBLE',
-            ] as Category[]
-          ).map((c) => (
-            <SelectItem key={c} value={c}>
-              {c}
+          {data.map((c) => (
+            <SelectItem key={c.code} value={c.code}>
+              {c.displayName}
             </SelectItem>
           ))}
         </SelectContent>
