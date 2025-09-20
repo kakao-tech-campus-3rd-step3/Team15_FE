@@ -1,3 +1,4 @@
+import { useProfileStore } from '@/features/my/ChangeProfileInfo/model/useProfileStore';
 import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
 import { Badge } from '@/shared/ui/shadcn/badge';
 import { Button } from '@/shared/ui/shadcn/button';
@@ -7,6 +8,8 @@ import { Award, Edit3, Flame, Heart, MessageCircle, Target, Trophy } from 'lucid
 import { Link } from 'react-router-dom';
 
 export const ProfileCard = () => {
+  const { setIsModalOpen } = useProfileStore();
+
   const userStats = {
     posts: 12,
     comments: 89,
@@ -51,10 +54,10 @@ export const ProfileCard = () => {
             className='border-green-300 bg-transparent text-green-700 hover:bg-green-50'
             asChild
           >
-            <Link to='/profile/edit'>
+            <Button variant='outline' size='sm' onClick={() => setIsModalOpen(true)}>
               <Edit3 className='mr-1 h-4 w-4' />
               프로필 수정
-            </Link>
+            </Button>
           </Button>
         </div>
 
