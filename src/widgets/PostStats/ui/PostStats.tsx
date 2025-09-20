@@ -1,5 +1,4 @@
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
-import { SearchInput } from '@/features/search-posts';
 import { YSButton } from '@/shared/ui';
 
 export function PostStars() {
@@ -10,7 +9,10 @@ export function PostStars() {
       {/* 상단: 검색/타이틀/글쓰기 */}
       <div className='grid grid-cols-1 items-center gap-3 px-5 sm:grid-cols-[1fr_auto_1fr]'>
         <div className='w-full max-w-xs sm:order-1'>
-          <SearchInput />
+          <div
+            className='pointer-events-none invisible h-10 w-full max-w-xs select-none sm:order-1'
+            aria-hidden='true'
+          />
         </div>
         <h1 className='text-center text-5xl font-extrabold tracking-tight sm:order-2'>게시글</h1>
         <div className='flex items-center justify-end gap-2 sm:order-3'>
