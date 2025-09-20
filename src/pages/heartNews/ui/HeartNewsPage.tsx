@@ -14,7 +14,6 @@ export function HeartNewsPage() {
     size: 10,
     sort: 'createdAt,desc',
   });
-  console.log(params);
   return (
     <>
       <PostStars />

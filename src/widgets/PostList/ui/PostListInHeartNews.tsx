@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Params } from '@/widgets/PostInfo/model/type';
 import { PostCard } from '@/widgets/PostCard';
 import { PaginationPosts } from '@/features/pagination';
+import { axiosInstance } from '@/shared/api/base/axiosInstance';
 
 // 쿼리스트링 직렬화 (명세에 맞춤)
 function toQS(params: Params) {
@@ -19,9 +20,10 @@ function toQS(params: Params) {
 }
 
 async function fetchSearch(params: Params) {
-  const res = await fetch(`/api/posts/search?${toQS(params)}`);
-  if (!res.ok) throw new Error('Failed to fetch posts');
-  return res.json();
+  const res = await axiosInstance.get(`/posts/search?${toQS(params)}`);
+  if (!res) throw new Error('Failed to fetch posts');
+
+  return res.data;
 }
 
 type Props = {
