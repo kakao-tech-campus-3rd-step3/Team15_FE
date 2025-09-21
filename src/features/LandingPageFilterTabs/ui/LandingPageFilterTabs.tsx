@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { CategoryCode } from '@/entities/post/model/types';
 import { YSButton } from '@/shared/ui/';
-import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQuery';
+import { useLandingPageCategoriesQuery } from '../model/useLandingPageCategoriesQuery';
 
-export function FilterTabs({
+export function LandingPageFilterTabs({
   className,
   category,
   setCategory,
@@ -12,7 +12,7 @@ export function FilterTabs({
   category: CategoryCode;
   setCategory: (code: CategoryCode) => void;
 }) {
-  const { data } = useCategoriesQuery();
+  const { data } = useLandingPageCategoriesQuery();
   if (!data || data.length === 0) {
     return null;
   }

@@ -17,13 +17,7 @@ export function HeartNewsPage() {
   return (
     <>
       <PostStars />
-
-      <PostInfo
-        // PostInfo 안에서 ParamsBar로 params 조작
-        params={params}
-        onParamsChange={setParams}
-      />
-
+      <PostInfo params={params} onParamsChange={setParams} />
       <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
     </>
   );

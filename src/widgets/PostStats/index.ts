@@ -1,1 +1,1 @@
-export * from './ui/PostStats';
+export * from './ui/PostStars';
