@@ -1,1 +1,1 @@
-export * from './ui/SearchInput';
+export * from './ui/ParamsBar';

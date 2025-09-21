@@ -1,6 +1,6 @@
-import { ParamsBar } from '@/features/filter-posts/ui/ParamsBar';
 import { ViewSwitch } from '@/features/switch-post-view';
 import type { Props } from '../model/type';
+import { ParamsBar } from '@/features/search-posts/ui/ParamsBar';
 
 export function PostInfo({ className, params, onParamsChange }: Props) {
   return (

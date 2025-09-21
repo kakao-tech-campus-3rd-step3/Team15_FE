@@ -11,9 +11,9 @@ import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/shadcn/popo
 import { Calendar } from '@/shared/ui/shadcn/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
-import { useCategoriesQuery } from '../lib/useCategoriesQuery';
 import type { CategoryCode } from '@/entities/post';
 import type { Params, SortKey } from '@/widgets/PostInfo/model/type';
+import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQuery';
 
 type Props = {
   value: Params;
