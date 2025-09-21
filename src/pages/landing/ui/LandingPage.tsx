@@ -1,6 +1,6 @@
 import { MorePostsButton } from '@/shared/ui';
-import { LandingPageFilterTabs } from '@/features/LandingPageFilterTabs';
-import { useFilter } from '@/features/LandingPageFilterTabs/model/useFilter';
+import { LandingPageFilterTabs } from '@/features/landing-page-filter-post';
+import { useFilter } from '@/features/landing-page-filter-post/model/useFilter';
 import { HeroSection } from '@/widgets/HeroSection';
 import { PostList } from '@/widgets/PostList';
 import { SupportBand } from '@/widgets/SupportBand';

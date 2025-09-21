@@ -1,4 +1,4 @@
-import type { Params } from '@/widgets/PostInfo/model/type';
+import type { Params } from '@/widgets/PostList/model/type';
 
 export function toQS(params: Params) {
   const qs = new URLSearchParams();

@@ -12,8 +12,8 @@ import { Calendar } from '@/shared/ui/shadcn/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import type { CategoryCode } from '@/entities/post';
-import type { Params, SortKey } from '@/widgets/PostInfo/model/type';
-import { useCategoriesQuery } from '@/features/filter-posts/lib/useCategoriesQuery';
+import type { Params, SortKey } from '@/widgets/PostList/model/type';
+import { useCategoriesQuery } from '../lib/useCategoriesQuery';
 
 type Props = {
   value: Params;

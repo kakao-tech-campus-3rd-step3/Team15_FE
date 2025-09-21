@@ -1,7 +1,16 @@
 import type { CategoryCode } from '@/entities/post';
 import type { Dispatch, SetStateAction } from 'react';
 
-export type Props = {
+export type PostListProps = {
+  className?: string;
+  code?: CategoryCode;
+  page?: number;
+  size?: number;
+  limit?: number;
+  showPagination?: boolean;
+};
+
+export type PostStatisticsProps = {
   className?: string;
   params: Params;
   onParamsChange: Dispatch<SetStateAction<Params>>;
@@ -18,3 +27,10 @@ export type Params = {
 };
 
 export type SortKey = 'createdAt,desc' | 'createdAt,asc' | 'viewCount,desc' | 'likeCount,desc';
+
+export type PostListInHeartNewsProps = {
+  className?: string;
+  params: Params; // category/keyword/startDate/endDate/page/size/sort
+  showPagination?: boolean;
+  limit?: number;
+};

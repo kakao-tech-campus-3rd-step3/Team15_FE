@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
 import { toQS } from '../lib/toQS';
-import type { Params } from '@/widgets/PostInfo/model/type';
+import type { Params } from '@/widgets/PostList/model/type';
 import { type PostEntity } from '@/entities/post';
 import type { PageResponse } from '@/entities/post/model/types';
 

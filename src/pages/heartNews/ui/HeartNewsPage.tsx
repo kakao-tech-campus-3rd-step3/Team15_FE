@@ -1,8 +1,8 @@
-import { PostInfo } from '@/widgets/PostInfo/ui/PostInfo';
+import { PostInfo } from '@/widgets/PostList/ui/PostInfo';
 import { PostStars } from '@/widgets/PostStats';
 import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
-import type { Params } from '@/widgets/PostInfo/model/type';
+import type { Params } from '@/widgets/PostList/model/type';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({

@@ -1,22 +1,15 @@
 import { PaginationPosts } from '@/features/pagination';
 import { PAGINATION_WINDOW } from '@/features/search-posts/config';
 import { useSearchPosts } from '@/features/search-posts/model/useSearchPosts';
-import { PostCard } from '@/widgets/PostCard';
-import type { Params } from '@/widgets/PostInfo/model/type';
-
-type Props = {
-  className?: string;
-  params: Params; // category/keyword/startDate/endDate/page/size/sort
-  showPagination?: boolean;
-  limit?: number;
-};
+import type { PostListInHeartNewsProps } from '@/widgets/PostList/model/type';
+import { PostCard } from './PostCard';
 
 export function PostListInHeartNews({
   className = '',
   params,
   showPagination = true,
   limit,
-}: Props) {
+}: PostListInHeartNewsProps) {
   const { data, isLoading, isError, page, setPage } = useSearchPosts(params);
 
   if (isLoading) return <div className={className}>로딩 중…</div>;

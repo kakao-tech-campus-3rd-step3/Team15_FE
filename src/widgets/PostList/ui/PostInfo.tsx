@@ -1,8 +1,8 @@
 import { ViewSwitch } from '@/features/switch-post-view';
-import type { Props } from '../model/type';
 import { ParamsBar } from '@/features/search-posts/ui/ParamsBar';
+import type { PostStatisticsProps } from '../model/type';
 
-export function PostInfo({ className, params, onParamsChange }: Props) {
+export function PostInfo({ className, params, onParamsChange }: PostStatisticsProps) {
   return (
     <div className={`flex items-center px-5 ${className ?? ''}`}>
       {/* 좌측: 탭 (가로 스크롤 허용) */}

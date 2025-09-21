@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { postListKeys } from './queryKeys';
 import { POST_LIST_STALE_TIME } from '../config';
-import type { Params } from '@/widgets/PostInfo/model/type';
+import type { Params } from '@/widgets/PostList/model/type';
 import { getSearchPost } from '../api/getSearchPost';
 
 // 내부 페이지 상태를 이 훅에서 관리(상위에서 주입받고 싶으면 제거 가능)

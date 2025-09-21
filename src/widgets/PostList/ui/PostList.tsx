@@ -1,8 +1,8 @@
-import { usePostsByCategoryQuery } from '@/entities/post/model/usePostsByCategoryQuery';
-import { PostCard } from '@/widgets/PostCard';
-import type { PostListProps } from '../model/interface';
+import { usePostsLandingPageCategoryQuery } from '@/entities/post/';
 import { PaginationPosts } from '@/features/pagination';
 import { useState } from 'react';
+import { PostCard } from './PostCard';
+import type { PostListProps } from '../model/type';
 
 export function PostList({
   className,
@@ -13,7 +13,11 @@ export function PostList({
   showPagination = true,
 }: PostListProps) {
   const [curPage, setCurPage] = useState(page);
-  const { data, isLoading, isError } = usePostsByCategoryQuery({ code, page: curPage, size });
+  const { data, isLoading, isError } = usePostsLandingPageCategoryQuery({
+    code,
+    page: curPage,
+    size,
+  });
 
   if (isLoading) return <div className={className}>로딩 중…</div>;
   if (isError || !data) return <div className={className}>데이터를 불러오지 못했습니다.</div>;
