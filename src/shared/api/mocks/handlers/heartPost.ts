@@ -209,8 +209,8 @@ function compareBy(field: string, dir: 'asc' | 'desc') {
       return (new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()) * sign;
     }
     // 숫자 필드 정렬 (viewCount, likeCount, commentCount)
-    const av = (a as any)[field] ?? 0;
-    const bv = (b as any)[field] ?? 0;
+    const av = (a[field as keyof HeartPost] as number) ?? 0;
+    const bv = (b[field as keyof HeartPost] as number) ?? 0;
     return (av - bv) * sign;
   };
 }

@@ -18,7 +18,7 @@ export function PaginationPosts({ page, totalPages, onChange, windowSize = 5 }: 
   // 가운데 윈도우 계산
   const half = Math.floor(windowSize / 2);
   let start = Math.max(1, current - half);
-  let end = Math.min(totalPages, start + windowSize - 1);
+  const end = Math.min(totalPages, start + windowSize - 1);
   start = Math.max(1, Math.min(start, end - windowSize + 1));
 
   const pages: number[] = [];
