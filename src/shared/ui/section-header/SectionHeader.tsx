@@ -16,9 +16,7 @@ export function SectionHeader({
   titleClassName = '',
 }: SectionHeaderProps) {
   return (
-    <div
-      className={`grid grid-cols-1 items-center gap-3 px-5 sm:grid-cols-[1fr_auto_1fr] ${className}`}
-    >
+    <div className={`grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] ${className}`}>
       <div className='w-full max-w-xs sm:order-1'>
         {left ? (
           <div className='flex h-10 items-center'>{left}</div>

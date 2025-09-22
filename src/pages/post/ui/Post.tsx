@@ -8,11 +8,13 @@ export function Post() {
 
   return (
     <>
-      <SectionHeader title='글쓰기' left={<YSButton size='lg'>돌아가기</YSButton>} />
-      <section className='mx-auto max-w-5xl space-y-8 py-10'>
+      <section className='mx-8 space-y-6 pb-10 pt-10'>
+        <SectionHeader title='글쓰기' left={<YSButton size='lg'>돌아가기</YSButton>} />
+      </section>
+      <main className='mx-8 space-y-8 rounded-xl border bg-white px-5 py-10 shadow-sm'>
         <LandingPageFilterTabs category={category} setCategory={setCategory} />
         <CreatePostForm category={category} />
-      </section>
+      </main>
     </>
   );
 }
