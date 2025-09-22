@@ -1,5 +1,5 @@
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
-import { YSButton } from '@/shared/ui';
+import { SectionHeader, YSButton } from '@/shared/ui';
 
 export function PostStats() {
   const { data, isLoading, isError } = usePostStatsQuery();
@@ -7,18 +7,7 @@ export function PostStats() {
   return (
     <section className='space-y-6 pb-10 pt-10'>
       {/* 상단: 검색/타이틀/글쓰기 */}
-      <div className='grid grid-cols-1 items-center gap-3 px-5 sm:grid-cols-[1fr_auto_1fr]'>
-        <div className='w-full max-w-xs sm:order-1'>
-          <div
-            className='pointer-events-none invisible h-10 w-full max-w-xs select-none sm:order-1'
-            aria-hidden='true'
-          />
-        </div>
-        <h1 className='text-center text-5xl font-extrabold tracking-tight sm:order-2'>게시글</h1>
-        <div className='flex items-center justify-end gap-2 sm:order-3'>
-          <YSButton size='lg'>+ 새 글쓰기</YSButton>
-        </div>
-      </div>
+      <SectionHeader title='게시글' right={<YSButton size='lg'>+ 새 글쓰기</YSButton>} />
 
       {/* 통계 요약 바 */}
       <div className='rounded-xl border border-emerald-100 bg-emerald-50/70 px-6 py-5 pt-10'>
