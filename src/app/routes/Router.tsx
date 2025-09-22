@@ -5,7 +5,7 @@ import { LandingPage } from '@/pages/landing';
 import { ROUTES } from '@/shared/config';
 import { AuthPage } from '@/pages/auth';
 import { MyPage } from '@/pages/my';
-import { HeartNewsPage } from '@/pages/heartNews';
+import { HeartNewsPage } from '@/pages/heart-news';
 
 function Router() {
   return (
