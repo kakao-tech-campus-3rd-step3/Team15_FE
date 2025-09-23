@@ -19,7 +19,7 @@ export function LandingPage() {
         <LandingPageFilterTabs category={category} setCategory={setCategory} />
         <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
           <PostList className='mt-8' limit={6} code={category} showPagination={false} />
-        </SuspenseBoundary>{' '}
+        </SuspenseBoundary>
         <MorePostsButton to='/post' label='마음소식 더 보러가기' />
         <SupportBand />
       </ErrorBoundary>

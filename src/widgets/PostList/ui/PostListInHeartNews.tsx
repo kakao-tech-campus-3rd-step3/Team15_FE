@@ -10,9 +10,8 @@ export function PostListInHeartNews({
   showPagination = true,
   limit,
 }: PostListInHeartNewsProps) {
-  const { data, isLoading, isError, page, setPage } = useSearchPosts(params);
+  const { data, isError, page, setPage } = useSearchPosts(params);
 
-  if (isLoading) return <div className={className}>로딩 중…</div>;
   if (isError || !data) return <div className={className}>데이터를 불러오지 못했습니다.</div>;
 
   const list = limit ? data.content.slice(0, limit) : data.content;
