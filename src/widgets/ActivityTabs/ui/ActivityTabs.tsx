@@ -1,3 +1,4 @@
+import { useUserProfile } from '@/entities/user';
 import { Button } from '@/shared/ui/shadcn/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/shadcn/tabs';
@@ -10,38 +11,11 @@ type TabValue = 'posts' | 'comments' | 'likes';
 export const ActivityTabs = () => {
   const [activeTab, setActiveTab] = useState<TabValue>('posts');
 
-  const myPosts = [
-    { id: 1, title: '커뮤니티 활동 팁 공유합니다', date: '2024.03.15', likes: 24, comments: 8 },
-    { id: 2, title: '새로운 기능 제안드려요', date: '2024.03.12', likes: 15, comments: 12 },
-    { id: 3, title: '질문있어요! 도움 부탁드립니다', date: '2024.03.10', likes: 8, comments: 5 },
-  ];
+  const { data, isPending, isError } = useUserProfile();
+  if (isPending) return <div>로딩중...</div>;
+  if (isError || !data) return <div>데이터를 불러오지 못했습니다.</div>;
 
-  const myComments = [
-    {
-      id: 1,
-      post: '개발자 모임 후기',
-      comment: '정말 유익한 시간이었네요! 다음에도 참여하고 싶어요.',
-      date: '2024.03.16',
-    },
-    {
-      id: 2,
-      post: 'React 질문',
-      comment: 'useEffect 사용할 때 dependency array 확인해보세요.',
-      date: '2024.03.15',
-    },
-    {
-      id: 3,
-      post: '프로젝트 팀원 모집',
-      comment: '관심있습니다! DM 보내드릴게요.',
-      date: '2024.03.14',
-    },
-  ];
-
-  const likedPosts = [
-    { id: 1, title: 'Next.js 14 새로운 기능들', author: '개발자김씨', date: '2024.03.16' },
-    { id: 2, title: '디자인 시스템 구축 경험담', author: '디자이너박씨', date: '2024.03.15' },
-    { id: 3, title: '스타트업 취업 후기', author: '신입이씨', date: '2024.03.14' },
-  ];
+  const { comments, likePosts, posts } = data ?? {}; //추후 select 이용해서 리팩토링
 
   return (
     <Card>
@@ -75,23 +49,23 @@ export const ActivityTabs = () => {
           </TabsList>
 
           <TabsContent value='posts' className='mt-6 space-y-4'>
-            {myPosts.map((post) => (
+            {posts.map((post) => (
               <div
-                key={post.id}
+                key={post.postId}
                 className='rounded-lg border p-4 transition-colors hover:bg-gray-50'
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <h4 className='font-medium text-gray-900'>{post.title}</h4>
-                  <span className='text-sm text-gray-500'>{post.date}</span>
+                  <span className='text-sm text-gray-500'>{post.createdAt}</span>
                 </div>
                 <div className='flex items-center space-x-4 text-sm text-gray-600'>
                   <span className='flex items-center'>
                     <Heart className='mr-1 h-4 w-4' />
-                    {post.likes}
+                    {post.likeCount}
                   </span>
                   <span className='flex items-center'>
                     <MessageCircle className='mr-1 h-4 w-4' />
-                    {post.comments}
+                    {post.commentCount}
                   </span>
                 </div>
               </div>
@@ -99,31 +73,31 @@ export const ActivityTabs = () => {
           </TabsContent>
 
           <TabsContent value='comments' className='mt-6 space-y-4'>
-            {myComments.map((comment) => (
+            {comments.map((comment) => (
               <div
-                key={comment.id}
+                key={comment.commentId}
                 className='rounded-lg border p-4 transition-colors hover:bg-gray-50'
               >
                 <div className='mb-2 flex items-start justify-between'>
-                  <span className='text-sm font-medium text-blue-600'>{comment.post}</span>
-                  <span className='text-sm text-gray-500'>{comment.date}</span>
+                  <span className='text-sm font-medium text-blue-600'>{comment.postTitle}</span>
+                  <span className='text-sm text-gray-500'>{comment.createdAt}</span>
                 </div>
-                <p className='text-sm text-gray-700'>{comment.comment}</p>
+                <p className='text-sm text-gray-700'>{comment.content}</p>
               </div>
             ))}
           </TabsContent>
 
           <TabsContent value='likes' className='mt-6 space-y-4'>
-            {likedPosts.map((post) => (
+            {likePosts.map((post) => (
               <div
-                key={post.id}
+                key={post.likeId}
                 className='rounded-lg border p-4 transition-colors hover:bg-gray-50'
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <h4 className='font-medium text-gray-900'>{post.title}</h4>
-                  <span className='text-sm text-gray-500'>{post.date}</span>
+                  <span className='text-sm text-gray-500'>{post.createdAt}</span>
                 </div>
-                <p className='text-sm text-gray-600'>작성자: {post.author}</p>
+                <p className='text-sm text-gray-600'>작성자: {'null'}</p>
               </div>
             ))}
           </TabsContent>
