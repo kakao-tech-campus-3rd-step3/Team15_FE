@@ -1,3 +1,4 @@
+import { useUserProfile } from '@/entities/user';
 import { useChangeEmail } from '@/features/my/ChangeEmail/model/useChangeEmail';
 import { useChangePassword } from '@/features/my/ChangePassword/model/useChangePassword';
 import { useDeleteAccount } from '@/features/my/DeleteAccount/model/useDeleteAccount';
@@ -6,11 +7,29 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/car
 import { Separator } from '@/shared/ui/shadcn/separator';
 import { Switch } from '@/shared/ui/shadcn/switch';
 import { Bell, Heart, Lock, Mail, Settings, User } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export const PersonalSettings = () => {
   const { open: openEmailDialog } = useChangeEmail();
   const { open: openPasswordDialog } = useChangePassword();
   const { open: openDeleteAccountDialog } = useDeleteAccount();
+
+  const [newCommentNotification, setNewCommentNotification] = useState(false);
+  const [likeNoticeNotification, setLikeNoticeNotification] = useState(false);
+
+  const { data, isPending, isError } = useUserProfile();
+  const { account } = data ?? {};
+
+  useEffect(() => {
+    if (account) {
+      setNewCommentNotification(account.newCommentNotification);
+      setLikeNoticeNotification(account.likeNoticeNotification);
+    }
+  }, [account]);
+
+  if (isPending) return <div>로딩중...</div>;
+  if (isError || !account) return <div>데이터를 불러오지 못했습니다.</div>;
+
   return (
     <Card id='personal-settings'>
       <CardHeader>
@@ -29,7 +48,7 @@ export const PersonalSettings = () => {
           <div className='space-y-3'>
             <div className='flex items-center justify-between rounded-lg border bg-gray-50 p-4'>
               <div>
-                <div className='font-medium'>user@example.com</div>
+                <div className='font-medium'>{account.email}</div>
                 <div className='text-sm text-gray-500'>인증된 이메일</div>
               </div>
               <Button variant='outline' size='sm' onClick={openEmailDialog}>
@@ -51,7 +70,9 @@ export const PersonalSettings = () => {
             <div className='flex items-center justify-between rounded-lg border bg-gray-50 p-4'>
               <div>
                 <div className='font-medium'>••••••••</div>
-                <div className='text-sm text-gray-500'>마지막 변경: 한 달 전</div>
+                <div className='text-sm text-gray-500'>
+                  마지막 변경: {account.passwordLastChanged}
+                </div>
               </div>
               <Button variant='outline' size='sm' onClick={openPasswordDialog}>
                 변경
@@ -73,14 +94,20 @@ export const PersonalSettings = () => {
                 <Bell className='h-4 w-4 text-gray-500' />
                 <span>새 댓글 알림</span>
               </div>
-              <Switch defaultChecked />
+              <Switch
+                checked={newCommentNotification}
+                onCheckedChange={setNewCommentNotification}
+              />
             </div>
             <div className='flex items-center justify-between'>
               <div className='flex items-center space-x-3'>
                 <Heart className='h-4 w-4 text-gray-500' />
                 <span>좋아요 알림</span>
               </div>
-              <Switch defaultChecked />
+              <Switch
+                checked={likeNoticeNotification}
+                onCheckedChange={setLikeNoticeNotification}
+              />
             </div>
           </div>
         </div>
