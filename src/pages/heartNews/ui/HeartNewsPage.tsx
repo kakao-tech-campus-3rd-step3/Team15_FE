@@ -1,8 +1,8 @@
 import { PostInfo } from '@/widgets/PostList/ui/PostInfo';
-import { PostStars } from '@/widgets/PostStats';
 import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
 import type { Params } from '@/widgets/PostList/model/type';
+import { PostStats } from '@/widgets/PostStats';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
@@ -16,7 +16,7 @@ export function HeartNewsPage() {
   });
   return (
     <>
-      <PostStars />
+      <PostStats />
       <PostInfo params={params} onParamsChange={setParams} />
       <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
     </>

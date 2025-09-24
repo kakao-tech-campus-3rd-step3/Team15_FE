@@ -1,7 +1,7 @@
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
 import { YSButton } from '@/shared/ui';
 
-export function PostStars() {
+export function PostStats() {
   const { data, isLoading, isError } = usePostStatsQuery();
 
   return (
