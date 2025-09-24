@@ -1,4 +1,5 @@
 import { useUserProfile } from '@/entities/user';
+import { formatDate } from '@/shared/lib/date';
 import { Button } from '@/shared/ui/shadcn/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/shadcn/tabs';
@@ -56,7 +57,7 @@ export const ActivityTabs = () => {
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <h4 className='font-medium text-gray-900'>{post.title}</h4>
-                  <span className='text-sm text-gray-500'>{post.createdAt}</span>
+                  <span className='text-sm text-gray-500'>{formatDate(post.createdAt)}</span>
                 </div>
                 <div className='flex items-center space-x-4 text-sm text-gray-600'>
                   <span className='flex items-center'>
@@ -80,7 +81,7 @@ export const ActivityTabs = () => {
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <span className='text-sm font-medium text-blue-600'>{comment.postTitle}</span>
-                  <span className='text-sm text-gray-500'>{comment.createdAt}</span>
+                  <span className='text-sm text-gray-500'>{formatDate(comment.createdAt)}</span>
                 </div>
                 <p className='text-sm text-gray-700'>{comment.content}</p>
               </div>
@@ -95,7 +96,7 @@ export const ActivityTabs = () => {
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <h4 className='font-medium text-gray-900'>{post.title}</h4>
-                  <span className='text-sm text-gray-500'>{post.createdAt}</span>
+                  <span className='text-sm text-gray-500'>{formatDate(post.createdAt)}</span>
                 </div>
                 <p className='text-sm text-gray-600'>작성자: {'null'}</p>
               </div>

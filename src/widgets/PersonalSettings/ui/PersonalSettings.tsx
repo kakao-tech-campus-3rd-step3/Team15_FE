@@ -2,6 +2,7 @@ import { useUserProfile } from '@/entities/user';
 import { useChangeEmail } from '@/features/my/ChangeEmail/model/useChangeEmail';
 import { useChangePassword } from '@/features/my/ChangePassword/model/useChangePassword';
 import { useDeleteAccount } from '@/features/my/DeleteAccount/model/useDeleteAccount';
+import { formatDate } from '@/shared/lib/date';
 import { Button } from '@/shared/ui/shadcn/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Separator } from '@/shared/ui/shadcn/separator';
@@ -71,7 +72,7 @@ export const PersonalSettings = () => {
               <div>
                 <div className='font-medium'>••••••••</div>
                 <div className='text-sm text-gray-500'>
-                  마지막 변경: {account.passwordLastChanged}
+                  마지막 변경: {formatDate(account.passwordLastChanged)}
                 </div>
               </div>
               <Button variant='outline' size='sm' onClick={openPasswordDialog}>
