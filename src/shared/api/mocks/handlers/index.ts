@@ -1,5 +1,6 @@
 import { authHandlers } from './auth';
 import { userHandlers } from './user';
 import { postHandlers } from './post';
+import { heartPostHandlers } from './heartPost';
 
-export const handlers = [...authHandlers, ...userHandlers, ...postHandlers];
+export const handlers = [...authHandlers, ...userHandlers, ...postHandlers, ...heartPostHandlers];

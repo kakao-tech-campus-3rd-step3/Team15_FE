@@ -10,7 +10,7 @@ type UsePostsByCategoryQueryParams = {
   enabled?: boolean;
 };
 
-export function usePostsByCategoryQuery({
+export function usePostsLandingPageCategoryQuery({
   code,
   page = 0,
   size = 10,
