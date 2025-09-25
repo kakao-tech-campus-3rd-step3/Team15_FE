@@ -9,7 +9,7 @@ import {
 } from '@/shared/ui/shadcn/pagination';
 import type { Props } from '../model/type';
 
-export function PaginationPosts({ page, totalPages, onChange, windowSize = 5 }: Props) {
+export function PaginationPosts({ page = 1, totalPages = 1, onChange, windowSize = 5 }: Props) {
   if (totalPages <= 1) return null;
 
   // 0-based 를 1-based로 보이게

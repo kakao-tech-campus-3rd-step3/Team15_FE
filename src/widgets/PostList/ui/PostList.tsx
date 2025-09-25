@@ -13,28 +13,25 @@ export function PostList({
   showPagination = true,
 }: PostListProps) {
   const [curPage, setCurPage] = useState(page);
-  const { data, isLoading, isError } = usePostsLandingPageCategoryQuery({
+  const { data } = usePostsLandingPageCategoryQuery({
     code,
     page: curPage,
     size,
   });
 
-  if (isLoading) return <div className={className}>로딩 중…</div>;
-  if (isError || !data) return <div className={className}>데이터를 불러오지 못했습니다.</div>;
-
   // 서버 페이지네이션을 쓰므로 그대로 사용. limit는 필요 시 컷.
-  const list = limit ? data.content.slice(0, limit) : data.content;
+  const list = limit ? data?.content.slice(0, limit) : data?.content;
 
   return (
     <div className={className + ' grid gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'}>
-      {list.map((p) => (
+      {list?.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}
       {showPagination && (
         <div className='col-span-full mt-6 flex justify-center'>
           <PaginationPosts
-            page={data.page}
-            totalPages={data.totalPages}
+            page={data?.page}
+            totalPages={data?.totalPages}
             onChange={setCurPage}
             windowSize={5}
           />

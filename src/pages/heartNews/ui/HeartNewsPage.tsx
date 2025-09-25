@@ -3,6 +3,8 @@ import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
 import type { Params } from '@/widgets/PostList/model/type';
 import { PostStats } from '@/widgets/PostStats';
+import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
+import FallbackError from '@/shared/ui/states/FallbackError';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
@@ -16,9 +18,11 @@ export function HeartNewsPage() {
   });
   return (
     <>
-      <PostStats />
-      <PostInfo params={params} onParamsChange={setParams} />
-      <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
+      <ErrorBoundary fallback={FallbackError}>
+        <PostStats />
+        <PostInfo params={params} onParamsChange={setParams} />
+        <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
+      </ErrorBoundary>
     </>
   );
 }

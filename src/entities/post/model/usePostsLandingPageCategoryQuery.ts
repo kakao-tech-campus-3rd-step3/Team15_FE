@@ -20,6 +20,7 @@ export function usePostsLandingPageCategoryQuery({
     queryKey: postKeys.categoryPage(code, page, size),
     queryFn: () => getPostsByCategory({ code, page, size }),
     enabled,
+    throwOnError: true,
     // staleTime, gcTime 등 필요 시 지정
   });
 }

@@ -13,9 +13,6 @@ export function LandingPageFilterTabs({
   setCategory: (code: CategoryCode) => void;
 }) {
   const { data } = useLandingPageCategoriesQuery();
-  if (!data || data.length === 0) {
-    return null;
-  }
 
   return (
     <div
@@ -23,7 +20,7 @@ export function LandingPageFilterTabs({
       aria-label='카테고리 필터'
       className={clsx('flex flex-wrap gap-2 px-6', className)}
     >
-      {data.map((tab) => (
+      {data?.map((tab) => (
         <YSButton
           key={tab.code}
           onClick={() => setCategory(tab.code)}
