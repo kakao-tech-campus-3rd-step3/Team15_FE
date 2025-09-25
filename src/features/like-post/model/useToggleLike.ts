@@ -1,9 +1,8 @@
-export function useToggleLike() {
-  let pending = false;
-  const toggle = async () => {
-    pending = true;
-    await new Promise((r) => setTimeout(r, 300));
-    pending = false;
-  };
-  return { toggle, isPending: pending } as const;
+import { useMutation } from '@tanstack/react-query';
+import { likePost } from '../api/likePostApi';
+
+export function useCreatePost() {
+  return useMutation({
+    mutationFn: (postId: number) => likePost(postId),
+  });
 }

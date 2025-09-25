@@ -1,9 +1,9 @@
 import { PostMeta } from '@/entities/post';
-import { useToggleLike } from '@/features/like-post';
+// import { useToggleLike } from '@/features/like-post';
 import type { PostEntity } from '@/entities/post';
 
 export function PostCard({ post }: { post: PostEntity }) {
-  const { isPending } = useToggleLike();
+  // const { isPending } = useToggleLike();
   return (
     <article className='rounded-xl border p-4 shadow-sm'>
       <span className='mb-2 inline-block text-xs text-emerald-700'>{post.postCategoryName}</span>
@@ -16,7 +16,7 @@ export function PostCard({ post }: { post: PostEntity }) {
           likes={post.likeCount}
           comments={post.commentCount}
           // onLike={() => toggle(post.id)}
-          disabled={isPending}
+          // disabled={isPending}
         />
       </div>
     </article>

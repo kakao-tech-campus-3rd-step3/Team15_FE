@@ -5,12 +5,12 @@ export function PostMeta({
   likes,
   comments,
   onLike,
-  disabled,
+  // disabled,
 }: {
   likes: number;
   comments: number;
   onLike?: () => void;
-  disabled?: boolean;
+  // disabled?: boolean;
 }) {
   return (
     <div className='text-muted-foreground flex items-center justify-center gap-8 text-sm'>
@@ -18,7 +18,7 @@ export function PostMeta({
         type='button'
         variant={'ghost'}
         onClick={onLike}
-        disabled={disabled}
+        // disabled={disabled}
         aria-label='공감'
       >
         <Heart className='h-5 w-5' />
