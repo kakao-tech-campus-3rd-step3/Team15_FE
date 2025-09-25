@@ -4,7 +4,7 @@ import { Footer } from '@/widgets/footer';
 import { Separator } from '@/shared/ui/shadcn/separator';
 import { SidebarProvider } from '@/shared/ui/shadcn/sidebar';
 import { HeaderGuest, HeaderLogin } from '@/widgets/header';
-import { SideBar } from '@/widgets/sidebar';
+import { SidebarIndex } from '@/widgets/Sidebar/ui/SidebarIndex';
 
 export default function AppLayout() {
   const read = () =>
@@ -33,7 +33,7 @@ export default function AppLayout() {
         </>
       ) : (
         <SidebarProvider>
-          <SideBar />
+          <SidebarIndex />
           <main className='m-3 w-screen'>
             <HeaderLogin />
             <Outlet />
