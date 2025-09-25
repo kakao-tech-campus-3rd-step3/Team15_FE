@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { postKeys } from './queryKeys';
 import { getPostsByCategory } from '../api/getPostsByCategory';
 import type { CategoryCode } from './types';
