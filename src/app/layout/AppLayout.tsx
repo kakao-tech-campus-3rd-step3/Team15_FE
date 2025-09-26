@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Footer } from '@/widgets/footer';
 import { Separator } from '@/shared/ui/shadcn/separator';
 import { SidebarProvider } from '@/shared/ui/shadcn/sidebar';
-import { SideBar } from '@/widgets/sidebar';
 import { HeaderGuest, HeaderLogin } from '@/widgets/header';
+import { SideBar } from '@/widgets/sidebar';
 
 export default function AppLayout() {
   const read = () =>
