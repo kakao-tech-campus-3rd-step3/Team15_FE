@@ -5,6 +5,7 @@ export const ROUTES = {
   home: '/home',
   post: '/post',
   createpost: '/post/create',
+  // postdetail: '/post/:id',
   login: '/login',
   register: '/register',
   space: '/space',
