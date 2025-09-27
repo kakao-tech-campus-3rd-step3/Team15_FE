@@ -19,7 +19,7 @@ function Router() {
           <Route path={ROUTES.login} element={<AuthPage />} />
           <Route path={ROUTES.createpost} element={<Post />} />
           <Route path={ROUTES.my} element={<MyPage />} />
-          <Route path={ROUTES.home} element={<PostDetailPage />} />
+          <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
         </Route>
       </Routes>
       <DevPanel />
