@@ -1,9 +1,8 @@
 import { Sidebar, SidebarHeader } from '@/shared/ui/shadcn/sidebar';
-
 import SidebarContentSection from './SidebarContentSection';
 import SidebarFooterSection from './SidebarFooterSection';
 
-export function SideBar() {
+export function SidebarIndex() {
   return (
     <Sidebar>
       <SidebarHeader>
