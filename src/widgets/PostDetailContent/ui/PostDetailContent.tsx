@@ -6,6 +6,7 @@ import { Textarea } from '@/shared/ui/shadcn/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Button } from '@/shared/ui/shadcn/button';
 import { useState } from 'react';
+import CommentList from '@/entities/comment/ui/CommentList';
 
 type Props = {
   postId: number;
@@ -48,7 +49,7 @@ export function PostDetailContent({ postId, onSubmitComment }: Props) {
       </Card>
 
       {/* 댓글 리스트 */}
-      {/* <CommentList postId={postId} /> */}
+      <CommentList postId={postId} />
     </div>
   );
 }

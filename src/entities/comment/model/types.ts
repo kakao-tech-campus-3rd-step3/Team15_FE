@@ -1,25 +1,21 @@
-export type CommentId = number;
-
-export interface CommentAuthor {
-  id: number;
-  nickname: string;
-  avatarUrl?: string | null;
-  isAI?: boolean; // AI 댓글 구분 필요 시
-}
-
 export interface Comment {
-  id: CommentId;
+  id: number;
   postId: number;
-  author: CommentAuthor;
-  content: string;
+  author: string; // 닉네임 (문자열)
+  handle?: string; // "@..."
+  authorTag?: string; // "AUTHOR" 등
+  content: string | null; // null 허용 → 어댑터에서 string으로 변환
+  isAnonymous?: boolean;
   createdAt: string;
   updatedAt?: string;
-  parentId?: CommentId | null; // 대댓글이면 부모 id
+  hasChildren?: boolean;
 }
 
 export interface CommentListResponse {
-  items: Comment[];
-  total: number;
   page: number;
+  content: Comment[];
   size: number;
+  totalElements: number;
+  totalPages: number;
+  last: boolean;
 }
