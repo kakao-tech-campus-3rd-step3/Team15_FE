@@ -15,10 +15,11 @@ function Router() {
         <Route element={<AppLayout />}>
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
-          <Route path={ROUTES.login} element={<AuthPage />} />
+
           <Route path={ROUTES.createpost} element={<Post />} />
           <Route path={ROUTES.my} element={<MyPage />} />
         </Route>
+        <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
       <DevPanel />
     </BrowserRouter>
