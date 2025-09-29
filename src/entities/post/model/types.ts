@@ -37,3 +37,25 @@ export type PostStats = {
   weekCount: number;
   todayCount: number;
 };
+
+export type PostId = number;
+
+export interface Author {
+  id: number;
+  nickname: string;
+  avatarUrl?: string | null;
+}
+
+export interface Post {
+  id: PostId;
+  title: string;
+  content: string;
+  author: Author;
+  likeCount: number;
+  viewCount: number;
+  commentCount: number;
+  createdAt: string; // ISO string
+  updatedAt?: string;
+  tags?: string[];
+  // 필요시 확장
+}
