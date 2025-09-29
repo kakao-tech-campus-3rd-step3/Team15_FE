@@ -10,6 +10,7 @@ export const ROUTES = {
   space: '/space',
   plan: '/plan',
   my: '/my',
+  badge: '/badges',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [
@@ -22,6 +23,7 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
   { label: '스페이스', path: ROUTES.space },
   { label: '계획', path: ROUTES.plan },
   { label: '마이', path: ROUTES.my },
+  { label: '뱃지', path: ROUTES.badge },
 ];
 
 // 메뉴 항목 정의
