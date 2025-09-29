@@ -17,7 +17,7 @@
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { config } from '@/shared/config/appConfig';
+// import { config } from '@/shared/config/appConfig';
 import './main.css';
 
 async function bootstrap() {
