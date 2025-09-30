@@ -89,7 +89,7 @@ export function EmptyState({
         )}
         {...rest}
       >
-        <div className='bg-muted/50 mb-2 flex h-10 w-10 items-center justify-center rounded-md border'>
+        <div className='bg-muted/50 mb-3 flex h-10 w-10 items-center justify-center rounded-md border'>
           {Icon}
         </div>
         <p className='text-sm font-medium'>{title}</p>

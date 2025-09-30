@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { PostCard } from './PostCard';
 import type { PostListProps } from '../model/type';
 import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
-import { Plus } from 'lucide-react';
+import { Plus, Search } from 'lucide-react';
+import { ROUTES } from '@/shared/config';
 
 export function PostList({
   className,
@@ -26,14 +27,15 @@ export function PostList({
 
   if (!list || list.length === 0) {
     return (
-      <EmptyState
-        icon={<Plus className='text-muted-foreground h-5 w-5' />}
-        title='게시글이 없습니다'
-        description='첫 게시글을 작성해보세요.'
-        action={{ label: '글 쓰기', to: '/posts/new', variant: 'default' }}
-        variant='default'
-        className={className + ' mt-6'}
-      />
+      <div className={className + ' grid h-[500px] gap-4 px-6 pb-10'}>
+        <EmptyState
+          icon={<Search className='text-muted-foreground h-5 w-5' />}
+          title='게시글이 없습니다'
+          description='첫 게시글을 작성해보세요.'
+          action={{ label: '글 쓰기', to: ROUTES.postdetail }}
+          variant='compact'
+        />
+      </div>
     );
   }
 
