@@ -3,6 +3,7 @@ import { SectionHeader, YSButton } from '@/shared/ui';
 
 export function PostStats() {
   const { data, isLoading, isError } = usePostStatsQuery();
+  // 추후 PostStats 스켈레톤UI, 에러UI 필요
 
   return (
     <section className='space-y-6 pb-10 pt-10'>
