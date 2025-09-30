@@ -17,7 +17,7 @@ export function HeaderLogin() {
   const location = useLocation();
   const pathname = location.pathname;
   const activeItem = getActiveItem(pathname);
-  const { mutate: logout, isPending } = useLogout();
+  const { logout } = useLogout();
   const navigate = useNavigate();
 
   return (
@@ -51,14 +51,8 @@ export function HeaderLogin() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button
-          variant='destructive'
-          size='sm'
-          className='rounded-full'
-          onClick={() => logout()}
-          disabled={isPending}
-        >
-          {isPending ? '로그아웃 중…' : '로그아웃'}
+        <Button variant='destructive' size='sm' className='rounded-full' onClick={() => logout()}>
+          {'로그아웃'}
         </Button>
       </div>
     </div>
