@@ -1,14 +1,24 @@
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
+import { ROUTES } from '@/shared/config';
 import { SectionHeader, YSButton } from '@/shared/ui';
+import { useNavigate } from 'react-router-dom';
 
 export function PostStats() {
   const { data, isLoading, isError } = usePostStatsQuery();
   // 추후 PostStats 스켈레톤UI, 에러UI 필요
+  const navigate = useNavigate();
 
   return (
     <section className='space-y-6 pb-10 pt-10'>
       {/* 상단: 검색/타이틀/글쓰기 */}
-      <SectionHeader title='게시글' right={<YSButton size='lg'>+ 새 글쓰기</YSButton>} />
+      <SectionHeader
+        title='게시글'
+        right={
+          <YSButton size='lg' onClick={() => navigate(ROUTES.createpost)}>
+            + 새 글쓰기
+          </YSButton>
+        }
+      />
 
       {/* 통계 요약 바 */}
       <div className='rounded-xl border border-emerald-100 bg-emerald-50/70 px-6 py-5 pt-10'>
