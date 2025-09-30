@@ -2,6 +2,7 @@ import { Search } from 'lucide-react';
 import { YSButton } from '@/shared/ui/';
 import { useNavigate } from 'react-router-dom';
 import { navItems } from '../config/const';
+import { ROUTES } from '@/shared/config';
 
 export function HeaderGuest() {
   const navigate = useNavigate();
@@ -38,10 +39,10 @@ export function HeaderGuest() {
           </YSButton>
 
           {/* 로그인 버튼 (연한 테두리 pill) */}
-          <YSButton variant='outline' size='sm'>
+          <YSButton variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
             로그인
           </YSButton>
-          <YSButton variant='outline' size='sm'>
+          <YSButton variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
             회원가입
           </YSButton>
         </div>

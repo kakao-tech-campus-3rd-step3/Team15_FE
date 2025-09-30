@@ -29,7 +29,7 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
 export const items = [
   {
     title: '홈',
-    url: '/',
+    url: ROUTES.landing,
     icon: Home,
   },
   {
@@ -39,7 +39,7 @@ export const items = [
   },
   {
     title: '마음소식',
-    url: '/news',
+    url: ROUTES.post,
     icon: MessageCircle,
   },
   {
