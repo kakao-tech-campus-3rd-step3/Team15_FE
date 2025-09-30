@@ -8,6 +8,7 @@ import { MyPage } from '@/pages/my';
 import { HeartNewsPage } from '@/pages/heart-news';
 import { Post } from '@/pages/post';
 import { PostDetailPage } from '@/pages/post-detail';
+import { ActivityPage } from '@/pages/activity';
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />
+          <Route path={ROUTES.activity} element={<ActivityPage />} />
           <Route path={ROUTES.createpost} element={<Post />} />
           <Route path={ROUTES.my} element={<MyPage />} />
           <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
