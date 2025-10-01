@@ -2,9 +2,9 @@ import { NotebookText, Home, MessageCircle, FileText } from 'lucide-react';
 
 export const ROUTES = {
   landing: '/',
-  post: '/post',
-  createpost: '/post/create',
-  postdetail: '/post/:id',
+  post: '/posts',
+  createpost: '/posts/create',
+  postdetail: '/posts/:id',
   login: '/login',
   register: '/register',
   activity: '/activity',
