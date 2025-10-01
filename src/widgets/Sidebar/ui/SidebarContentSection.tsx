@@ -7,6 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/ui/shadcn/sidebar';
+import { Link } from 'react-router-dom';
 
 function SidebarContentSection() {
   return (
@@ -17,10 +18,10 @@ function SidebarContentSection() {
             {items.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url} className='flex items-center gap-2'>
+                  <Link to={item.url} className='flex items-center gap-2'>
                     <item.icon />
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}

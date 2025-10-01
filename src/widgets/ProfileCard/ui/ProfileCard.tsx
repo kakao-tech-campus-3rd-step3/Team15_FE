@@ -7,8 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/car
 import { Progress } from '@/shared/ui/shadcn/progress';
 import { Award, Edit3, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { StatCard } from './StatCard';
 import SmallBadge from './SmallBadge';
+import { StatCard } from '@/shared/ui/stats/StatCard';
 
 export const ProfileCard = () => {
   const { setIsModalOpen } = useProfileStore();

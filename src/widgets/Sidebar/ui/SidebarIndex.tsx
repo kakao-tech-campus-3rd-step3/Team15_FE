@@ -1,6 +1,6 @@
 import { Sidebar, SidebarHeader } from '@/shared/ui/shadcn/sidebar';
 import SidebarContentSection from './SidebarContentSection';
-import SidebarFooterSection from './SidebarFooterSection';
+// import SidebarFooterSection from './SidebarFooterSection';
 
 export function SidebarIndex() {
   return (
@@ -9,7 +9,7 @@ export function SidebarIndex() {
         <span className='block w-full text-center text-xl font-bold'>휴 쉼</span>
       </SidebarHeader>
       <SidebarContentSection />
-      <SidebarFooterSection />
+      {/* <SidebarFooterSection /> */}
     </Sidebar>
   );
 }
