@@ -1,4 +1,3 @@
-import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
 import { useAuthStore } from '@/features/auth/model/useAuthStore';
 
 export function HeroSection() {
