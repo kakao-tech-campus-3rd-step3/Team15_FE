@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import type { PostStats } from './types';
 import { statsKeys } from './queryKeys';
 import { getPostStats } from '../api/getPostStats';

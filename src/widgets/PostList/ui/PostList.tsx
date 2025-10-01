@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { PostCard } from './PostCard';
 import type { PostListProps } from '../model/type';
 import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
-import { Plus, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
 
 export function PostList({

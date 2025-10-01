@@ -7,6 +7,10 @@ import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
 import FallbackError from '@/shared/ui/states/FallbackError';
 import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
 import { PostListSkeleton } from '@/widgets/PostList/ui/PostList.skeleton';
+import { PostStatsSkeleton } from '@/widgets/PostStats/ui/PostStats.skeletton';
+import { SectionHeader, YSButton } from '@/shared/ui';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
@@ -18,10 +22,25 @@ export function HeartNewsPage() {
     size: 10,
     sort: 'createdAt,desc',
   });
+  const navigate = useNavigate();
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
-        <PostStats />
+        <section className='mx-8 space-y-6 pb-10 pt-10'>
+          {/* 상단: 검색/타이틀/글쓰기 */}
+          <SectionHeader
+            title='게시글'
+            right={
+              <YSButton size='lg' onClick={() => navigate(ROUTES.createpost)}>
+                + 새 글쓰기
+              </YSButton>
+            }
+          />
+          <SuspenseBoundary fallback={<PostStatsSkeleton />}>
+            <PostStats />
+          </SuspenseBoundary>
+        </section>
+
         <PostInfo params={params} onParamsChange={setParams} />
         <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={10} />}>
           <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
