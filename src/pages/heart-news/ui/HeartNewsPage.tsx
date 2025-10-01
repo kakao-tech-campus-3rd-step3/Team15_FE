@@ -11,6 +11,7 @@ import { PostStatsSkeleton } from '@/widgets/PostStats/ui/PostStats.skeletton';
 import { SectionHeader, YSButton } from '@/shared/ui';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';
+import { Newspaper } from 'lucide-react';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
@@ -29,7 +30,18 @@ export function HeartNewsPage() {
         <section className='mx-8 space-y-6 pb-10 pt-10'>
           {/* 상단: 검색/타이틀/글쓰기 */}
           <SectionHeader
-            title='게시글'
+            title={
+              <>
+                <Newspaper className='mr-2 h-6 w-6 text-green-600' />
+                게시글
+              </>
+            }
+            description='마음소식 게시판의 모든 글을 모아볼 수 있습니다'
+            left={
+              <YSButton size='lg' onClick={() => navigate(-1)}>
+                목록으로
+              </YSButton>
+            }
             right={
               <YSButton size='lg' onClick={() => navigate(ROUTES.createpost)}>
                 + 새 글쓰기
