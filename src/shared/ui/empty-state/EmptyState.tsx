@@ -24,7 +24,7 @@ type ClickAction = {
 type Action = LinkAction | ClickAction;
 
 function isLinkAction(action: Action): action is LinkAction {
-  return typeof (action as any).to === 'string';
+  return 'to' in action;
 }
 
 export type EmptyStateProps = {
