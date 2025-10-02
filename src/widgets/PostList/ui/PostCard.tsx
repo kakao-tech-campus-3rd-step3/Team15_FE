@@ -12,7 +12,7 @@ export function PostCard({ post }: { post: PostEntity }) {
       role='button'
       tabIndex={0}
       className='cursor-pointer rounded-xl border p-4 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-300'
-      onClick={() => navigate(`/post/${post.id}`)}
+      onClick={() => navigate(`/posts/${post.id}`)}
     >
       <span className='mb-2 inline-block text-xs text-emerald-700'>{post.postCategoryName}</span>
       <h3 className='line-clamp-1 text-base font-semibold'>{post.title}</h3>
