@@ -18,7 +18,12 @@ export function PostCard({ post }: { post: PostEntity }) {
         {(post.content ?? '').slice(0, 100)}
       </p>
       <div className='mt-5 flex items-center justify-end'>
-        <PostMeta likes={post.likeCount} comments={post.commentCount} postId={post.id} />
+        <PostMeta
+          likes={post.likeCount}
+          comments={post.commentCount}
+          // postId={post.id}
+          isLiked={post.isLiked}
+        />
       </div>
     </article>
   );

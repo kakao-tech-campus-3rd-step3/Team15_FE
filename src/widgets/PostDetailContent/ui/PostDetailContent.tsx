@@ -1,4 +1,3 @@
-import PostDetail from '@/entities/post/ui/PostDetail';
 // import CommentList from '@/entities/comment/ui/CommentList';
 
 import { usePostDetailQuery } from '@/entities/post/model/usePostDetail';
@@ -7,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/car
 import { Button } from '@/shared/ui/shadcn/button';
 import { useState } from 'react';
 import CommentList from '@/entities/comment/ui/CommentList';
+import { PostDetail } from '@/entities/post/ui/PostDetail';
+import { useToggleLike } from '@/features/like-post';
 
 type Props = {
   postId: number;
@@ -15,13 +16,14 @@ type Props = {
 
 export function PostDetailContent({ postId, onSubmitComment }: Props) {
   const { data } = usePostDetailQuery(postId);
+  const { mutate } = useToggleLike();
   const [value, setValue] = useState('');
 
   if (!data) return null;
 
   return (
     <div className='space-y-6'>
-      <PostDetail post={data} />
+      <PostDetail post={data} onClickLike={(postId: number) => mutate(postId)} />
 
       {/* 댓글 작성 박스 */}
       <Card>

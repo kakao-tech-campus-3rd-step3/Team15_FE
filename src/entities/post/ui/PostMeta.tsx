@@ -5,24 +5,33 @@ import { Heart, MessageCircle } from 'lucide-react';
 export function PostMeta({
   likes,
   comments,
-  postId,
+  isLiked,
 }: {
   likes: number;
   comments: number;
-  postId: number;
+  postId?: number;
+  isLiked: boolean;
 }) {
-  const { isPending, mutate } = useToggleLike();
+  const { isPending } = useToggleLike();
 
   return (
     <div className='text-muted-foreground flex items-center justify-center gap-8 text-sm'>
       <YSButton
         type='button'
         variant={'ghost'}
-        onClick={() => mutate(postId)}
+        // onClick={(e) => {
+        //   e.stopPropagation();
+        //   mutate(postId);
+        // }}
         disabled={isPending}
         aria-label='공감'
       >
-        <Heart className='h-5 w-5' />
+        {/* isLiked 여부에 따라 하트 색상/채우기 바꾸기 */}
+        {isLiked ? (
+          <Heart className='h-5 w-5 fill-red-500 text-red-500' />
+        ) : (
+          <Heart className='h-5 w-5' />
+        )}
         <span>{likes}</span>
       </YSButton>
       <div className='flex items-center gap-2 rounded-full px-2 py-1'>
