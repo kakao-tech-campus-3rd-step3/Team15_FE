@@ -1,24 +1,25 @@
+import { useToggleLike } from '@/features/like-post';
 import { YSButton } from '@/shared/ui';
 import { Heart, MessageCircle } from 'lucide-react';
 
 export function PostMeta({
   likes,
   comments,
-  onLike,
-  disabled,
+  postId,
 }: {
   likes: number;
   comments: number;
-  onLike?: () => void;
-  disabled?: boolean;
+  postId: number;
 }) {
+  const { isPending, mutate } = useToggleLike();
+
   return (
     <div className='text-muted-foreground flex items-center justify-center gap-8 text-sm'>
       <YSButton
         type='button'
         variant={'ghost'}
-        onClick={onLike}
-        disabled={disabled}
+        onClick={() => mutate(postId)}
+        disabled={isPending}
         aria-label='공감'
       >
         <Heart className='h-5 w-5' />

@@ -1,11 +1,8 @@
 import { PostMeta } from '@/entities/post';
 import type { PostEntity } from '@/entities/post';
-import { useToggleLike } from '@/features/like-post';
-import type { PostEntity } from '@/entities/post';
 import { useNavigate } from 'react-router-dom';
 
 export function PostCard({ post }: { post: PostEntity }) {
-  const { isPending } = useToggleLike();
   const navigate = useNavigate();
 
   return (
@@ -21,12 +18,7 @@ export function PostCard({ post }: { post: PostEntity }) {
         {(post.content ?? '').slice(0, 100)}
       </p>
       <div className='mt-5 flex items-center justify-end'>
-        <PostMeta
-          likes={post.likeCount}
-          comments={post.commentCount}
-          onLike={() => mutateAsync(post.id)}
-          disabled={isPending}
-        />
+        <PostMeta likes={post.likeCount} comments={post.commentCount} postId={post.id} />
       </div>
     </article>
   );
