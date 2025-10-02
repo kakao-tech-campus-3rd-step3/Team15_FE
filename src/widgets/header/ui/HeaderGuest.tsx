@@ -25,7 +25,10 @@ export function HeaderGuest() {
         </nav>
 
         {/* 중앙 로고 */}
-        <div className='col-start-2 select-none justify-self-center'>
+        <div
+          className='col-start-2 cursor-pointer select-none justify-self-center transition-transform hover:scale-105 hover:opacity-80'
+          onClick={() => navigate(ROUTES.landing)}
+        >
           <div className='text-primary flex items-center gap-2 text-4xl font-extrabold tracking-tight'>
             <span>휴쉼</span>
           </div>

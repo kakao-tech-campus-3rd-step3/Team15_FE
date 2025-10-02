@@ -8,6 +8,8 @@ import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
 import { PostListSkeleton } from '@/widgets/PostList/ui/PostList.skeleton';
 import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
 import FallbackError from '@/shared/ui/states/FallbackError';
+import { HeroSectionSkeleton } from '@/widgets/HeroSection/ui/HeroSection.skeleton';
+import { ROUTES } from '@/shared/config';
 
 export function LandingPage() {
   const { category, setCategory } = useFilter();
@@ -15,12 +17,14 @@ export function LandingPage() {
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
-        <HeroSection />
+        <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
+          <HeroSection />
+        </SuspenseBoundary>
         <LandingPageFilterTabs category={category} setCategory={setCategory} />
         <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
           <PostList className='mt-8' limit={6} code={category} showPagination={false} />
         </SuspenseBoundary>
-        <MorePostsButton to='/post' label='마음소식 더 보러가기' />
+        <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
         <SupportBand />
       </ErrorBoundary>
     </>

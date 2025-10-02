@@ -10,6 +10,6 @@ import { axiosInstance } from '@/shared/api/base/axiosInstance';
 // };
 
 export async function fetchComments(postId: number): Promise<CommentListResponse> {
-  const res = await axiosInstance.get<CommentListResponse>(`/posts/${postId}/comments`);
-  return res.data;
+  const { data } = await axiosInstance.get<CommentListResponse>(`/posts/${postId}/comments`);
+  return data;
 }

@@ -3,6 +3,9 @@ import { PaginationPosts } from '@/features/pagination';
 import { useState } from 'react';
 import { PostCard } from './PostCard';
 import type { PostListProps } from '../model/type';
+import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
+import { Search } from 'lucide-react';
+import { ROUTES } from '@/shared/config';
 
 export function PostList({
   className,
@@ -21,6 +24,20 @@ export function PostList({
 
   // 서버 페이지네이션을 쓰므로 그대로 사용. limit는 필요 시 컷.
   const list = limit ? data?.content.slice(0, limit) : data?.content;
+
+  if (!list || list.length === 0) {
+    return (
+      <div className={className + ' grid h-[500px] gap-4 px-6 pb-10'}>
+        <EmptyState
+          icon={<Search className='text-muted-foreground h-5 w-5' />}
+          title='게시글이 없습니다'
+          description='첫 게시글을 작성해보세요.'
+          action={{ label: '글 쓰기', to: ROUTES.postdetail }}
+          variant='compact'
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={className + ' grid gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'}>

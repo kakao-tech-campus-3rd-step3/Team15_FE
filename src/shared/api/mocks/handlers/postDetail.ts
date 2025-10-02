@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const postDetailHandlers = [
-  http.get('/api/post/:id', ({ params }) => {
+  http.get('/api/posts/:id', ({ params }) => {
     const { id } = params;
 
     return HttpResponse.json({
