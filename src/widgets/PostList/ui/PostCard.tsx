@@ -1,11 +1,20 @@
 import { PostMeta } from '@/entities/post';
 import type { PostEntity } from '@/entities/post';
 import { useToggleLike } from '@/features/like-post';
+import type { PostEntity } from '@/entities/post';
+import { useNavigate } from 'react-router-dom';
 
 export function PostCard({ post }: { post: PostEntity }) {
-  const { mutateAsync, isPending } = useToggleLike();
+  const { isPending } = useToggleLike();
+  const navigate = useNavigate();
+
   return (
-    <article className='rounded-xl border p-4 shadow-sm'>
+    <article
+      role='button'
+      tabIndex={0}
+      className='cursor-pointer rounded-xl border p-4 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-300'
+      onClick={() => navigate(`/post/${post.id}`)}
+    >
       <span className='mb-2 inline-block text-xs text-emerald-700'>{post.postCategoryName}</span>
       <h3 className='line-clamp-1 text-base font-semibold'>{post.title}</h3>
       <p className='text-muted-foreground mt-2 line-clamp-3 text-sm'>

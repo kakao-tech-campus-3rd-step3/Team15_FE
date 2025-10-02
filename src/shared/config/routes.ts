@@ -2,19 +2,19 @@ import { NotebookText, Home, MessageCircle, FileText } from 'lucide-react';
 
 export const ROUTES = {
   landing: '/',
-  home: '/home',
   post: '/post',
   createpost: '/post/create',
+  postdetail: '/post/:id',
   login: '/login',
   register: '/register',
   space: '/space',
   plan: '/plan',
   my: '/my',
+  badge: '/badges',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [
   { label: '랜딩', path: ROUTES.landing },
-  { label: '홈', path: ROUTES.home },
   { label: '포스터', path: ROUTES.post },
   { label: '포스터 작성', path: ROUTES.createpost },
   { label: '로그인', path: ROUTES.login },
@@ -22,13 +22,14 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
   { label: '스페이스', path: ROUTES.space },
   { label: '계획', path: ROUTES.plan },
   { label: '마이', path: ROUTES.my },
+  { label: '뱃지', path: ROUTES.badge },
 ];
 
 // 메뉴 항목 정의
 export const items = [
   {
     title: '홈',
-    url: '/',
+    url: ROUTES.landing,
     icon: Home,
   },
   {
@@ -38,7 +39,7 @@ export const items = [
   },
   {
     title: '마음소식',
-    url: '/news',
+    url: ROUTES.post,
     icon: MessageCircle,
   },
   {

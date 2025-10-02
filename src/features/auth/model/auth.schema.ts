@@ -23,6 +23,7 @@ const signupSchema = z
     email: emailSchema,
     password: passwordSchema,
     passwordConfirm: z.string(),
+    verificationCode: z.string().optional(),
     termsAgree: z.boolean().refine((v) => v === true, {
       message: '이용약관에 동의해주세요.',
     }),
