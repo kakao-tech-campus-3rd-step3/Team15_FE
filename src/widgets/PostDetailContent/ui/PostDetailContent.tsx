@@ -28,7 +28,7 @@ export function PostDetailContent({ postId, onSubmitComment }: Props) {
       {/* 댓글 작성 박스 */}
       <Card>
         <CardHeader>
-          <CardTitle>대댓글 추가</CardTitle>
+          <CardTitle>댓글 추가</CardTitle>
         </CardHeader>
         <CardContent className='space-y-3'>
           <Textarea
