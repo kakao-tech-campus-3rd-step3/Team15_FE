@@ -7,7 +7,6 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
   // mode = 'development' | 'production'
   const env = loadEnv(mode, process.cwd(), ''); // '' prefix로 모든 env 로드
-  console.log('VITE_API_BASE_URL =', env.VITE_API_BASE_URL);
 
   return {
     plugins: [react(), tailwindcss()],
