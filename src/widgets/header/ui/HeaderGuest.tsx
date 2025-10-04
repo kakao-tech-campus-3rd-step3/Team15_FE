@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react';
 import { YSButton } from '@/shared/ui/';
 import { useNavigate } from 'react-router-dom';
-import { navItems } from '../config/const';
+import { HEADER_NAV_ITEMS } from '../config/const';
 import { ROUTES } from '@/shared/config';
 
 export function HeaderGuest() {
@@ -12,7 +12,7 @@ export function HeaderGuest() {
       <div className='mx-auto grid h-20 w-full max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-4 md:px-6'>
         {/* 좌측 네비게이션 */}
         <nav className='col-start-1 hidden items-center gap-3 md:flex'>
-          {navItems.map((item) => (
+          {HEADER_NAV_ITEMS.map((item) => (
             <YSButton
               key={item.path}
               onClick={() => navigate(item.path)}

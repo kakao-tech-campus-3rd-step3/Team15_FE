@@ -12,6 +12,8 @@ export const ROUTES = {
   plan: '/plan',
   my: '/my',
   badge: '/badges',
+  mission: '/mission',
+  support: '/support',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [
@@ -25,10 +27,12 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
   { label: '계획', path: ROUTES.plan },
   { label: '마이', path: ROUTES.my },
   { label: '뱃지', path: ROUTES.badge },
+  { label: '미션', path: ROUTES.mission },
+  { label: '지원사업', path: ROUTES.support },
 ];
 
 // 메뉴 항목 정의
-export const items = [
+export const MENU_ITEMS = [
   {
     title: '홈',
     url: ROUTES.landing,
@@ -36,7 +40,7 @@ export const items = [
   },
   {
     title: '미션',
-    url: '/mission',
+    url: ROUTES.mission,
     icon: NotebookText,
   },
   {
@@ -46,7 +50,7 @@ export const items = [
   },
   {
     title: '지원사업',
-    url: '/support',
+    url: ROUTES.support,
     icon: FileText,
   },
 ];
