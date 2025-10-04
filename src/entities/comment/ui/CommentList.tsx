@@ -4,6 +4,7 @@ import { Separator } from '@/shared/ui/shadcn/separator';
 
 import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
+import { ReplyList } from '@/features/add-reply/ui/ReplyList';
 
 type Props = {
   postId: number;
@@ -28,6 +29,7 @@ export function CommentList({ postId, className }: Props) {
             {items.map((c) => (
               <Fragment key={c.id}>
                 <CommentItem comment={c} />
+                <ReplyList parentId={c.id} />
                 <Separator />
               </Fragment>
             ))}
