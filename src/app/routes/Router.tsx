@@ -10,7 +10,7 @@ import { Post } from '@/pages/post';
 import { PostDetailPage } from '@/pages/post-detail';
 import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
-
+import { MissionPage } from '@/pages/mission';
 
 function Router() {
   return (
@@ -25,6 +25,7 @@ function Router() {
           <Route path={ROUTES.my} element={<MyPage />} />
           <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
           <Route path={ROUTES.badge} element={<BadgePage />} />
+          <Route path={ROUTES.mission} element={<MissionPage />} />
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
