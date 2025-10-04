@@ -28,7 +28,7 @@ export const ROUTE_LIST: { label: string; path: string }[] = [
 ];
 
 // 메뉴 항목 정의
-export const items = [
+export const MENU_ITEMS = [
   {
     title: '홈',
     url: ROUTES.landing,
