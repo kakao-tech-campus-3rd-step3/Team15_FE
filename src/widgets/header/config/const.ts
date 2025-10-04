@@ -1,6 +1,6 @@
 import { ROUTES } from '@/shared/config';
 
-export const navItems = [
+export const HEADER_NAV_ITEMS = [
   { label: '홈', path: ROUTES.landing },
   { label: '미션', path: ROUTES.mission },
   { label: '마음소식', path: ROUTES.post },
