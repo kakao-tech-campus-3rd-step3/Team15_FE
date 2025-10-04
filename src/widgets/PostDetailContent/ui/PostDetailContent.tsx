@@ -1,5 +1,3 @@
-// import CommentList from '@/entities/comment/ui/CommentList';
-
 import { usePostDetailQuery } from '@/entities/post/model/usePostDetail';
 import { Textarea } from '@/shared/ui/shadcn/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
@@ -8,18 +6,17 @@ import { useState } from 'react';
 import CommentList from '@/entities/comment/ui/CommentList';
 import { PostDetail } from '@/entities/post/ui/PostDetail';
 import { useToggleLike } from '@/features/like-post';
+import { useCreateComment } from '@/features/add-comment/model/useCreateComment';
 
 type Props = {
   postId: number;
-  onSubmitComment?: (content: string) => Promise<void> | void;
 };
 
-export function PostDetailContent({ postId, onSubmitComment }: Props) {
+export function PostDetailContent({ postId }: Props) {
   const { data } = usePostDetailQuery(postId);
   const { mutate } = useToggleLike();
+  const { mutate: createComment } = useCreateComment(postId);
   const [value, setValue] = useState('');
-
-  if (!data) return null;
 
   return (
     <div className='space-y-6'>
@@ -37,15 +34,7 @@ export function PostDetailContent({ postId, onSubmitComment }: Props) {
             onChange={(e) => setValue(e.target.value)}
           />
           <div className='flex justify-end'>
-            <Button
-              onClick={async () => {
-                if (!value.trim()) return;
-                await onSubmitComment?.(value.trim());
-                setValue('');
-              }}
-            >
-              댓글작성
-            </Button>
+            <Button onClick={() => {}}>댓글작성</Button>
           </div>
         </CardContent>
       </Card>
