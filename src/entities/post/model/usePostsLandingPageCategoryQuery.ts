@@ -8,16 +8,24 @@ type UsePostsByCategoryQueryParams = {
   page?: number; // 0-base
   size?: number;
   enabled?: boolean;
+  limit?: number;
 };
 
 export function usePostsLandingPageCategoryQuery({
   code,
   page = 0,
   size = 10,
+  limit = 6,
 }: UsePostsByCategoryQueryParams) {
   return useSuspenseQuery({
     queryKey: postKeys.categoryPage(code, page, size),
-    queryFn: () => getPostsByCategory({ code, page, size }),
+    queryFn: async () => {
+      const data = await getPostsByCategory({ code, page, size });
+      if (limit) {
+        return { ...data, content: data.content.slice(0, limit) };
+      }
+      return data;
+    },
 
     // staleTime, gcTime 등 필요 시 지정
   });

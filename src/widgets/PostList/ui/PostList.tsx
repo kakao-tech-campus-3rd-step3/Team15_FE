@@ -20,10 +20,11 @@ export function PostList({
     code,
     page: curPage,
     size,
+    limit,
   });
 
   // 서버 페이지네이션을 쓰므로 그대로 사용. limit는 필요 시 컷.
-  const list = limit ? data?.content.slice(0, limit) : data?.content;
+  const list = data?.content;
 
   if (!list || list.length === 0) {
     return (
