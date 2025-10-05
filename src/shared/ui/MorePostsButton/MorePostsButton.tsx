@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { YSButton } from '@/shared/ui/';
+import { Button } from '../shadcn/button';
 
 interface MorePostsButtonProps {
   /** 이동할 경로 */
@@ -25,9 +25,9 @@ export function MorePostsButton({
 
   return (
     <div className={className}>
-      <YSButton onClick={() => navigate(to)} size={size} variant={variant}>
+      <Button onClick={() => navigate(to)} size={size} variant={variant}>
         {label}
-      </YSButton>
+      </Button>
     </div>
   );
 }

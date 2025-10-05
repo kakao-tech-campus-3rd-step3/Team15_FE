@@ -1,8 +1,8 @@
 import { Search } from 'lucide-react';
-import { YSButton } from '@/shared/ui/';
 import { useNavigate } from 'react-router-dom';
 import { HEADER_NAV_ITEMS } from '../config/const';
 import { ROUTES } from '@/shared/config';
+import { Button } from '@/shared/ui/shadcn/button';
 
 export function HeaderGuest() {
   const navigate = useNavigate();
@@ -13,14 +13,14 @@ export function HeaderGuest() {
         {/* 좌측 네비게이션 */}
         <nav className='col-start-1 hidden items-center gap-3 md:flex'>
           {HEADER_NAV_ITEMS.map((item) => (
-            <YSButton
+            <Button
               key={item.path}
               onClick={() => navigate(item.path)}
               variant='link'
               className='text-xl'
             >
               {item.label}
-            </YSButton>
+            </Button>
           ))}
         </nav>
 
@@ -37,17 +37,17 @@ export function HeaderGuest() {
         {/* 우측 유틸 */}
         <div className='col-start-3 flex items-center gap-4 justify-self-end'>
           {/* 검색 아이콘 버튼 */}
-          <YSButton variant='ghost' size='icon'>
+          <Button variant='ghost' size='icon'>
             <Search className='h-6 w-6' />
-          </YSButton>
+          </Button>
 
           {/* 로그인 버튼 (연한 테두리 pill) */}
-          <YSButton variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
+          <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
             로그인
-          </YSButton>
-          <YSButton variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
+          </Button>
+          <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
             회원가입
-          </YSButton>
+          </Button>
         </div>
       </div>
     </header>

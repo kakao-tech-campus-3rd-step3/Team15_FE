@@ -1,5 +1,5 @@
 import { useToggleLike } from '@/features/like-post';
-import { YSButton } from '@/shared/ui';
+import { Button } from '@/shared/ui/shadcn/button';
 import { Heart, MessageCircle } from 'lucide-react';
 
 export function PostMeta({
@@ -16,7 +16,7 @@ export function PostMeta({
 
   return (
     <div className='text-muted-foreground flex items-center justify-center gap-8 text-sm'>
-      <YSButton
+      <Button
         type='button'
         variant={'ghost'}
         // onClick={(e) => {
@@ -33,7 +33,7 @@ export function PostMeta({
           <Heart className='h-5 w-5' />
         )}
         <span>{likes}</span>
-      </YSButton>
+      </Button>
       <div className='flex items-center gap-2 rounded-full px-2 py-1'>
         <MessageCircle className='h-5 w-5' />
         <span>{comments}</span>

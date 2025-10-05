@@ -8,7 +8,6 @@ import { PanelLeftIcon } from 'lucide-react';
 
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { cn } from '@/shared/lib/utils';
-import { YSButton } from '@/shared/ui/';
 import { Input } from '@/shared/ui/shadcn/input';
 import { Separator } from '@/shared/ui/shadcn/separator';
 import {
@@ -25,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/shared/ui/shadcn/tooltip';
+import { Button } from './button';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -251,11 +251,11 @@ function Sidebar({
   );
 }
 
-function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof YSButton>) {
+function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof Button>) {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <YSButton
+    <Button
       data-sidebar='trigger'
       data-slot='sidebar-trigger'
       variant='ghost'
@@ -269,7 +269,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
     >
       <PanelLeftIcon />
       <span className='sr-only'>Toggle Sidebar</span>
-    </YSButton>
+    </Button>
   );
 }
 
