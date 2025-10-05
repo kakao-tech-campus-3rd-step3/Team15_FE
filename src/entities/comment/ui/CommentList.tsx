@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Button } from '@/shared/ui/shadcn/button';
 import CommentItem from './CommentItem';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Separator } from '@/shared/ui/shadcn/separator';
@@ -8,6 +7,7 @@ import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
 import { ReplyList } from '@/features/add-reply/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
+import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 
 type Props = {
   postId: number;
@@ -16,6 +16,7 @@ type Props = {
 
 export function CommentList({ postId, className }: Props) {
   const { data } = useComments(postId);
+  const { mutate } = useCreateReply();
 
   const items = data?.content ?? [];
 
@@ -49,7 +50,11 @@ export function CommentList({ postId, className }: Props) {
                       setReplyTargetId(null);
                       setReplyText('');
                     }}
-                    onSubmit={() => {}}
+                    onSubmit={() => {
+                      mutate({ parentId: c.id, data: { content: replyText, isAnonymous: false } });
+                      setReplyTargetId(null);
+                      setReplyText('');
+                    }}
                     disabled={!replyText.trim()}
                     autoFocus
                   />
