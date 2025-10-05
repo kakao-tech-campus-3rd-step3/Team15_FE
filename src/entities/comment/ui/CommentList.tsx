@@ -22,6 +22,7 @@ export function CommentList({ postId, className }: Props) {
 
   const [replyTargetId, setReplyTargetId] = useState<number | null>(null);
   const [replyText, setReplyText] = useState('');
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   return (
     <Card className={className}>
@@ -39,6 +40,7 @@ export function CommentList({ postId, className }: Props) {
                   comment={c}
                   onClickReply={() => {
                     setReplyText('');
+                    setIsAnonymous(false);
                     setReplyTargetId((prev) => (prev === c.id ? null : c.id));
                   }}
                 />
@@ -49,12 +51,16 @@ export function CommentList({ postId, className }: Props) {
                     onCancel={() => {
                       setReplyTargetId(null);
                       setReplyText('');
+                      setIsAnonymous(false);
                     }}
                     onSubmit={() => {
-                      mutate({ parentId: c.id, data: { content: replyText, isAnonymous: false } });
+                      mutate({ parentId: c.id, data: { content: replyText, isAnonymous } });
                       setReplyTargetId(null);
                       setReplyText('');
+                      setIsAnonymous(false);
                     }}
+                    isAnonymous={isAnonymous}
+                    onToggleAnonymous={setIsAnonymous}
                     disabled={!replyText.trim()}
                     autoFocus
                   />
