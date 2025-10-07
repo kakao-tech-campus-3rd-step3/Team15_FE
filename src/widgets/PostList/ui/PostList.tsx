@@ -1,4 +1,3 @@
-import { usePostsLandingPageCategoryQuery } from '@/entities/post/';
 import { PaginationPosts } from '@/features/pagination';
 import { useState } from 'react';
 import { PostCard } from './PostCard';
@@ -6,6 +5,7 @@ import type { PostListProps } from '../model/type';
 import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
 import { Search } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
+import { usePostByCategory } from '@/entities/post';
 
 export function PostList({
   className,
@@ -16,7 +16,7 @@ export function PostList({
   showPagination = true,
 }: PostListProps) {
   const [curPage, setCurPage] = useState(page);
-  const { data } = usePostsLandingPageCategoryQuery({
+  const { data } = usePostByCategory({
     code,
     page: curPage,
     size,

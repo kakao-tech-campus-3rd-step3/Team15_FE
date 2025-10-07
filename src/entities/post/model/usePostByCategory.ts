@@ -11,7 +11,7 @@ type UsePostsByCategoryQueryParams = {
   limit?: number;
 };
 
-export function usePostsLandingPageCategoryQuery({
+export function usePostByCategory({
   code,
   page = 0,
   size = 10,
