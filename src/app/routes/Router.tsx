@@ -10,7 +10,7 @@ import { Post } from '@/pages/post';
 import { PostDetailPage } from '@/pages/post-detail';
 import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
-
+import AuthGuard from './AuthGuard';
 
 function Router() {
   return (
@@ -20,11 +20,13 @@ function Router() {
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />
-          <Route path={ROUTES.activity} element={<ActivityPage />} />
           <Route path={ROUTES.createpost} element={<Post />} />
-          <Route path={ROUTES.my} element={<MyPage />} />
+          <Route element={<AuthGuard />}>
+            <Route path={ROUTES.activity} element={<ActivityPage />} />
+            <Route path={ROUTES.badge} element={<BadgePage />} />
+            <Route path={ROUTES.my} element={<MyPage />} />
+          </Route>
           <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
-          <Route path={ROUTES.badge} element={<BadgePage />} />
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
