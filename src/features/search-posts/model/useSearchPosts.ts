@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { postListKeys } from './queryKeys';
-import { POST_LIST_STALE_TIME } from '../config';
 import type { Params } from '@/widgets/PostList/model/type';
 import { getSearchPost } from '../api/getSearchPost';
 
@@ -13,7 +12,6 @@ export function useSearchPosts(baseParams: Params) {
   const query = useSuspenseQuery({
     queryKey: postListKeys.search(params),
     queryFn: () => getSearchPost(params),
-    staleTime: POST_LIST_STALE_TIME,
   });
 
   return { ...query, page, setPage, params };
