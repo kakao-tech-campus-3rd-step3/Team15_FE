@@ -7,9 +7,20 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/shared/ui/shadcn/pagination';
-import type { Props } from '../model/type';
 
-export function PaginationPosts({ page = 1, totalPages = 1, onChange, windowSize = 5 }: Props) {
+type PaginationPostProps = {
+  page?: number; // 0-based
+  totalPages?: number; // 전체 페이지 수
+  onChange: (next: number) => void;
+  windowSize?: number; // 가운데에 보여줄 페이지 개수(짝수/홀수 무관)
+};
+
+export function PaginationPosts({
+  page = 1,
+  totalPages = 1,
+  onChange,
+  windowSize = 5,
+}: PaginationPostProps) {
   if (totalPages <= 1) return null;
 
   // 0-based 를 1-based로 보이게
