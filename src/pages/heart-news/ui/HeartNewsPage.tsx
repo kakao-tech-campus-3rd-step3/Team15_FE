@@ -8,10 +8,11 @@ import FallbackError from '@/shared/ui/states/FallbackError';
 import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
 import { PostListSkeleton } from '@/widgets/PostList/ui/PostList.skeleton';
 import { PostStatsSkeleton } from '@/widgets/PostStats/ui/PostStats.skeletton';
-import { SectionHeader, YSButton } from '@/shared/ui';
+import { SectionHeader } from '@/shared/ui';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';
 import { Newspaper } from 'lucide-react';
+import { Button } from '@/shared/ui/shadcn/button';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
@@ -38,14 +39,14 @@ export function HeartNewsPage() {
             }
             description='마음소식 게시판의 모든 글을 모아볼 수 있습니다'
             left={
-              <YSButton size='lg' onClick={() => navigate(-1)}>
+              <Button size='lg' onClick={() => navigate(-1)}>
                 목록으로
-              </YSButton>
+              </Button>
             }
             right={
-              <YSButton size='lg' onClick={() => navigate(ROUTES.createpost)}>
+              <Button size='lg' onClick={() => navigate(ROUTES.createpost)}>
                 + 새 글쓰기
-              </YSButton>
+              </Button>
             }
           />
           <SuspenseBoundary fallback={<PostStatsSkeleton />}>

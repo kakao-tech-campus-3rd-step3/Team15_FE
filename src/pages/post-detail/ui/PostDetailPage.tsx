@@ -1,10 +1,11 @@
-import { SectionHeader, YSButton } from '@/shared/ui';
+import { SectionHeader } from '@/shared/ui';
 import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
 import PostDetailContent from '@/widgets/PostDetailContent/ui/PostDetailContent';
 import PostDetailContentSkeleton from '@/widgets/PostDetailContent/ui/PostDetailContent.skeleton';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import { FileText } from 'lucide-react';
+import { Button } from '@/shared/ui/shadcn/button';
 
 export function PostDetailPage() {
   const { id } = useParams();
@@ -22,9 +23,9 @@ export function PostDetailPage() {
           }
           description='선택한 게시글의 상세 내용을 확인하세요'
           left={
-            <YSButton size='lg' onClick={() => navigate(-1)}>
+            <Button size='lg' onClick={() => navigate(-1)}>
               목록으로
-            </YSButton>
+            </Button>
           }
         />
       </section>
