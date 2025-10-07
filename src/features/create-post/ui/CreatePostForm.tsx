@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { useCreatePost } from '../model/useCreatePost';
 
-// import { GuidelineCard } from './GuidelineCard';
 import {
   Form,
   FormControl,
@@ -18,8 +16,11 @@ import { Textarea } from '@/shared/ui/shadcn/textarea';
 import { RadioGroup, RadioGroupItem } from '@/shared/ui/shadcn/radio-group';
 import { Button } from '@/shared/ui/shadcn/button';
 import { createPostSchema, type CreatePostFormValues } from '../lib/post.scheme';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config';
 
 export function CreatePostForm({ category }: { category: string }) {
+  const navigate = useNavigate();
   const form = useForm<CreatePostFormValues>({
     resolver: zodResolver(createPostSchema),
     defaultValues: {
@@ -32,14 +33,13 @@ export function CreatePostForm({ category }: { category: string }) {
 
   const { mutateAsync, isPending } = useCreatePost();
 
-  // 외부 카테고리 변경 시 동기화
   useEffect(() => {
     form.setValue('categoryCode', category);
   }, [category, form]);
 
   const onSubmit = async (values: CreatePostFormValues) => {
     await mutateAsync(values);
-    window.location.href = '/posts';
+    navigate(ROUTES.post);
   };
 
   return (
