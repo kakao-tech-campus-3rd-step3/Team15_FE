@@ -1,10 +1,8 @@
 import { PostMeta } from '@/entities/post';
-import { useToggleLike } from '@/features/like-post';
 import type { PostEntity } from '@/entities/post';
 import { useNavigate } from 'react-router-dom';
 
 export function PostCard({ post }: { post: PostEntity }) {
-  const { isPending } = useToggleLike();
   const navigate = useNavigate();
 
   return (
@@ -23,8 +21,8 @@ export function PostCard({ post }: { post: PostEntity }) {
         <PostMeta
           likes={post.likeCount}
           comments={post.commentCount}
-          // onLike={() => toggle(post.id)}
-          disabled={isPending}
+          // postId={post.id}
+          isLiked={post.isLiked}
         />
       </div>
     </article>

@@ -30,13 +30,7 @@ export function PostDetailPage() {
       </section>
       <main className='space-y-8 px-4 py-8'>
         <SuspenseBoundary fallback={<PostDetailContentSkeleton />}>
-          <PostDetailContent
-            postId={postId}
-            onSubmitComment={async (content) => {
-              // TODO: 댓글 작성 API 연동 후 refetch
-              console.log('submit comment:', content);
-            }}
-          />
+          <PostDetailContent postId={postId} />
         </SuspenseBoundary>
       </main>
     </>
