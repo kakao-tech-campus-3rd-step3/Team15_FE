@@ -4,6 +4,11 @@ export interface CreateReplyRequest {
   isAnonymous?: boolean;
 }
 
+export interface CreateReplyVariables {
+  parentId: number;
+  data: CreateReplyRequest;
+}
+
 // 대댓글 단일 객체 타입
 export interface Reply {
   id: number;

@@ -16,7 +16,7 @@ export function PostDetailContent({ postId }: Props) {
     <div className='space-y-6'>
       <PostDetail post={data} onClickLike={(postId: number) => mutate(postId)} />
 
-      {/* 댓글 작성 박스 */}
+      {/* 댓글 추가 박스 */}
       <AddCommentForm postId={postId} />
 
       {/* 댓글 리스트 */}

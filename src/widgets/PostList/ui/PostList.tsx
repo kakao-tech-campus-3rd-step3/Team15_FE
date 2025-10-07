@@ -33,7 +33,7 @@ export function PostList({
           icon={<Search className='text-muted-foreground h-5 w-5' />}
           title='게시글이 없습니다'
           description='첫 게시글을 작성해보세요.'
-          action={{ label: '글 쓰기', to: ROUTES.postdetail }}
+          action={{ label: '글 쓰기', to: ROUTES.createpost }}
           variant='compact'
         />
       </div>

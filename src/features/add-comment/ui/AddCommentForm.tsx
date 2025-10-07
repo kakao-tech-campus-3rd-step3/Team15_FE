@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Textarea } from '@/shared/ui/shadcn/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
 import { Button } from '@/shared/ui/shadcn/button';
-import { Label } from '@/shared/ui/shadcn/label';
-import { Checkbox } from '@/shared/ui/shadcn/checkbox';
+import { Switch } from '@/shared/ui/shadcn/switch';
 import { useCreateComment } from '@/features/add-comment/model/useCreateComment';
 
 export function AddCommentForm({ postId }: { postId: number }) {
@@ -26,12 +25,12 @@ export function AddCommentForm({ postId }: { postId: number }) {
         />
         <div className='flex items-center justify-between gap-3'>
           <div className='flex items-center gap-2'>
-            <Checkbox
+            <Switch
               id='anonymous'
               checked={isAnonymous}
               onCheckedChange={(checked) => setIsAnonymous(Boolean(checked))}
             />
-            <Label htmlFor='anonymous'>익명으로 작성</Label>
+            <span className='text-muted-foreground text-sm'>익명으로 작성</span>
           </div>
           <Button
             disabled={disabled}
