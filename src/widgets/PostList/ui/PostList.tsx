@@ -20,10 +20,11 @@ export function PostList({
     code,
     page: curPage,
     size,
+    limit,
   });
 
   // 서버 페이지네이션을 쓰므로 그대로 사용. limit는 필요 시 컷.
-  const list = limit ? data?.content.slice(0, limit) : data?.content;
+  const list = data?.content;
 
   if (!list || list.length === 0) {
     return (
@@ -32,7 +33,7 @@ export function PostList({
           icon={<Search className='text-muted-foreground h-5 w-5' />}
           title='게시글이 없습니다'
           description='첫 게시글을 작성해보세요.'
-          action={{ label: '글 쓰기', to: ROUTES.postdetail }}
+          action={{ label: '글 쓰기', to: ROUTES.createpost }}
           variant='compact'
         />
       </div>

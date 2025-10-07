@@ -5,6 +5,5 @@ export const useLandingPageCategoriesQuery = () => {
   return useQuery({
     queryKey: ['categories'],
     queryFn: getLandingPageCategories,
-    throwOnError: true,
   });
 };

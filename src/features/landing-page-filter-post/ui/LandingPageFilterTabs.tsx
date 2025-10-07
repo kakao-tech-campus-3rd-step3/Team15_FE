@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { CategoryCode } from '@/entities/post/model/types';
-import { YSButton } from '@/shared/ui/';
 import { useLandingPageCategoriesQuery } from '../model/useLandingPageCategoriesQuery';
+import { Button } from '@/shared/ui/shadcn/button';
 
 export function LandingPageFilterTabs({
   className,
@@ -21,7 +21,7 @@ export function LandingPageFilterTabs({
       className={clsx('flex flex-wrap gap-2 px-6', className)}
     >
       {data?.map((tab) => (
-        <YSButton
+        <Button
           key={tab.code}
           onClick={() => setCategory(tab.code)}
           variant={category === tab.code ? 'default' : 'outline'}
@@ -31,7 +31,7 @@ export function LandingPageFilterTabs({
           aria-selected={category === tab.code}
         >
           {tab.displayName}
-        </YSButton>
+        </Button>
       ))}
     </div>
   );

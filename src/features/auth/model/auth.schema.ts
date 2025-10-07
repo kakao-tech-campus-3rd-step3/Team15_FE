@@ -1,14 +1,12 @@
+import { VALIDATION_MESSAGES } from '@/shared/constants/validationMessages';
 import { z } from 'zod';
 
 // 공통 필드 정의
-const emailSchema = z.email('올바른 이메일을 입력해주세요.');
+const emailSchema = z.email(VALIDATION_MESSAGES.EMAIL_INVALID);
 const passwordSchema = z
   .string()
-  .min(8, '비밀번호는 최소 8자 이상이어야 합니다.')
-  .regex(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
-    '비밀번호는 영문, 숫자, 특수문자를 각각 최소 1자 이상 포함해야 합니다.',
-  );
+  .min(8, VALIDATION_MESSAGES.PASSWORD_MIN_LENGTH)
+  .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/, VALIDATION_MESSAGES.PASSWORD_COMPLEXITY);
 
 // 로그인 스키마
 const loginSchema = z.object({
@@ -25,11 +23,11 @@ const signupSchema = z
     passwordConfirm: z.string(),
     verificationCode: z.string().optional(),
     termsAgree: z.boolean().refine((v) => v === true, {
-      message: '이용약관에 동의해주세요.',
+      message: VALIDATION_MESSAGES.TERMS_AGREE,
     }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
-    message: '비밀번호가 일치하지 않습니다.',
+    message: VALIDATION_MESSAGES.PASSWORD_MISMATCH,
     path: ['passwordConfirm'],
   });
 type SignupFormValues = z.infer<typeof signupSchema>;
