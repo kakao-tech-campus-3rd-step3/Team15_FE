@@ -6,7 +6,7 @@ export interface Category {
   displayName: string;
 }
 
-export async function getLandingPageCategories(): Promise<Category[]> {
+export async function getCategories(): Promise<Category[]> {
   const { data } = await axiosInstance.get<Category[]>('/posts/categories');
   return data;
 }

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { getLandingPageCategories } from '../lib/getLandingPageCategories';
+import { getCategories } from '../api/landing.api';
 
 export const useLandingPageCategoriesQuery = () => {
   return useQuery({
     queryKey: ['categories'],
-    queryFn: getLandingPageCategories,
+    queryFn: getCategories,
   });
 };

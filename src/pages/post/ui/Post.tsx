@@ -1,6 +1,6 @@
 import { CreatePostForm } from '@/features/create-post';
-import { LandingPageFilterTabs } from '@/features/landing-page-filter-post';
-import { useFilter } from '@/features/landing-page-filter-post/model/useFilter';
+import { LandingPageFilterTabs } from '@/features/landing';
+import { useFilter } from '@/features/landing/model/useFilter';
 import { SectionHeader } from '@/shared/ui';
 import { useNavigate } from 'react-router-dom';
 import { Pencil } from 'lucide-react';
