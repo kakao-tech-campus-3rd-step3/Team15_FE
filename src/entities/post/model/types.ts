@@ -10,6 +10,11 @@ export type CategoryCode =
   | 'MENTAL'
   | 'TROUBLE';
 
+export interface CategoryResponse {
+  code: CategoryCode;
+  displayName: string;
+}
+
 export type PostEntity = {
   id: number;
   postCategory: CategoryCode;

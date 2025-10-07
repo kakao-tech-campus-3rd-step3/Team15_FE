@@ -6,6 +6,7 @@ import type {
   PageResponse,
   PostStats,
   PostId,
+  CategoryResponse,
 } from '../model/types';
 
 export const postService = {
@@ -26,6 +27,10 @@ export const postService = {
   },
   async getPostStats(): Promise<PostStats> {
     const { data } = await axiosInstance.get<PostStats>('/posts/stats');
+    return data;
+  },
+  async getCategories(): Promise<CategoryResponse[]> {
+    const { data } = await axiosInstance.get<CategoryResponse[]>('/posts/categories');
     return data;
   },
 };
