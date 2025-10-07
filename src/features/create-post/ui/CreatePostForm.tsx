@@ -17,11 +17,11 @@ import { Input } from '@/shared/ui/shadcn/input';
 import { Textarea } from '@/shared/ui/shadcn/textarea';
 import { RadioGroup, RadioGroupItem } from '@/shared/ui/shadcn/radio-group';
 import { Button } from '@/shared/ui/shadcn/button';
-import { zCreatePost, type CreatePostInput } from '../model/validation';
+import { createPostSchema, type CreatePostFormValues } from '../lib/post.scheme';
 
 export function CreatePostForm({ category }: { category: string }) {
-  const form = useForm<CreatePostInput>({
-    resolver: zodResolver(zCreatePost),
+  const form = useForm<CreatePostFormValues>({
+    resolver: zodResolver(createPostSchema),
     defaultValues: {
       title: '',
       content: '',
@@ -37,7 +37,7 @@ export function CreatePostForm({ category }: { category: string }) {
     form.setValue('categoryCode', category);
   }, [category, form]);
 
-  const onSubmit = async (values: CreatePostInput) => {
+  const onSubmit = async (values: CreatePostFormValues) => {
     await mutateAsync(values);
     window.location.href = '/posts';
   };

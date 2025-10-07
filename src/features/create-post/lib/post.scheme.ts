@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const zCreatePost = z.object({
+export const createPostSchema = z.object({
   title: z
     .string()
     .min(2, '제목은 2자 이상 입력해주세요')
@@ -13,4 +13,4 @@ export const zCreatePost = z.object({
   categoryCode: z.string().min(1, '카테고리를 선택해주세요'),
 });
 
-export type CreatePostInput = z.infer<typeof zCreatePost>;
+export type CreatePostFormValues = z.infer<typeof createPostSchema>;
