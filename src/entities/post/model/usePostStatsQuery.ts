@@ -1,13 +1,11 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import type { PostStats } from './types';
 import { statsKeys } from './queryKeys';
-import { getPostStats } from '../api/getPostStats';
+import { postService } from '../lib/postService';
 
 export function usePostStatsQuery() {
   return useSuspenseQuery<PostStats>({
     queryKey: statsKeys.posts(),
-    queryFn: getPostStats,
-    staleTime: 1000 * 60, // 1분
-    gcTime: 1000 * 60 * 5, // 5분
+    queryFn: postService.getPostStats,
   });
 }

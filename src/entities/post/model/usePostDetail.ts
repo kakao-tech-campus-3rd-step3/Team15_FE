@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import type { PostId } from './types';
-import { getPostById } from '../api/getPostById';
+import { postService } from '../lib/postService';
 
 export const postKeys = {
   all: ['post'] as const,
@@ -10,6 +10,6 @@ export const postKeys = {
 export function usePostDetailQuery(postId: PostId) {
   return useSuspenseQuery({
     queryKey: postKeys.detail(postId),
-    queryFn: () => getPostById(postId),
+    queryFn: () => postService.getPostById(postId),
   });
 }
