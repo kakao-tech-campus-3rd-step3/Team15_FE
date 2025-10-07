@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { postKeys } from './queryKeys';
-import { getPostsByCategory } from '../api/getPostsByCategory';
 import type { CategoryCode } from './types';
+import { postService } from '../lib/postService';
 
 type UsePostsByCategoryQueryParams = {
   code: CategoryCode;
@@ -20,7 +20,7 @@ export function usePostsLandingPageCategoryQuery({
   return useSuspenseQuery({
     queryKey: postKeys.categoryPage(code, page, size),
     queryFn: async () => {
-      const data = await getPostsByCategory({ code, page, size });
+      const data = await postService.getPostsByCategory({ code, page, size });
       if (limit) {
         return { ...data, content: data.content.slice(0, limit) };
       }

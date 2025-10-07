@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { postKeys } from './queryKeys';
-import { getPostsByCategory } from '../api/getPostsByCategory';
 import type { CategoryCode } from './types';
+import { postService } from '../lib/postService';
 
 type UsePostsByCategoryQueryParams = {
   code: CategoryCode;
@@ -18,7 +18,7 @@ export function usePostsHeartCategoryQuery({
 }: UsePostsByCategoryQueryParams) {
   return useQuery({
     queryKey: postKeys.categoryPage(code, page, size),
-    queryFn: () => getPostsByCategory({ code, page, size }),
+    queryFn: () => postService.getPostsByCategory({ code, page, size }),
     enabled,
     // staleTime, gcTime 등 필요 시 지정
   });
