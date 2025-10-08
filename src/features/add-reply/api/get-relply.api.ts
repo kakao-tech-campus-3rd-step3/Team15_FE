@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
-import type { ReplyListResponse } from '../model/type';
+import type { ReplyListResponse } from '../model/reply.type';
 
 // 게시글(postId)의 댓글 목록 조회
 export async function getRelply(postId: number): Promise<ReplyListResponse> {

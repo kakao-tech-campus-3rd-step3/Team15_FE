@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
-import type { CreateCommentRequest, CreateCommentResponse } from '../model/type';
+import type { CreateCommentRequest, CreateCommentResponse } from '../model/comment.type';
 
 export async function createComment(
   postId: number,

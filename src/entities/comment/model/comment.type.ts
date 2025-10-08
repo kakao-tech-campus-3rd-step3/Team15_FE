@@ -1,4 +1,4 @@
-export interface Comment {
+export interface CommentEntity {
   id: number;
   postId: number;
   author: string; // 닉네임 (문자열)
@@ -13,7 +13,7 @@ export interface Comment {
 
 export interface CommentListResponse {
   page: number;
-  content: Comment[];
+  content: CommentEntity[];
   size: number;
   totalElements: number;
   totalPages: number;

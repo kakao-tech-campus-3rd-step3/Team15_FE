@@ -9,12 +9,12 @@ import { ReplyList } from '@/features/add-reply/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 
-type Props = {
+type CommentListProps = {
   postId: number;
   className?: string;
 };
 
-export function CommentList({ postId, className }: Props) {
+export function CommentList({ postId, className }: CommentListProps) {
   const { data } = useComments(postId);
   const { mutate } = useCreateReply();
 

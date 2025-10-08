@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { postKeys } from './queryKeys';
-import type { CategoryCode } from './types';
+import type { CategoryCode } from './post.type';
 import { postService } from '../lib/postService';
 
 type UsePostsByCategoryQueryParams = {

@@ -41,7 +41,7 @@ export type PageResponse<T> = {
   last: boolean;
 };
 
-export type PostStats = {
+export type PostStatsResponse = {
   totalCount: number;
   weekCount: number;
   todayCount: number;
@@ -49,27 +49,7 @@ export type PostStats = {
 
 export type PostId = number;
 
-// export interface Author {
-//   id: number;
-//   nickname: string;
-//   avatarUrl?: string | null;
-// }
-
-// export interface Post {
-//   id: PostId;
-//   title: string;
-//   content: string;
-//   author: Author;
-//   likeCount: number;
-//   viewCount: number;
-//   commentCount: number;
-//   createdAt: string; // ISO string
-//   updatedAt?: string;
-//   tags?: string[];
-//   // 필요시 확장
-// }
-
-export interface PostDetail {
+export interface PostDetailResponse {
   id: number;
   postCategory: string; // 카테고리 코드 (예: "TROUBLE")
   postCategoryName: string; // 카테고리 한글 이름 (예: "고민상담")

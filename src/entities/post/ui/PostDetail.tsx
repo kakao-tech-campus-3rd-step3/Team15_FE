@@ -6,17 +6,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/sha
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from '@/shared/ui/shadcn/button';
-import type { PostDetail } from '../model/types';
+import type { PostDetailResponse } from '../model/post.type';
 
-type Props = {
-  post: PostDetail;
+type PostDetailProps = {
+  post: PostDetailResponse;
   className?: string;
   onClickLike?: (postId: number) => void;
   onClickReport?: () => void;
   actionSlot?: React.ReactNode; // 공유 등
 };
 
-export function PostDetail({ post, className, onClickLike, onClickReport, actionSlot }: Props) {
+export function PostDetail({
+  post,
+  className,
+  onClickLike,
+  onClickReport,
+  actionSlot,
+}: PostDetailProps) {
   const initials = post.author?.slice(0, 2) ?? 'U';
   return (
     <Card className={cn('w-full', className)}>
@@ -74,5 +80,3 @@ export function PostDetail({ post, className, onClickLike, onClickReport, action
     </Card>
   );
 }
-
-export default PostDetail;

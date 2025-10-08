@@ -1,14 +1,14 @@
 import { postKeys } from '@/entities/post/model/usePostDetail';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { likePost } from '../api/likePostApi';
+import { likePost } from '../api/like-post.api';
 
 // 캐시에서 사용하는 Post의 최소 형태 가정
 // (isLiked가 없다면 likes만 낙관적으로 +/- 1 처리)
-type Post = { id: number; likes: number; isLiked?: boolean };
+type PostLikeEntity = { id: number; likes: number; isLiked?: boolean };
 
 type Ctx = {
   prevLists: [readonly unknown[], unknown][];
-  prevDetail?: Post | undefined;
+  prevDetail?: PostLikeEntity | undefined;
 };
 
 export function useToggleLike() {
@@ -25,10 +25,10 @@ export function useToggleLike() {
 
       // 2) 롤백을 위한 스냅샷
       const prevLists = qc.getQueriesData({ queryKey: postKeys.all });
-      const prevDetail = qc.getQueryData<Post>(postKeys.detail(postId));
+      const prevDetail = qc.getQueryData<PostLikeEntity>(postKeys.detail(postId));
 
       // 3) 낙관적 패치 함수
-      const applyOptimistic = (p: Post): Post => {
+      const applyOptimistic = (p: PostLikeEntity): PostLikeEntity => {
         if (typeof p.isLiked === 'boolean') {
           const nextLiked = !p.isLiked;
           return {
@@ -44,13 +44,13 @@ export function useToggleLike() {
       // 다양한 리스트/페이지네이션 응답을 안전하게 패치
       const patchListLike = (data: unknown): unknown => {
         if (Array.isArray(data)) {
-          return (data as Post[]).map((p) => (p?.id === postId ? applyOptimistic(p) : p));
+          return (data as PostLikeEntity[]).map((p) => (p?.id === postId ? applyOptimistic(p) : p));
         }
         if (data && typeof data === 'object') {
           const obj = data as Record<string, unknown>;
           const patchArray = (arr: unknown): unknown =>
             Array.isArray(arr)
-              ? (arr as Post[]).map((p) => (p?.id === postId ? applyOptimistic(p) : p))
+              ? (arr as PostLikeEntity[]).map((p) => (p?.id === postId ? applyOptimistic(p) : p))
               : arr;
 
           // 우선순위: content -> items -> data -> posts
@@ -78,7 +78,7 @@ export function useToggleLike() {
 
       // 3-2) 상세 캐시가 있으면 패치
       if (prevDetail) {
-        qc.setQueryData<Post>(postKeys.detail(postId), applyOptimistic(prevDetail));
+        qc.setQueryData<PostLikeEntity>(postKeys.detail(postId), applyOptimistic(prevDetail));
       }
 
       // 4) 컨텍스트로 이전값 반환 (onError에서 롤백)

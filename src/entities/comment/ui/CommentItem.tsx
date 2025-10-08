@@ -2,10 +2,10 @@ import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
 import { Badge } from '@/shared/ui/shadcn/badge';
 import { Button } from '@/shared/ui/shadcn/button';
 import { cn } from '@/lib/utils';
-import type { Comment } from '../model/types';
+import type { CommentEntity } from '../model/comment.type';
 
 type Props = {
-  comment: Comment;
+  comment: CommentEntity;
   className?: string;
   onClickReply?: () => void;
 };
