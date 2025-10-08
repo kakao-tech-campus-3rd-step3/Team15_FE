@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { CategoryCode } from '@/entities/post/model/post.type';
 import { useLandingPageCategoriesQuery } from '../model/useLandingPageCategoriesQuery';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 
 export function LandingPageFilterTabs({
   className,

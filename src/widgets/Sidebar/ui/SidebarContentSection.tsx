@@ -6,7 +6,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/shared/ui/shadcn/sidebar';
+} from '@/shared/ui/sidebar';
 import { Link } from 'react-router-dom';
 
 function SidebarContentSection() {

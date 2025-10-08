@@ -6,7 +6,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/shared/ui/shadcn/pagination';
+} from '@/shared/ui/pagination';
 
 type PaginationPostProps = {
   page?: number; // 0-based

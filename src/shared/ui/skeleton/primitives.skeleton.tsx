@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Skeleton } from '@/shared/ui/shadcn/skeleton';
+import { Skeleton } from '@/shared/ui/skeleton';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/lib/utils';
 

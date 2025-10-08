@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react';
-import { Input } from '@/shared/ui/shadcn/input';
-import { Card, CardContent } from '@/shared/ui/shadcn/card';
+import { Input } from '@/shared/ui/input';
+import { Card, CardContent } from '@/shared/ui/card';
 
 interface ActivitySearchProps {
   searchQuery: string;

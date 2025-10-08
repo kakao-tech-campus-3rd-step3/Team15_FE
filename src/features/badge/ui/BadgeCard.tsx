@@ -1,8 +1,8 @@
-import { Progress } from '@/shared/ui/shadcn/progress';
+import { Progress } from '@/shared/ui/progress';
 import { getColorClasses, getRarityColor } from '../lib/badgeUtils';
-import { Card, CardContent } from '@/shared/ui/shadcn/card';
+import { Card, CardContent } from '@/shared/ui/card';
 import { Lock } from 'lucide-react';
-import { Badge } from '@/shared/ui/shadcn/badge';
+import { Badge } from '@/shared/ui/badge';
 import type { BadgeType } from '../types.ts/badge';
 
 // 공통 뱃지 카드 컴포넌트

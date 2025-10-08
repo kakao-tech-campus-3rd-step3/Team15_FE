@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../shadcn/button';
+import { Button } from './button';
 
 interface MorePostsButtonProps {
   /** 이동할 경로 */

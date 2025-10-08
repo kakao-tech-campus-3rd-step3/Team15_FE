@@ -3,18 +3,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCreatePost } from '../model/useCreatePost';
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/shared/ui/shadcn/form';
-import { Input } from '@/shared/ui/shadcn/input';
-import { Textarea } from '@/shared/ui/shadcn/textarea';
-import { RadioGroup, RadioGroupItem } from '@/shared/ui/shadcn/radio-group';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/form';
+import { Input } from '@/shared/ui/input';
+import { Textarea } from '@/shared/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/shared/ui/radio-group';
+import { Button } from '@/shared/ui/button';
 import { createPostSchema, type CreatePostFormValues } from '../lib/post.scheme';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';

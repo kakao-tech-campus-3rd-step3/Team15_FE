@@ -2,7 +2,7 @@ import { PaginationPosts } from '@/features/pagination';
 import { useState } from 'react';
 import { PostCard } from './PostCard';
 import type { PostListProps } from '../model/type';
-import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
+import { EmptyState } from '@/shared/ui/states/EmptyState';
 import { Search } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
 import { usePostByCategory } from '@/entities/post';

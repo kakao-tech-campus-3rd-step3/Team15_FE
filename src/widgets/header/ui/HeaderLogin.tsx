@@ -1,16 +1,16 @@
-import { Separator } from '@/shared/ui/shadcn/separator';
-import { SidebarTrigger } from '@/shared/ui/shadcn/sidebar';
+import { Separator } from '@/shared/ui/separator';
+import { SidebarTrigger } from '@/shared/ui/sidebar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getActiveItem } from '../model/getActiveItem';
 import { Bell, ChevronDown } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { useLogout } from '@/features/auth/api/useLogout';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/shared/ui/shadcn/dropdown-menu';
+} from '@/shared/ui/dropdown-menu';
 import { ROUTES } from '@/shared/config';
 
 export function HeaderLogin() {

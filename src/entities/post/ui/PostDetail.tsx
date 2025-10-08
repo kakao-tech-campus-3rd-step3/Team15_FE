@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { Eye, Heart, MessageSquare, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { Separator } from '@radix-ui/react-separator';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import type { PostDetailResponse } from '../model/post.type';
 
 type PostDetailProps = {

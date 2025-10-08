@@ -1,10 +1,10 @@
 import { CreatePostForm } from '@/features/create-post';
 import { LandingPageFilterTabs } from '@/features/landing';
 import { useFilter } from '@/features/landing/model/useFilter';
-import { SectionHeader } from '@/shared/ui';
 import { useNavigate } from 'react-router-dom';
 import { Pencil } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
+import { SectionHeader } from '@/shared/ui/section-header';
 
 export function Post() {
   const { category, setCategory } = useFilter();

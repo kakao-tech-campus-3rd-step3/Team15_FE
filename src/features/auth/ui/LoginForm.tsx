@@ -1,6 +1,6 @@
 import React from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
-import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
+import { InputWithLabel } from '@/shared/ui/input-with-label';
 import { loginSchema, type LoginFormValues } from '../lib/auth.schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

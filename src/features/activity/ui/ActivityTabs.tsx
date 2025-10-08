@@ -1,8 +1,8 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/shadcn/tabs';
-import { Card, CardContent } from '@/shared/ui/shadcn/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
+import { Card, CardContent } from '@/shared/ui/card';
 import { PenTool, MessageCircle, ThumbsUp, Heart, TrendingUp, Calendar, Eye } from 'lucide-react';
 import { getCategoryColor } from '../lib/activityUtils';
-import { Badge } from '@/shared/ui/shadcn/badge';
+import { Badge } from '@/shared/ui/badge';
 import type { LikedPost, MyComment, MyPost } from '../types/activity';
 
 interface ActivityTabsProps {

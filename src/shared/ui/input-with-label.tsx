@@ -1,6 +1,6 @@
 import { useId, type InputHTMLAttributes } from 'react';
-import { Label } from '../shadcn/label';
-import { Input } from '../shadcn/input';
+import { Label } from './label';
+import { Input } from './input';
 
 // htmlFor는 내부에서 처리하므로 제거
 export interface InputWithLabelProps

@@ -1,4 +1,4 @@
-import { Card, CardContent } from '../shadcn/card';
+import { Card, CardContent } from './card';
 
 interface StatCardProps {
   label: string;

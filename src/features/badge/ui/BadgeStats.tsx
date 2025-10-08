@@ -1,4 +1,4 @@
-import { StatCard } from '@/shared/ui/stats/StatCard';
+import { StatCard } from '@/shared/ui/stat-card';
 
 interface BadgeStatsProps {
   earnedCount: number;

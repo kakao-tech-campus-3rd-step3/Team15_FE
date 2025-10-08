@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Button, buttonVariants } from '@/shared/ui/shadcn/button';
-import { Separator } from '@/shared/ui/shadcn/separator';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Button, buttonVariants } from '@/shared/ui/button';
+import { Separator } from '@/shared/ui/separator';
 import { Inbox } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/shared/lib/utils';
