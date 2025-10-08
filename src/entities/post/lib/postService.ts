@@ -1,12 +1,13 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
 import type {
   CategoryCode,
-  PostDetail,
+  PostDetailResponse,
   PostEntity,
   PageResponse,
-  PostStats,
+  PostStatsResponse,
   PostId,
-} from '../model/types';
+  CategoryResponse,
+} from '../model/post.type';
 
 export const postService = {
   async getPostsByCategory(params: {
@@ -20,12 +21,16 @@ export const postService = {
     });
     return res.data;
   },
-  async getPostById(postId: PostId): Promise<PostDetail> {
-    const { data } = await axiosInstance.get<PostDetail>(`/posts/${postId}`);
+  async getPostById(postId: PostId): Promise<PostDetailResponse> {
+    const { data } = await axiosInstance.get<PostDetailResponse>(`/posts/${postId}`);
     return data;
   },
-  async getPostStats(): Promise<PostStats> {
-    const { data } = await axiosInstance.get<PostStats>('/posts/stats');
+  async getPostStats(): Promise<PostStatsResponse> {
+    const { data } = await axiosInstance.get<PostStatsResponse>('/posts/stats');
+    return data;
+  },
+  async getCategories(): Promise<CategoryResponse[]> {
+    const { data } = await axiosInstance.get<CategoryResponse[]>('/posts/categories');
     return data;
   },
 };

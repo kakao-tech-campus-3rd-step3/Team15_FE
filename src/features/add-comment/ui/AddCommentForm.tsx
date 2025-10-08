@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Textarea } from '@/shared/ui/shadcn/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Switch } from '@/shared/ui/shadcn/switch';
+import { Textarea } from '@/shared/ui/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Switch } from '@/shared/ui/switch';
 import { useCreateComment } from '@/features/add-comment/model/useCreateComment';
 
 export function AddCommentForm({ postId }: { postId: number }) {

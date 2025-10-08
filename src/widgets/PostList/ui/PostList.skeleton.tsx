@@ -1,5 +1,5 @@
 import { PostCardSkeleton } from '@/entities/post/ui/PostCard.skeleton';
-import { GridSkeleton } from '@/shared/ui/skeleton/list';
+import { GridSkeleton } from '@/shared/ui/skeleton/list.skeleton';
 
 export function PostListSkeleton({
   className,

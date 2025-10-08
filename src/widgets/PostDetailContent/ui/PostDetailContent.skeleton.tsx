@@ -1,5 +1,5 @@
-import { Skeleton } from '@/shared/ui/shadcn/skeleton';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
+import { Skeleton } from '@/shared/ui/skeleton';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 
 export function PostDetailContentSkeleton() {
   return (

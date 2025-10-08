@@ -1,11 +1,11 @@
-import { SectionHeader } from '@/shared/ui';
-import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
+import { SuspenseBoundary } from '@/shared/ui/boundary/SuspenseBoundary';
 import PostDetailContent from '@/widgets/PostDetailContent/ui/PostDetailContent';
 import PostDetailContentSkeleton from '@/widgets/PostDetailContent/ui/PostDetailContent.skeleton';
 
 import { useNavigate, useParams } from 'react-router-dom';
 import { FileText } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
+import { SectionHeader } from '@/shared/ui/section-header';
 
 export function PostDetailPage() {
   const { id } = useParams();

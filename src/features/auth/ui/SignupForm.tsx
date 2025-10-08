@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
-import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
+import { InputWithLabel } from '@/shared/ui/input-with-label';
 import { useForm } from 'react-hook-form';
-import { signupSchema, type SignupFormValues } from '../model/auth.schema';
+import { signupSchema, type SignupFormValues } from '../lib/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSignup } from '../api/useSignup';
 import { Check, Clock } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { useEmailVerification } from '../lib/useEmailVerification';
 
 type SignupFormProps = {

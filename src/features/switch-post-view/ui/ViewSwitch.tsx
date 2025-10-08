@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/shadcn/toggle-group';
+import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group';
 import { useEffect, useState } from 'react';
 
 export type ViewMode = 'list' | 'grid';

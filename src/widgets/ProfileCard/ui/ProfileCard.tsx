@@ -1,14 +1,14 @@
 import { useUserProfile } from '@/entities/user';
 import { useProfileStore } from '@/features/my/ChangeProfileInfo/model/useProfileStore';
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import { Badge } from '@/shared/ui/shadcn/badge';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Progress } from '@/shared/ui/shadcn/progress';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Progress } from '@/shared/ui/progress';
 import { Award, Edit3, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SmallBadge from './SmallBadge';
-import { StatCard } from '@/shared/ui/stats/StatCard';
+import { StatCard } from '@/shared/ui/stat-card';
 
 export const ProfileCard = () => {
   const { setIsModalOpen } = useProfileStore();

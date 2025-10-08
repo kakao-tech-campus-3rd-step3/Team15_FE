@@ -1,15 +1,15 @@
-import { MorePostsButton } from '@/shared/ui';
-import { LandingPageFilterTabs } from '@/features/landing-page-filter-post';
-import { useFilter } from '@/features/landing-page-filter-post/model/useFilter';
+import { LandingPageFilterTabs } from '@/features/landing';
+import { useFilter } from '@/features/landing/model/useFilter';
 import { HeroSection } from '@/widgets/HeroSection';
 import { PostList } from '@/widgets/PostList';
 import { SupportBand } from '@/widgets/SupportBand';
-import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
+import { SuspenseBoundary } from '@/shared/ui/boundary/SuspenseBoundary';
 import { PostListSkeleton } from '@/widgets/PostList/ui/PostList.skeleton';
-import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
+import ErrorBoundary from '@/shared/ui/boundary/ErrorBoundary';
 import FallbackError from '@/shared/ui/states/FallbackError';
 import { HeroSectionSkeleton } from '@/widgets/HeroSection/ui/HeroSection.skeleton';
 import { ROUTES } from '@/shared/config';
+import { MorePostsButton } from '@/shared/ui/more-posts-button';
 
 export function LandingPage() {
   const { category, setCategory } = useFilter();

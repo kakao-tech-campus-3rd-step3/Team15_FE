@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Footer } from '@/widgets/footer';
-import { Separator } from '@/shared/ui/shadcn/separator';
-import { SidebarProvider } from '@/shared/ui/shadcn/sidebar';
+import { Separator } from '@/shared/ui/separator';
+import { SidebarProvider } from '@/shared/ui/sidebar';
 import { HeaderGuest, HeaderLogin } from '@/widgets/header';
 import { SidebarIndex } from '@/widgets/Sidebar/ui/SidebarIndex';
 import { useAuthStore } from '@/features/auth/model/useAuthStore';

@@ -1,6 +1,6 @@
-import { Button } from '@/shared/ui/shadcn/button';
-import { Textarea } from '@/shared/ui/shadcn/textarea';
-import { Switch } from '@/shared/ui/shadcn/switch';
+import { Button } from '@/shared/ui/button';
+import { Textarea } from '@/shared/ui/textarea';
+import { Switch } from '@/shared/ui/switch';
 import { cn } from '@/lib/utils';
 
 type Props = {
