@@ -20,10 +20,10 @@ export function LandingPage() {
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
-        <AnimatedSection from='up'>
+        <AnimatedSection from='up' threshold={0.35}>
           <HeroShowcase />
         </AnimatedSection>
-        <AnimatedSection from='up'>
+        <AnimatedSection from='up' threshold={0.35}>
           <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
             <HeroSection />
           </SuspenseBoundary>
