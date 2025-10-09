@@ -12,12 +12,15 @@ import { ROUTES } from '@/shared/config';
 import { MorePostsButton } from '@/shared/ui/more-posts-button';
 import { AnimatedSection } from '@/features/scroll-animate/ui/AnimatedSection';
 
+import { HeroShowcase } from '../../../widgets/HeroSection/ui/HeroShowcase';
+
 export function LandingPage() {
   const { category, setCategory } = useFilter();
 
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
+        <HeroShowcase />
         <AnimatedSection from='up'>
           <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
             <HeroSection />
