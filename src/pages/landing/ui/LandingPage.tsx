@@ -20,7 +20,9 @@ export function LandingPage() {
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
-        <HeroShowcase />
+        <AnimatedSection from='up'>
+          <HeroShowcase />
+        </AnimatedSection>
         <AnimatedSection from='up'>
           <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
             <HeroSection />
@@ -30,10 +32,11 @@ export function LandingPage() {
         <AnimatedSection from='down'>
           <LandingPageFilterTabs category={category} setCategory={setCategory} />
         </AnimatedSection>
-        <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
-          <PostList className='mt-8' limit={6} code={category} showPagination={false} />
-        </SuspenseBoundary>
         <AnimatedSection from='scale'>
+          <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
+            <PostList className='mt-8' limit={6} code={category} showPagination={false} />
+          </SuspenseBoundary>
+
           <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
         </AnimatedSection>
         <AnimatedSection from='up'>
