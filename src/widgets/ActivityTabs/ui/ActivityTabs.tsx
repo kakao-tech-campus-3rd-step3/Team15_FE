@@ -1,8 +1,9 @@
 import { useUserProfile } from '@/entities/user';
+import { ROUTES } from '@/shared/config';
 import { formatDate } from '@/shared/lib/date';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/shadcn/tabs';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { BookOpen, Heart, MessageCircle, PenTool, ThumbsUp } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -25,7 +26,7 @@ export const ActivityTabs = () => {
           <CardTitle className='flex items-center'>
             <BookOpen className='mr-2 h-5 w-5' />내 활동 내역
           </CardTitle>
-          <Link to='/activity'>
+          <Link to={ROUTES.activity}>
             <Button variant='outline' size='sm'>
               자세히 보기
             </Button>

@@ -3,10 +3,10 @@ import { useChangeEmail } from '@/features/my/ChangeEmail/model/useChangeEmail';
 import { useChangePassword } from '@/features/my/ChangePassword/model/useChangePassword';
 import { useDeleteAccount } from '@/features/my/DeleteAccount/model/useDeleteAccount';
 import { formatDate } from '@/shared/lib/date';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Separator } from '@/shared/ui/shadcn/separator';
-import { Switch } from '@/shared/ui/shadcn/switch';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Separator } from '@/shared/ui/separator';
+import { Switch } from '@/shared/ui/switch';
 import { Bell, Heart, Lock, Mail, Settings, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 

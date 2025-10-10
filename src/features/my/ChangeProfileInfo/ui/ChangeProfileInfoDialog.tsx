@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/ui/shadcn/dialog';
-import { Input } from '@/shared/ui/shadcn/input';
-import { Label } from '@/shared/ui/shadcn/label';
-import { Textarea } from '@/shared/ui/shadcn/textarea';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Button } from '@/shared/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/ui/dialog';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
+import { Textarea } from '@/shared/ui/textarea';
 import { Save, X } from 'lucide-react';
 import { useProfileStore } from '../model/useProfileStore';
 

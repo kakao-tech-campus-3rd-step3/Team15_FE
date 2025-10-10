@@ -1,4 +1,4 @@
-import { Separator } from '@/shared/ui/shadcn/separator';
+import { Separator } from '@/shared/ui/separator';
 import { BOTTOMBAR_LINKS, SECTIONS } from '../config/footerLinks';
 import { Section } from './Section';
 import { Socials } from './Socials';
