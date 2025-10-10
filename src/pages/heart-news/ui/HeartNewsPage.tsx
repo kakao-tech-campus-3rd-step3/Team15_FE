@@ -3,16 +3,16 @@ import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
 import type { Params } from '@/widgets/PostList/model/type';
 import { PostStats } from '@/widgets/PostStats';
-import ErrorBoundary from '@/shared/ui/error-boundary/ErrorBoundary';
+import ErrorBoundary from '@/shared/ui/boundary/ErrorBoundary';
 import FallbackError from '@/shared/ui/states/FallbackError';
-import { SuspenseBoundary } from '@/shared/ui/suspense/SuspenseBoundary';
+import { SuspenseBoundary } from '@/shared/ui/boundary/SuspenseBoundary';
 import { PostListSkeleton } from '@/widgets/PostList/ui/PostList.skeleton';
 import { PostStatsSkeleton } from '@/widgets/PostStats/ui/PostStats.skeletton';
-import { SectionHeader } from '@/shared/ui';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';
 import { Newspaper } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
+import { SectionHeader } from '@/shared/ui/section-header';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({

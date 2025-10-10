@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/utils';
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 
 type Reply = {
   id: number;

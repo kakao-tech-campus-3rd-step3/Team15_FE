@@ -1,5 +1,5 @@
 import { LoginForm, SignupForm } from '@/features/auth';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/shadcn/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/tabs';
 import { useState } from 'react';
 
 export function AuthFormTabs() {

@@ -1,11 +1,7 @@
 import { useState } from 'react';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/shared/ui/shadcn/collapsible';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { useReplyList } from '../model/useReplyList';
 import { ReplyItem } from './ReplyItem';
 

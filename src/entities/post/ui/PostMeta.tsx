@@ -1,5 +1,5 @@
 import { useToggleLike } from '@/features/like-post';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { Heart, MessageCircle } from 'lucide-react';
 
 export function PostMeta({

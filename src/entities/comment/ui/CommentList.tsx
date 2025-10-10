@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CommentItem from './CommentItem';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Separator } from '@/shared/ui/shadcn/separator';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Separator } from '@/shared/ui/separator';
 
 import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
@@ -9,12 +9,12 @@ import { ReplyList } from '@/features/add-reply/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 
-type Props = {
+type CommentListProps = {
   postId: number;
   className?: string;
 };
 
-export function CommentList({ postId, className }: Props) {
+export function CommentList({ postId, className }: CommentListProps) {
   const { data } = useComments(postId);
   const { mutate } = useCreateReply();
 

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createReply } from '../api/createReply';
-import type { CreateReplyResponse, CreateReplyVariables } from './type';
+import { createReply } from '../api/create-reply.api';
+import type { CreateReplyResponse, CreateReplyVariables } from './reply.type';
 
 export const useCreateReply = () => {
   const queryClient = useQueryClient();

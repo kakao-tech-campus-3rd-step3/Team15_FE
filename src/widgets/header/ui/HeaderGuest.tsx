@@ -2,7 +2,7 @@ import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { HEADER_NAV_ITEMS } from '../config/const';
 import { ROUTES } from '@/shared/config';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 
 export function HeaderGuest() {
   const navigate = useNavigate();
