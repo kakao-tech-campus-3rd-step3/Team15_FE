@@ -10,6 +10,9 @@ import FallbackError from '@/shared/ui/states/FallbackError';
 import { HeroSectionSkeleton } from '@/widgets/HeroSection/ui/HeroSection.skeleton';
 import { ROUTES } from '@/shared/config';
 import { MorePostsButton } from '@/shared/ui/more-posts-button';
+import { AnimatedSection } from '@/features/scroll-animate/ui/AnimatedSection';
+
+import { HeroShowcase } from '../../../widgets/HeroSection/ui/HeroShowcase';
 
 export function LandingPage() {
   const { category, setCategory } = useFilter();
@@ -17,15 +20,28 @@ export function LandingPage() {
   return (
     <>
       <ErrorBoundary fallback={FallbackError}>
-        <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
-          <HeroSection />
-        </SuspenseBoundary>
-        <LandingPageFilterTabs category={category} setCategory={setCategory} />
-        <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
-          <PostList className='mt-8' limit={6} code={category} showPagination={false} />
-        </SuspenseBoundary>
-        <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
-        <SupportBand />
+        <AnimatedSection from='up' threshold={0.35}>
+          <HeroShowcase />
+        </AnimatedSection>
+        <AnimatedSection from='up' threshold={0.35}>
+          <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
+            <HeroSection />
+          </SuspenseBoundary>
+        </AnimatedSection>
+
+        <AnimatedSection from='down'>
+          <LandingPageFilterTabs category={category} setCategory={setCategory} />
+        </AnimatedSection>
+        <AnimatedSection from='scale'>
+          <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
+            <PostList className='mt-8' limit={6} code={category} showPagination={false} />
+          </SuspenseBoundary>
+
+          <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
+        </AnimatedSection>
+        <AnimatedSection from='up'>
+          <SupportBand />
+        </AnimatedSection>
       </ErrorBoundary>
     </>
   );
