@@ -1,4 +1,5 @@
-import { authHandlers } from "./auth";
-import { userHandlers } from "./user";
+import { authHandlers } from './auth';
+import { userHandlers } from './user';
+import { postHandlers } from './post';
 
-export const handlers = [...authHandlers, ...userHandlers];
+export const handlers = [...authHandlers, ...userHandlers, ...postHandlers];

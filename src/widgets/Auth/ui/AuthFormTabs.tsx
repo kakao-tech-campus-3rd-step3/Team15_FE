@@ -1,9 +1,11 @@
 import { LoginForm, SignupForm } from '@/features/auth';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/shared/ui/shadcn/tabs';
+import { useState } from 'react';
 
 export function AuthFormTabs() {
+  const [tab, setTab] = useState<'login' | 'signup'>('login');
   return (
-    <Tabs defaultValue='login' className='w-full'>
+    <Tabs value={tab} onValueChange={(val) => setTab(val as 'login' | 'signup')} className='w-full'>
       {/* 탭 버튼 */}
       <TabsList className='flex h-12 w-full rounded-lg bg-gray-200 p-1'>
         <TabsTrigger
@@ -25,7 +27,7 @@ export function AuthFormTabs() {
         <LoginForm />
       </TabsContent>
       <TabsContent value='signup' className='mt-6'>
-        <SignupForm />
+        <SignupForm onSuccess={() => setTab('login')} />
       </TabsContent>
     </Tabs>
   );
