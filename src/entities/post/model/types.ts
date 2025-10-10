@@ -31,3 +31,9 @@ export type PageResponse<T> = {
   totalPages: number;
   last: boolean;
 };
+
+export type PostStats = {
+  totalCount: number;
+  weekCount: number;
+  todayCount: number;
+};

@@ -3,6 +3,8 @@ import { NotebookText, Home, MessageCircle, FileText } from 'lucide-react';
 export const ROUTES = {
   landing: '/',
   home: '/home',
+  post: '/post',
+  createpost: '/post/create',
   login: '/login',
   register: '/register',
   space: '/space',
@@ -13,6 +15,8 @@ export const ROUTES = {
 export const ROUTE_LIST: { label: string; path: string }[] = [
   { label: '랜딩', path: ROUTES.landing },
   { label: '홈', path: ROUTES.home },
+  { label: '포스터', path: ROUTES.post },
+  { label: '포스터 작성', path: ROUTES.createpost },
   { label: '로그인', path: ROUTES.login },
   { label: '회원가입', path: ROUTES.register },
   { label: '스페이스', path: ROUTES.space },
