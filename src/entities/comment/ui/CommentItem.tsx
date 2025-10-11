@@ -4,13 +4,13 @@ import { Button } from '@/shared/ui/button';
 import { cn } from '@/lib/utils';
 import type { CommentEntity } from '../model/comment.type';
 
-type Props = {
+type CommentItemProps = {
   comment: CommentEntity;
   className?: string;
   onClickReply?: () => void;
 };
 
-export function CommentItem({ comment, className, onClickReply }: Props) {
+export function CommentItem({ comment, className, onClickReply }: CommentItemProps) {
   const initials = (comment.author?.slice(0, 2) || 'U').toUpperCase();
   const displayContent = comment.content ?? '삭제된 댓글입니다.';
   const isDeleted = comment.content == null;
