@@ -1,9 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import { createPost } from '../api/create-post.api';
+
 import type { CreatePostFormValues } from '../lib/post.scheme';
+import { postService } from '@/entities/post/lib/postService';
 
 export function useCreatePost() {
   return useMutation({
-    mutationFn: (input: CreatePostFormValues) => createPost(input),
+    mutationFn: (input: CreatePostFormValues) => postService.createPost(input),
   });
 }
