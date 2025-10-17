@@ -11,7 +11,7 @@ type CommentItemProps = {
 };
 
 export function CommentItem({ comment, className, onClickReply }: CommentItemProps) {
-  const initials = (comment.author?.slice(0, 2) || 'U').toUpperCase();
+  const initials = comment.author.slice(0, 2).toUpperCase();
   const displayContent = comment.content ?? '삭제된 댓글입니다.';
   const isDeleted = comment.content == null;
 
