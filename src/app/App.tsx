@@ -1,10 +1,14 @@
+import ErrorBoundary from '@/shared/ui/boundary/ErrorBoundary';
 import { QueryProvider } from './providers/query';
 import Router from './routes/Router';
+import FallbackError from '@/shared/ui/states/FallbackError';
 
 export default function App() {
   return (
     <QueryProvider>
-      <Router />
+      <ErrorBoundary fallback={FallbackError}>
+        <Router />
+      </ErrorBoundary>
     </QueryProvider>
   );
 }
