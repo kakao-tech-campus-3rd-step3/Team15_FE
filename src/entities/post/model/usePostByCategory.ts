@@ -18,7 +18,7 @@ export function usePostByCategory({
   limit = 6,
 }: UsePostsByCategoryQueryParams) {
   return useSuspenseQuery({
-    queryKey: postKeys.categoryPage(code, page, size),
+    queryKey: postKeys.list({ code, page, size }),
     queryFn: async () => {
       const data = await postService.getPostsByCategory({ code, page, size });
       if (limit) {

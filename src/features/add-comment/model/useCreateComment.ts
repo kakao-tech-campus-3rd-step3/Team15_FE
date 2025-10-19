@@ -1,15 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createComment } from '../api/create-comment.api';
 import type { CreateCommentRequest } from './comment.type';
+import { commentService } from '@/entities/comment/lib/commentService';
+import { commentKeys } from '@/entities/comment/model/queryKeys';
+import { postKeys } from '@/entities/post/model/queryKeys';
 
 export function useCreateComment(postId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (body: CreateCommentRequest) => createComment(postId, body),
+    mutationFn: (body: CreateCommentRequest) => commentService.postComment(postId, body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['comments', postId] });
-      queryClient.invalidateQueries({ queryKey: ['post', postId] });
+      queryClient.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
+      queryClient.invalidateQueries({ queryKey: postKeys.detail(postId) });
     },
   });
 }
