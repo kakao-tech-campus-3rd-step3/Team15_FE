@@ -46,7 +46,7 @@ export const postService = {
     return data;
   },
   async likePost(postId: number) {
-    const { data } = await axiosInstance.post(`/api/posts/${postId}/likes`);
+    const { data } = await axiosInstance.post(`/posts/${postId}/likes`);
     return data;
   },
 };
