@@ -29,11 +29,11 @@ export const commentService = {
     return data;
   },
 
-  async postRelplyComment(
+  async postReplyComment(
     parentId: number,
     content: CreateReplyRequest,
   ): Promise<CreateReplyResponse> {
-    const { data } = await axiosInstance.post(`/api/comments/${parentId}/replies`, content);
+    const { data } = await axiosInstance.post(`/comments/${parentId}/replies`, content);
     return data;
   },
 };
