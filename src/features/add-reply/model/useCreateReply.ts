@@ -8,7 +8,7 @@ export const useCreateReply = () => {
   const queryClient = useQueryClient();
 
   return useMutation<CreateReplyResponse, Error, CreateReplyVariables>({
-    mutationFn: ({ parentId, data }) => commentService.postRelplyComment(parentId, data),
+    mutationFn: ({ parentId, data }) => commentService.postReplyComment(parentId, data),
     onSuccess: (_data, variables) => {
       const { parentId } = variables;
       queryClient.invalidateQueries({ queryKey: commentKeys.listByPost(parentId) });
