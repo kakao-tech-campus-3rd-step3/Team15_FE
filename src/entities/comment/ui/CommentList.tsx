@@ -36,6 +36,14 @@ export function CommentList({ postId, className }: CommentListProps) {
     setIsAnonymous(false);
   }, []);
 
+  const handleSubmitReply = useCallback(
+    (id: number) => {
+      mutate({ parentId: id, data: { content: replyText, isAnonymous } });
+      closeReply();
+    },
+    [mutate, replyText, isAnonymous, closeReply],
+  );
+
   return (
     <Card className={className}>
       <CardHeader className='flex-row items-center justify-between space-y-0'>
@@ -54,10 +62,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                     value={replyText}
                     onChange={setReplyText}
                     onCancel={closeReply}
-                    onSubmit={() => {
-                      mutate({ parentId: c.id, data: { content: replyText, isAnonymous } });
-                      closeReply();
-                    }}
+                    onSubmit={() => handleSubmitReply(c.id)}
                     isAnonymous={isAnonymous}
                     onToggleAnonymous={setIsAnonymous}
                     disabled={!replyText.trim()}
