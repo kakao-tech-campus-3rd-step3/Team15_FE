@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import CommentItem from './CommentItem';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Separator } from '@/shared/ui/separator';
@@ -24,6 +24,12 @@ export function CommentList({ postId, className }: CommentListProps) {
   const [replyText, setReplyText] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
 
+  const handleClickReply = useCallback((id: number) => {
+    setReplyText('');
+    setIsAnonymous(false);
+    setReplyTargetId((prev) => (prev === id ? null : id));
+  }, []);
+
   return (
     <Card className={className}>
       <CardHeader className='flex-row items-center justify-between space-y-0'>
@@ -36,14 +42,7 @@ export function CommentList({ postId, className }: CommentListProps) {
           <ul className='divide-y'>
             {items.map((c) => (
               <Fragment key={c.id}>
-                <CommentItem
-                  comment={c}
-                  onClickReply={() => {
-                    setReplyText('');
-                    setIsAnonymous(false);
-                    setReplyTargetId((prev) => (prev === c.id ? null : c.id));
-                  }}
-                />
+                <CommentItem comment={c} onClickReply={() => handleClickReply(c.id)} />
                 {replyTargetId === c.id && (
                   <AddReplyForm
                     value={replyText}
