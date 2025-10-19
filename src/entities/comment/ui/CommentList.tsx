@@ -30,6 +30,12 @@ export function CommentList({ postId, className }: CommentListProps) {
     setReplyTargetId((prev) => (prev === id ? null : id));
   }, []);
 
+  const closeReply = useCallback(() => {
+    setReplyTargetId(null);
+    setReplyText('');
+    setIsAnonymous(false);
+  }, []);
+
   return (
     <Card className={className}>
       <CardHeader className='flex-row items-center justify-between space-y-0'>
@@ -47,16 +53,10 @@ export function CommentList({ postId, className }: CommentListProps) {
                   <AddReplyForm
                     value={replyText}
                     onChange={setReplyText}
-                    onCancel={() => {
-                      setReplyTargetId(null);
-                      setReplyText('');
-                      setIsAnonymous(false);
-                    }}
+                    onCancel={closeReply}
                     onSubmit={() => {
                       mutate({ parentId: c.id, data: { content: replyText, isAnonymous } });
-                      setReplyTargetId(null);
-                      setReplyText('');
-                      setIsAnonymous(false);
+                      closeReply();
                     }}
                     isAnonymous={isAnonymous}
                     onToggleAnonymous={setIsAnonymous}
