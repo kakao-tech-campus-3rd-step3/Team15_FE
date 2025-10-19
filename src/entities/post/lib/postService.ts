@@ -28,7 +28,7 @@ export const postService = {
   },
 
   async createPost(input: CreatePostFormValues): Promise<PostDetailResponse> {
-    const { data } = await axiosInstance.post('/api/posts', {
+    const { data } = await axiosInstance.post('/posts', {
       title: input.title,
       content: input.content,
       anonymous: input.anonymous,
