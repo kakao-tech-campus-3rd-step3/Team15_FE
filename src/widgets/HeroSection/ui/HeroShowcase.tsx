@@ -33,7 +33,7 @@ export function HeroShowcase() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection from='up' threshold={0.2} className='mt-8'>
+          <AnimatedSection from='up' className='mt-8'>
             <div className='flex flex-wrap items-center gap-3'>
               <Button size='lg' variant='whiteoutline'>
                 지금 시작하기
@@ -44,7 +44,7 @@ export function HeroShowcase() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection from='up' threshold={0.3} className='mt-6'>
+          <AnimatedSection from='up' className='mt-6'>
             <ul className='flex flex-wrap items-center gap-6 text-sm text-white/80'>
               <li>❤️ 응원 12만+</li>
               <li>💬 댓글 45만+</li>
@@ -54,7 +54,7 @@ export function HeroShowcase() {
         </div>
 
         {/* Visual Preview */}
-        <AnimatedSection from='left' threshold={0.2}>
+        <AnimatedSection from='left'>
           <div className='relative'>
             <div className='rounded-2xl border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-md'>
               <div className='mt-4 grid gap-3'>
