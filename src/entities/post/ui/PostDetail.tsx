@@ -15,7 +15,6 @@ type PostDetailProps = {
   onClickReport?: () => void;
   actionSlot?: React.ReactNode; // 공유 등
 };
-
 export function PostDetail({
   post,
   className,
@@ -24,12 +23,27 @@ export function PostDetail({
   actionSlot,
 }: PostDetailProps) {
   const initials = post.author?.slice(0, 2) ?? 'U';
+
   return (
     <Card className={cn('w-full', className)}>
-      <CardHeader>
-        <CardTitle className='text-2xl'>{post.title}</CardTitle>
+      <CardHeader className='relative'>
+        {/* 제목 + 버튼 그룹 */}
+        <div className='flex items-start justify-between'>
+          <CardTitle className='text-2xl'>{post.title}</CardTitle>
+
+          {/* 수정 / 삭제 버튼 */}
+          <div className='flex gap-2'>
+            <Button variant='outline' size='sm' onClick={() => console.log('수정 클릭')}>
+              수정
+            </Button>
+            <Button variant='destructive' size='sm' onClick={() => console.log('삭제 클릭')}>
+              삭제
+            </Button>
+          </div>
+        </div>
+
         <CardDescription>
-          <div className='flex items-center gap-3 text-sm'>
+          <div className='mt-2 flex items-center gap-3 text-sm'>
             <Avatar className='h-8 w-8'>
               {post.author ? <AvatarImage src={post.author} alt={`${post.author} avatar`} /> : null}
               <AvatarFallback>{initials}</AvatarFallback>
@@ -42,6 +56,7 @@ export function PostDetail({
           </div>
         </CardDescription>
       </CardHeader>
+
       <CardContent>
         <div className='prose max-w-none whitespace-pre-wrap leading-7'>{post.content}</div>
 
@@ -60,6 +75,7 @@ export function PostDetail({
               {post.viewCount}
             </span>
           </div>
+
           <div className='flex items-center gap-2'>
             <Button variant='outline' size='sm' onClick={() => onClickLike?.(post.id)}>
               {post.isLiked ? (
