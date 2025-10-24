@@ -66,3 +66,9 @@ export interface PostDetailResponse {
   createdAt: string; // 작성일 (ISO 8601)
   updatedAt: string; // 수정일 (ISO 8601)
 }
+
+export type UpdatePostRequest = {
+  title?: string;
+  content?: string;
+  postCategory?: CategoryCode; // 서버 스펙에 맞춰 key 이름 주의
+};
