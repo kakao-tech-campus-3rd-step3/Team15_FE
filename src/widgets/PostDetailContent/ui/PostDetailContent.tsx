@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { usePostDetailQuery } from '@/entities/post';
-import { PostDetail } from '@/entities/post/';
+import { usePostDetailQuery, PostDetail } from '@/entities/post';
 import { AddCommentForm } from '@/features/add-comment/';
 import { CommentList } from '@/entities/comment';
 import { useToggleLike } from '@/features/like-post';
@@ -43,7 +42,7 @@ export function PostDetailContent({ postId }: Props) {
         post={post}
         isRevise={isRevise}
         setIsRevise={setIsRevise}
-        onClickLike={(id) => toggleLike(id)}
+        onClickLike={toggleLike}
         onClickDelete={() => setShowDeleteModal(true)} // ← 삭제 버튼 트리거 연결
         reviseActionSlot={
           <>
