@@ -9,20 +9,6 @@ export type CategoryCode =
   | 'HOBBY'
   | 'MENTAL'
   | 'TROUBLE';
-
-export const CATEGORY_CODES = [
-  'ALL',
-  'FREE',
-  'STUDY',
-  'CAREER',
-  'RELATIONSHIP',
-  'SOCIAL',
-  'FAMILY',
-  'HOBBY',
-  'MENTAL',
-  'TROUBLE',
-] as const;
-
 export interface CategoryResponse {
   code: CategoryCode;
   displayName: string;

@@ -1,11 +1,10 @@
-// src/features/edit-post/ui/EditPostForm.tsx
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
 import { Textarea } from '@/shared/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
+
 import { postEditSchema, type PostEditValues } from '../model/postEdit.schema';
 
 type Props = {
@@ -52,33 +51,6 @@ export function EditPostForm({ defaultValues, onSubmit, id = 'postEditForm', dis
                   {...field}
                   disabled={disabled}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name='postCategory'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>카테고리</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  disabled={disabled}
-                >
-                  <SelectTrigger className='w-full'>
-                    <SelectValue placeholder='카테고리를 선택하세요' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value='FREE'>자유</SelectItem>
-                    <SelectItem value='TROUBLE'>고민상담</SelectItem>
-                    <SelectItem value='NOTICE'>공지사항</SelectItem>
-                  </SelectContent>
-                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -7,6 +7,8 @@ import { useToggleLike } from '@/features/like-post';
 import { EditPostForm, useUpdatePost, type PostEditValues } from '@/features/edit-post';
 import { Button } from '@/shared/ui/button';
 
+import { LandingPageFilterTabs } from '@/features/landing';
+
 type Props = { postId: number };
 
 export function PostDetailContent({ postId }: Props) {
@@ -14,14 +16,20 @@ export function PostDetailContent({ postId }: Props) {
   const { mutate: toggleLike } = useToggleLike();
   const [isRevise, setIsRevise] = useState(false);
   const { mutate: updatePost, isPending } = useUpdatePost(postId);
+
+  const [category, setCategory] = useState(post.postCategory);
+
   const handleSubmit = (values: PostEditValues) => {
-    updatePost(values, {
-      onSuccess: () => {
-        setIsRevise(false);
+    updatePost(
+      { ...values, postCategory: category },
+      {
+        onSuccess: () => {
+          setIsRevise(false);
+        },
+        // 필요 시 에러 처리도 여기서
+        // onError: (e) => toast.error(e.message),
       },
-      // 필요 시 에러 처리도 여기서
-      // onError: (e) => toast.error(e.message),
-    });
+    );
   };
 
   return (
@@ -45,16 +53,18 @@ export function PostDetailContent({ postId }: Props) {
         // 수정 모드일 때 본문 컨텐츠(= 폼) 주입
         actionSlot={
           isRevise && (
-            <EditPostForm
-              id='postEditForm'
-              disabled={isPending}
-              defaultValues={{
-                title: post.title,
-                content: post.content,
-                postCategory: post.postCategory,
-              }}
-              onSubmit={handleSubmit}
-            />
+            <>
+              <LandingPageFilterTabs category={category} setCategory={setCategory} />
+              <EditPostForm
+                id='postEditForm'
+                disabled={isPending}
+                defaultValues={{
+                  title: post.title,
+                  content: post.content,
+                }}
+                onSubmit={handleSubmit}
+              />
+            </>
           )
         }
       />
