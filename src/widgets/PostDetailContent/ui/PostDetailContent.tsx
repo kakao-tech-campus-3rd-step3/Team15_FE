@@ -51,7 +51,7 @@ export function PostDetailContent({ postId }: Props) {
               defaultValues={{
                 title: post.title,
                 content: post.content,
-                postCategory: post.postCategory ?? 'FREE',
+                postCategory: post.postCategory,
               }}
               onSubmit={handleSubmit}
             />

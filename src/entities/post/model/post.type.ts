@@ -10,6 +10,19 @@ export type CategoryCode =
   | 'MENTAL'
   | 'TROUBLE';
 
+export const CATEGORY_CODES = [
+  'ALL',
+  'FREE',
+  'STUDY',
+  'CAREER',
+  'RELATIONSHIP',
+  'SOCIAL',
+  'FAMILY',
+  'HOBBY',
+  'MENTAL',
+  'TROUBLE',
+] as const;
+
 export interface CategoryResponse {
   code: CategoryCode;
   displayName: string;
@@ -51,7 +64,7 @@ export type PostId = number;
 
 export interface PostDetailResponse {
   id: number;
-  postCategory: string; // 카테고리 코드 (예: "TROUBLE")
+  postCategory: CategoryCode; // 카테고리 코드 (예: "TROUBLE")
   postCategoryName: string; // 카테고리 한글 이름 (예: "고민상담")
   title: string;
   content: string;
