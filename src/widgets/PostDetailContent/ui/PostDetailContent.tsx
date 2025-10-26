@@ -9,8 +9,8 @@ import { Button } from '@/shared/ui/button';
 import { LandingPageFilterTabs } from '@/features/landing';
 import { ConfirmDeleteModal } from '@/features/delete-post';
 import { useDeletePost } from '@/entities/post/model/useDeletePost';
-
-export function PostDetailContent(postId: number) {
+type Props = { postId: number };
+export function PostDetailContent({ postId }: Props) {
   const { data: post } = usePostDetailQuery(postId);
   const { mutate: toggleLike } = useToggleLike();
   const [isRevise, setIsRevise] = useState(false);
