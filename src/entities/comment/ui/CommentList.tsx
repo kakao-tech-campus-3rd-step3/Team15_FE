@@ -79,5 +79,3 @@ export function CommentList({ postId, className }: CommentListProps) {
     </Card>
   );
 }
-
-export default CommentList;
