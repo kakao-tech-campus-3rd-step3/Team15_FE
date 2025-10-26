@@ -13,6 +13,7 @@ type PostDetailProps = {
   className?: string;
   onClickLike?: (postId: number) => void;
   onClickReport?: () => void;
+  onClickDelete: () => void;
   actionSlot?: React.ReactNode; // 공유 등
   reviseActionSlot?: React.ReactNode;
 };
@@ -23,6 +24,7 @@ export function PostDetail({
   className,
   onClickLike,
   onClickReport,
+  onClickDelete,
   actionSlot,
   reviseActionSlot,
 }: PostDetailProps) {
@@ -43,7 +45,7 @@ export function PostDetail({
                 <Button variant='outline' size='sm' onClick={() => setIsRevise(true)}>
                   수정
                 </Button>
-                <Button variant='destructive' size='sm'>
+                <Button variant='destructive' size='sm' onClick={onClickDelete}>
                   삭제
                 </Button>
               </>

@@ -7,14 +7,17 @@ import { useToggleLike } from '@/features/like-post';
 import { EditPostForm, useUpdatePost, type PostEditValues } from '@/features/edit-post';
 import { Button } from '@/shared/ui/button';
 import { LandingPageFilterTabs } from '@/features/landing';
+import { ConfirmDeleteModal } from '@/features/delete-post';
+import { useDeletePost } from '@/entities/post/model/useDeletePost';
 
 export function PostDetailContent(postId: number) {
   const { data: post } = usePostDetailQuery(postId);
   const { mutate: toggleLike } = useToggleLike();
   const [isRevise, setIsRevise] = useState(false);
   const { mutate: updatePost, isPending } = useUpdatePost(postId);
-
   const [category, setCategory] = useState(post.postCategory);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { mutate: deletePost, isPending: isDeleting } = useDeletePost(postId);
 
   const handleSubmit = (values: PostEditValues) => {
     updatePost(
@@ -29,6 +32,11 @@ export function PostDetailContent(postId: number) {
     );
   };
 
+  const handleDelete = () => {
+    deletePost();
+    setShowDeleteModal(false);
+  };
+
   return (
     <div className='space-y-6'>
       <PostDetail
@@ -36,7 +44,7 @@ export function PostDetailContent(postId: number) {
         isRevise={isRevise}
         setIsRevise={setIsRevise}
         onClickLike={(id) => toggleLike(id)}
-        // 수정 모드일 때 상단 버튼
+        onClickDelete={() => setShowDeleteModal(true)} // ← 삭제 버튼 트리거 연결
         reviseActionSlot={
           <>
             <Button type='submit' form='postEditForm' disabled={isPending}>
@@ -72,6 +80,12 @@ export function PostDetailContent(postId: number) {
           <CommentList postId={postId} />
         </>
       )}
+      <ConfirmDeleteModal
+        open={showDeleteModal}
+        onOpenChange={setShowDeleteModal}
+        onConfirm={handleDelete}
+        isPending={isDeleting}
+      />
     </div>
   );
 }
