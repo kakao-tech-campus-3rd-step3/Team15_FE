@@ -1,17 +1,14 @@
 import { useState } from 'react';
-import { usePostDetailQuery } from '@/entities/post/model/usePostDetail';
-import { PostDetail } from '@/entities/post/ui/PostDetail';
-import { AddCommentForm } from '@/features/add-comment/ui/AddCommentForm';
-import CommentList from '@/entities/comment/ui/CommentList';
+import { usePostDetailQuery } from '@/entities/post';
+import { PostDetail } from '@/entities/post/';
+import { AddCommentForm } from '@/features/add-comment/';
+import { CommentList } from '@/entities/comment';
 import { useToggleLike } from '@/features/like-post';
 import { EditPostForm, useUpdatePost, type PostEditValues } from '@/features/edit-post';
 import { Button } from '@/shared/ui/button';
-
 import { LandingPageFilterTabs } from '@/features/landing';
 
-type Props = { postId: number };
-
-export function PostDetailContent({ postId }: Props) {
+export function PostDetailContent(postId: number) {
   const { data: post } = usePostDetailQuery(postId);
   const { mutate: toggleLike } = useToggleLike();
   const [isRevise, setIsRevise] = useState(false);
