@@ -71,6 +71,8 @@ export function PostDetail({
           actionSlot
         ) : (
           <>
+            <div className='prose max-w-none whitespace-pre-wrap leading-7'>{post.content}</div>
+
             <div className='text-muted-foreground mt-6 flex items-center justify-between text-sm'>
               <div className='flex items-center gap-4'>
                 <span className='inline-flex items-center gap-1'>

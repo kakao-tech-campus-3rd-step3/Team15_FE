@@ -44,7 +44,7 @@ export function PostDetailContent({ postId }: Props) {
         }
         // 수정 모드일 때 본문 컨텐츠(= 폼) 주입
         actionSlot={
-          isRevise ?? (
+          isRevise && (
             <EditPostForm
               id='postEditForm'
               disabled={isPending}
