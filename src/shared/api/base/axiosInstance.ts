@@ -1,5 +1,6 @@
 //axios 설정 (baseURL, interceptors)
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { ApiError } from '../../errors/ApiError';
 
 export const axiosInstance = axios.create({
   baseURL: '/api',
@@ -74,5 +75,16 @@ axiosInstance.interceptors.response.use(
       window.location.href = '/login';
     }
     return Promise.reject(err);
+  },
+);
+
+axiosInstance.interceptors.response.use(
+  (res) => res,
+  (err: AxiosError) => {
+    throw new ApiError(
+      err.response?.status ?? 500,
+      err.response?.data,
+      (err.response?.data as { message?: string })?.message ?? '요청 실패',
+    );
   },
 );

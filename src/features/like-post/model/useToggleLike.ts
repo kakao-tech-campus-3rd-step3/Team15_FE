@@ -1,5 +1,5 @@
-import { postKeys } from '@/entities/post/model/usePostDetail';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postKeys } from '@/entities/post/model/queryKeys';
 import { likePost } from '../api/like-post.api';
 
 // 캐시에서 사용하는 Post의 최소 형태 가정

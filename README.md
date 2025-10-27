@@ -218,3 +218,34 @@ export const isProductionStage = import.meta.env.MODE === 'production';
   - import.meta.env.DEV → 개발 서버 실행 중일 때 true
   - import.meta.env.PROD → 빌드된 배포 환경일 때 true
 - 기본 제공되지만, 가독성과 명시적 표현을 위해 isLocalStage, isProductionStage 같은 헬퍼 변수를 정의해서 사용
+
+---
+
+## 파일 네이밍 및 컨벤션
+
+### 파일 네이밍 기본 원칙
+
+| 원칙                                       | 설명                                                    | 예시                                                     |
+| ------------------------------------------ | ------------------------------------------------------- | -------------------------------------------------------- |
+| ✅ **kebab-case 사용**                     | 모든 파일은 소문자와 `-`로 구성 (공백·대문자 금지)      | `comment-list.tsx`, `use-in-view.ts`                     |
+| ✅ **역할이 드러나게 네이밍**              | 파일 이름만 봐도 용도가 명확해야 함                     | `comment.service.ts`, `auth.schema.ts`                   |
+| ✅ **UI / 로직 분리**                      | UI는 `.tsx`, 비즈니스 로직·훅·타입은 `.ts`              | `comment-item.tsx`, `use-create-comment.ts`              |
+| ✅ **접미사 규칙 유지**                    | 기능별 접미사(`.api`, `.type`, `.schema`, `.util`) 통일 | `post-api.ts`, `post.service.ts`                         |
+| ✅ **index.ts는 public API 전용**          | 외부 노출용 entry, 내부 import 금지                     | `export * from './ui/comment-item'`                      |
+| ⚠️ **폴더명 = 도메인명 / 파일명 = 역할명** | 폴더는 도메인 단위, 파일은 역할명으로 구체화            | `comment/comment-item.tsx` ✅ / `comment/comment.tsx` ❌ |
+| ⚠️ **1파일 1책임 (SRP)**                   | 타입, UI, 로직을 하나의 파일에 섞지 않기                | —                                                        |
+
+---
+
+### 💡 네이밍 패턴
+
+| 역할            | 컨벤션                  | 예시                                       |
+| --------------- | ----------------------- | ------------------------------------------ |
+| **API 호출**    | `*-api.ts`              | `comment-api.ts`, `auth-api.ts`            |
+| **React 훅**    | `use-*`                 | `use-in-view.ts`, `use-comment-query.ts`   |
+| **타입 정의**   | `*.type.ts`             | `comment.type.ts`, `user.type.ts`          |
+| **검증 스키마** | `*.schema.ts`           | `login.schema.ts`, `add-comment.schema.ts` |
+| **유틸 함수**   | `*.util.ts` 또는 `*.ts` | `format-date.util.ts`, `activity-utils.ts` |
+| **UI 컴포넌트** | `*.tsx`                 | `comment-item.tsx`, `add-comment-form.tsx` |
+| **테스트**      | `*.test.ts(x)`          | `use-in-view.test.ts`                      |
+| **스토리북**    | `*.stories.tsx`         | `button.stories.tsx`                       |
