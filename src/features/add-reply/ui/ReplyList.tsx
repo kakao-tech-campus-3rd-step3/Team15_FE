@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { useReplyList } from '../model/useReplyList';
 import { ReplyItem } from './ReplyItem';
+import { Textarea } from '@/shared/ui/textarea';
 
 type ReplyListProps = {
   parentId: number;
@@ -12,6 +13,8 @@ type ReplyListProps = {
 export function ReplyList({ parentId }: ReplyListProps) {
   const { data, refetch, isFetching, isFetched } = useReplyList(parentId);
   const [open, setOpen] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editText, setEditText] = useState('');
 
   const replies = data ?? [];
   const count = isFetched ? replies.length : undefined;
@@ -27,6 +30,31 @@ export function ReplyList({ parentId }: ReplyListProps) {
       await refetch();
     }
     setOpen((v) => !v);
+  };
+
+  const startEdit = (replyId: number, current: string) => {
+    setEditingId(replyId);
+    setEditText(current);
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditText('');
+  };
+
+  const submitEdit = async (replyId: number) => {
+    // 예: updateReply({ id: replyId, content: editText })
+    console.warn('[ReplyList] submitEdit called for', replyId, editText);
+    setEditingId(null);
+    setEditText('');
+    await refetch();
+  };
+
+  const deleteReply = async (replyId: number) => {
+    if (!confirm('이 대댓글을 삭제할까요?')) return;
+    // 예: deleteReply({ id: replyId })
+    console.warn('[ReplyList] deleteReply called for', replyId);
+    await refetch();
   };
 
   return (
@@ -47,7 +75,59 @@ export function ReplyList({ parentId }: ReplyListProps) {
           ) : (
             <ul className='divide-y rounded-md border'>
               {replies.map((r) => (
-                <ReplyItem key={r.id} reply={r} />
+                <li key={r.id} className='relative p-3 pr-24'>
+                  <ReplyItem reply={r} />
+
+                  <div className='absolute right-3 top-3 flex gap-1'>
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      className='text-xs'
+                      onClick={() => startEdit(r.id, (r as any).content)}
+                    >
+                      수정
+                    </Button>
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      className='text-xs'
+                      onClick={() => deleteReply(r.id)}
+                    >
+                      삭제
+                    </Button>
+                  </div>
+
+                  {editingId === r.id && (
+                    <div className='mt-2 space-y-2'>
+                      {Textarea ? (
+                        <Textarea
+                          value={editText}
+                          onChange={(e: any) => setEditText(e.target.value)}
+                          rows={3}
+                        />
+                      ) : (
+                        <textarea
+                          className='w-full rounded-md border p-2 text-sm'
+                          rows={3}
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                        />
+                      )}
+                      <div className='flex gap-2'>
+                        <Button
+                          size='sm'
+                          onClick={() => submitEdit(r.id)}
+                          disabled={!editText.trim()}
+                        >
+                          저장
+                        </Button>
+                        <Button variant='ghost' size='sm' onClick={cancelEdit}>
+                          취소
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </li>
               ))}
             </ul>
           )}
