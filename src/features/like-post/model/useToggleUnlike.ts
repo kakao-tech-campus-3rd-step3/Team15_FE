@@ -4,16 +4,16 @@ import { likePostService } from '../api/likePostService';
 import { postKeys } from '@/entities/post/model/queryKeys';
 
 /**
- * Like(좋아요)용 커스텀 훅
- * - 상세 캐시에 낙관적 업데이트( likeCount + 1, isLiked=true )
+ * Unlike(좋아요 취소)용 커스텀 훅
+ * - 상세 캐시에 낙관적 업데이트( likeCount - 1, isLiked=false )
  * - 실패 시 롤백
  * - 완료 후 리스트/상세 무효화로 최종 동기화
  */
-export function useToggleLike() {
+export function useToggleUnlike() {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (postId: number) => likePostService.likePost(postId),
+    mutationFn: (postId: number) => likePostService.unlikePost(postId),
 
     // 1) 서버 호출 전에 낙관적 업데이트
     onMutate: async (postId: number) => {
@@ -28,8 +28,8 @@ export function useToggleLike() {
       if (prevDetail) {
         const nextDetail: PostDetailResponse = {
           ...prevDetail,
-          isLiked: true,
-          likeCount: (prevDetail.likeCount ?? 0) + 1,
+          isLiked: false,
+          likeCount: Math.max(0, (prevDetail.likeCount ?? 0) - 1),
         };
         qc.setQueryData(postKeys.detail(postId), nextDetail);
       }

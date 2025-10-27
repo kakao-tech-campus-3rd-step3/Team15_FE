@@ -12,6 +12,9 @@ type PostDetailProps = {
   setIsRevise: (value: boolean) => void;
   className?: string;
   onClickLike?: (postId: number) => void;
+  onClickUnlike?: (postId: number) => void;
+  likeDisabled?: boolean;
+  unlikeDisabled?: boolean;
   onClickReport?: () => void;
   onClickDelete: () => void;
   actionSlot?: React.ReactNode; // 공유 등
@@ -23,6 +26,9 @@ export function PostDetail({
   setIsRevise,
   className,
   onClickLike,
+  onClickUnlike,
+  likeDisabled,
+  unlikeDisabled,
   onClickReport,
   onClickDelete,
   actionSlot,
@@ -92,7 +98,12 @@ export function PostDetail({
               </div>
 
               <div className='flex items-center gap-2'>
-                <Button variant='outline' size='sm' onClick={() => onClickLike?.(post.id)}>
+                <Button
+                  variant='outline'
+                  size='sm'
+                  disabled={post.isLiked ? unlikeDisabled : likeDisabled}
+                  onClick={() => (post.isLiked ? onClickUnlike?.(post.id) : onClickLike?.(post.id))}
+                >
                   {post.isLiked ? (
                     <Heart className='mr-1 h-4 w-4 fill-red-500 text-red-500' />
                   ) : (

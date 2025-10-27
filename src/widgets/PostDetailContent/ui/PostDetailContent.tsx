@@ -8,10 +8,14 @@ import { Button } from '@/shared/ui/button';
 import { LandingPageFilterTabs } from '@/features/landing';
 import { ConfirmDeleteModal } from '@/features/delete-post';
 import { useDeletePost } from '@/entities/post/model/useDeletePost';
+import { useToggleUnlike } from '@/features/like-post/model/useToggleUnlike';
+
 type Props = { postId: number };
+
 export function PostDetailContent({ postId }: Props) {
   const { data: post } = usePostDetailQuery(postId);
-  const { mutate: toggleLike } = useToggleLike();
+  const { mutate: toggleLike, isPending: likeBusy } = useToggleLike();
+  const { mutate: toggleUnlike, isPending: unlikeBusy } = useToggleUnlike();
   const [isRevise, setIsRevise] = useState(false);
   const { mutate: updatePost, isPending } = useUpdatePost(postId);
   const [category, setCategory] = useState(post.postCategory);
@@ -43,6 +47,9 @@ export function PostDetailContent({ postId }: Props) {
         isRevise={isRevise}
         setIsRevise={setIsRevise}
         onClickLike={toggleLike}
+        onClickUnlike={toggleUnlike}
+        likeDisabled={likeBusy}
+        unlikeDisabled={unlikeBusy}
         onClickDelete={() => setShowDeleteModal(true)} // ← 삭제 버튼 트리거 연결
         reviseActionSlot={
           <>
