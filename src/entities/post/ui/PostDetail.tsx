@@ -14,6 +14,7 @@ type PostDetailProps = {
   onClickLike?: (postId: number) => void;
   onClickUnlike?: (postId: number) => void;
   likeDisabled?: boolean;
+  unlikeDisabled?: boolean;
   onClickReport?: () => void;
   onClickDelete: () => void;
   actionSlot?: React.ReactNode; // 공유 등
@@ -27,6 +28,7 @@ export function PostDetail({
   onClickLike,
   onClickUnlike,
   likeDisabled,
+  unlikeDisabled,
   onClickReport,
   onClickDelete,
   actionSlot,
@@ -46,20 +48,10 @@ export function PostDetail({
               <>{reviseActionSlot}</>
             ) : (
               <>
-                <Button
-                  variant='outline'
-                  size='sm'
-                  disabled={likeDisabled}
-                  onClick={() => setIsRevise(true)}
-                >
+                <Button variant='outline' size='sm' onClick={() => setIsRevise(true)}>
                   수정
                 </Button>
-                <Button
-                  variant='destructive'
-                  size='sm'
-                  disabled={likeDisabled}
-                  onClick={onClickDelete}
-                >
+                <Button variant='destructive' size='sm' onClick={onClickDelete}>
                   삭제
                 </Button>
               </>
@@ -109,6 +101,7 @@ export function PostDetail({
                 <Button
                   variant='outline'
                   size='sm'
+                  disabled={post.isLiked ? unlikeDisabled : likeDisabled}
                   onClick={() => (post.isLiked ? onClickUnlike?.(post.id) : onClickLike?.(post.id))}
                 >
                   {post.isLiked ? (

@@ -14,7 +14,7 @@ export const postDetailHandlers = [
       handle: '@yozjov',
       isAnonymous: false,
       isDeleted: false,
-      isLiked: true,
+      isLiked: false,
       viewCount: 0,
       likeCount: 0,
       commentCount: 1,

@@ -9,18 +9,18 @@ import { LandingPageFilterTabs } from '@/features/landing';
 import { ConfirmDeleteModal } from '@/features/delete-post';
 import { useDeletePost } from '@/entities/post/model/useDeletePost';
 import { useToggleUnlike } from '@/features/like-post/model/useToggleUnlike';
-import { useIsMutating } from '@tanstack/react-query';
+
 type Props = { postId: number };
+
 export function PostDetailContent({ postId }: Props) {
   const { data: post } = usePostDetailQuery(postId);
-  const { mutate: toggleLike } = useToggleLike();
-  const { mutate: toggleUnlike } = useToggleUnlike();
+  const { mutate: toggleLike, isPending: likeBusy } = useToggleLike();
+  const { mutate: toggleUnlike, isPending: unlikeBusy } = useToggleUnlike();
   const [isRevise, setIsRevise] = useState(false);
   const { mutate: updatePost, isPending } = useUpdatePost(postId);
   const [category, setCategory] = useState(post.postCategory);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { mutate: deletePost, isPending: isDeleting } = useDeletePost(postId);
-  const likeBusy = useIsMutating({ mutationKey: ['post-like'] }) > 0;
 
   const handleSubmit = (values: PostEditValues) => {
     updatePost(
@@ -49,6 +49,7 @@ export function PostDetailContent({ postId }: Props) {
         onClickLike={toggleLike}
         onClickUnlike={toggleUnlike}
         likeDisabled={likeBusy}
+        unlikeDisabled={unlikeBusy}
         onClickDelete={() => setShowDeleteModal(true)} // ← 삭제 버튼 트리거 연결
         reviseActionSlot={
           <>
