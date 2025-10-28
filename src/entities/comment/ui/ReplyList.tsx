@@ -103,29 +103,6 @@ export function ReplyList({ parentId }: ReplyListProps) {
                       삭제
                     </Button>
                   </div>
-
-                  {editingId === r.id && (
-                    <div className='mt-2 space-y-2'>
-                      <Textarea
-                        value={editText}
-                        onChange={(e: any) => setEditText(e.target.value)}
-                        rows={3}
-                      />
-
-                      <div className='flex gap-2'>
-                        <Button
-                          size='sm'
-                          onClick={() => submitEdit(r.id)}
-                          disabled={!editText.trim()}
-                        >
-                          저장
-                        </Button>
-                        <Button variant='ghost' size='sm' onClick={cancelEdit}>
-                          취소
-                        </Button>
-                      </div>
-                    </div>
-                  )}
                 </li>
               ))}
             </ul>
