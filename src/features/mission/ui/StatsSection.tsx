@@ -1,6 +1,5 @@
-import { Card } from '@/shared/ui/shadcn/card';
+import { Card } from '@/shared/ui/card';
 import type { MissionStats } from '../types/mission';
-
 interface Props {
   stats: MissionStats;
 }

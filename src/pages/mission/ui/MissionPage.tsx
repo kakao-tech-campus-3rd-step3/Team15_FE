@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 
 import { CategoryFilter, MissionsList, StatsSection, TitleSection } from '@/features/mission';
 import type { Mission, MissionCategory, MissionStats } from '@/features/mission/types/mission';
 
-const mockMissions = [
+const mockMissions: Mission[] = [
   {
     id: 1,
     title: '하루 10분 명상하기',
@@ -86,7 +86,7 @@ const mockMissions = [
     status: 'available',
     difficulty: '어려움',
   },
-] as const;
+];
 
 export function MissionPage() {
   const [selectedCategory, setSelectedCategory] = useState<MissionCategory>('전체');
