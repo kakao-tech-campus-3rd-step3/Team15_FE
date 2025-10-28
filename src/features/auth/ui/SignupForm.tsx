@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { SocialLoginButtons } from './SocialLoginButtons';
-import { InputWithLabel } from '@/shared/ui/form/InputWithLabel';
+import { InputWithLabel } from '@/shared/ui/input-with-label';
 import { useForm } from 'react-hook-form';
-import { signupSchema, type SignupFormValues } from '../model/auth.schema';
+import { signupSchema, type SignupFormValues } from '../lib/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSignup } from '../api/useSignup';
 import { Check, Clock } from 'lucide-react';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { useEmailVerification } from '../lib/useEmailVerification';
 
 type SignupFormProps = {
@@ -14,18 +14,18 @@ type SignupFormProps = {
 };
 
 export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }: SignupFormProps) => {
-  // const { mutate: postSignupMutation } = useMutation({
-  //   mutationFn: postSignup,
-  // });
-
+  // 이메일 인증 api
   const {
     state: emailVerification,
     sendVerificationCode,
     verifyCode,
     reset,
   } = useEmailVerification();
+
+  // 회원가입 api
   const signupMutation = useSignup(onSuccess);
 
+  // RHF + zod
   const {
     register,
     handleSubmit,
@@ -36,13 +36,6 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }: SignupFormP
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
   });
-
-  // const [emailVerification, setEmailVerification] = useState<EmailValidation>({
-  //   sent: false,
-  //   verified: false,
-  //   timer: 0,
-  //   isLoading: false,
-  // });
 
   const email = watch('email');
   const verificationCode = watch('verificationCode');
@@ -56,12 +49,22 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess }: SignupFormP
     }
   }, [email, reset]);
 
-  const handleSendCode = () => sendVerificationCode(email);
+  const handleSendCode = () => {
+    if (!email) {
+      setError('email', { message: '이메일을 입력해주세요' });
+      return;
+    }
+    clearErrors('email');
+    sendVerificationCode(email);
+  };
 
-  const handleVerifyCode = async () => {
-    const verified = await verifyCode(verificationCode || '');
-    if (!verified) setError('verificationCode', { message: '인증번호가 올바르지 않습니다' });
-    else clearErrors('verificationCode');
+  const handleVerifyCode = () => {
+    if (!verificationCode || verificationCode.length !== 6) {
+      setError('verificationCode', { message: '6자리 인증번호를 입력해주세요' });
+      return;
+    }
+    clearErrors('verificationCode');
+    verifyCode(email, verificationCode);
   };
 
   const formatTime = (seconds: number) => {

@@ -1,15 +1,17 @@
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import { Badge } from '@/shared/ui/shadcn/badge';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
 import { cn } from '@/lib/utils';
-import type { Comment } from '../model/types';
+import type { CommentEntity } from '../model/comment.type';
 
-type Props = {
-  comment: Comment;
+type CommentItemProps = {
+  comment: CommentEntity;
   className?: string;
+  onClickReply?: () => void;
 };
 
-export function CommentItem({ comment, className }: Props) {
-  const initials = (comment.author?.slice(0, 2) || 'U').toUpperCase();
+export function CommentItem({ comment, className, onClickReply }: CommentItemProps) {
+  const initials = comment.author.slice(0, 2).toUpperCase();
   const displayContent = comment.content ?? '삭제된 댓글입니다.';
   const isDeleted = comment.content == null;
 
@@ -39,6 +41,19 @@ export function CommentItem({ comment, className }: Props) {
         >
           {displayContent}
         </p>
+        {!isDeleted && (
+          <div className='mt-2'>
+            <Button
+              type='button'
+              variant='ghost'
+              size='sm'
+              className='h-7 px-2 text-xs'
+              onClick={onClickReply}
+            >
+              답글
+            </Button>
+          </div>
+        )}
       </div>
     </li>
   );

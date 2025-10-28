@@ -1,19 +1,13 @@
-import { Input } from '@/shared/ui/shadcn/input';
-import { Button } from '@/shared/ui/shadcn/button';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/shared/ui/shadcn/select';
-import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/shadcn/popover';
-import { Calendar } from '@/shared/ui/shadcn/calendar';
+import { Input } from '@/shared/ui/input';
+import { Button } from '@/shared/ui/button';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/shared/ui/select';
+import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/popover';
+import { Calendar } from '@/shared/ui/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import type { CategoryCode } from '@/entities/post';
 import type { Params, SortKey } from '@/widgets/PostList/model/type';
-import { useCategoriesQuery } from '../lib/useCategoriesQuery';
+import { useCategoriesQuery } from '../model/useCategoriesQuery';
 
 type Props = {
   value: Params;

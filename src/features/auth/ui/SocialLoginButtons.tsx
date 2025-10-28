@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/shared/lib/utils';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import { FcGoogle } from 'react-icons/fc';
 import { SiKakaotalk } from 'react-icons/si';
 import { useStartGoogleLogin } from '../api/useStartGoogleLogin';
