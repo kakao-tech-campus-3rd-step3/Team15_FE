@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
-import { useReplyList } from '../model/useReplyList';
+import { useReplyList } from '../../../features/add-reply/model/useReplyList';
 import { ReplyItem } from './ReplyItem';
 import { Textarea } from '@/shared/ui/textarea';
 
@@ -76,7 +76,14 @@ export function ReplyList({ parentId }: ReplyListProps) {
             <ul className='divide-y rounded-md border'>
               {replies.map((r) => (
                 <li key={r.id} className='relative p-3 pr-24'>
-                  <ReplyItem reply={r} />
+                  <ReplyItem
+                    reply={r}
+                    editingId={editingId}
+                    editText={editText}
+                    setEditText={setEditText}
+                    submitEdit={() => submitEdit(r.id)}
+                    cancelEdit={cancelEdit}
+                  />
 
                   <div className='absolute right-3 top-3 flex gap-1'>
                     <Button
@@ -99,20 +106,12 @@ export function ReplyList({ parentId }: ReplyListProps) {
 
                   {editingId === r.id && (
                     <div className='mt-2 space-y-2'>
-                      {Textarea ? (
-                        <Textarea
-                          value={editText}
-                          onChange={(e: any) => setEditText(e.target.value)}
-                          rows={3}
-                        />
-                      ) : (
-                        <textarea
-                          className='w-full rounded-md border p-2 text-sm'
-                          rows={3}
-                          value={editText}
-                          onChange={(e) => setEditText(e.target.value)}
-                        />
-                      )}
+                      <Textarea
+                        value={editText}
+                        onChange={(e: any) => setEditText(e.target.value)}
+                        rows={3}
+                      />
+
                       <div className='flex gap-2'>
                         <Button
                           size='sm'

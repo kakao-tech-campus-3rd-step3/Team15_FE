@@ -1,2 +1,2 @@
-export * from './ui/CommentList';
-export * from './ui/CommentItem';
+export * from './ui/CommentList/CommentList';
+export * from './ui/CommentItem/CommentItem';

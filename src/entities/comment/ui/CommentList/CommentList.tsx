@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react';
-import CommentItem from './CommentItem';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
 
 import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
-import { ReplyList } from '@/features/add-reply/ui/ReplyList';
+import { ReplyList } from '@/entities/comment/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
+import CommentItem from '../CommentItem/CommentItem';
 
 type CommentListProps = {
   postId: number;
@@ -89,7 +89,15 @@ export function CommentList({ postId, className }: CommentListProps) {
             {items.map((c) => (
               <Fragment key={c.id}>
                 <div className='relative flex items-start justify-between'>
-                  <CommentItem comment={c} onClickReply={() => handleClickReply(c.id)} />
+                  <CommentItem
+                    comment={c}
+                    onClickReply={() => handleClickReply(c.id)}
+                    isEditing={editingCommentId === c.id}
+                    editText={commentEditText}
+                    onEditChange={setCommentEditText}
+                    onSubmitEdit={() => submitEditComment(c.id)}
+                    onCancelEdit={cancelEditComment}
+                  />
                   <div className='absolute right-0 top-0 flex gap-1'>
                     <Button
                       variant='ghost'
@@ -110,29 +118,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                   </div>
                 </div>
 
-                {editingCommentId === c.id && (
-                  <div className='mt-2 space-y-2'>
-                    <textarea
-                      className='w-full rounded-md border p-2 text-sm'
-                      rows={4}
-                      value={commentEditText}
-                      onChange={(e) => setCommentEditText(e.target.value)}
-                    />
-                    <div className='flex gap-2'>
-                      <Button
-                        size='sm'
-                        onClick={() => submitEditComment(c.id)}
-                        disabled={!commentEditText.trim()}
-                      >
-                        저장
-                      </Button>
-                      <Button variant='ghost' size='sm' onClick={cancelEditComment}>
-                        취소
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
+                {/* 여기가 답글적기/ */}
                 {replyTargetId === c.id && (
                   <AddReplyForm
                     value={replyText}
@@ -146,6 +132,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                   />
                 )}
 
+                {/* 여기는 대댓글 */}
                 <ReplyList parentId={c.id} />
                 <Separator />
               </Fragment>
