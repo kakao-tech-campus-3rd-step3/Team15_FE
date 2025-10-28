@@ -1,7 +1,7 @@
 import { BookOpen, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 
 interface ActivityHeaderProps {
   postCount: number;

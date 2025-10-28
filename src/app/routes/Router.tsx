@@ -1,4 +1,3 @@
-import { DevPanel } from '@/shared/ui';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppLayout from '../layout/AppLayout';
 import { LandingPage } from '@/pages/landing';
@@ -11,6 +10,7 @@ import { PostDetailPage } from '@/pages/post-detail';
 import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
 import AuthGuard from './AuthGuard';
+import { DevPanel } from '@/shared/ui/dev-panner/DevPanel';
 
 function Router() {
   return (

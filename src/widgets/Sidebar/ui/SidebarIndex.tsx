@@ -1,4 +1,4 @@
-import { Sidebar, SidebarHeader } from '@/shared/ui/shadcn/sidebar';
+import { Sidebar, SidebarHeader } from '@/shared/ui/sidebar';
 import SidebarContentSection from './SidebarContentSection';
 // import SidebarFooterSection from './SidebarFooterSection';
 

@@ -1,9 +1,10 @@
 import { CreatePostForm } from '@/features/create-post';
-import { LandingPageFilterTabs } from '@/features/landing-page-filter-post';
-import { useFilter } from '@/features/landing-page-filter-post/model/useFilter';
-import { SectionHeader, YSButton } from '@/shared/ui';
+import { LandingPageFilterTabs } from '@/features/landing';
+import { useFilter } from '@/features/landing/model/useFilter';
 import { useNavigate } from 'react-router-dom';
 import { Pencil } from 'lucide-react';
+import { Button } from '@/shared/ui/button';
+import { SectionHeader } from '@/shared/ui/section-header';
 
 export function Post() {
   const { category, setCategory } = useFilter();
@@ -20,9 +21,9 @@ export function Post() {
           }
           description='새로운 글을 작성할 수 있습니다'
           left={
-            <YSButton size='lg' onClick={() => naviga(-1)}>
+            <Button size='lg' onClick={() => naviga(-1)}>
               돌아가기
-            </YSButton>
+            </Button>
           }
         />
       </section>

@@ -1,9 +1,7 @@
 import { useSuspenseQueries, type UseSuspenseQueryResult } from '@tanstack/react-query';
 import { postKeys } from '@/entities/post/model/queryKeys';
-import { statsKeys } from '@/entities/post/model/queryKeys';
-import { getPostsByCategory } from '@/entities/post/api/getPostsByCategory';
-import { getPostStats } from '@/entities/post/api/getPostStats';
-import type { CategoryCode, PostStats } from '@/entities/post/model/types';
+import type { CategoryCode, PostStatsResponse } from '@/entities/post/model/post.type';
+import { postService } from '@/entities/post/lib/postService';
 
 type Params = {
   code: CategoryCode;
@@ -14,22 +12,18 @@ export function useLandingPageQueries({ code, size = 6 }: Params) {
   const combined = useSuspenseQueries({
     queries: [
       {
-        queryKey: postKeys.categoryPage(code, 0, size),
-        queryFn: () => getPostsByCategory({ code, page: 0, size }),
-        staleTime: 60_000,
-        gcTime: 5 * 60_000,
+        queryKey: postKeys.list({ code, page: 0, size }),
+        queryFn: () => postService.getPostsByCategory({ code, page: 0, size }),
       },
       {
-        queryKey: statsKeys.posts(),
-        queryFn: getPostStats,
-        staleTime: 60_000,
-        gcTime: 5 * 60_000,
+        queryKey: postKeys.stats(),
+        queryFn: postService.getPostStats,
       },
     ],
     combine: (
       results: [
-        UseSuspenseQueryResult<Awaited<ReturnType<typeof getPostsByCategory>>>,
-        UseSuspenseQueryResult<PostStats>,
+        UseSuspenseQueryResult<Awaited<ReturnType<typeof postService.getPostsByCategory>>>,
+        UseSuspenseQueryResult<PostStatsResponse>,
       ],
     ) => {
       const [postsRes, statsRes] = results;

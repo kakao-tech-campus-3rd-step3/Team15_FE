@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle, Target, Lock, Medal, Award } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/shadcn/tabs';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { BadgeCard } from './BadgeCard';
 import type { BadgeTabsProps } from '../types.ts/badge';
 

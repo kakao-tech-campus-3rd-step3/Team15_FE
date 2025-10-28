@@ -3,7 +3,7 @@ import { PAGINATION_WINDOW } from '@/features/search-posts/config';
 import { useSearchPosts } from '@/features/search-posts/model/useSearchPosts';
 import type { PostListInHeartNewsProps } from '@/widgets/PostList/model/type';
 import { PostCard } from './PostCard';
-import { EmptyState } from '@/shared/ui/empty-state/EmptyState';
+import { EmptyState } from '@/shared/ui/states/EmptyState';
 import { Search } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
 
