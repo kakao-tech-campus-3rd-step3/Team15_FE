@@ -4,7 +4,6 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { useReplyList } from '../../../features/add-reply/model/useReplyList';
 import { ReplyItem } from './ReplyItem';
-import { Textarea } from '@/shared/ui/textarea';
 
 type ReplyListProps = {
   parentId: number;

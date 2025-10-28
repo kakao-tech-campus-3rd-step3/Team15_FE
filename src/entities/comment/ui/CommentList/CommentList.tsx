@@ -88,7 +88,7 @@ export function CommentList({ postId, className }: CommentListProps) {
           <ul className='divide-y'>
             {items.map((c) => (
               <Fragment key={c.id}>
-                <div className='relative flex items-start justify-between'>
+                <div className='relative'>
                   <CommentItem
                     comment={c}
                     onClickReply={() => handleClickReply(c.id)}
@@ -98,7 +98,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                     onSubmitEdit={() => submitEditComment(c.id)}
                     onCancelEdit={cancelEditComment}
                   />
-                  <div className='absolute right-0 top-0 flex gap-1'>
+                  <div className='absolute right-0 top-0 flex flex-wrap gap-1'>
                     <Button
                       variant='ghost'
                       size='sm'
