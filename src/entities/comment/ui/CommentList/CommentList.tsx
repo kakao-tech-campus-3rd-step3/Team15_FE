@@ -9,6 +9,8 @@ import { ReplyList } from '@/entities/comment/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 import CommentItem from '../CommentItem/CommentItem';
+import { useDeleteComment } from '../../model/useDeleteComment';
+import { useUpdateComment } from '../../model/useUpdateComment';
 
 type CommentListProps = {
   postId: number;
@@ -27,7 +29,8 @@ export function CommentList({ postId, className }: CommentListProps) {
 
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [commentEditText, setCommentEditText] = useState('');
-
+  const { mutate: deleteCommentMutate } = useDeleteComment();
+  const { mutate: updateCommentMutate } = useUpdateComment(editingCommentId ?? 0);
   const handleClickReply = useCallback((id: number) => {
     setReplyText('');
     setIsAnonymous(false);
@@ -59,9 +62,9 @@ export function CommentList({ postId, className }: CommentListProps) {
   }, []);
 
   const submitEditComment = useCallback(
-    async (id: number) => {
+    async (content: string) => {
       // 예: updateComment({ id, content: commentEditText })
-      console.warn('[CommentList] submitEditComment called for', id, commentEditText);
+      updateCommentMutate(content);
       setEditingCommentId(null);
       setCommentEditText('');
       // 새로고침 필요 시: queryClient.invalidateQueries(...)
@@ -70,10 +73,7 @@ export function CommentList({ postId, className }: CommentListProps) {
   );
 
   const deleteComment = useCallback(async (id: number) => {
-    if (!confirm('이 댓글을 삭제할까요?')) return;
-    // 예: deleteComment({ id })
-    console.warn('[CommentList] deleteComment called for', id);
-    // 새로고침 필요 시: queryClient.invalidateQueries(...)
+    deleteCommentMutate(id);
   }, []);
 
   return (
@@ -95,7 +95,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                     isEditing={editingCommentId === c.id}
                     editText={commentEditText}
                     onEditChange={setCommentEditText}
-                    onSubmitEdit={() => submitEditComment(c.id)}
+                    onSubmitEdit={() => submitEditComment(commentEditText)}
                     onCancelEdit={cancelEditComment}
                   />
                   <div className='absolute right-0 top-0 flex flex-wrap gap-1'>

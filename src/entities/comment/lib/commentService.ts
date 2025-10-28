@@ -29,11 +29,17 @@ export const commentService = {
     return data;
   },
 
-  async postReplyComment(
-    parentId: number,
-    content: CreateReplyRequest,
-  ): Promise<CreateReplyResponse> {
-    const { data } = await axiosInstance.post(`/comments/${parentId}/replies`, content);
+  async postReplyComment(parentId: number, body: CreateReplyRequest): Promise<CreateReplyResponse> {
+    const { data } = await axiosInstance.post(`/comments/${parentId}/replies`, body);
+    return data;
+  },
+
+  async updateComment(parentId: number, content: string): Promise<CreateReplyResponse> {
+    const { data } = await axiosInstance.patch(`/comments/${parentId}`, content);
+    return data;
+  },
+  async deleteComment(commentId: number): Promise<void> {
+    const { data } = await axiosInstance.delete(`/comments/${commentId}`);
     return data;
   },
 };
