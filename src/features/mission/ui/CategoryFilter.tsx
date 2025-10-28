@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/shadcn/button';
+import { Button } from '@/shared/ui/button';
 import type { MissionCategory } from '../types/mission';
 
 interface Props {

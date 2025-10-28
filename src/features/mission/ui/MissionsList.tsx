@@ -1,9 +1,9 @@
-import { Card } from '@/shared/ui/shadcn/card';
 import { Badge } from '@/shared/ui/shadcn/badge';
-import { Button } from '@/shared/ui/shadcn/button';
 import { Star, Users } from 'lucide-react';
 import type { Mission } from '../types/mission';
 import { getStatusBadge } from '../lib/missionUtils';
+import { Card } from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
 
 interface Props {
   missions: Mission[];
