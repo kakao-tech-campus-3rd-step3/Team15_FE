@@ -87,7 +87,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      onClick={() => startEdit(r.id, (r as any).content)}
+                      onClick={() => startEdit(r.id, r.content ?? '')}
                     >
                       수정
                     </Button>
