@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
-import { useReplyList } from '../../../features/add-reply/model/useReplyList';
+
 import { ReplyItem } from './ReplyItem';
 import { useDeleteComment } from '../model/useDeleteComment';
 import { useUpdateComment } from '../model/useUpdateComment';
+import { useReplyList } from '@/features/add-reply';
 
 type ReplyListProps = {
   parentId: number;
