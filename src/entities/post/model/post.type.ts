@@ -54,8 +54,10 @@ export interface PostDetailResponse {
   postCategoryName: string; // 카테고리 한글 이름 (예: "고민상담")
   title: string;
   content: string;
+  authorId: number;
   author: string; // 작성자 닉네임
   handle: string; // 작성자 핸들 (예: "@yozjov")
+  isAuthor: boolean;
   isAnonymous: boolean; // 익명 여부
   isDeleted: boolean; // 삭제 여부
   isLiked: boolean; // 내가 좋아요 눌렀는지 여부

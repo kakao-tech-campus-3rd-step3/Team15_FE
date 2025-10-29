@@ -1,8 +1,8 @@
 import { cn } from '@/shared/lib/utils';
-import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import { Textarea } from '@/shared/ui/textarea';
 import { Button } from '@/shared/ui/button';
 import type { Reply } from '@/entities/comment/model/reply.type';
+import { Badge } from '@/shared/ui/badge';
 
 type ReplyItemProps = {
   reply: Reply;
@@ -13,6 +13,12 @@ type ReplyItemProps = {
   cancelEdit: () => void;
 };
 
+const authorTagLabel = {
+  AUTHOR: '작성자',
+  NORMAL: '일반',
+  AI: 'AI',
+} as const;
+
 export function ReplyItem({
   reply,
   editingId,
@@ -21,17 +27,33 @@ export function ReplyItem({
   submitEdit,
   cancelEdit,
 }: ReplyItemProps) {
+  const tag = reply.authorTag ? authorTagLabel[reply.authorTag] : null;
+
   return (
     <li className='flex gap-3 p-3'>
-      <Avatar className='h-8 w-8'>
+      {/* <Avatar className='h-8 w-8'>
         <AvatarFallback className='text-xs'>
           {reply.author?.slice(0, 2)?.toUpperCase() || 'U'}
         </AvatarFallback>
-      </Avatar>
+      </Avatar> */}
       <div className='flex-1'>
         <div className='flex items-center gap-2'>
           <span className='text-sm font-medium'>{reply.author}</span>
           <span className='text-muted-foreground text-xs'>
+            {tag && (
+              <Badge
+                variant={
+                  reply.authorTag === 'AUTHOR'
+                    ? 'default'
+                    : reply.authorTag === 'AI'
+                      ? 'outline'
+                      : 'secondary'
+                }
+                className='px-1.5 py-0 text-[10px]'
+              >
+                {tag}
+              </Badge>
+            )}
             {new Date(reply.createdAt).toLocaleString()}
           </span>
         </div>

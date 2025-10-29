@@ -1,7 +1,6 @@
 import { Eye, Heart, MessageSquare, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from '@/shared/ui/button';
 import type { PostDetailResponse } from '../model/post.type';
@@ -34,7 +33,6 @@ export function PostDetail({
   actionSlot,
   reviseActionSlot,
 }: PostDetailProps) {
-  const initials = post.author?.slice(0, 2) ?? 'U';
   return (
     <Card className={cn('w-full', className)}>
       <CardHeader className='relative'>
@@ -42,29 +40,31 @@ export function PostDetail({
         <div className='flex items-start justify-between'>
           <CardTitle className='text-2xl'>{isRevise ? '게시글 수정' : post.title}</CardTitle>
 
-          <div className='flex gap-2'>
-            {isRevise ? (
-              // 수정 모드: 외부에서 주입한 액션(완료/취소 버튼 등) 표시
-              <>{reviseActionSlot}</>
-            ) : (
-              <>
-                <Button variant='outline' size='sm' onClick={() => setIsRevise(true)}>
-                  수정
-                </Button>
-                <Button variant='destructive' size='sm' onClick={onClickDelete}>
-                  삭제
-                </Button>
-              </>
-            )}
-          </div>
+          {post.isAuthor && (
+            <div className='flex gap-2'>
+              {isRevise ? (
+                // 수정 모드: 외부에서 주입한 액션(완료/취소 버튼 등) 표시
+                <>{reviseActionSlot}</>
+              ) : (
+                <>
+                  <Button variant='outline' size='sm' onClick={() => setIsRevise(true)}>
+                    수정
+                  </Button>
+                  <Button variant='destructive' size='sm' onClick={onClickDelete}>
+                    삭제
+                  </Button>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         <CardDescription>
           <div className='mt-2 flex items-center gap-3 text-sm'>
-            <Avatar className='h-8 w-8'>
+            {/* <Avatar className='h-8 w-8'>
               {post.author ? <AvatarImage src={post.author} alt={`${post.author} avatar`} /> : null}
               <AvatarFallback>{initials}</AvatarFallback>
-            </Avatar>
+            </Avatar> */}
             <span className='font-medium'>{post.author}</span>
             <Separator orientation='vertical' className='h-4' />
             <time className='text-muted-foreground'>

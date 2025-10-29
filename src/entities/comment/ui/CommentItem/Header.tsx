@@ -5,14 +5,31 @@ type HeaderProps = {
   comment: CommentEntity;
 };
 
+const authorTagLabel = {
+  AUTHOR: '작성자',
+  NORMAL: '일반',
+  AI: 'AI',
+} as const;
+
 export function Header({ comment }: HeaderProps) {
+  const tag = comment.authorTag ? authorTagLabel[comment.authorTag] : null;
+
   return (
     <div className='flex items-center gap-2 text-sm'>
       <span className='font-medium'>{comment.author}</span>
 
-      {comment.authorTag && (
-        <Badge variant='secondary' className='px-1.5 py-0 text-[10px]'>
-          {comment.authorTag === 'AUTHOR' ? '작성자' : comment.authorTag}
+      {tag && (
+        <Badge
+          variant={
+            comment.authorTag === 'AUTHOR'
+              ? 'default'
+              : comment.authorTag === 'AI'
+                ? 'outline'
+                : 'secondary'
+          }
+          className='px-1.5 py-0 text-[10px]'
+        >
+          {tag}
         </Badge>
       )}
 

@@ -12,7 +12,7 @@ export const postDetailHandlers = [
       content: '요즘 너무 힘들다.',
       author: '새싹이',
       handle: '@yozjov',
-      isAnonymous: false,
+      isAnonymous: true,
       isDeleted: false,
       isLiked: false,
       viewCount: 0,
