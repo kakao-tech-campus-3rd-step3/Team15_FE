@@ -62,17 +62,16 @@ export function CommentList({ postId, className }: CommentListProps) {
   }, []);
 
   const submitEditComment = useCallback(
-    async (content: string) => {
-      // 예: updateComment({ id, content: commentEditText })
+    (content: string) => {
       updateCommentMutate(content);
       setEditingCommentId(null);
       setCommentEditText('');
-      // 새로고침 필요 시: queryClient.invalidateQueries(...)
     },
     [commentEditText],
   );
 
-  const deleteComment = useCallback(async (id: number) => {
+  const deleteComment = useCallback((id: number) => {
+    if (!confirm('이 대댓글을 삭제할까요?')) return;
     deleteCommentMutate(id);
   }, []);
 

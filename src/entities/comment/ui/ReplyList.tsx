@@ -12,7 +12,7 @@ type ReplyListProps = {
 };
 
 export function ReplyList({ parentId }: ReplyListProps) {
-  const { data, refetch, isFetching, isFetched } = useReplyList(parentId);
+  const { data, isFetching, isFetched } = useReplyList(parentId);
   const [open, setOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
@@ -30,9 +30,6 @@ export function ReplyList({ parentId }: ReplyListProps) {
       : '답글 보기';
 
   const onToggle = async () => {
-    if (!open) {
-      await refetch();
-    }
     setOpen((v) => !v);
   };
 
@@ -46,17 +43,15 @@ export function ReplyList({ parentId }: ReplyListProps) {
     setEditText('');
   };
 
-  const submitEdit = async (content: string) => {
+  const submitEdit = (content: string) => {
     updateReplyMutate(content);
     setEditingId(null);
     setEditText('');
-    await refetch();
   };
 
-  const deleteReply = async (replyId: number) => {
+  const deleteReply = (replyId: number) => {
     if (!confirm('이 대댓글을 삭제할까요?')) return;
     deleteReplyMutate(replyId);
-    await refetch();
   };
 
   return (
