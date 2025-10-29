@@ -30,7 +30,7 @@ export function CommentList({ postId, className }: CommentListProps) {
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [commentEditText, setCommentEditText] = useState('');
   const { mutate: deleteCommentMutate } = useDeleteComment();
-  const { mutate: updateCommentMutate } = useUpdateComment(editingCommentId ?? 0);
+  const { mutate: updateCommentMutate } = useUpdateComment();
   const handleClickReply = useCallback((id: number) => {
     setReplyText('');
     setIsAnonymous(false);
@@ -61,14 +61,16 @@ export function CommentList({ postId, className }: CommentListProps) {
     setCommentEditText('');
   }, []);
 
-  const submitEditComment = useCallback(
-    (body: { content: string }) => {
-      updateCommentMutate(body);
-      setEditingCommentId(null);
-      setCommentEditText('');
-    },
-    [updateCommentMutate],
-  );
+  const submitEditComment = useCallback(() => {
+    if (!editingCommentId) return;
+    updateCommentMutate({
+      commentId: editingCommentId,
+      body: { content: commentEditText },
+      postId,
+    });
+    setEditingCommentId(null);
+    setCommentEditText('');
+  }, [updateCommentMutate, editingCommentId, commentEditText, postId]);
 
   const deleteComment = useCallback(
     (id: number) => {
@@ -97,7 +99,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                     isEditing={editingCommentId === c.id}
                     editText={commentEditText}
                     onEditChange={setCommentEditText}
-                    onSubmitEdit={() => submitEditComment({ content: commentEditText })}
+                    onSubmitEdit={submitEditComment}
                     onCancelEdit={cancelEditComment}
                   />
                   <div className='absolute right-0 top-0 flex flex-wrap gap-1'>

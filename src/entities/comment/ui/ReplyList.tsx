@@ -18,7 +18,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
   const [editText, setEditText] = useState('');
 
   const { mutate: deleteReplyMutate } = useDeleteComment();
-  const { mutate: updateReplyMutate } = useUpdateComment(editingId ?? 0);
+  const { mutate: updateReplyMutate } = useUpdateComment();
 
   const replies = data ?? [];
   const count = isFetched ? replies.length : undefined;
@@ -43,8 +43,12 @@ export function ReplyList({ parentId }: ReplyListProps) {
     setEditText('');
   };
 
-  const submitEdit = (body: { content: string }) => {
-    updateReplyMutate(body);
+  const submitEdit = () => {
+    if (!editingId) return;
+    updateReplyMutate({
+      commentId: editingId,
+      body: { content: editText },
+    });
     setEditingId(null);
     setEditText('');
   };
@@ -78,7 +82,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
                     editingId={editingId}
                     editText={editText}
                     setEditText={setEditText}
-                    submitEdit={() => submitEdit({ content: editText })}
+                    submitEdit={submitEdit}
                     cancelEdit={cancelEdit}
                   />
 

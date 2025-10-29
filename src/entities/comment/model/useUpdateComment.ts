@@ -2,15 +2,26 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { commentService } from '../lib/commentService';
 import { commentKeys } from './queryKeys';
 
-export const useUpdateComment = (postId: number) => {
+export const useUpdateComment = () => {
   const qc = useQueryClient();
+
+  type UpdateCommentVars = {
+    commentId: number;
+    body: { content: string };
+    postId?: number;
+  };
+
   return useMutation({
-    mutationFn: (body: { content: string }) => commentService.updateComment(postId, body),
-    onSuccess: () => {
-      // 키 관련해서 수정이 필요
-      qc.invalidateQueries({ queryKey: commentKeys.detail(postId) });
+    mutationFn: ({ commentId, body }: UpdateCommentVars) =>
+      commentService.updateComment(commentId, body),
+    onSuccess: (_data, variables) => {
+      const { commentId, postId } = variables as UpdateCommentVars;
+      // 개별 댓글 상세 및 목록 계열 무효화
+      qc.invalidateQueries({ queryKey: commentKeys.detail(commentId) });
       qc.invalidateQueries({ queryKey: commentKeys.lists() });
-      qc.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
+      if (postId) {
+        qc.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
+      }
     },
   });
 };
