@@ -4,6 +4,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { useReplyList } from '../../../features/add-reply/model/useReplyList';
 import { ReplyItem } from './ReplyItem';
+import { useDeleteComment } from '../model/useDeleteComment';
+import { useUpdateComment } from '../model/useUpdateComment';
 
 type ReplyListProps = {
   parentId: number;
@@ -14,6 +16,9 @@ export function ReplyList({ parentId }: ReplyListProps) {
   const [open, setOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
+
+  const { mutate: deleteReplyMutate } = useDeleteComment();
+  const { mutate: updateReplyMutate } = useUpdateComment(editingId ?? 0);
 
   const replies = data ?? [];
   const count = isFetched ? replies.length : undefined;
@@ -41,9 +46,8 @@ export function ReplyList({ parentId }: ReplyListProps) {
     setEditText('');
   };
 
-  const submitEdit = async (replyId: number) => {
-    // 예: updateReply({ id: replyId, content: editText })
-    console.warn('[ReplyList] submitEdit called for', replyId, editText);
+  const submitEdit = async (content: string) => {
+    updateReplyMutate(content);
     setEditingId(null);
     setEditText('');
     await refetch();
@@ -51,8 +55,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
 
   const deleteReply = async (replyId: number) => {
     if (!confirm('이 대댓글을 삭제할까요?')) return;
-    // 예: deleteReply({ id: replyId })
-    console.warn('[ReplyList] deleteReply called for', replyId);
+    deleteReplyMutate(replyId);
     await refetch();
   };
 
@@ -80,7 +83,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
                     editingId={editingId}
                     editText={editText}
                     setEditText={setEditText}
-                    submitEdit={() => submitEdit(r.id)}
+                    submitEdit={() => submitEdit(editText)}
                     cancelEdit={cancelEdit}
                   />
 

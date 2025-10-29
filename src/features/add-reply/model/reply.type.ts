@@ -17,6 +17,8 @@ export interface Reply {
   author: string;
   handle?: string;
   authorTag?: string;
+  isAuthor: boolean;
+  isAnonymous: boolean;
   createdAt: string;
   updatedAt: string;
   children: Reply[];
