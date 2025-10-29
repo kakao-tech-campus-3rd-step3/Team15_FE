@@ -1,3 +1,5 @@
 export * from './ui/AddReplyForm';
-export * from './ui/ReplyItem';
-export * from './ui/ReplyList';
+export * from '../../entities/comment/ui/ReplyItem';
+export * from '../../entities/comment/ui/ReplyList';
+export * from './model/useCreateReply';
+export * from './model/useReplyList';

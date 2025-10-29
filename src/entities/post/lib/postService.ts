@@ -32,8 +32,8 @@ export const postService = {
     const { data } = await axiosInstance.post('/posts', {
       title: input.title,
       content: input.content,
-      anonymous: input.anonymous,
-      category: input.categoryCode,
+      isAnonymous: input.anonymous,
+      postCategory: input.categoryCode,
     });
     return data;
   },
