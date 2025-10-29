@@ -8,6 +8,7 @@ import type {
   CreateReplyRequest,
   CreateReplyResponse,
   ReplyListResponse,
+  ReplyResponse,
 } from '@/features/add-reply/model/reply.type';
 
 export const commentService = {
@@ -34,8 +35,8 @@ export const commentService = {
     return data;
   },
 
-  async updateComment(parentId: number, content: string): Promise<CreateReplyResponse> {
-    const { data } = await axiosInstance.patch(`/comments/${parentId}`, content);
+  async updateComment(parentId: number, body: { content: string }): Promise<ReplyResponse> {
+    const { data } = await axiosInstance.patch(`/comments/${parentId}`, body);
     return data;
   },
   async deleteComment(commentId: number): Promise<void> {

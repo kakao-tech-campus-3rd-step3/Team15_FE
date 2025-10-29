@@ -5,7 +5,7 @@ import { commentKeys } from './queryKeys';
 export const useUpdateComment = (postId: number) => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (content: string) => commentService.updateComment(postId, content),
+    mutationFn: (body: { content: string }) => commentService.updateComment(postId, body),
     onSuccess: () => {
       // 키 관련해서 수정이 필요
       qc.invalidateQueries({ queryKey: commentKeys.detail(postId) });

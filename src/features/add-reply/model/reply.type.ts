@@ -26,4 +26,5 @@ export interface Reply {
 }
 
 export type CreateReplyResponse = Reply;
+export type ReplyResponse = Reply;
 export type ReplyListResponse = Reply[];

@@ -43,8 +43,8 @@ export function ReplyList({ parentId }: ReplyListProps) {
     setEditText('');
   };
 
-  const submitEdit = (content: string) => {
-    updateReplyMutate(content);
+  const submitEdit = (body: { content: string }) => {
+    updateReplyMutate(body);
     setEditingId(null);
     setEditText('');
   };
@@ -78,7 +78,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
                     editingId={editingId}
                     editText={editText}
                     setEditText={setEditText}
-                    submitEdit={() => submitEdit(editText)}
+                    submitEdit={() => submitEdit({ content: editText })}
                     cancelEdit={cancelEdit}
                   />
 

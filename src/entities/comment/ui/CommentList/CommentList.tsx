@@ -62,8 +62,8 @@ export function CommentList({ postId, className }: CommentListProps) {
   }, []);
 
   const submitEditComment = useCallback(
-    (content: string) => {
-      updateCommentMutate(content);
+    (body: { content: string }) => {
+      updateCommentMutate(body);
       setEditingCommentId(null);
       setCommentEditText('');
     },
@@ -97,7 +97,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                     isEditing={editingCommentId === c.id}
                     editText={commentEditText}
                     onEditChange={setCommentEditText}
-                    onSubmitEdit={() => submitEditComment(commentEditText)}
+                    onSubmitEdit={() => submitEditComment({ content: commentEditText })}
                     onCancelEdit={cancelEditComment}
                   />
                   <div className='absolute right-0 top-0 flex flex-wrap gap-1'>
