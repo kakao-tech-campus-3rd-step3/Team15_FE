@@ -67,13 +67,16 @@ export function CommentList({ postId, className }: CommentListProps) {
       setEditingCommentId(null);
       setCommentEditText('');
     },
-    [commentEditText],
+    [updateCommentMutate],
   );
 
-  const deleteComment = useCallback((id: number) => {
-    if (!confirm('이 대댓글을 삭제할까요?')) return;
-    deleteCommentMutate(id);
-  }, []);
+  const deleteComment = useCallback(
+    (id: number) => {
+      if (!confirm('이 대댓글을 삭제할까요?')) return;
+      deleteCommentMutate(id);
+    },
+    [deleteCommentMutate],
+  );
 
   return (
     <Card className={className}>
@@ -102,7 +105,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      onClick={() => startEditComment(c.id, (c as any).content)}
+                      onClick={() => startEditComment(c.id, c.content ?? '')}
                     >
                       수정
                     </Button>
