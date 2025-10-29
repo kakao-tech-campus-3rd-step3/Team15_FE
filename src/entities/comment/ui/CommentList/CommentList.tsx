@@ -74,7 +74,7 @@ export function CommentList({ postId, className }: CommentListProps) {
 
   const deleteComment = useCallback(
     (id: number) => {
-      if (!confirm('이 대댓글을 삭제할까요?')) return;
+      if (!confirm('이 댓글을 삭제할까요?')) return;
       deleteCommentMutate(id);
     },
     [deleteCommentMutate],

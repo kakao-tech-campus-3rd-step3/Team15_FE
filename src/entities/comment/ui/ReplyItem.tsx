@@ -2,14 +2,7 @@ import { cn } from '@/shared/lib/utils';
 import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import { Textarea } from '@/shared/ui/textarea';
 import { Button } from '@/shared/ui/button';
-
-type Reply = {
-  id: number;
-  author?: string;
-  content: string;
-  createdAt: string;
-  deleted?: boolean;
-};
+import type { Reply } from '@/entities/comment/model/reply.type';
 
 type ReplyItemProps = {
   reply: Reply;

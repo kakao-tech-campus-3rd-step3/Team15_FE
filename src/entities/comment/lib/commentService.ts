@@ -9,7 +9,7 @@ import type {
   CreateReplyResponse,
   ReplyListResponse,
   ReplyResponse,
-} from '@/features/add-reply/model/reply.type';
+} from '@/entities/comment/model/reply.type';
 
 export const commentService = {
   async getComments(postId: number): Promise<CommentListResponse> {
@@ -30,17 +30,19 @@ export const commentService = {
     return data;
   },
 
-  async postReplyComment(parentId: number, body: CreateReplyRequest): Promise<CreateReplyResponse> {
-    const { data } = await axiosInstance.post(`/comments/${parentId}/replies`, body);
+  async postReplyComment(
+    commentId: number,
+    body: CreateReplyRequest,
+  ): Promise<CreateReplyResponse> {
+    const { data } = await axiosInstance.post(`/comments/${commentId}/replies`, body);
     return data;
   },
 
-  async updateComment(parentId: number, body: { content: string }): Promise<ReplyResponse> {
-    const { data } = await axiosInstance.patch(`/comments/${parentId}`, body);
+  async updateComment(commentId: number, body: { content: string }): Promise<ReplyResponse> {
+    const { data } = await axiosInstance.patch(`/comments/${commentId}`, body);
     return data;
   },
   async deleteComment(commentId: number): Promise<void> {
-    const { data } = await axiosInstance.delete(`/comments/${commentId}`);
-    return data;
+    await axiosInstance.delete(`/comments/${commentId}`);
   },
 };

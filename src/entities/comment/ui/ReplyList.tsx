@@ -86,24 +86,26 @@ export function ReplyList({ parentId }: ReplyListProps) {
                     cancelEdit={cancelEdit}
                   />
 
-                  <div className='absolute right-3 top-3 flex gap-1'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='text-xs'
-                      onClick={() => startEdit(r.id, r.content ?? '')}
-                    >
-                      수정
-                    </Button>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='text-xs'
-                      onClick={() => deleteReply(r.id)}
-                    >
-                      삭제
-                    </Button>
-                  </div>
+                  {r.isAuthor && (
+                    <div className='absolute right-3 top-3 flex gap-1'>
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        className='text-xs'
+                        onClick={() => startEdit(r.id, r.content ?? '')}
+                      >
+                        수정
+                      </Button>
+                      <Button
+                        variant='ghost'
+                        size='sm'
+                        className='text-xs'
+                        onClick={() => deleteReply(r.id)}
+                      >
+                        삭제
+                      </Button>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
