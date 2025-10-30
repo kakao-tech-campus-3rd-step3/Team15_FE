@@ -16,7 +16,7 @@ import { SectionHeader } from '@/shared/ui/section-header';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
-    category: 'ALL',
+    category: 'FREE',
     keyword: '',
     startDate: undefined,
     endDate: undefined,

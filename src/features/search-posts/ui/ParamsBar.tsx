@@ -17,7 +17,7 @@ type Props = {
   className?: string;
 };
 
-export function ParamsBar({ value, onChange, onApply, onReset, className }: Props) {
+export function ParamsBar({ value, onChange, onApply, className }: Props) {
   const pretty = (d?: string) => (d ? format(new Date(d), 'yyyy-MM-dd') : '기간 선택');
   const { data } = useCategoriesQuery();
   if (!data || data.length === 0) {
@@ -125,12 +125,6 @@ export function ParamsBar({ value, onChange, onApply, onReset, className }: Prop
           ))}
         </SelectContent>
       </Select>
-
-      {/* 실행/초기화 */}
-      <Button onClick={onApply}>적용</Button>
-      <Button variant='outline' onClick={onReset}>
-        초기화
-      </Button>
     </div>
   );
 }

@@ -83,7 +83,7 @@ export function PostDetailContent({ postId }: Props) {
       {!isRevise && (
         <>
           <AddCommentForm postId={postId} />
-          <CommentList postId={postId} />
+          {/* <CommentList postId={postId} /> */}
         </>
       )}
       <ConfirmDeleteModal
