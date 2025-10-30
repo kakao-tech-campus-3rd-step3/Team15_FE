@@ -1,14 +1,16 @@
 import type { MissionCategory, MissionStatus } from '../types/mission';
 
+const FALLBACK_CATEGORY = { text: '기타', color: 'bg-gray-500' };
+
 export const getCategoryInfo = (category: MissionCategory) => {
   const colors = {
     ALL: { text: '전체', color: 'bg-green-500' },
     ROUTINE: { text: '일상', color: 'bg-purple-500' },
     ACTIVITY: { text: '활동', color: 'bg-green-500' },
     COMMUNICATION: { text: '소통', color: 'bg-orange-500' },
-    ETC: { text: '기타', color: 'bg-pink-500' },
+    ETC: { text: '기타', color: 'bg-gray-500' },
   };
-  return colors[category] || 'bg-gray-500';
+  return colors[category] || FALLBACK_CATEGORY;
 };
 
 export const getStatusBadge = (status: MissionStatus) => {
