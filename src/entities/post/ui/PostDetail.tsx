@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Eye, Heart, MessageSquare, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Separator } from '@radix-ui/react-separator';
 import { Button } from '@/shared/ui/button';
 import type { PostDetailResponse } from '../model/post.type';
+import { ReportModal } from '@/features/submit-report/ui/ReportModal';
+import { usePostReport } from '@/features/submit-report/model/usePostReport';
 
 type PostDetailProps = {
   post: PostDetailResponse;
@@ -33,6 +36,8 @@ export function PostDetail({
   actionSlot,
   reviseActionSlot,
 }: PostDetailProps) {
+  const [reportOpen, setReportOpen] = useState(false);
+  const { mutate: postReport } = usePostReport();
   return (
     <Card className={cn('w-full', className)}>
       <CardHeader className='relative'>
@@ -65,7 +70,7 @@ export function PostDetail({
               {post.author ? <AvatarImage src={post.author} alt={`${post.author} avatar`} /> : null}
               <AvatarFallback>{initials}</AvatarFallback>
             </Avatar> */}
-            <span className='font-medium'>{post.author}</span>
+            <span className='font-medium'>{post.isAnonymous ? '익명' : post.author}</span>
             <Separator orientation='vertical' className='h-4' />
             <time className='text-muted-foreground'>
               {new Date(post.createdAt).toLocaleString()}
@@ -111,7 +116,14 @@ export function PostDetail({
                   )}
                   좋아요
                 </Button>
-                <Button variant='ghost' size='sm' onClick={onClickReport}>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  onClick={() => {
+                    onClickReport?.();
+                    setReportOpen(true);
+                  }}
+                >
                   <Flag className='mr-1 h-4 w-4' />
                   신고
                 </Button>
@@ -121,6 +133,15 @@ export function PostDetail({
           </>
         )}
       </CardContent>
+      <ReportModal
+        open={reportOpen}
+        onOpenChange={setReportOpen}
+        reportType='POST'
+        targetId={post.id}
+        onSubmit={(payload) => {
+          postReport(payload);
+        }}
+      />
     </Card>
   );
 }
