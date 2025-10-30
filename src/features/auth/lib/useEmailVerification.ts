@@ -32,8 +32,8 @@ export const useEmailVerification = () => {
   const sendEmailMutation = useMutation({
     mutationFn: sendEmailCodeApi,
     onMutate: () => setState((prev) => ({ ...prev, isLoading: true })),
-    onSuccess: (data) => {
-      alert(data.newCode ? '새 코드가 전송되었습니다.' : '1분 이내 재요청: 기존 코드 전송');
+    onSuccess: () => {
+      alert('인증 코드가 전송되었습니다.');
       setState({ sent: true, verified: false, timer: 180, isLoading: false });
     },
     onError: (err: EmailError) => {
