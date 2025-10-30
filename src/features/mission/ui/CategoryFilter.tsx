@@ -1,5 +1,6 @@
 import { Button } from '@/shared/ui/button';
 import type { MissionCategory } from '../types/mission';
+import { getCategoryInfo } from '../lib/missionUtils';
 
 interface Props {
   categories: MissionCategory[];
@@ -21,7 +22,7 @@ export const CategoryFilter = ({ categories, selectedCategory, onSelect }: Props
             : 'bg-white hover:bg-gray-50'
         }
       >
-        {category}
+        {getCategoryInfo(category).text}
       </Button>
     ))}
   </div>
