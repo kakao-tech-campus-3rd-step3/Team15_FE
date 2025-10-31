@@ -31,7 +31,6 @@ axiosInstance.interceptors.request.use(
         // 공개 경로가 아닌데 토큰이 없다면 로그인 페이지로 리다이렉트 후 에러를 발생
         window.location.href = '/login';
         return Promise.reject(new Error('Authentication token is missing.'));
-        console.log('토큰 없음');
       }
     }
     return config;
