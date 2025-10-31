@@ -127,8 +127,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      // onClick={() => deleteComment(c.id)}
-
+                      onClick={() => deleteComment(c.id)}
                     >
                       신고
                     </Button>
