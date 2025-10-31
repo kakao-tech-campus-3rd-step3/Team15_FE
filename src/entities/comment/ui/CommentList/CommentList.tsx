@@ -103,21 +103,33 @@ export function CommentList({ postId, className }: CommentListProps) {
                     onCancelEdit={cancelEditComment}
                   />
                   <div className='absolute right-0 top-0 flex flex-wrap gap-1'>
-                    <Button
-                      variant='ghost'
-                      size='sm'
-                      className='text-xs'
-                      onClick={() => startEditComment(c.id, c.content ?? '')}
-                    >
-                      수정
-                    </Button>
+                    {c.isAuthor && (
+                      <>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          className='text-xs'
+                          onClick={() => startEditComment(c.id, c.content ?? '')}
+                        >
+                          수정
+                        </Button>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          className='text-xs'
+                          onClick={() => deleteComment(c.id)}
+                        >
+                          삭제
+                        </Button>
+                      </>
+                    )}
                     <Button
                       variant='ghost'
                       size='sm'
                       className='text-xs'
                       onClick={() => deleteComment(c.id)}
                     >
-                      삭제
+                      신고
                     </Button>
                   </div>
                 </div>

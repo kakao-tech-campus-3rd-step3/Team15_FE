@@ -14,9 +14,10 @@ export interface Reply {
   id: number;
   postId: number;
   content: string;
+  authorId: number;
   author: string;
   handle?: string;
-  authorTag?: string;
+  authorTag: 'AUTHOR' | 'NORMAL' | 'AI' | null;
   isAuthor: boolean;
   isAnonymous: boolean;
   createdAt: string;

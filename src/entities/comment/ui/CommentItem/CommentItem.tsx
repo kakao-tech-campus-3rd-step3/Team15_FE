@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import type { CommentEntity } from '../../model/comment.type';
 import { Header } from './Header';
 import { Body } from './Body';
@@ -9,7 +8,6 @@ import { Textarea } from '@/shared/ui/textarea';
 type CommentItemProps = {
   comment: CommentEntity;
   onClickReply?: () => void;
-  // Inline edit controls (optional)
   isEditing?: boolean;
   editText?: string;
   onEditChange?: (value: string) => void;
@@ -26,14 +24,14 @@ export function CommentItem({
   onSubmitEdit,
   onCancelEdit,
 }: CommentItemProps) {
-  const initials = comment.author.slice(0, 2).toUpperCase();
+  // const initials = comment.author.slice(0, 2).toUpperCase();
   const isDeleted = comment.content == null;
 
   return (
     <li className='flex gap-3 p-3'>
-      <Avatar className='h-8 w-8'>
+      {/* <Avatar className='h-8 w-8'>
         <AvatarFallback>{initials}</AvatarFallback>
-      </Avatar>
+      </Avatar> */}
 
       <div className='flex-1'>
         <Header comment={comment} />

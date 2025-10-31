@@ -21,7 +21,7 @@ export default function AppLayout() {
       ) : (
         <SidebarProvider>
           <SidebarIndex />
-          <main className='m-3 w-screen'>
+          <main className='w-screen'>
             <HeaderLogin />
             <Outlet />
             <Footer />

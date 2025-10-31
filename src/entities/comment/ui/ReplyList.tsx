@@ -86,27 +86,36 @@ export function ReplyList({ parentId }: ReplyListProps) {
                     submitEdit={submitEdit}
                     cancelEdit={cancelEdit}
                   />
-
-                  {r.isAuthor && (
-                    <div className='absolute right-3 top-3 flex gap-1'>
-                      <Button
-                        variant='ghost'
-                        size='sm'
-                        className='text-xs'
-                        onClick={() => startEdit(r.id, r.content ?? '')}
-                      >
-                        수정
-                      </Button>
-                      <Button
-                        variant='ghost'
-                        size='sm'
-                        className='text-xs'
-                        onClick={() => deleteReply(r.id)}
-                      >
-                        삭제
-                      </Button>
-                    </div>
-                  )}
+                  <div className='absolute right-3 top-3 flex gap-1'>
+                    {r.isAuthor && (
+                      <>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          className='text-xs'
+                          onClick={() => startEdit(r.id, r.content ?? '')}
+                        >
+                          수정
+                        </Button>
+                        <Button
+                          variant='ghost'
+                          size='sm'
+                          className='text-xs'
+                          onClick={() => deleteReply(r.id)}
+                        >
+                          삭제
+                        </Button>
+                      </>
+                    )}
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      className='text-xs'
+                      onClick={() => deleteReply(r.id)}
+                    >
+                      신고
+                    </Button>
+                  </div>
                 </li>
               ))}
             </ul>
