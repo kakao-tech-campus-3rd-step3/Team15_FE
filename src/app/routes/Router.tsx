@@ -12,7 +12,6 @@ import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
 import { MissionPage } from '@/pages/mission';
 import AuthGuard from './AuthGuard';
-import { DevPanel } from '@/shared/ui/dev-panner/DevPanel';
 
 function Router() {
   return (
