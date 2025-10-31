@@ -111,7 +111,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      onClick={() => deleteReply(r.id)}
+                      // onClick={() => deleteReply(r.id)}
                     >
                       신고
                     </Button>
