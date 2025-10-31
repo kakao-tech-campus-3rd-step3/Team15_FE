@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import type { ReplyListResponse } from './reply.type';
+import type { ReplyListResponse } from '../../../entities/comment/model/reply.type';
 import { commentKeys } from '@/entities/comment/model/queryKeys';
 import { commentService } from '@/entities/comment/lib/commentService';
 

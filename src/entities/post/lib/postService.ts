@@ -7,6 +7,7 @@ import type {
   PostStatsResponse,
   PostId,
   CategoryResponse,
+  UpdatePostRequest,
 } from '../model/post.type';
 import type { CreatePostFormValues } from '@/features/create-post/lib/post.scheme';
 
@@ -31,8 +32,8 @@ export const postService = {
     const { data } = await axiosInstance.post('/posts', {
       title: input.title,
       content: input.content,
-      anonymous: input.anonymous,
-      category: input.categoryCode,
+      isAnonymous: input.anonymous,
+      postCategory: input.categoryCode,
     });
     return data;
   },
@@ -48,5 +49,15 @@ export const postService = {
   async likePost(postId: number) {
     const { data } = await axiosInstance.post(`/posts/${postId}/likes`);
     return data;
+  },
+
+  async updatePost(postId: PostId, body: UpdatePostRequest): Promise<PostDetailResponse> {
+    // 익명 여부는 수정 불가 (전달하지 않음)
+    const { data } = await axiosInstance.patch<PostDetailResponse>(`/posts/${postId}`, body);
+    return data;
+  },
+
+  async deletePost(postId: PostId): Promise<void> {
+    await axiosInstance.delete(`/posts/${postId}`);
   },
 };

@@ -9,7 +9,6 @@ export type CategoryCode =
   | 'HOBBY'
   | 'MENTAL'
   | 'TROUBLE';
-
 export interface CategoryResponse {
   code: CategoryCode;
   displayName: string;
@@ -51,12 +50,14 @@ export type PostId = number;
 
 export interface PostDetailResponse {
   id: number;
-  postCategory: string; // 카테고리 코드 (예: "TROUBLE")
+  postCategory: CategoryCode; // 카테고리 코드 (예: "TROUBLE")
   postCategoryName: string; // 카테고리 한글 이름 (예: "고민상담")
   title: string;
   content: string;
+  authorId: number;
   author: string; // 작성자 닉네임
   handle: string; // 작성자 핸들 (예: "@yozjov")
+  isAuthor: boolean;
   isAnonymous: boolean; // 익명 여부
   isDeleted: boolean; // 삭제 여부
   isLiked: boolean; // 내가 좋아요 눌렀는지 여부
@@ -66,3 +67,9 @@ export interface PostDetailResponse {
   createdAt: string; // 작성일 (ISO 8601)
   updatedAt: string; // 수정일 (ISO 8601)
 }
+
+export type UpdatePostRequest = {
+  title?: string;
+  content?: string;
+  postCategory?: CategoryCode; // 서버 스펙에 맞춰 key 이름 주의
+};

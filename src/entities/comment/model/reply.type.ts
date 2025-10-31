@@ -14,9 +14,12 @@ export interface Reply {
   id: number;
   postId: number;
   content: string;
+  authorId: number;
   author: string;
   handle?: string;
-  authorTag?: string;
+  authorTag: 'AUTHOR' | 'NORMAL' | 'AI' | null;
+  isAuthor: boolean;
+  isAnonymous: boolean;
   createdAt: string;
   updatedAt: string;
   children: Reply[];
@@ -24,4 +27,5 @@ export interface Reply {
 }
 
 export type CreateReplyResponse = Reply;
+export type ReplyResponse = Reply;
 export type ReplyListResponse = Reply[];

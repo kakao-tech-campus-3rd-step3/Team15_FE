@@ -21,9 +21,9 @@ export function HeaderLogin() {
   const navigate = useNavigate();
 
   return (
-    <div className='bg-background sticky top-0 z-30 flex h-8 w-full items-center gap-5'>
+    <div className='bg-background h-13 sticky top-0 z-30 flex w-full items-center gap-4 px-4'>
       <SidebarTrigger />
-      <Separator orientation='vertical' />
+      <Separator orientation='vertical' className='!h-8 self-center' />
       <div className='text-sm font-medium'>{activeItem?.title}</div>
       <div className='ml-auto flex items-center gap-4'>
         <DropdownMenu>
