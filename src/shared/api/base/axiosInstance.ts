@@ -8,12 +8,19 @@ export const axiosInstance = axios.create({
 });
 
 // 토큰이 필요 없는 경로 목록
-const publicPaths = ['/auth/login', '/auth/refresh'];
+const publicPaths = [
+  '/auth/login',
+  '/auth/refresh',
+  '/posts/categories',
+  '/posts/stats',
+  '/posts/category',
+];
 
 axiosInstance.interceptors.request.use(
   (config) => {
     // 현재 요청 URL이 publicPaths에 포함되어 있는지 확인
     const isPublicPath = publicPaths.some((path) => config.url?.startsWith(path));
+    // console.log(config.url);
 
     // 토큰이 필요 없는 경로가 아니면, 액세스 토큰을 헤더에 추가
     if (!isPublicPath) {
@@ -24,6 +31,7 @@ axiosInstance.interceptors.request.use(
         // 공개 경로가 아닌데 토큰이 없다면 로그인 페이지로 리다이렉트 후 에러를 발생
         window.location.href = '/login';
         return Promise.reject(new Error('Authentication token is missing.'));
+        console.log('토큰 없음');
       }
     }
     return config;
