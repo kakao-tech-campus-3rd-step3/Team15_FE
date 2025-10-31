@@ -16,7 +16,7 @@ import { SectionHeader } from '@/shared/ui/section-header';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
-    category: 'ALL',
+    category: 'FREE',
     keyword: '',
     startDate: undefined,
     endDate: undefined,
@@ -39,7 +39,7 @@ export function HeartNewsPage() {
             }
             description='마음소식 게시판의 모든 글을 모아볼 수 있습니다'
             left={
-              <Button size='lg' onClick={() => navigate(-1)}>
+              <Button size='lg' onClick={() => navigate(ROUTES.landing)}>
                 목록으로
               </Button>
             }
