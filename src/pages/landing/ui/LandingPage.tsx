@@ -37,6 +37,7 @@ export function LandingPage() {
 
           <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
         </AnimatedSection>
+
         <AnimatedSection from='up'>
           <SupportBand />
         </AnimatedSection>
