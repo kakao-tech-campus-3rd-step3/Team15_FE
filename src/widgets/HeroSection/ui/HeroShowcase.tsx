@@ -21,12 +21,12 @@ export function HeroShowcase() {
           </AnimatedSection>
 
           <AnimatedSection from='up'>
-            <h2 className='text-3xl font-extrabold leading-tight md:text-4xl'>
+            <h2 className='text-3xl font-extrabold leading-tight text-white/90 [text-shadow:_2px_2px_2px_gray] md:text-4xl'>
               혼자 고민하지 말아요.
               <br />
               함께 털어놓고, 위로와 도움을 받아요.
             </h2>
-            <p className='mt-5 text-lg leading-relaxed text-white/85'>
+            <p className='mt-5 text-lg leading-relaxed text-white/90'>
               가벼운 걱정거리부터 상담사의 도움이 필요한 문제까지.
               <br />
               휴쉼에서 안전하게 기록하고 서로를 지지해요.

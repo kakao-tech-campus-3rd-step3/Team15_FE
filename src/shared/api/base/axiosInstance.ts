@@ -7,23 +7,59 @@ export const axiosInstance = axios.create({
   withCredentials: true, //클라이언트(브라우저)가 서버로 요청을 보낼 때 쿠키(refresh token)를 포함하도록 지정
 });
 
-// 토큰이 필요 없는 경로 목록
-const publicPaths = [
-  '/auth/login',
-  '/auth/refresh',
-  '/posts/categories',
-  '/posts/stats',
-  '/posts/category',
+// 토큰이 필요 없는 경로 규칙 (메서드 + 패턴)
+type PublicRule = { pattern: RegExp; methods?: string[] };
+const publicRules: PublicRule[] = [
+  // 인증 관련 (POST 허용)
+  { pattern: /^\/auth\/login$/, methods: ['post'] },
+  { pattern: /^\/auth\/refresh$/, methods: ['post'] },
+
+  // 게시글 상세 조회 (GET만, 숫자 id)
+  { pattern: /^\/posts\/\d+(\/)?(\?.*)?$/, methods: ['get'] },
+
+  // 기타 공개 GET API
+  { pattern: /^\/posts\/categories(\/)?(\?.*)?$/, methods: ['get'] },
+
+  // 게시글 카테고리/검색/통계/코멘트 조회
+  { pattern: /^\/posts\/categories(\/)?(\?.*)?$/, methods: ['get'] }, // already present (kept)
+  { pattern: /^\/posts\/category\/[^/]+(\/)?(\?.*)?$/, methods: ['get'] }, // /posts/category/{category}?page=0
+  { pattern: /^\/posts\/stats(\/)?(\?.*)?$/, methods: ['get'] }, // already present (kept)
+  { pattern: /^\/posts\/search(\/)?(\?.*)?$/, methods: ['get'] }, // /posts/search?keyword=
+  { pattern: /^\/posts\/\d+\/comments(\/)?(\?.*)?$/, methods: ['get'] }, // /posts/{postId}/comments
+
+  // 댓글/대댓글 조회
+  { pattern: /^\/comments\/\d+\/replies(\/)?(\?.*)?$/, methods: ['get'] }, // /comments/{parentId}/replies
+  { pattern: /^\/comments\/\d+(\/)?(\?.*)?$/, methods: ['get'] }, // /comments/{id}
+
+  // 신고 사유 조회
+  { pattern: /^\/reports\/reasons(\/)?(\?.*)?$/, methods: ['get'] },
+
+  // 지원사업 조회
+  { pattern: /^\/support-programs(\/)?(\?.*)?$/, methods: ['get'] }, // /support-programs
+  { pattern: /^\/support-programs\/[^/]+(\/)?(\?.*)?$/, methods: ['get'] }, // /support-programs/{type} or {programId}
+  { pattern: /^\/support-programs\/count(\/)?(\?.*)?$/, methods: ['get'] }, // /support-programs/count
+  // 오타 대비 (/supprot-programs/count)
+  { pattern: /^\/supprot-programs\/count(\/)?(\?.*)?$/, methods: ['get'] },
 ];
+
+// 현재 요청이 공개 규칙에 맞는지 검사
+const isPublicRequest = (url?: string, method?: string) => {
+  if (!url) return false;
+  const target = url; // 정규식이 쿼리까지 포함하도록 작성됨
+  const m = (method ?? 'get').toLowerCase();
+  return publicRules.some((rule) => {
+    if (rule.methods && !rule.methods.includes(m)) return false;
+    return rule.pattern.test(target);
+  });
+};
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    // 현재 요청 URL이 publicPaths에 포함되어 있는지 확인
-    const isPublicPath = publicPaths.some((path) => config.url?.startsWith(path));
-    // console.log(config.url);
+    // 메서드/패턴 기반 공개 경로 검사
+    const publicAllowed = isPublicRequest(config.url ?? '', config.method);
 
     // 토큰이 필요 없는 경로가 아니면, 액세스 토큰을 헤더에 추가
-    if (!isPublicPath) {
+    if (!publicAllowed) {
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
