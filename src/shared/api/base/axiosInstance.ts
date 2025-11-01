@@ -58,17 +58,19 @@ axiosInstance.interceptors.request.use(
     // 메서드/패턴 기반 공개 경로 검사
     const publicAllowed = isPublicRequest(config.url ?? '', config.method);
 
-    // 토큰이 필요 없는 경로가 아니면, 액세스 토큰을 헤더에 추가
-    if (!publicAllowed) {
-      const accessToken = localStorage.getItem('accessToken');
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      } else {
-        // 공개 경로가 아닌데 토큰이 없다면 로그인 페이지로 리다이렉트 후 에러를 발생
-        window.location.href = '/login';
-        return Promise.reject(new Error('Authentication token is missing.'));
-      }
+    // 토큰이 있으면 항상 헤더에 첨부 (공개 API라도 개인화/권한 반영 가능)
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      if (!config.headers) config.headers = {} as any;
+      (config.headers as any).Authorization = `Bearer ${accessToken}`;
     }
+
+    // 비공개 경로인데 토큰이 없으면 로그인으로 유도
+    if (!publicAllowed && !accessToken) {
+      window.location.href = '/login';
+      return Promise.reject(new Error('Authentication token is missing.'));
+    }
+
     return config;
   },
   (error) => {

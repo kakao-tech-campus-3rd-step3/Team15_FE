@@ -2,10 +2,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/u
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import type { SupportProgram } from '@/entities/support/model/supportProgram.type';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   program: SupportProgram;
-  onApply?: (program: SupportProgram) => void;
 };
 
 const CATEGORY_LABEL: Record<string, string> = {
@@ -30,9 +30,10 @@ function formatDate(date: string) {
   return date.replaceAll('-', '.');
 }
 
-export function SupportProgramCard({ program, onApply }: Props) {
+export function SupportProgramCard({ program }: Props) {
   const closed = isClosed(program.endPoint);
   const category = CATEGORY_LABEL[program.supportType] ?? program.supportType;
+  const naviget = useNavigate();
 
   return (
     <Card className='rounded-2xl border border-slate-200/80 shadow-sm transition-shadow hover:shadow-md'>
@@ -50,7 +51,6 @@ export function SupportProgramCard({ program, onApply }: Props) {
         {/* 목록 조회 응답에는 content가 없으므로 간단 안내만 표기 */}
         <div className='flex flex-wrap gap-4 text-xs md:text-sm'>
           <span>종료: {formatDate(program.endPoint)}</span>
-          <span>장소: 전국</span>
         </div>
       </CardContent>
 
@@ -60,8 +60,8 @@ export function SupportProgramCard({ program, onApply }: Props) {
             종료됨
           </Button>
         ) : (
-          <Button className='w-full' onClick={() => onApply?.(program)}>
-            참여하기
+          <Button className='w-full' onClick={() => naviget(`/support/${program.id}`)}>
+            더 자세히 알아보기
           </Button>
         )}
       </CardFooter>

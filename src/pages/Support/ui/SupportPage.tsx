@@ -25,7 +25,7 @@ export function SupportPage() {
             지원사업
           </>
         }
-        description='마음소식 게시판의 모든 글을 모아볼 수 있습니다'
+        description='다양한 청년 지원사업 정보를 한눈에 확인해보세요'
         left={
           <Button size='lg' onClick={() => navigate(ROUTES.landing)}>
             목록으로

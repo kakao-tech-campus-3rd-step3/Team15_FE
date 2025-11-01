@@ -23,3 +23,24 @@ export const postDetailHandlers = [
     });
   }),
 ];
+
+export const supportProgramHandlers = [
+  http.get('/api/support-programs', () => {
+    return HttpResponse.json([
+      {
+        id: 1,
+        name: '청년 창업 지원 사업',
+        company: '중소벤처기업부',
+        supportType: 'TEMP',
+        endPoint: '2025-12-31',
+      },
+      {
+        id: 2,
+        name: '문화 예술 지원 사업',
+        company: '문화체육관광부',
+        supportType: 'TEMP',
+        endPoint: '2025-11-30',
+      },
+    ]);
+  }),
+];
