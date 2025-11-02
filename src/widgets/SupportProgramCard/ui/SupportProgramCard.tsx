@@ -3,6 +3,7 @@ import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import type { SupportProgram } from '@/entities/support/model/supportProgram.type';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '@/shared/lib/date';
 
 type Props = {
   program: SupportProgram;
@@ -23,11 +24,6 @@ function isClosed(endPoint: string) {
   const end = new Date(endPoint + 'T23:59:59');
   const now = new Date();
   return end.getTime() < now.getTime();
-}
-
-function formatDate(date: string) {
-  // Expecting YYYY-MM-DD -> YYYY.MM.DD
-  return date.replaceAll('-', '.');
 }
 
 export function SupportProgramCard({ program }: Props) {
