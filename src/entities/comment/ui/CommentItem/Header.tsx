@@ -13,10 +13,11 @@ const authorTagLabel = {
 
 export function Header({ comment }: HeaderProps) {
   const tag = comment.authorTag ? authorTagLabel[comment.authorTag] : null;
+  const displayAuthor = comment.isAnonymous ? '익명' : comment.author;
 
   return (
     <div className='flex items-center gap-2 text-sm'>
-      <span className='font-medium'>{comment.author}</span>
+      <span className='font-medium'>{displayAuthor}</span>
 
       {tag && (
         <Badge

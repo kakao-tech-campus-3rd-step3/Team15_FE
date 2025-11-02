@@ -28,6 +28,7 @@ export function ReplyItem({
   cancelEdit,
 }: ReplyItemProps) {
   const tag = reply.authorTag ? authorTagLabel[reply.authorTag] : null;
+  const displayAuthor = reply.isAnonymous ? '익명' : reply.author;
 
   return (
     <li className='flex gap-3 p-3'>
@@ -38,8 +39,8 @@ export function ReplyItem({
       </Avatar> */}
       <div className='flex-1'>
         <div className='flex items-center gap-2'>
-          <span className='text-sm font-medium'>{reply.author}</span>
-          <span className='text-muted-foreground text-xs'>
+          <span className='text-sm font-medium'>{displayAuthor}</span>
+          <span className='text-muted-foreground inline-flex items-center gap-1.5 text-xs'>
             {tag && (
               <Badge
                 variant={
@@ -54,7 +55,7 @@ export function ReplyItem({
                 {tag}
               </Badge>
             )}
-            {new Date(reply.createdAt).toLocaleString()}
+            <time>{new Date(reply.createdAt).toLocaleString()}</time>
           </span>
         </div>
         {editingId === reply.id ? (
