@@ -10,14 +10,14 @@ export function SupportProgramList() {
 
   if (!items || items.length === 0) {
     return (
-      <div className='rounded-xl border p-10 text-center text-slate-500'>
+      <div className='rounded-xl border p-10 px-6 text-center text-slate-500'>
         표시할 지원사업이 없습니다.
       </div>
     );
   }
 
   return (
-    <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+    <div className='grid gap-6 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'>
       {items.map((p) => (
         <SupportProgramCard key={p.id} program={p} />
       ))}

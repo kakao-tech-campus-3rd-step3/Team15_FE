@@ -46,7 +46,7 @@ export function SupportPage() {
         }
       >
         <SupportProgramList />
-      </SuspenseBoundary>{' '}
+      </SuspenseBoundary>
     </section>
   );
 }
