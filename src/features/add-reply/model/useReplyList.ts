@@ -5,7 +5,7 @@ import { commentService } from '@/entities/comment/lib/commentService';
 
 export function useReplyList(parentId: number) {
   return useSuspenseQuery<ReplyListResponse, Error>({
-    queryKey: [...commentKeys.listByPost(parentId), 'replies'],
+    queryKey: ['comments', 'replies', parentId],
     queryFn: () => commentService.getReplyComment(parentId),
   });
 }
