@@ -1,11 +1,16 @@
 //axios 설정 (baseURL, interceptors)
-import axios, { AxiosError } from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import { ApiError } from '../../errors/ApiError';
 
 export const axiosInstance = axios.create({
   baseURL: '/api',
   withCredentials: true, //클라이언트(브라우저)가 서버로 요청을 보낼 때 쿠키(refresh token)를 포함하도록 지정
 });
+
+// 내부 재시도 표시용 확장 타입
+interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
+  _retry?: boolean;
+}
 
 // 토큰이 필요 없는 경로 규칙 (메서드 + 패턴)
 type PublicRule = { pattern: RegExp; methods?: string[] };
@@ -82,7 +87,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (res) => res, //성공 응답 반환
   async (err) => {
-    const originalRequest = err.config; //원래 요청 정보 저장
+    const originalRequest = err.config as AxiosRequestConfigWithRetry; // 원래 요청 정보 저장 (+_retry 확장)
     // 401 에러 && 재요청 시도가 아닌 경우
     if (err.response?.status === 401 && !originalRequest._retry) {
       if (err.response.data?.code === 'LOGIN_FAILED') {
@@ -101,7 +106,8 @@ axiosInstance.interceptors.response.use(
         localStorage.setItem('accessToken', newAccessToken);
 
         // 3. 원래 요청의 헤더를 새 토큰으로 업데이트
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        originalRequest.headers = originalRequest.headers ?? {};
+        (originalRequest.headers as any).Authorization = `Bearer ${newAccessToken}`;
 
         // 4. 원래 요청을 새로운 토큰으로 다시 시도
         return axiosInstance(originalRequest);
@@ -114,18 +120,13 @@ axiosInstance.interceptors.response.use(
       }
     }
 
-    // 401 에러만 로그인 페이지로 리다이렉트
+    // 401 에러만 로그인 페이지로 리다이렉트 (refresh 실패/미적용 케이스)
     if (err.response?.status === 401) {
-      localStorage.removeItem('accessToken'); // 토큰 정리
+      localStorage.removeItem('accessToken');
       window.location.href = '/login';
     }
-    return Promise.reject(err);
-  },
-);
 
-axiosInstance.interceptors.response.use(
-  (res) => res,
-  (err: AxiosError) => {
+    // 공통 에러 래핑
     throw new ApiError(
       err.response?.status ?? 500,
       err.response?.data,
