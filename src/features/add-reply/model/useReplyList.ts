@@ -3,9 +3,9 @@ import type { ReplyListResponse } from '../../../entities/comment/model/reply.ty
 import { commentKeys } from '@/entities/comment/model/queryKeys';
 import { commentService } from '@/entities/comment/lib/commentService';
 
-export function useReplyList(postId: number) {
+export function useReplyList(parentId: number) {
   return useSuspenseQuery<ReplyListResponse, Error>({
-    queryKey: [...commentKeys.listByPost(postId), 'replies'],
-    queryFn: () => commentService.getReplyComment(postId),
+    queryKey: [...commentKeys.listByPost(parentId), 'replies'],
+    queryFn: () => commentService.getReplyComment(parentId),
   });
 }

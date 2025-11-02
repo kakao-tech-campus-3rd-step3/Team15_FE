@@ -2,15 +2,17 @@ import { useCallback, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Separator } from '@/shared/ui/separator';
 import { Button } from '@/shared/ui/button';
+import { ReportModal } from '@/features/submit-report/ui/ReportModal';
 
 import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
-// import { ReplyList } from '@/entities/comment/ui/ReplyList';
+import { ReplyList } from '@/entities/comment/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 import CommentItem from '../CommentItem/CommentItem';
 import { useDeleteComment } from '../../model/useDeleteComment';
 import { useUpdateComment } from '../../model/useUpdateComment';
+import { usePostReport } from '@/features/submit-report/model/usePostReport';
 
 type CommentListProps = {
   postId: number;
@@ -22,10 +24,12 @@ export function CommentList({ postId, className }: CommentListProps) {
   const { mutate } = useCreateReply();
 
   const items = data?.content ?? [];
-
   const [replyTargetId, setReplyTargetId] = useState<number | null>(null);
   const [replyText, setReplyText] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
+  const [reportTargetId, setReportTargetId] = useState<number | null>(null);
+  const { mutate: commentReport } = usePostReport();
 
   const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
   const [commentEditText, setCommentEditText] = useState('');
@@ -127,7 +131,10 @@ export function CommentList({ postId, className }: CommentListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      onClick={() => deleteComment(c.id)}
+                      onClick={() => {
+                        setReportTargetId(c.id);
+                        setReportOpen(true);
+                      }}
                     >
                       신고
                     </Button>
@@ -149,13 +156,24 @@ export function CommentList({ postId, className }: CommentListProps) {
                 )}
 
                 {/* 여기는 대댓글 */}
-                {/* <ReplyList parentId={c.id} /> */}
+                <ReplyList parentId={c.id} />
                 <Separator />
               </Fragment>
             ))}
           </ul>
         )}
       </CardContent>
+      {reportTargetId !== null && (
+        <ReportModal
+          open={reportOpen}
+          onOpenChange={setReportOpen}
+          reportType='COMMENT'
+          targetId={reportTargetId}
+          onSubmit={(payload) => {
+            commentReport(payload);
+          }}
+        />
+      )}
     </Card>
   );
 }
