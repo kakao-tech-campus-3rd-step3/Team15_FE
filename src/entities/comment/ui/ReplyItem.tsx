@@ -40,7 +40,7 @@ export function ReplyItem({
       <div className='flex-1'>
         <div className='flex items-center gap-2'>
           <span className='text-sm font-medium'>{displayAuthor}</span>
-          <span className='text-muted-foreground text-xs'>
+          <span className='text-muted-foreground inline-flex items-center gap-1.5 text-xs'>
             {tag && (
               <Badge
                 variant={
@@ -55,7 +55,7 @@ export function ReplyItem({
                 {tag}
               </Badge>
             )}
-            {new Date(reply.createdAt).toLocaleString()}
+            <time>{new Date(reply.createdAt).toLocaleString()}</time>
           </span>
         </div>
         {editingId === reply.id ? (

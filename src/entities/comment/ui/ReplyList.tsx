@@ -77,7 +77,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
           </CollapsibleTrigger>
         </div>
 
-        <CollapsibleContent className='mt-2 space-y-3'>
+        <CollapsibleContent className='mb-4 space-y-3'>
           {replies.length === 0 ? (
             <p className='text-muted-foreground text-sm'>아직 대댓글이 없어요.</p>
           ) : (
