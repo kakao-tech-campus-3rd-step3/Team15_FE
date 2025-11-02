@@ -1,13 +1,11 @@
 import { usePostStatsQuery } from '@/entities/post/model/usePostStatsQuery';
-import { useAuthStore } from '@/features/auth/model/useAuthStore';
 
 export function HeroSection() {
-  const { isLoggedIn } = useAuthStore();
   const { data } = usePostStatsQuery();
 
   return (
-    <section className='py-10 text-center'>
-      {isLoggedIn && <h1 className='text-primary text-4xl font-extrabold tracking-tight'>휴쉼</h1>}
+    <section className='mt-10 py-10 text-center'>
+      <h1 className='text-primary text-4xl font-extrabold tracking-tight'>마음소식</h1>
 
       <p className='mt-2 text-4xl font-bold'>지금, {data.totalCount}개의 마음이 오가는 중이에요.</p>
       <p className='text-muted-foreground mt-4'>

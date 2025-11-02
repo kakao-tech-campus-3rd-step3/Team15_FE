@@ -5,7 +5,7 @@ import { Button } from '@/shared/ui/button';
 
 import { useComments } from '@/entities/comment/model/useCommentQuery';
 import { Fragment } from 'react/jsx-runtime';
-import { ReplyList } from '@/entities/comment/ui/ReplyList';
+// import { ReplyList } from '@/entities/comment/ui/ReplyList';
 import { AddReplyForm } from '@/features/add-reply/ui/AddReplyForm';
 import { useCreateReply } from '@/features/add-reply/model/useCreateReply';
 import CommentItem from '../CommentItem/CommentItem';
@@ -149,7 +149,7 @@ export function CommentList({ postId, className }: CommentListProps) {
                 )}
 
                 {/* 여기는 대댓글 */}
-                <ReplyList parentId={c.id} />
+                {/* <ReplyList parentId={c.id} /> */}
                 <Separator />
               </Fragment>
             ))}
