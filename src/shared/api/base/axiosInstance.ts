@@ -1,5 +1,5 @@
 //axios 설정 (baseURL, interceptors)
-import axios, { type AxiosRequestConfig } from 'axios';
+import axios, { AxiosHeaders, type AxiosRequestConfig, type RawAxiosRequestHeaders } from 'axios';
 import { ApiError } from '../../errors/ApiError';
 
 export const axiosInstance = axios.create({
@@ -11,6 +11,17 @@ export const axiosInstance = axios.create({
 interface AxiosRequestConfigWithRetry extends AxiosRequestConfig {
   _retry?: boolean;
 }
+
+// 타입 안전한 Authorization 헤더 설정 유틸
+const setAuthHeader = (config: AxiosRequestConfig, token: string) => {
+  if (config.headers instanceof AxiosHeaders) {
+    config.headers.set('Authorization', `Bearer ${token}`);
+  } else if (config.headers) {
+    (config.headers as RawAxiosRequestHeaders).Authorization = `Bearer ${token}`;
+  } else {
+    config.headers = { Authorization: `Bearer ${token}` } as RawAxiosRequestHeaders;
+  }
+};
 
 // 토큰이 필요 없는 경로 규칙 (메서드 + 패턴)
 type PublicRule = { pattern: RegExp; methods?: string[] };
@@ -66,8 +77,7 @@ axiosInstance.interceptors.request.use(
     // 토큰이 있으면 항상 헤더에 첨부 (공개 API라도 개인화/권한 반영 가능)
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      if (!config.headers) config.headers = {} as any;
-      (config.headers as any).Authorization = `Bearer ${accessToken}`;
+      setAuthHeader(config, accessToken);
     }
 
     // 비공개 경로인데 토큰이 없으면 로그인으로 유도
@@ -106,8 +116,7 @@ axiosInstance.interceptors.response.use(
         localStorage.setItem('accessToken', newAccessToken);
 
         // 3. 원래 요청의 헤더를 새 토큰으로 업데이트
-        originalRequest.headers = originalRequest.headers ?? {};
-        (originalRequest.headers as any).Authorization = `Bearer ${newAccessToken}`;
+        setAuthHeader(originalRequest, newAccessToken);
 
         // 4. 원래 요청을 새로운 토큰으로 다시 시도
         return axiosInstance(originalRequest);
