@@ -33,7 +33,7 @@ function formatDate(date: string) {
 export function SupportProgramCard({ program }: Props) {
   const closed = isClosed(program.endPoint);
   const category = CATEGORY_LABEL[program.supportType] ?? program.supportType;
-  const naviget = useNavigate();
+  const navigete = useNavigate();
 
   return (
     <Card className='rounded-2xl border border-slate-200/80 shadow-sm transition-shadow hover:shadow-md'>
@@ -60,7 +60,7 @@ export function SupportProgramCard({ program }: Props) {
             종료됨
           </Button>
         ) : (
-          <Button className='w-full' onClick={() => naviget(`/support/${program.id}`)}>
+          <Button className='w-full' onClick={() => navigete(`/support/${program.id}`)}>
             더 자세히 알아보기
           </Button>
         )}

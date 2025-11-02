@@ -4,9 +4,7 @@ import SupportProgramCard from '@/widgets/SupportProgramCard/ui/SupportProgramCa
 
 export function SupportProgramList() {
   const { data } = useSupportListQuery();
-  const items: SupportProgram[] = Array.isArray(data)
-    ? (data as unknown as SupportProgram[])
-    : data.items;
+  const items: SupportProgram[] = Array.isArray(data) ? (data as SupportProgram[]) : data.items;
 
   if (!items || items.length === 0) {
     return (

@@ -7,12 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/sha
 import { Separator } from '@/shared/ui/separator';
 import { Building2, ExternalLink, Link as LinkIcon, MapPin, Newspaper } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { ApiError } from '@/shared/errors/ApiError';
 
 export function SupportDetailPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const programId = Number(id);
-
+  if (!id || Number.isNaN(programId) || programId <= 0) {
+    throw new ApiError(404, null, '유효하지 않은 지원사업 ID입니다.');
+  }
   const { data } = useSupportDetailQuery(programId);
 
   const openEndPoint = () => {
