@@ -13,6 +13,12 @@ import { MorePostsButton } from '@/shared/ui/more-posts-button';
 import { AnimatedSection } from '@/features/scroll-animate/ui/AnimatedSection';
 
 import { HeroShowcase } from '../../../widgets/HeroSection/ui/HeroShowcase';
+import { SupportProgramList } from '@/pages/support/ui/SupportProgramList';
+import { Separator } from '@/shared/ui/separator';
+import { HeroSupportSection } from '@/widgets/HeroSection/ui/HeroSupportSection';
+import { SupportProgramListSkeleton } from '@/pages/support/ui/SupportProgramList.skelton';
+import { GuidePage } from '@/pages/landing/ui/GuidePage';
+import { GuideFAQSection } from './GuideFAQSection';
 
 export function LandingPage() {
   const { category, setCategory } = useFilter();
@@ -21,22 +27,39 @@ export function LandingPage() {
     <>
       <ErrorBoundary fallback={FallbackError}>
         <HeroShowcase />
+        <GuidePage />
+
         <AnimatedSection from='up'>
           <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
             <HeroSection />
           </SuspenseBoundary>
         </AnimatedSection>
 
-        <AnimatedSection from='down'>
-          <LandingPageFilterTabs category={category} setCategory={setCategory} />
-        </AnimatedSection>
         <AnimatedSection from='scale'>
+          <LandingPageFilterTabs category={category} setCategory={setCategory} />
           <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
             <PostList className='mt-8' limit={6} code={category} showPagination={false} />
           </SuspenseBoundary>
 
           <MorePostsButton to={ROUTES.post} label='마음소식 더 보러가기' />
         </AnimatedSection>
+
+        <Separator className='my-16' />
+
+        <AnimatedSection from='up'>
+          <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
+            <HeroSupportSection />
+          </SuspenseBoundary>
+        </AnimatedSection>
+
+        <div className='px-6'>
+          <SuspenseBoundary fallback={<SupportProgramListSkeleton />}>
+            <SupportProgramList />
+            <MorePostsButton to={ROUTES.support} label='지원사업 더 보러가기' />
+          </SuspenseBoundary>
+        </div>
+        <Separator className='my-16' />
+        <GuideFAQSection />
         <AnimatedSection from='up'>
           <SupportBand />
         </AnimatedSection>

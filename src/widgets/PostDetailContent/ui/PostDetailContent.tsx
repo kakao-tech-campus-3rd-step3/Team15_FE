@@ -21,7 +21,6 @@ export function PostDetailContent({ postId }: Props) {
   const [category, setCategory] = useState(post.postCategory);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { mutate: deletePost, isPending: isDeleting } = useDeletePost(postId);
-
   const handleSubmit = (values: PostEditValues) => {
     updatePost(
       { ...values, postCategory: category },

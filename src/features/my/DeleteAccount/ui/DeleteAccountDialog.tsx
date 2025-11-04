@@ -11,9 +11,30 @@ import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import { User } from 'lucide-react';
 import { useDeleteAccount } from '../model/useDeleteAccount';
+import { useDeleteAccountMutation } from '@/entities/user/model/useUserProfile';
 
 const DeleteAccountDialog = () => {
-  const { isOpen, close, deleteConfirmText, setDeleteConfirmText, submit } = useDeleteAccount();
+  const { isOpen, close, deleteConfirmText, setDeleteConfirmText } = useDeleteAccount();
+  const deleteAccountMutation = useDeleteAccountMutation();
+
+  const handleSubmit = () => {
+    if (deleteConfirmText !== '계정 탈퇴') {
+      return;
+    }
+    deleteAccountMutation.mutate(
+      { confirmText: deleteConfirmText },
+      {
+        onSuccess: () => {
+          alert('계정 탈퇴 완료');
+          close();
+        },
+        onError: (error) => {
+          alert('계정 탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.');
+          console.error('Account deletion failed:', error);
+        },
+      },
+    );
+  };
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent className='sm:max-w-md'>
@@ -55,11 +76,11 @@ const DeleteAccountDialog = () => {
             취소
           </Button>
           <Button
-            onClick={submit}
-            disabled={deleteConfirmText !== '계정 탈퇴'}
+            onClick={handleSubmit}
+            disabled={deleteConfirmText !== '계정 탈퇴' || deleteAccountMutation.isPending}
             className='bg-red-600 text-white hover:bg-red-700'
           >
-            계정 탈퇴하기
+            {deleteAccountMutation.isPending ? '처리 중...' : '계정 탈퇴하기'}
           </Button>
         </DialogFooter>
       </DialogContent>

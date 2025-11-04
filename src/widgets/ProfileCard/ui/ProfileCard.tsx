@@ -1,4 +1,4 @@
-import { useUserProfile } from '@/entities/user';
+import { useUserProfile, useUserProfileEdit } from '@/entities/user';
 import { useProfileStore } from '@/features/my/ChangeProfileInfo/model/useProfileStore';
 import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
 import { Badge } from '@/shared/ui/badge';
@@ -12,6 +12,7 @@ import { StatCard } from '@/shared/ui/stat-card';
 
 export const ProfileCard = () => {
   const { setIsModalOpen } = useProfileStore();
+  const { data: profileEdit } = useUserProfileEdit();
 
   const { data, isPending, isError } = useUserProfile();
   if (isPending) return <div>로딩중...</div>;
@@ -60,8 +61,7 @@ export const ProfileCard = () => {
                 활동일: {diffDays}일
               </Badge>
             </div>
-            <p className='mb-2 text-sm text-gray-600'>함께 성장하는 것을 좋아해요! 🌱</p>
-            {/* 이 데이터도 달라고 요청하기 */}
+            <p className='mb-2 text-sm text-gray-600'>{profileEdit?.introduction}</p>
             <div className='flex items-center space-x-4 text-sm text-gray-500'>
               <span>가입일: {joinDate}</span>
               <span>활동점수: {user.score}점</span>
@@ -72,12 +72,10 @@ export const ProfileCard = () => {
             variant='outline'
             size='sm'
             className='border-green-300 bg-transparent text-green-700 hover:bg-green-50'
-            asChild
+            onClick={() => setIsModalOpen(true)}
           >
-            <Button variant='outline' size='sm' onClick={() => setIsModalOpen(true)}>
-              <Edit3 className='mr-1 h-4 w-4' />
-              프로필 수정
-            </Button>
+            <Edit3 className='mr-1 h-4 w-4' />
+            프로필 수정
           </Button>
         </div>
 

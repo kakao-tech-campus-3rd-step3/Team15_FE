@@ -1,3 +1,4 @@
+import type { ViewMode } from '@/features/switch-post-view/ui/ViewSwitch';
 import { PostInfo } from '@/widgets/PostList/ui/PostInfo';
 import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
@@ -16,7 +17,7 @@ import { SectionHeader } from '@/shared/ui/section-header';
 
 export function HeartNewsPage() {
   const [params, setParams] = useState<Params>({
-    category: 'ALL',
+    category: 'FREE',
     keyword: '',
     startDate: undefined,
     endDate: undefined,
@@ -24,6 +25,7 @@ export function HeartNewsPage() {
     size: 10,
     sort: 'createdAt,desc',
   });
+  const [view, setView] = useState<ViewMode>('grid');
   const navigate = useNavigate();
   return (
     <>
@@ -39,7 +41,7 @@ export function HeartNewsPage() {
             }
             description='마음소식 게시판의 모든 글을 모아볼 수 있습니다'
             left={
-              <Button size='lg' onClick={() => navigate(-1)}>
+              <Button size='lg' onClick={() => navigate(ROUTES.landing)}>
                 목록으로
               </Button>
             }
@@ -54,9 +56,9 @@ export function HeartNewsPage() {
           </SuspenseBoundary>
         </section>
 
-        <PostInfo params={params} onParamsChange={setParams} />
+        <PostInfo params={params} onParamsChange={setParams} view={view} onViewChange={setView} />
         <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={10} />}>
-          <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
+          <PostListInHeartNews className='mt-8' params={params} showPagination={true} view={view} />
         </SuspenseBoundary>
       </ErrorBoundary>
     </>
