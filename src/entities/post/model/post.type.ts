@@ -9,7 +9,6 @@ export type CategoryCode =
   | 'HOBBY'
   | 'MENTAL'
   | 'TROUBLE';
-
 export interface CategoryResponse {
   code: CategoryCode;
   displayName: string;
@@ -51,7 +50,7 @@ export type PostId = number;
 
 export interface PostDetailResponse {
   id: number;
-  postCategory: string; // 카테고리 코드 (예: "TROUBLE")
+  postCategory: CategoryCode; // 카테고리 코드 (예: "TROUBLE")
   postCategoryName: string; // 카테고리 한글 이름 (예: "고민상담")
   title: string;
   content: string;
@@ -66,3 +65,9 @@ export interface PostDetailResponse {
   createdAt: string; // 작성일 (ISO 8601)
   updatedAt: string; // 수정일 (ISO 8601)
 }
+
+export type UpdatePostRequest = {
+  title?: string;
+  content?: string;
+  postCategory?: CategoryCode; // 서버 스펙에 맞춰 key 이름 주의
+};
