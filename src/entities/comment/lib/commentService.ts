@@ -25,8 +25,8 @@ export const commentService = {
     return data;
   },
 
-  async getReplyComment(postId: number): Promise<ReplyListResponse> {
-    const { data } = await axiosInstance.get<ReplyListResponse>(`/posts/${postId}/replies`);
+  async getReplyComment(parentId: number): Promise<ReplyListResponse> {
+    const { data } = await axiosInstance.get<ReplyListResponse>(`/comments/${parentId}/replies`);
     return data;
   },
 

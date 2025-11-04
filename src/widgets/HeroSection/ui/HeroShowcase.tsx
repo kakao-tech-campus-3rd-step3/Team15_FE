@@ -1,8 +1,12 @@
 import { Button } from '@/shared/ui/button';
 import { Badge } from '@/shared/ui/shadcn/badge';
 import { AnimatedSection } from '@/features/scroll-animate/ui/AnimatedSection';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config';
 
 export function HeroShowcase() {
+  const navigate = useNavigate();
+
   return (
     <section className='from-primary via-primary relative isolate overflow-visible bg-gradient-to-r to-emerald-500/90 text-black/70'>
       {/* subtle noise / glow decorations */}
@@ -21,12 +25,12 @@ export function HeroShowcase() {
           </AnimatedSection>
 
           <AnimatedSection from='up'>
-            <h2 className='text-3xl font-extrabold leading-tight md:text-4xl'>
+            <h2 className='text-3xl font-extrabold leading-tight text-white/90 [text-shadow:_2px_2px_2px_gray] md:text-4xl'>
               혼자 고민하지 말아요.
               <br />
               함께 털어놓고, 위로와 도움을 받아요.
             </h2>
-            <p className='mt-5 text-lg leading-relaxed text-white/85'>
+            <p className='mt-5 text-lg leading-relaxed text-white/90'>
               가벼운 걱정거리부터 상담사의 도움이 필요한 문제까지.
               <br />
               휴쉼에서 안전하게 기록하고 서로를 지지해요.
@@ -35,11 +39,11 @@ export function HeroShowcase() {
 
           <AnimatedSection from='up' className='mt-8'>
             <div className='flex flex-wrap items-center gap-3'>
-              <Button size='lg' variant='whiteoutline'>
-                지금 시작하기
+              <Button size='lg' variant='whiteoutline' onClick={() => navigate(ROUTES.post)}>
+                커뮤니티 가기
               </Button>
-              <Button size='lg' variant='whiteoutline'>
-                가이드 보기
+              <Button size='lg' variant='whiteoutline' onClick={() => navigate(ROUTES.support)}>
+                지원사업 가기
               </Button>
             </div>
           </AnimatedSection>

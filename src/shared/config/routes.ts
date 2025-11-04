@@ -14,6 +14,7 @@ export const ROUTES = {
   badge: '/badges',
   mission: '/mission',
   support: '/support',
+  supportDetail: '/support/:id',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [

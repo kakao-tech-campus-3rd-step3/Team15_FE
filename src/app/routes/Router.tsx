@@ -12,6 +12,8 @@ import { BadgePage } from '@/pages/badge';
 import { MissionPage } from '@/pages/mission';
 import AuthGuard from './AuthGuard';
 import { DevPanel } from '@/shared/ui/dev-panner/DevPanel';
+import { SupportPage } from '@/pages/support';
+import { SupportDetailPage } from '@/pages/support-detail';
 
 function Router() {
   return (
@@ -21,8 +23,10 @@ function Router() {
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />
-          <Route path={ROUTES.createpost} element={<Post />} />
+          <Route path={ROUTES.support} element={<SupportPage />} />
+          <Route path={ROUTES.supportDetail} element={<SupportDetailPage />} />
           <Route element={<AuthGuard />}>
+            <Route path={ROUTES.createpost} element={<Post />} />
             <Route path={ROUTES.activity} element={<ActivityPage />} />
             <Route path={ROUTES.badge} element={<BadgePage />} />
             <Route path={ROUTES.my} element={<MyPage />} />

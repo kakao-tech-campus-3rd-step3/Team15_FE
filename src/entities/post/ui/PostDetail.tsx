@@ -38,6 +38,7 @@ export function PostDetail({
 }: PostDetailProps) {
   const [reportOpen, setReportOpen] = useState(false);
   const { mutate: postReport } = usePostReport();
+
   return (
     <Card className={cn('w-full', className)}>
       <CardHeader className='relative'>
@@ -66,11 +67,9 @@ export function PostDetail({
 
         <CardDescription>
           <div className='mt-2 flex items-center gap-3 text-sm'>
-            {/* <Avatar className='h-8 w-8'>
-              {post.author ? <AvatarImage src={post.author} alt={`${post.author} avatar`} /> : null}
-              <AvatarFallback>{initials}</AvatarFallback>
-            </Avatar> */}
-            <span className='font-medium'>{post.isAnonymous ? '익명' : post.author}</span>
+            <span className='font-medium'>
+              {post.isAnonymous ? '익명' : post.author + ' ' + post.handle}
+            </span>
             <Separator orientation='vertical' className='h-4' />
             <time className='text-muted-foreground'>
               {new Date(post.createdAt).toLocaleString()}

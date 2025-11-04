@@ -24,15 +24,10 @@ export function CommentItem({
   onSubmitEdit,
   onCancelEdit,
 }: CommentItemProps) {
-  // const initials = comment.author.slice(0, 2).toUpperCase();
   const isDeleted = comment.content == null;
 
   return (
     <li className='flex gap-3 p-3'>
-      {/* <Avatar className='h-8 w-8'>
-        <AvatarFallback>{initials}</AvatarFallback>
-      </Avatar> */}
-
       <div className='flex-1'>
         <Header comment={comment} />
         {isEditing ? (

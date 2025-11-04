@@ -7,6 +7,8 @@ import { ReplyItem } from './ReplyItem';
 import { useDeleteComment } from '../model/useDeleteComment';
 import { useUpdateComment } from '../model/useUpdateComment';
 import { useReplyList } from '@/features/add-reply';
+import { ReportModal } from '@/features/submit-report/ui/ReportModal';
+import { usePostReport } from '@/features/submit-report/model/usePostReport';
 
 type ReplyListProps = {
   parentId: number;
@@ -17,6 +19,10 @@ export function ReplyList({ parentId }: ReplyListProps) {
   const [open, setOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editText, setEditText] = useState('');
+
+  const [reportOpen, setReportOpen] = useState(false);
+  const [reportTargetId, setReportTargetId] = useState<number | null>(null);
+  const { mutate: commentReport } = usePostReport();
 
   const { mutate: deleteReplyMutate } = useDeleteComment();
   const { mutate: updateReplyMutate } = useUpdateComment();
@@ -71,7 +77,7 @@ export function ReplyList({ parentId }: ReplyListProps) {
           </CollapsibleTrigger>
         </div>
 
-        <CollapsibleContent className='mt-2 space-y-3'>
+        <CollapsibleContent className='mb-4 space-y-3'>
           {replies.length === 0 ? (
             <p className='text-muted-foreground text-sm'>아직 대댓글이 없어요.</p>
           ) : (
@@ -111,7 +117,10 @@ export function ReplyList({ parentId }: ReplyListProps) {
                       variant='ghost'
                       size='sm'
                       className='text-xs'
-                      onClick={() => deleteReply(r.id)}
+                      onClick={() => {
+                        setReportTargetId(r.id);
+                        setReportOpen(true);
+                      }}
                     >
                       신고
                     </Button>
@@ -123,6 +132,17 @@ export function ReplyList({ parentId }: ReplyListProps) {
           {/* <ReplyComposer parentId={parentId} onPosted={refetch} /> */}
         </CollapsibleContent>
       </Collapsible>
+      {reportTargetId !== null && (
+        <ReportModal
+          open={reportOpen}
+          onOpenChange={setReportOpen}
+          reportType='COMMENT'
+          targetId={reportTargetId}
+          onSubmit={(payload) => {
+            commentReport(payload);
+          }}
+        />
+      )}
     </div>
   );
 }
