@@ -9,6 +9,7 @@ import {
 } from './postDetail';
 import { commentHandlers } from './comment';
 import { missionHandlers } from './mission';
+import { activityHandlers } from './activity';
 
 export const handlers = [
   ...authHandlers,
@@ -20,4 +21,5 @@ export const handlers = [
   ...missionHandlers,
   ...supportProgramHandlers,
   ...supportProgramDetailHandlers,
+  ...activityHandlers,
 ];

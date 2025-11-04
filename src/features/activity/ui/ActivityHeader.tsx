@@ -2,14 +2,9 @@ import { BookOpen, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/shared/config';
 import { Button } from '@/shared/ui/button';
+import type { ActivityHeaderProps } from '../types/activity';
 
-interface ActivityHeaderProps {
-  postCount: number;
-  commentCount: number;
-  likeCount: number;
-}
-
-export function ActivityHeader({ postCount, commentCount, likeCount }: ActivityHeaderProps) {
+export function ActivityHeader({ postCount, commentCount, likesCount }: ActivityHeaderProps) {
   return (
     <div className='flex items-center justify-between'>
       <div className='flex items-center space-x-4'>
@@ -38,7 +33,7 @@ export function ActivityHeader({ postCount, commentCount, likeCount }: ActivityH
           <div className='text-xs text-gray-500'>댓글</div>
         </div>
         <div className='text-center'>
-          <div className='text-lg font-bold text-red-600'>{likeCount}</div>
+          <div className='text-lg font-bold text-red-600'>{likesCount}</div>
           <div className='text-xs text-gray-500'>좋아요</div>
         </div>
       </div>
