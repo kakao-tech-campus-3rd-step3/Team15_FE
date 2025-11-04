@@ -17,6 +17,8 @@ import { SupportProgramList } from '@/pages/support/ui/SupportProgramList';
 import { Separator } from '@/shared/ui/separator';
 import { HeroSupportSection } from '@/widgets/HeroSection/ui/HeroSupportSection';
 import { SupportProgramListSkeleton } from '@/pages/support/ui/SupportProgramList.skelton';
+import { GuidePage } from '@/pages/landing/ui/GuidePage';
+import { GuideFAQSection } from './GuideFAQSection';
 
 export function LandingPage() {
   const { category, setCategory } = useFilter();
@@ -25,6 +27,7 @@ export function LandingPage() {
     <>
       <ErrorBoundary fallback={FallbackError}>
         <HeroShowcase />
+        <GuidePage />
 
         <AnimatedSection from='up'>
           <SuspenseBoundary fallback={<HeroSectionSkeleton />}>
@@ -55,7 +58,8 @@ export function LandingPage() {
             <MorePostsButton to={ROUTES.support} label='지원사업 더 보러가기' />
           </SuspenseBoundary>
         </div>
-
+        <Separator className='my-16' />
+        <GuideFAQSection />
         <AnimatedSection from='up'>
           <SupportBand />
         </AnimatedSection>
