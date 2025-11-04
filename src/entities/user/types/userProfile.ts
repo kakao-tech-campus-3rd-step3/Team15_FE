@@ -61,3 +61,39 @@ export interface UserProfileResponse {
   likePosts: LikePostSummary[];
   account: Account;
 }
+
+// 내 프로필 수정 조회 응답
+export interface UserProfileEditResponse {
+  nickname: string;
+  introduction: string;
+}
+
+// 기본 정보 변경 요청
+export interface UpdateUserProfileRequest {
+  nickname: string;
+  introduction: string;
+}
+
+// 비밀번호 변경 요청
+export interface ChangePasswordRequest {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+// 에러 응답
+export interface UserErrorResponse {
+  status: number;
+  code: string;
+  message: string;
+}
+
+// 회원 탈퇴 요청
+export interface DeleteAccountRequest {
+  confirmText: string;
+}
+
+// 알림 설정 요청
+export interface NotificationSettingRequest {
+  enabled: boolean;
+}
