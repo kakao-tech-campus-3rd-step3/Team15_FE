@@ -32,11 +32,8 @@ export function LandingPage() {
           </SuspenseBoundary>
         </AnimatedSection>
 
-        <AnimatedSection from='down'>
-          <LandingPageFilterTabs category={category} setCategory={setCategory} />
-        </AnimatedSection>
-
         <AnimatedSection from='scale'>
+          <LandingPageFilterTabs category={category} setCategory={setCategory} />
           <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={6} />}>
             <PostList className='mt-8' limit={6} code={category} showPagination={false} />
           </SuspenseBoundary>
@@ -58,8 +55,6 @@ export function LandingPage() {
             <MorePostsButton to={ROUTES.support} label='지원사업 더 보러가기' />
           </SuspenseBoundary>
         </div>
-
-        <Separator className='my-16' />
 
         <AnimatedSection from='up'>
           <SupportBand />

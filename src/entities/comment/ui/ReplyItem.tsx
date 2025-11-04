@@ -39,7 +39,7 @@ export function ReplyItem({
       </Avatar> */}
       <div className='flex-1'>
         <div className='flex items-center gap-2'>
-          <span className='text-sm font-medium'>{displayAuthor}</span>
+          <span className='text-sm font-medium'>{displayAuthor + ' ' + reply.handle}</span>
           <span className='text-muted-foreground inline-flex items-center gap-1.5 text-xs'>
             {tag && (
               <Badge

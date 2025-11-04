@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from '../model/useInView';
 
 type Props = React.PropsWithChildren<{
@@ -6,6 +6,7 @@ type Props = React.PropsWithChildren<{
   from?: 'up' | 'down' | 'left' | 'right' | 'scale';
   threshold?: number;
   once?: boolean;
+  hysteresisMs?: number;
 }>;
 
 const fromClass: Record<NonNullable<Props['from']>, string> = {
@@ -19,20 +20,31 @@ const fromClass: Record<NonNullable<Props['from']>, string> = {
 export function AnimatedSection({
   className = '',
   from = 'up',
-  threshold = 0.9,
+  threshold = 0.8,
   once = false,
+  hysteresisMs = 180,
   children,
 }: Props) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold }, once);
 
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (inView) {
+      setVisible(true);
+      return;
+    }
+    const t = setTimeout(() => setVisible(false), hysteresisMs);
+    return () => clearTimeout(t);
+  }, [inView, hysteresisMs]);
+
   return (
     <section
       ref={ref}
-      data-in-view={inView}
+      data-in-view={visible}
       className={[
         'transition-all duration-700 ease-out',
         'transform-gpu will-change-transform',
-        inView
+        visible
           ? 'translate-x-0 translate-y-0 scale-100 opacity-100'
           : ['opacity-0', fromClass[from]].join(' '),
         className,
