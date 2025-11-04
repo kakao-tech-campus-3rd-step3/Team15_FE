@@ -1,4 +1,3 @@
-import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { HEADER_NAV_ITEMS } from '../config/const';
 import { ROUTES } from '@/shared/config';
