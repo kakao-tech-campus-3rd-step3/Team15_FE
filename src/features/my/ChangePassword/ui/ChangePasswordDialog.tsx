@@ -97,7 +97,9 @@ const ChangePasswordDialog = () => {
               onChange={(e) => setCurrentPassword(e.target.value)}
             />
           </div>
-          <p className='text-sm text-gray-500'>임시: qwer1234!</p>
+          {process.env.NODE_ENV === 'development' && (
+            <p className='text-sm text-gray-500'>임시: qwer1234!</p>
+          )}
           <div>
             <Label htmlFor='new-password' className='text-sm font-medium'>
               새 비밀번호

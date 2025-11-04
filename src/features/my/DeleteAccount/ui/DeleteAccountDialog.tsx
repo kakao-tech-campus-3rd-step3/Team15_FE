@@ -21,7 +21,19 @@ const DeleteAccountDialog = () => {
     if (deleteConfirmText !== '계정 탈퇴') {
       return;
     }
-    deleteAccountMutation.mutate({ confirmText: deleteConfirmText });
+    deleteAccountMutation.mutate(
+      { confirmText: deleteConfirmText },
+      {
+        onSuccess: () => {
+          alert('계정 탈퇴 완료');
+          close();
+        },
+        onError: (error) => {
+          alert('계정 탈퇴 중 오류가 발생했습니다. 다시 시도해주세요.');
+          console.error('Account deletion failed:', error);
+        },
+      },
+    );
   };
   return (
     <Dialog open={isOpen} onOpenChange={close}>

@@ -106,7 +106,15 @@ export const PersonalSettings = () => {
                 checked={newCommentNotification}
                 onCheckedChange={(checked) => {
                   setNewCommentNotification(checked);
-                  updateCommentNotification.mutate({ enabled: checked });
+                  updateCommentNotification.mutate(
+                    { enabled: checked },
+                    {
+                      onError: () => {
+                        setNewCommentNotification(!checked);
+                        alert('알림 설정 변경에 실패했습니다.');
+                      },
+                    },
+                  );
                 }}
                 disabled={updateCommentNotification.isPending}
               />
@@ -120,7 +128,15 @@ export const PersonalSettings = () => {
                 checked={likeNoticeNotification}
                 onCheckedChange={(checked) => {
                   setLikeNoticeNotification(checked);
-                  updateLikeNotification.mutate({ enabled: checked });
+                  updateLikeNotification.mutate(
+                    { enabled: checked },
+                    {
+                      onError: () => {
+                        setLikeNoticeNotification(!checked);
+                        alert('알림 설정 변경에 실패했습니다.');
+                      },
+                    },
+                  );
                 }}
                 disabled={updateLikeNotification.isPending}
               />

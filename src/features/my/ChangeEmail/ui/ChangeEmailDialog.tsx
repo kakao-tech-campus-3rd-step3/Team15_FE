@@ -14,6 +14,7 @@ import { Mail } from 'lucide-react';
 import { useChangeEmail } from '../model/useChangeEmail';
 import { useUpdateEmail } from '@/entities/user/model/useUserProfile';
 import { useEmailVerification } from '@/features/auth/lib/useEmailVerification';
+import { emailSchema } from '@/features/auth/lib/auth.schema';
 
 const ChangeEmailDialog = () => {
   const { isOpen, newEmail, setNewEmail, close } = useChangeEmail();
@@ -22,8 +23,9 @@ const ChangeEmailDialog = () => {
   const [verificationCode, setVerificationCode] = useState('');
 
   const handleSendCode = () => {
-    if (!newEmail.includes('@')) {
-      alert('올바른 이메일 주소를 입력하세요.');
+    const result = emailSchema.safeParse(newEmail);
+    if (!result.success) {
+      alert(result.error.issues[0]?.message);
       return;
     }
     sendVerificationCode(newEmail);
