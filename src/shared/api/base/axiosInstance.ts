@@ -77,7 +77,13 @@ axiosInstance.interceptors.response.use(
     }
 
     // 401 에러만 로그인 페이지로 리다이렉트
+    // 단, 비즈니스 로직 에러(비밀번호 변경 실패 등)는 제외
     if (err.response?.status === 401) {
+      const errorCode = err.response.data?.code;
+      // 비밀번호 변경 실패와 같은 비즈니스 로직 에러는 리다이렉트하지 않음
+      if (errorCode === 'INVALID_PASSWORD') {
+        return Promise.reject(err);
+      }
       localStorage.removeItem('accessToken'); // 토큰 정리
       window.location.href = '/login';
     }

@@ -31,6 +31,18 @@ export const userProfileEditOptions = () => {
   });
 };
 
+// 이메일 조회 관련 쿼리키/옵션
+export const userEmailQueryKey = ['userEmail'] as const;
+
+export const userEmailOptions = () => {
+  return queryOptions({
+    queryKey: userEmailQueryKey,
+    queryFn: userService.getEmail,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 30,
+  });
+};
+
 // 프로필 조회 훅
 export const useUserProfile = () => {
   return useQuery(userProfileOptions());
@@ -39,6 +51,11 @@ export const useUserProfile = () => {
 // 프로필 수정 조회 훅
 export const useUserProfileEdit = () => {
   return useQuery(userProfileEditOptions());
+};
+
+// 이메일 조회 훅
+export const useUserEmail = () => {
+  return useQuery(userEmailOptions());
 };
 
 // 프로필 업데이트 훅
@@ -62,6 +79,27 @@ export const useChangePasswordMutation = () => {
   });
 };
 
+// 이메일 전송(인증 요청) 훅
+export const useSendEmailVerification = () => {
+  return useMutation({
+    mutationFn: (body: { email: string }) => userService.sendEmailVerification(body),
+  });
+};
+
+// 이메일 변경 훅 (명세에 따라 void 반환)
+export const useUpdateEmail = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: { email: string; code: string }) => userService.updateEmail(body),
+    onSuccess: () => {
+      // 이메일/프로필 관련 캐시 무효화
+      queryClient.invalidateQueries({ queryKey: userProfileQueryKey });
+      queryClient.invalidateQueries({ queryKey: userEmailQueryKey });
+    },
+  });
+};
+
 // 회원 탈퇴 훅
 export const useDeleteAccountMutation = () => {
   const queryClient = useQueryClient();
@@ -72,7 +110,7 @@ export const useDeleteAccountMutation = () => {
       // 모든 쿼리 캐시 무효화 및 로그아웃 처리
       queryClient.clear();
       localStorage.removeItem('accessToken');
-      window.location.href = '/login';
+      window.location.href = '/';
     },
   });
 };

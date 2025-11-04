@@ -1,4 +1,8 @@
-import { useUserProfile } from '@/entities/user';
+import {
+  useUserProfile,
+  useUpdateCommentNotification,
+  useUpdateLikeNotification,
+} from '@/entities/user';
 import { useChangeEmail } from '@/features/my/ChangeEmail/model/useChangeEmail';
 import { useChangePassword } from '@/features/my/ChangePassword/model/useChangePassword';
 import { useDeleteAccount } from '@/features/my/DeleteAccount/model/useDeleteAccount';
@@ -20,6 +24,9 @@ export const PersonalSettings = () => {
 
   const { data, isPending, isError } = useUserProfile();
   const { account } = data ?? {};
+
+  const updateCommentNotification = useUpdateCommentNotification();
+  const updateLikeNotification = useUpdateLikeNotification();
 
   useEffect(() => {
     if (account) {
@@ -97,7 +104,11 @@ export const PersonalSettings = () => {
               </div>
               <Switch
                 checked={newCommentNotification}
-                onCheckedChange={setNewCommentNotification}
+                onCheckedChange={(checked) => {
+                  setNewCommentNotification(checked);
+                  updateCommentNotification.mutate({ enabled: checked });
+                }}
+                disabled={updateCommentNotification.isPending}
               />
             </div>
             <div className='flex items-center justify-between'>
@@ -107,7 +118,11 @@ export const PersonalSettings = () => {
               </div>
               <Switch
                 checked={likeNoticeNotification}
-                onCheckedChange={setLikeNoticeNotification}
+                onCheckedChange={(checked) => {
+                  setLikeNoticeNotification(checked);
+                  updateLikeNotification.mutate({ enabled: checked });
+                }}
+                disabled={updateLikeNotification.isPending}
               />
             </div>
           </div>
