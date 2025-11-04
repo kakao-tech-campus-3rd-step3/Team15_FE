@@ -1,3 +1,4 @@
+import type { ViewMode } from '@/features/switch-post-view/ui/ViewSwitch';
 import { PostInfo } from '@/widgets/PostList/ui/PostInfo';
 import { PostListInHeartNews } from '@/widgets/PostList/ui/PostListInHeartNews';
 import { useState } from 'react';
@@ -24,6 +25,7 @@ export function HeartNewsPage() {
     size: 10,
     sort: 'createdAt,desc',
   });
+  const [view, setView] = useState<ViewMode>('grid');
   const navigate = useNavigate();
   return (
     <>
@@ -54,9 +56,9 @@ export function HeartNewsPage() {
           </SuspenseBoundary>
         </section>
 
-        <PostInfo params={params} onParamsChange={setParams} />
+        <PostInfo params={params} onParamsChange={setParams} view={view} onViewChange={setView} />
         <SuspenseBoundary fallback={<PostListSkeleton className='mt-8' count={10} />}>
-          <PostListInHeartNews className='mt-8' params={params} showPagination={true} />
+          <PostListInHeartNews className='mt-8' params={params} showPagination={true} view={view} />
         </SuspenseBoundary>
       </ErrorBoundary>
     </>

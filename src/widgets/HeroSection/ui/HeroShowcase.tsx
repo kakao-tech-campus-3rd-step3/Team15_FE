@@ -1,8 +1,12 @@
 import { Button } from '@/shared/ui/button';
 import { Badge } from '@/shared/ui/shadcn/badge';
 import { AnimatedSection } from '@/features/scroll-animate/ui/AnimatedSection';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/shared/config';
 
 export function HeroShowcase() {
+  const navigate = useNavigate();
+
   return (
     <section className='from-primary via-primary relative isolate overflow-visible bg-gradient-to-r to-emerald-500/90 text-black/70'>
       {/* subtle noise / glow decorations */}
@@ -35,11 +39,11 @@ export function HeroShowcase() {
 
           <AnimatedSection from='up' className='mt-8'>
             <div className='flex flex-wrap items-center gap-3'>
-              <Button size='lg' variant='whiteoutline'>
-                지금 시작하기
+              <Button size='lg' variant='whiteoutline' onClick={() => navigate(ROUTES.post)}>
+                커뮤니티 가기
               </Button>
-              <Button size='lg' variant='whiteoutline'>
-                가이드 보기
+              <Button size='lg' variant='whiteoutline' onClick={() => navigate(ROUTES.support)}>
+                지원사업 가기
               </Button>
             </div>
           </AnimatedSection>
