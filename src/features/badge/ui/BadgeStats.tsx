@@ -15,9 +15,11 @@ export function BadgeStats({ earnedCount, unearnedCount, allCount }: BadgeStatsP
   ];
 
   return (
-    <div className='grid grid-cols-1 gap-3 md:grid-cols-3'>
+    <div className='flex flex-wrap justify-between gap-3'>
       {statsData.map((stat) => (
-        <StatCard key={stat.label} {...stat} />
+        <div key={stat.label} className='flex-1'>
+          <StatCard key={stat.label} {...stat} />
+        </div>
       ))}
     </div>
   );
