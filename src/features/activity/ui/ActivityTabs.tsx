@@ -29,8 +29,10 @@ export function ActivityTabs({
       post.content.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  const filteredComments = comments.filter((comment) =>
-    comment.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredComments = comments.filter(
+    (comment) =>
+      comment.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      comment.content.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const filteredLikedPosts = likedPosts.filter((post) =>
