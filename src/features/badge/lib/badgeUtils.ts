@@ -27,7 +27,7 @@ export const getColorClasses = (color: string, earned = true) => {
   return colors[color] || colors.gray;
 };
 
-export const getBadgeCategoryColor = (rarity: string) => {
+export const getBadgeKindColor = (kind: string) => {
   const colors: Record<string, string> = {
     일반: 'bg-gray-100 text-gray-700',
     LOVE_EVANGELIST: 'bg-red-100 text-red-700',
@@ -36,5 +36,5 @@ export const getBadgeCategoryColor = (rarity: string) => {
     PERFECT_ATTENDANCE: 'bg-green-100 text-green-700',
   };
 
-  return colors[rarity] || colors.일반;
+  return colors[kind] || colors.일반;
 };

@@ -3,7 +3,7 @@ import { CheckCircle, Target, Medal, Award } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { BadgeCard } from './BadgeCard';
-import type { BadgeResponse } from '../types.ts/badge';
+import type { BadgeResponse } from '../types/badge';
 
 export function BadgeTabs({ earnedBadges, unearnedBadges, allBadges }: BadgeResponse) {
   const [activeTab, setActiveTab] = useState('earned');
@@ -41,7 +41,7 @@ export function BadgeTabs({ earnedBadges, unearnedBadges, allBadges }: BadgeResp
           <TabsContent value='earned' className='mt-6'>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
               {earnedBadges.map((badge) => (
-                <BadgeCard key={badge.name} badge={badge} />
+                <BadgeCard key={badge.kind} badge={badge} />
               ))}
             </div>
           </TabsContent>
@@ -49,7 +49,7 @@ export function BadgeTabs({ earnedBadges, unearnedBadges, allBadges }: BadgeResp
           <TabsContent value='progress' className='mt-6'>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
               {unearnedBadges.map((badge) => (
-                <BadgeCard key={badge.name} badge={badge} />
+                <BadgeCard key={badge.kind} badge={badge} />
               ))}
             </div>
           </TabsContent>
@@ -65,7 +65,7 @@ export function BadgeTabs({ earnedBadges, unearnedBadges, allBadges }: BadgeResp
           <TabsContent value='all' className='mt-6'>
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
               {allBadges.map((badge) => (
-                <BadgeCard key={badge.name} badge={badge} />
+                <BadgeCard key={badge.kind} badge={badge} />
               ))}
             </div>
           </TabsContent>

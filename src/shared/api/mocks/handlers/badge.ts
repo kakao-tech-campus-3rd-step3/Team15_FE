@@ -1,4 +1,4 @@
-import type { BadgeResponse } from '@/features/badge/types.ts/badge';
+import type { BadgeResponse } from '@/features/badge';
 import { http, HttpResponse } from 'msw';
 
 // ✅ 뱃지 관련 핸들러

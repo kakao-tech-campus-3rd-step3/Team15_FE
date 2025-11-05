@@ -1,7 +1,11 @@
-import { useBadges } from '@/features/badge/api/useBadges';
-import { BadgeHeader, BadgeStats, BadgeTabs } from '@/features/badge';
+import {
+  BadgeHeader,
+  BadgeStats,
+  BadgeTabs,
+  useBadges,
+  type BadgeResponse,
+} from '@/features/badge';
 import { Alert } from '@/shared/ui/alert';
-import type { BadgeResponse } from '@/features/badge/types.ts/badge';
 
 export function BadgePage() {
   const { data, error, isPending } = useBadges();
@@ -19,14 +23,14 @@ export function BadgePage() {
       <div className='flex min-h-screen items-center justify-center bg-gray-50'>
         <Alert variant='destructive'>
           <p>뱃지 정보를 불러오는 중 오류가 발생했습니다.</p>
-          <p className='text-sm text-gray-500'>{String(error.message)}</p>
+          <p className='text-sm text-gray-500'>{error?.message ?? '알 수 없는 오류'}</p>
         </Alert>
       </div>
     );
   }
 
   // 정상 응답
-  const { earnedBadges, unearnedBadges, allBadges } = (data ?? {}) as BadgeResponse;
+  const { earnedBadges = [], unearnedBadges = [], allBadges = [] } = (data ?? {}) as BadgeResponse;
 
   // api 응답 대신 사용
   const allBadge = [...earnedBadges, ...unearnedBadges];
@@ -39,16 +43,16 @@ export function BadgePage() {
 
         {/* 통계 요약 */}
         <BadgeStats
-          earnedCount={earnedBadges?.length ?? 0}
-          unearnedCount={unearnedBadges?.length ?? 0}
-          allCount={allBadges?.length ?? 0}
+          earnedCount={earnedBadges.length}
+          unearnedCount={unearnedBadges.length}
+          allCount={allBadges.length}
         />
 
         {/* 뱃지 탭 */}
         <BadgeTabs
-          earnedBadges={earnedBadges ?? []}
-          unearnedBadges={unearnedBadges ?? []}
-          allBadges={allBadge ?? []}
+          earnedBadges={earnedBadges}
+          unearnedBadges={unearnedBadges}
+          allBadges={allBadge}
         />
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
-import type { BadgeResponse } from '../types.ts/badge';
+import type { BadgeResponse } from '../types/badge';
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { badgeQueryKeys } from '../model/queryKeys';
 

@@ -18,7 +18,7 @@ export function BadgeStats({ earnedCount, unearnedCount, allCount }: BadgeStatsP
     <div className='flex flex-wrap justify-between gap-3'>
       {statsData.map((stat) => (
         <div key={stat.label} className='flex-1'>
-          <StatCard key={stat.label} {...stat} />
+          <StatCard {...stat} />
         </div>
       ))}
     </div>

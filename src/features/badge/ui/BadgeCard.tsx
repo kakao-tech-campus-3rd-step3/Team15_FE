@@ -1,7 +1,7 @@
 import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
-import type { BaseBadge, EarnedBadge } from '../types.ts/badge';
-import { getBadgeCategoryColor } from '../lib/badgeUtils';
+import type { BaseBadge, EarnedBadge } from '../types/badge';
+import { getBadgeKindColor } from '../lib/badgeUtils';
 
 // 획득 여부에 따라 스타일을 달리 보여주는 공통 배지 카드
 type BadgeType = BaseBadge | EarnedBadge;
@@ -24,9 +24,8 @@ export function BadgeCard({ badge }: { badge: BadgeType }) {
         {/* 텍스트 영역 */}
         <div className='flex-1'>
           <div className='mb-1 flex flex-col items-start space-y-1'>
-            {' '}
             <h3 className='font-semibold text-gray-900'>{badge.name}</h3>
-            <Badge className={getBadgeCategoryColor(badge.kind)} variant='secondary'>
+            <Badge className={getBadgeKindColor(badge.kind)} variant='secondary'>
               {badge.kind}
             </Badge>
           </div>
