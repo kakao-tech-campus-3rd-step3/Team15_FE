@@ -1,9 +1,4 @@
-import { ROUTES } from '@/shared/config';
-import { Button } from '@/shared/ui/button';
-import { useNavigate } from 'react-router-dom';
-
 export function SupportBand() {
-  const navigate = useNavigate();
   return (
     <section className='from-primary to-primary/80 relative overflow-hidden bg-gradient-to-br text-white'>
       <div className='mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2'>

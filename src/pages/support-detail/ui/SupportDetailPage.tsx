@@ -39,14 +39,6 @@ export function SupportDetailPage() {
             목록으로
           </Button>
         }
-        right={
-          <div className='flex gap-2'>
-            <Button onClick={openEndPoint} disabled={!data?.endPoint}>
-              <ExternalLink className='mr-2 h-4 w-4' />
-              공식 페이지 열기
-            </Button>
-          </div>
-        }
       />
 
       {/* 성공 상태 */}
