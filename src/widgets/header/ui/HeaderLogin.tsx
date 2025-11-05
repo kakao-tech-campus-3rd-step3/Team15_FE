@@ -12,11 +12,13 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu';
 import { ROUTES } from '@/shared/config';
+import { useUserSummaryQuery } from '../model/useUserSummaryQuery';
 
 export function HeaderLogin() {
   const location = useLocation();
   const pathname = location.pathname;
   const activeItem = getActiveItem(pathname);
+  const { data: userSummary } = useUserSummaryQuery();
   const { logout } = useLogout();
   const navigate = useNavigate();
 
@@ -34,8 +36,8 @@ export function HeaderLogin() {
                 <span className='absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-500' />
               </div>
               <div className='flex flex-col text-right'>
-                <span className='text-sm font-semibold'>전남대학교</span>
-                <span className='text-xs text-gray-500'>전남대1팀</span>
+                <span className='text-sm font-semibold'>{userSummary.handle}</span>
+                <span className='text-xs text-gray-500'>{userSummary.name}</span>
               </div>
               <ChevronDown className='h-4 w-4 text-gray-500 transition-transform group-data-[state=open]:rotate-180' />
             </button>
