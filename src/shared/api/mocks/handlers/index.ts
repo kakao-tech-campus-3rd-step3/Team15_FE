@@ -9,6 +9,7 @@ import {
 } from './postDetail';
 import { commentHandlers } from './comment';
 import { missionHandlers } from './mission';
+import { badgeHandlers } from './badge';
 
 export const handlers = [
   ...authHandlers,
@@ -20,4 +21,5 @@ export const handlers = [
   ...missionHandlers,
   ...supportProgramHandlers,
   ...supportProgramDetailHandlers,
+  ...badgeHandlers,
 ];
