@@ -10,6 +10,7 @@ import {
 import { commentHandlers } from './comment';
 import { missionHandlers } from './mission';
 import { activityHandlers } from './activity';
+import { badgeHandlers } from './badge';
 
 export const handlers = [
   ...authHandlers,
@@ -22,4 +23,5 @@ export const handlers = [
   ...supportProgramHandlers,
   ...supportProgramDetailHandlers,
   ...activityHandlers,
+  ...badgeHandlers,
 ];

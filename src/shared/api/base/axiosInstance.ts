@@ -56,6 +56,11 @@ const publicRules: PublicRule[] = [
   { pattern: /^\/support-programs\/count(\/)?(\?.*)?$/, methods: ['get'] }, // /support-programs/count
   // 오타 대비 (/supprot-programs/count)
   { pattern: /^\/supprot-programs\/count(\/)?(\?.*)?$/, methods: ['get'] },
+
+  // AI 챗봇 상담 관련 공개 API
+  { pattern: /^\/counsel\/[^/]+(\/)?(\?.*)?$/, methods: ['delete'] }, // /counsel/{sessionId}
+  { pattern: /^\/counsel\/[^/]+\/message(\/)?(\?.*)?$/, methods: ['post'] }, // /counsel/{sessionId}/message
+  { pattern: /^\/counsel\/start(\/)?(\?.*)?$/, methods: ['post'] }, // /counsel/start
 ];
 
 // 현재 요청이 공개 규칙에 맞는지 검사
@@ -76,6 +81,7 @@ axiosInstance.interceptors.request.use(
 
     // 토큰이 있으면 항상 헤더에 첨부 (공개 API라도 개인화/권한 반영 가능)
     const accessToken = localStorage.getItem('accessToken');
+
     if (accessToken) {
       setAuthHeader(config, accessToken);
     }

@@ -14,6 +14,8 @@ import AuthGuard from './AuthGuard';
 import { DevPanel } from '@/shared/ui/dev-panner/DevPanel';
 import { SupportPage } from '@/pages/support';
 import { SupportDetailPage } from '@/pages/support-detail';
+import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
+import ChatLayout from '../layout/ChatLayout';
 
 function Router() {
   return (
@@ -34,6 +36,9 @@ function Router() {
           <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
           <Route path={ROUTES.badge} element={<BadgePage />} />
           <Route path={ROUTES.mission} element={<MissionPage />} />
+        </Route>
+        <Route element={<ChatLayout />}>
+          <Route path={ROUTES.chatBot} element={<ChatbotPage />} />
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
