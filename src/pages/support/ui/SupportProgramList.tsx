@@ -2,9 +2,14 @@ import { useSupportListQuery } from '@/entities/support/model/useSupportListQuer
 import type { SupportProgram } from '@/entities/support/model/supportProgram.type';
 import SupportProgramCard from '@/widgets/SupportProgramCard/ui/SupportProgramCard';
 
-export function SupportProgramList() {
+interface SupportProgramListProps {
+  limit?: number;
+}
+
+export function SupportProgramList({ limit }: SupportProgramListProps) {
   const { data } = useSupportListQuery();
   const items: SupportProgram[] = Array.isArray(data) ? (data as SupportProgram[]) : data.items;
+  const displayedItems = limit ? items.slice(0, limit) : items;
 
   if (!items || items.length === 0) {
     return (
@@ -16,7 +21,7 @@ export function SupportProgramList() {
 
   return (
     <div className='grid gap-6 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'>
-      {items.map((p) => (
+      {displayedItems.map((p) => (
         <SupportProgramCard key={p.id} program={p} />
       ))}
     </div>

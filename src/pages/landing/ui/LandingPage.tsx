@@ -54,7 +54,7 @@ export function LandingPage() {
 
         <div className='px-6'>
           <SuspenseBoundary fallback={<SupportProgramListSkeleton />}>
-            <SupportProgramList />
+            <SupportProgramList limit={3} />
             <MorePostsButton to={ROUTES.support} label='지원사업 더 보러가기' />
           </SuspenseBoundary>
         </div>

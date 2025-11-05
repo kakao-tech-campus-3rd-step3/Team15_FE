@@ -1,4 +1,4 @@
-import { NotebookText, Home, MessageCircle, FileText } from 'lucide-react';
+import { NotebookText, Home, MessageCircle, FileText, Bot } from 'lucide-react';
 
 export const ROUTES = {
   landing: '/',
@@ -58,6 +58,6 @@ export const MENU_ITEMS = [
   {
     title: '상담챗봇',
     url: ROUTES.chatBot,
-    icon: MessageCircle,
+    icon: Bot,
   },
 ];

@@ -1,10 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { HEADER_NAV_ITEMS } from '../config/const';
 import { ROUTES } from '@/shared/config';
 import { Button } from '@/shared/ui/button';
 
 export function HeaderGuest() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAuthPage = location.pathname === ROUTES.login || location.pathname === ROUTES.login;
 
   return (
     <header className='sticky top-0 z-40 w-full bg-white text-black'>
@@ -41,12 +43,16 @@ export function HeaderGuest() {
           </Button> */}
 
           {/* 로그인 버튼 (연한 테두리 pill) */}
-          <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
-            로그인
-          </Button>
-          <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
-            회원가입
-          </Button>
+          {!isAuthPage && (
+            <>
+              <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
+                로그인
+              </Button>
+              <Button variant='outline' size='sm' onClick={() => navigate(ROUTES.login)}>
+                회원가입
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>
