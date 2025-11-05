@@ -9,6 +9,7 @@ import {
 } from './postDetail';
 import { commentHandlers } from './comment';
 import { missionHandlers } from './mission';
+import { activityHandlers } from './activity';
 import { badgeHandlers } from './badge';
 
 export const handlers = [
@@ -21,5 +22,6 @@ export const handlers = [
   ...missionHandlers,
   ...supportProgramHandlers,
   ...supportProgramDetailHandlers,
+  ...activityHandlers,
   ...badgeHandlers,
 ];
