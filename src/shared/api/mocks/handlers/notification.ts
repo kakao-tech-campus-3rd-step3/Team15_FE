@@ -6,6 +6,7 @@ let mockNotifications: Notification[] = [
   {
     id: 1,
     type: 'MISSION',
+    typeId: 2,
     actorId: 0,
     actorNickname: '시스템',
     receiverId: 1,
@@ -17,6 +18,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 2,
+    typeId: 2,
     type: 'COMMENT',
     actorId: 3,
     actorNickname: '김철수',
@@ -29,6 +31,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 3,
+    typeId: 2,
     type: 'LIKE',
     actorId: 4,
     actorNickname: '유저A',
@@ -41,6 +44,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 4,
+    typeId: 2,
     type: 'MISSION',
     actorId: 0,
     actorNickname: '시스템',
@@ -53,6 +57,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 5,
+    typeId: 2,
     type: 'SYSTEM',
     actorId: 0,
     actorNickname: '시스템',
@@ -65,6 +70,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 6,
+    typeId: 2,
     type: 'COMMENT',
     actorId: 5,
     actorNickname: '이영희',
@@ -77,6 +83,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 7,
+    typeId: 2,
     type: 'MISSION',
     actorId: 0,
     actorNickname: '시스템',
@@ -89,6 +96,7 @@ let mockNotifications: Notification[] = [
   },
   {
     id: 8,
+    typeId: 2,
     type: 'LIKE',
     actorId: 6,
     actorNickname: '유저B',

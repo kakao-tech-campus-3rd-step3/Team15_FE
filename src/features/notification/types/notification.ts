@@ -3,6 +3,7 @@ export type TargetType = 'POST' | 'COMMENT' | 'MISSION' | 'SYSTEM';
 
 export interface Notification {
   id: number;
+  typeId: number | null;
   type: NotificationType;
   actorId: number;
   actorNickname: string;
