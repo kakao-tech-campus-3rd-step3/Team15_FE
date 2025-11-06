@@ -16,12 +16,14 @@ import { SupportPage } from '@/pages/support';
 import { SupportDetailPage } from '@/pages/support-detail';
 import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
 import ChatLayout from '../layout/ChatLayout';
+import OAuthCallback from '@/pages/oauth-callback/OAuthCallback';
 
 function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
+          <Route path={ROUTES.oauthGoogle} element={<OAuthCallback />} />
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />

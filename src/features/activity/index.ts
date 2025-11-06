@@ -8,4 +8,4 @@ export { useActivityComments, useActivityLikes, useActivityPosts } from './api/u
 export { useActivityStats } from './api/useActivityStats';
 
 // types
-export type { ActivityHeaderProps, BasePostResponse } from './types/activity';
+export type { ActivityHeaderProps } from './types/activity';

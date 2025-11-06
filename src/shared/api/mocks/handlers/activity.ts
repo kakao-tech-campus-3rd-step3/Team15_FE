@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import type { ActivityHeaderProps, BasePostResponse } from '@/features/activity/types/activity';
+import type { ActivityHeaderProps } from '@/features/activity/types/activity';
 
 export const activityHandlers = [
   // 🔹 활동 통계
@@ -15,7 +15,7 @@ export const activityHandlers = [
 
   // 🔹 내가 쓴 글
   http.get('/api/users/me/posts', () => {
-    const mockResponse: BasePostResponse[] = [
+    const mockResponse = [
       {
         id: 1,
         postCategory: 'FREE',
@@ -45,7 +45,7 @@ export const activityHandlers = [
 
   // 🔹 내가 쓴 댓글
   http.get('/api/users/me/comments', () => {
-    const mockResponse: BasePostResponse[] = [
+    const mockResponse = [
       {
         id: 101,
         postCategory: 'FREE',
@@ -64,7 +64,7 @@ export const activityHandlers = [
 
   // 🔹 좋아요 누른 글
   http.get('/api/users/me/likes', () => {
-    const mockResponse: BasePostResponse[] = [
+    const mockResponse = [
       {
         id: 301,
         postCategory: 'REVIEW',

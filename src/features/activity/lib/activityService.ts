@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/shared/api/base/axiosInstance';
-import type { ActivityHeaderProps, BasePostResponse } from '../types/activity';
+import type { ActivityHeaderProps, MyComment, MyLikedPost, MyPost } from '../types/activity';
 
 export const activityService = {
   // 활동 통계
@@ -8,18 +8,18 @@ export const activityService = {
     return data;
   },
   // 포스트
-  getMyPosts: async (): Promise<BasePostResponse[]> => {
-    const { data } = await axiosInstance.get<BasePostResponse[]>('/users/me/posts');
+  getMyPosts: async (): Promise<MyPost[]> => {
+    const { data } = await axiosInstance.get<MyPost[]>('/users/me/posts');
     return data;
   },
   // 댓글
-  getMyComments: async (): Promise<BasePostResponse[]> => {
-    const { data } = await axiosInstance.get<BasePostResponse[]>('/users/me/comments');
+  getMyComments: async (): Promise<MyComment[]> => {
+    const { data } = await axiosInstance.get<MyComment[]>('/users/me/comments');
     return data;
   },
   // 좋아요
-  getLikedPosts: async (): Promise<BasePostResponse[]> => {
-    const { data } = await axiosInstance.get<BasePostResponse[]>('/users/me/likes');
+  getLikedPosts: async (): Promise<MyLikedPost[]> => {
+    const { data } = await axiosInstance.get<MyLikedPost[]>('/users/me/likes');
     return data;
   },
 };

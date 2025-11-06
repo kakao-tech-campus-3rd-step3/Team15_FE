@@ -6,7 +6,7 @@ import { Calendar } from '@/shared/ui/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import type { CategoryCode } from '@/entities/post';
-import type { Params, SortKey } from '@/widgets/PostList/model/type';
+import type { Params } from '@/widgets/PostList/model/type';
 import { useCategoriesQuery } from '../model/useCategoriesQuery';
 
 type Props = {
@@ -52,7 +52,7 @@ export function ParamsBar({ value, onChange, onApply, className }: Props) {
       </Select>
 
       {/* 정렬 */}
-      <Select value={value.sort} onValueChange={(v) => onChange({ sort: v as SortKey, page: 0 })}>
+      {/* <Select value={value.sort} onValueChange={(v) => onChange({ sort: v as SortKey, page: 0 })}>
         <SelectTrigger className='w-[140px]'>
           <SelectValue placeholder='정렬' />
         </SelectTrigger>
@@ -62,7 +62,7 @@ export function ParamsBar({ value, onChange, onApply, className }: Props) {
           <SelectItem value='viewCount,desc'>조회수순</SelectItem>
           <SelectItem value='likeCount,desc'>좋아요순</SelectItem>
         </SelectContent>
-      </Select>
+      </Select> */}
 
       {/* 기간 (start~end) */}
       <Popover>
