@@ -29,6 +29,13 @@ const publicRules: PublicRule[] = [
   // 인증 관련 (POST 허용)
   { pattern: /^\/auth\/login$/, methods: ['post'] },
   { pattern: /^\/auth\/refresh$/, methods: ['post'] },
+  { pattern: /^\/auth\/signup$/, methods: ['post'] },
+  { pattern: /^\/auth\/email\/send$/, methods: ['post'] },
+  { pattern: /^\/auth\/email\/verify$/, methods: ['post'] },
+  { pattern: /^\/auth\/google\/url$/, methods: ['get'] },
+  { pattern: /^\/auth\/logout$/, methods: ['post'] },
+
+  // 미션 관련
 
   // 게시글 상세 조회 (GET만, 숫자 id)
   { pattern: /^\/posts\/\d+(\/)?(\?.*)?$/, methods: ['get'] },
