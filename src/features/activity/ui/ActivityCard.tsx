@@ -3,7 +3,7 @@ import { Calendar, Heart, MessageCircle, Eye } from 'lucide-react';
 import { getCategoryColor } from '../lib/activityUtils';
 import { formatDate } from '@/shared/lib/date';
 import type { MyComment, MyLikedPost, MyPost } from '../types/activity';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 /* -------------------- 공통 카드 베이스 -------------------- */
 interface ActivityCardBaseProps {
@@ -14,7 +14,7 @@ interface ActivityCardBaseProps {
   content?: string;
   date: string;
   stats?: React.ReactNode;
-  postId: number;
+  // postId: number;
 }
 
 const ActivityCardBase = ({
@@ -25,16 +25,16 @@ const ActivityCardBase = ({
   content,
   date,
   stats,
-  postId,
+  // postId,
 }: ActivityCardBaseProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/posts/${postId}`);
-  };
+  // const handleClick = () => {
+  //   navigate(`/posts/${postId}`);
+  // };
   return (
     <div
-      onClick={handleClick}
+      // onClick={handleClick}
       className='cursor-pointer rounded-lg border bg-white p-5 transition-colors hover:bg-gray-50 active:bg-gray-100'
     >
       <div className='mb-3 flex justify-between'>
@@ -67,7 +67,7 @@ const ActivityCardBase = ({
 export const ActivityPostCard = ({ post }: { post: MyPost }) => {
   return (
     <ActivityCardBase
-      postId={post.id}
+      // postId={post.id}
       badgeLabel={post.displayName}
       badgeColor={getCategoryColor(post.displayName)}
       title={post.title}
@@ -94,7 +94,7 @@ export const ActivityPostCard = ({ post }: { post: MyPost }) => {
 export const CommentCard = ({ comment }: { comment: MyComment }) => {
   return (
     <ActivityCardBase
-      postId={comment.postId}
+      // postId={comment.postId}
       badgeLabel={comment.displayName}
       badgeColor={getCategoryColor(comment.displayName)}
       subtitle={comment.postTitle}
@@ -113,7 +113,7 @@ export const CommentCard = ({ comment }: { comment: MyComment }) => {
 export const LikedPostCard = ({ post }: { post: MyLikedPost }) => {
   return (
     <ActivityCardBase
-      postId={post.postId}
+      // postId={post.postId}
       badgeLabel={post.displayName}
       badgeColor={getCategoryColor(post.displayName)}
       title={post.postTitle}
