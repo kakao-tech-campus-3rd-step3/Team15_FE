@@ -13,9 +13,10 @@ import type { MissionResponse } from '../types/mission';
 
 interface Props {
   missions: MissionResponse[];
+  isRecommended?: boolean;
 }
 
-export const MissionsList = ({ missions }: Props) => {
+export const MissionsList = ({ missions, isRecommended }: Props) => {
   // const { data: missions } = useTodayMissions();
   const { mutate: cancelMission } = useCancelMission();
   const { mutate: completeMission } = useCompleteMission();
@@ -29,7 +30,7 @@ export const MissionsList = ({ missions }: Props) => {
 
   return (
     <>
-      <div className='mb-6 grid grid-cols-1 gap-4 md:grid-cols-2'>
+      <div className='mb-6 grid grid-cols-1 gap-4 md:grid-cols-3'>
         {missions.map((mission) => {
           const statusBadge = getStatusBadge(mission.state);
           const isCompleted = mission.state === 'COMPLETED';
@@ -37,7 +38,10 @@ export const MissionsList = ({ missions }: Props) => {
           const isAvailable = mission.state === 'NOT_STARTED';
 
           return (
-            <Card key={mission.id} className={`p-5 ${isCompleted ? 'bg-gray-50' : 'bg-white'}`}>
+            <Card
+              key={mission.id}
+              className={`p-5 ${isRecommended ? 'animate-pulse border-2 border-yellow-400 bg-yellow-100 shadow-lg' : isCompleted ? 'bg-gray-50' : 'bg-white'}`}
+            >
               <div className='mb-3 flex items-start justify-between'>
                 <Badge className={statusBadge.color}>{statusBadge.text}</Badge>
                 <span className='text-xs text-gray-500'>{mission.level}</span>
