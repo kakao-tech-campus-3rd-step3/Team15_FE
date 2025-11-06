@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Bot, MessageSquare, ShieldCheck, Sparkles, Send } from 'lucide-react';
+import { Bot, MessageSquare, ShieldCheck, Send } from 'lucide-react';
 import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import { Separator } from '@/shared/ui/separator';
