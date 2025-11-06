@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/features/auth/model/useAuthStore';
-import { axiosInstance } from '@/shared/api/base/axiosInstance';
+// import { axiosInstance } from '@/shared/api/base/axiosInstance';
 
 export const KakaoOAuthCallback = () => {
   const navigate = useNavigate();
@@ -18,23 +18,26 @@ export const KakaoOAuthCallback = () => {
       }
 
       try {
+        window.location.href = `/api/auth/kakao/callback?code=${code}`;
+
         // 백엔드 API로 인가 코드 전달
-        const res = await axiosInstance.get(`/auth/kakao/callback?code=${code}`);
-        console.log('카카오 로그인', res);
+        // const res = await axiosInstance.get(`/auth/kakao/callback?code=${code}`);
+        // console.log('카카오 로그인', res);
 
-        const { accessToken } = res.data;
-        if (!accessToken) {
-          console.error('accessToken이 응답에 없습니다:', res.data);
-          alert('로그인에 실패했습니다. 다시 시도해주세요.');
-          // navigate('/login');
-          return;
-        }
+        // const { accessToken } = res.data;
+        // if (!accessToken) {
+        //   console.error('accessToken이 응답에 없습니다:', res.data);
+        //   window.location.href = `/auth/kakao/callback?code=${code}`;
+        //   alert('로그인에 실패했습니다. 다시 시도해주세요.');
+        //   // navigate('/login');
+        //   return;
+        // }
 
-        login(accessToken);
-        console.log(accessToken);
+        // login(accessToken);
+        // console.log(accessToken);
 
-        // 로그인 완료 후 홈으로 이동
-        navigate('/');
+        // // 로그인 완료 후 홈으로 이동
+        // navigate('/');
       } catch (err) {
         console.error('카카오 로그인 실패:', err);
       }

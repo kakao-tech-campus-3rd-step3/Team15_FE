@@ -18,6 +18,7 @@ import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
 import ChatLayout from '../layout/ChatLayout';
 import GoogleOAuthCallback from '@/pages/oauth-callback/GoogleOAuthCallback';
 import { KakaoOAuthCallback } from '@/pages/oauth-callback/KakaoOAuthCallback';
+// import { OAuthCallback } from '@/pages/oauth-callback/Callback';
 
 function Router() {
   return (
@@ -26,6 +27,8 @@ function Router() {
         <Route element={<AppLayout />}>
           <Route path={ROUTES.oauthGoogle} element={<GoogleOAuthCallback />} />
           <Route path='/kakao/login/callback' element={<KakaoOAuthCallback />} />
+
+          <Route path='/oauth/callback/kakao' element={<GoogleOAuthCallback />} />
 
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
