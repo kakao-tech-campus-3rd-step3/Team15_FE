@@ -16,9 +16,8 @@ import { SupportPage } from '@/pages/support';
 import { SupportDetailPage } from '@/pages/support-detail';
 import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
 import ChatLayout from '../layout/ChatLayout';
-import GoogleOAuthCallback from '@/pages/oauth-callback/GoogleOAuthCallback';
-import { KakaoOAuthCallback } from '@/pages/oauth-callback/KakaoOAuthCallback';
-// import { OAuthCallback } from '@/pages/oauth-callback/Callback';
+import GoogleOAuthCallback from '@/pages/OAuthCallback/GoogleOAuthCallback';
+import { KakaoOAuthCallback } from '@/pages/OAuthCallback/KakaoOAuthCallback';
 
 function Router() {
   return (
