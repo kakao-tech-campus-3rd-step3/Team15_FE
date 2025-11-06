@@ -1,0 +1,73 @@
+import { Bell, Check, Trash2 } from 'lucide-react';
+import { Badge } from '@/shared/ui//badge';
+import { Button } from '@/shared/ui/button';
+import { getTypeColor, getTypeLabel } from '../lib/notificationUtils';
+import type { Notification } from '../types/notification';
+
+interface TempProps {
+  notifications: Notification[];
+  handleMarkAsRead: (id: number) => void;
+  handleDelete: (id: number) => void;
+}
+
+export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete }: TempProps) => {
+  return (
+    <div className='flex-1 overflow-y-auto'>
+      <div className='space-y-3 p-4'>
+        {notifications.length === 0 ? (
+          <div className='py-12 text-center text-gray-500'>
+            <Bell className='mx-auto mb-4 h-12 w-12 text-gray-300' />
+            <p>알림이 없습니다</p>
+          </div>
+        ) : (
+          notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className={`rounded-lg border p-4 transition-colors ${
+                notification.isRead ? 'bg-white' : 'border-green-200 bg-green-50'
+              }`}
+            >
+              <div className='mb-2 flex items-start justify-between'>
+                <div className='flex flex-1 items-center gap-2'>
+                  <Badge className={getTypeColor(notification.type)} variant='secondary'>
+                    {getTypeLabel(notification.type)}
+                  </Badge>
+                  {!notification.isRead && (
+                    <div className='h-2 w-2 animate-pulse rounded-full bg-green-500'></div>
+                  )}
+                </div>
+                <span className='text-xs text-gray-500'>{notification.time}</span>
+              </div>
+
+              <h4 className='mb-1 font-semibold text-gray-900'>{notification.title}</h4>
+              <p className='mb-3 text-sm text-gray-600'>{notification.message}</p>
+
+              <div className='flex items-center gap-2'>
+                {!notification.isRead && (
+                  <Button
+                    variant='outline'
+                    size='sm'
+                    onClick={() => handleMarkAsRead(notification.id)}
+                    className='border-green-300 text-green-600 hover:bg-green-50'
+                  >
+                    <Check className='mr-1 h-3 w-3' />
+                    읽음
+                  </Button>
+                )}
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() => handleDelete(notification.id)}
+                  className='border-red-300 text-red-600 hover:bg-red-50'
+                >
+                  <Trash2 className='mr-1 h-3 w-3' />
+                  삭제
+                </Button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
