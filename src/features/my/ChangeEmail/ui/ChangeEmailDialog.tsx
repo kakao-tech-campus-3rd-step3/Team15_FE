@@ -16,7 +16,11 @@ import { useUpdateEmail } from '@/entities/user/model/useUserProfile';
 import { useEmailVerification } from '@/features/auth/lib/useEmailVerification';
 import { emailSchema } from '@/features/auth/lib/auth.schema';
 
-const ChangeEmailDialog = () => {
+interface Props {
+  email: string;
+}
+
+const ChangeEmailDialog = ({ email }: Props) => {
   const { isOpen, newEmail, setNewEmail, close } = useChangeEmail();
   const updateEmail = useUpdateEmail();
   const { state, sendVerificationCode, verifyCode, reset } = useEmailVerification();
@@ -72,12 +76,7 @@ const ChangeEmailDialog = () => {
             <Label htmlFor='current-email' className='text-sm font-medium'>
               현재 이메일
             </Label>
-            <Input
-              id='current-email'
-              value='user@example.com'
-              disabled
-              className='bg-gray-50 text-gray-500'
-            />
+            <Input id='current-email' value={email} disabled className='bg-gray-50 text-gray-500' />
           </div>
 
           {/* 새 이메일 입력 */}
