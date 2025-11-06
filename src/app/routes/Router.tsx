@@ -23,7 +23,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path='/oauth/callback/google' element={<OAuthCallback />} />
+          <Route path={ROUTES.oauthGoogle} element={<OAuthCallback />} />
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />
