@@ -2,7 +2,7 @@ export interface User {
   nickname: string;
   joinDate: string;
   lastActiveDate: string;
-  score: number;
+  points: number;
   level: number;
 }
 
