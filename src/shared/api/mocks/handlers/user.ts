@@ -12,7 +12,7 @@ export const userHandlers = [
         nickname: 'jin',
         joinDate: '2025-02-12T12:00:00Z',
         lastActiveDate: '2025-06-20T12:00:00Z',
-        score: 1200,
+        points: 1200,
         level: 5,
       },
       stats: {
