@@ -8,7 +8,7 @@ export const useLogout = () => {
 
   const logout = () => {
     logoutStore();
-    alert('로그아웃 성공, 메인페이지로 이동합니다.');
+    // alert('로그아웃 성공, 메인페이지로 이동합니다.');
     navigate(ROUTES.landing);
   };
   return { logout };
