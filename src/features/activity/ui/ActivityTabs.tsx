@@ -1,16 +1,19 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { Card, CardContent } from '@/shared/ui/card';
-import { PenTool, MessageCircle, ThumbsUp, Heart, TrendingUp } from 'lucide-react';
+import { PenTool, MessageCircle, ThumbsUp, Heart, TrendingUp, Calendar } from 'lucide-react';
 
-import type { BasePostResponse } from '../types/activity';
+import type { MyComment, MyLikedPost, MyPost } from '../types/activity';
 import { ActivityPostCard } from './ActivityCard';
+import { Badge } from '@/shared/ui/badge';
+import { getCategoryColor } from '../lib/activityUtils';
+import { formatDate } from '@/shared/lib/date';
 
 interface ActivityTabsProps {
   activeTab: string;
   onTabChange: (value: string) => void;
-  posts: BasePostResponse[];
-  comments: BasePostResponse[];
-  likedPosts: BasePostResponse[];
+  posts: MyPost[];
+  comments: MyComment[];
+  likedPosts: MyLikedPost[];
   searchQuery: string;
 }
 
@@ -31,13 +34,17 @@ export function ActivityTabs({
 
   const filteredComments = comments.filter(
     (comment) =>
-      comment.title?.toLowerCase().includes(searchQuery?.toLowerCase() ?? '') ||
-      comment.content?.toLowerCase().includes(searchQuery?.toLowerCase() ?? ''),
+      comment.postTitle?.toLowerCase().includes(searchQuery?.toLowerCase() ?? '') ||
+      comment.content?.toLowerCase().includes(searchQuery?.toLowerCase() ?? '') ||
+      comment.postContent?.toLowerCase().includes(searchQuery?.toLowerCase() ?? ''),
   );
 
-  const filteredLikedPosts = likedPosts.filter((post) =>
-    post.title?.toLowerCase().includes(searchQuery?.toLowerCase() ?? ''),
+  const filteredLikedPosts = likedPosts.filter(
+    (post) =>
+      post.postTitle?.toLowerCase().includes(searchQuery?.toLowerCase() ?? '') ||
+      post.postContent?.toLowerCase().includes(searchQuery?.toLowerCase() ?? ''),
   );
+  console.log(posts, comments, likedPosts);
 
   return (
     <Card>
@@ -81,38 +88,40 @@ export function ActivityTabs({
                 </span>
               </div>
             </div>
-            {filteredComments.map((post) => (
-              <ActivityPostCard key={post.id} post={post} />
+            {filteredComments.map((comment) => (
+              // <ActivityPostCard key={post.id} post={post} />
 
-              // <div
-              //   key={comment.id}
-              //   className='rounded-lg border bg-white p-5 transition-colors hover:bg-gray-50'
-              // >
-              //   <div className='mb-3 flex items-start justify-between'>
-              //     <div className='flex-1'>
-              //       <div className='mb-2 flex items-center space-x-2'>
-              //         <Badge className={getCategoryColor(comment.postCategory)}>
-              //           {comment.postCategory}
-              //         </Badge>
-              //         <span className='text-sm font-medium text-blue-600'>{comment.title}</span>
-              //       </div>
-              //       <p className='mb-2 leading-relaxed text-gray-700'>{comment.comment}</p>
-              //       <div className='flex items-center space-x-4 text-sm text-gray-500'>
-              //         <span>원글 작성자: {comment.author}</span>
-              //         <span className='flex items-center'>
-              //           <Calendar className='mr-1 h-4 w-4' />
-              //           {comment.createdAt}
-              //         </span>
-              //       </div>
-              //     </div>
-              //   </div>
-              //   <div className='flex items-center space-x-4 text-sm text-gray-600'>
-              //     <span className='flex items-center'>
-              //       <Heart className='mr-1 h-4 w-4 text-red-500' />
-              //       좋아요 {comment.likeCount}
-              //     </span>
-              //   </div>
-              // </div>
+              <div
+                key={comment.id}
+                className='rounded-lg border bg-white p-5 transition-colors hover:bg-gray-50'
+              >
+                <div className='mb-3 flex items-start justify-between'>
+                  <div className='flex-1'>
+                    <div className='mb-2 flex items-center space-x-2'>
+                      <Badge className={getCategoryColor(comment.displayName)}>
+                        {comment.displayName}
+                      </Badge>
+                      <span className='text-sm font-medium text-blue-600'>{comment.postTitle}</span>
+                    </div>
+                    <p className='mb-2 leading-relaxed text-gray-700'>
+                      해당 게시물에 {comment.content}을 달았습니다.
+                    </p>
+                    <div className='flex items-center space-x-4 text-sm text-gray-500'>
+                      {/* <span>원글 작성자: {comment.author}</span> */}
+                      <span className='flex items-center'>
+                        <Calendar className='mr-1 h-4 w-4' />
+                        {formatDate(comment.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className='flex items-center space-x-4 text-sm text-gray-600'>
+                  <span className='flex items-center'>
+                    <Heart className='mr-1 h-4 w-4 text-red-500' />
+                    좋아요 {comment.likeCount}
+                  </span>
+                </div>
+              </div>
             ))}
           </TabsContent>
 
@@ -122,37 +131,36 @@ export function ActivityTabs({
               <div className='text-sm text-gray-500'>관심있는 글들을 모아보세요</div>
             </div>
             {filteredLikedPosts.map((post) => (
-              <ActivityPostCard key={post.id} post={post} />
-
-              // <div
-              //   key={post.id}
-              //   className='rounded-lg border bg-white p-5 transition-colors hover:bg-gray-50'
-              // >
-              //   <div className='mb-3 flex items-start justify-between'>
-              //     <div className='flex-1'>
-              //       <div className='mb-2 flex items-center space-x-2'>
-              //         <Badge className={getCategoryColor(post.category)}>{post.category}</Badge>
-              //         <span className='text-sm text-gray-600'>작성자: {post.author}</span>
-              //       </div>
-              //       <h4 className='mb-2 text-lg font-semibold text-gray-900'>{post.title}</h4>
-              //       <p className='mb-3 text-sm leading-relaxed text-gray-600'>{post.excerpt}</p>
-              //     </div>
-              //     <span className='ml-4 flex items-center text-sm text-gray-500'>
-              //       <Calendar className='mr-1 h-4 w-4' />
-              //       {post.date}
-              //     </span>
-              //   </div>
-              //   <div className='flex items-center space-x-6 text-sm text-gray-600'>
-              //     <span className='flex items-center'>
-              //       <Heart className='mr-1 h-4 w-4 text-red-500' />
-              //       좋아요 {post.likes}
-              //     </span>
-              //     <span className='flex items-center'>
-              //       <MessageCircle className='mr-1 h-4 w-4 text-blue-500' />
-              //       댓글 {post.comments}
-              //     </span>
-              //   </div>
-              // </div>
+              <div
+                key={post.id}
+                className='rounded-lg border bg-white p-5 transition-colors hover:bg-gray-50'
+              >
+                <div className='mb-3 flex items-start justify-between'>
+                  <div className='flex-1'>
+                    <div className='mb-2 flex items-center space-x-2'>
+                      <Badge className={getCategoryColor(post.displayName)}>
+                        {post.displayName}
+                      </Badge>
+                    </div>
+                    <h4 className='mb-2 text-lg font-semibold text-gray-900'>{post.postTitle}</h4>
+                    <p className='mb-3 text-sm leading-relaxed text-gray-600'>{post.postContent}</p>
+                  </div>
+                  <span className='ml-4 flex items-center text-sm text-gray-500'>
+                    <Calendar className='mr-1 h-4 w-4' />
+                    {formatDate(post.postCreatedAt)}
+                  </span>
+                </div>
+                <div className='flex items-center space-x-6 text-sm text-gray-600'>
+                  <span className='flex items-center'>
+                    <Heart className='mr-1 h-4 w-4 text-red-500' />
+                    좋아요 {post.likeCount}
+                  </span>
+                  <span className='flex items-center'>
+                    <MessageCircle className='mr-1 h-4 w-4 text-blue-500' />
+                    댓글 {post.commentCount}
+                  </span>
+                </div>
+              </div>
             ))}
           </TabsContent>
         </Tabs>

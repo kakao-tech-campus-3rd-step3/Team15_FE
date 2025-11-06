@@ -1,14 +1,36 @@
-// 공통 베이스 타입
-export interface BasePostResponse {
+// 공통 베이스 (모든 게시글이 공통으로 가지는 필드)
+export interface BasePost {
   id: number;
-  postCategory: string; // 예: 'FREE', 'QUESTION', ...
-  displayName: string; // 예: '자유', '질문'
-  title: string;
-  content: string;
+  postCategory: string;
+  displayName: string;
   likeCount: number;
   commentCount: number;
   viewCount: number;
-  createdAt: string; // ISO 형식 예: "2025-09-19T19:28:23.549989"
+}
+
+// 내가 쓴 글
+export interface MyPost extends BasePost {
+  title: string;
+  content: string;
+  createdAt: string;
+}
+
+// 내가 쓴 댓글
+export interface MyComment extends BasePost {
+  content: string;
+  createdAt: string;
+  isAnonymous: boolean;
+  postId: number;
+  postTitle: string;
+  postContent: string;
+}
+
+// 좋아요한 글
+export interface MyLikedPost extends BasePost {
+  postId: number;
+  postTitle: string;
+  postContent: string;
+  postCreatedAt: string;
 }
 
 // 활동 헤더

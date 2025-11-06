@@ -1,11 +1,11 @@
 import { Badge } from '@/shared/ui/badge';
 import { Calendar, Heart, MessageCircle, Eye } from 'lucide-react';
-import type { BasePostResponse } from '../types/activity';
 import { getCategoryColor } from '../lib/activityUtils';
 import { formatDate } from '@/shared/lib/date';
+import type { MyPost } from '../types/activity';
 
 interface ActivityPostCardProps {
-  post: BasePostResponse;
+  post: MyPost;
 }
 
 export const ActivityPostCard = ({ post }: ActivityPostCardProps) => {
