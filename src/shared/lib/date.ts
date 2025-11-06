@@ -6,7 +6,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export function formatDate(isoString: string, format = 'YYYY.MM.DD') {
-  return dayjs.utc(isoString).tz('Asia/Seoul').format(format);
+  return dayjs(isoString).tz('Asia/Seoul').format(format);
 }
 
 /**
@@ -17,7 +17,7 @@ export function formatDate(isoString: string, format = 'YYYY.MM.DD') {
  */
 export function formatDateRelative(isoString: string): string {
   const now = dayjs().tz('Asia/Seoul');
-  const date = dayjs.utc(isoString).tz('Asia/Seoul');
+  const date = dayjs(isoString).tz('Asia/Seoul');
 
   const diffMinutes = now.diff(date, 'minute');
   const diffHours = now.diff(date, 'hour');
