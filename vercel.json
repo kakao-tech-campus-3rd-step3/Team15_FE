@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "${VITE_API_BASE_URL}/api/$1"
+      "destination": "http://98.80.129.245:8080/api/$1"
     },
     { "source": "/(.*)", "destination": "/" }
   ]
