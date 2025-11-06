@@ -3,9 +3,7 @@ import { Card, CardContent } from '@/shared/ui/card';
 import { PenTool, MessageCircle, ThumbsUp, Heart, TrendingUp } from 'lucide-react';
 
 import type { MyComment, MyLikedPost, MyPost } from '../types/activity';
-import { ActivityPostCard } from './ActivityCard';
-import { CommentCard } from './CommentCard';
-import { LikedPostCard } from './LikedPostCard';
+import { ActivityPostCard, LikedPostCard, CommentCard } from './ActivityCard';
 
 interface ActivityTabsProps {
   activeTab: string;
