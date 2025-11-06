@@ -1,4 +1,5 @@
-import { Button } from '@/shared/ui/shadcn/button';
+import { useChangePasswordMutation } from '@/entities/user/model/useUserProfile';
+import { Button } from '@/shared/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -6,10 +7,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/shared/ui/shadcn/dialog';
-import { Input } from '@/shared/ui/shadcn/input';
-import { Label } from '@/shared/ui/shadcn/label';
+} from '@/shared/ui/dialog';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import { Lock } from 'lucide-react';
+import { useEffect } from 'react';
+import { isAxiosError } from 'axios';
 import { useChangePassword } from '../model/useChangePassword';
 
 const ChangePasswordDialog = () => {
@@ -22,8 +25,53 @@ const ChangePasswordDialog = () => {
     setNewPassword,
     confirmPassword,
     setConfirmPassword,
-    submit,
   } = useChangePassword();
+  const changePasswordMutation = useChangePasswordMutation();
+
+  useEffect(() => {
+    if (changePasswordMutation.isSuccess) {
+      alert('비밀번호가 성공적으로 변경되었습니다.');
+      close();
+      changePasswordMutation.reset();
+    }
+  }, [
+    changePasswordMutation.isSuccess,
+    close,
+    changePasswordMutation.reset,
+    changePasswordMutation,
+  ]);
+
+  useEffect(() => {
+    if (changePasswordMutation.isError) {
+      if (isAxiosError<{ message: string }>(changePasswordMutation.error)) {
+        alert(
+          changePasswordMutation.error.response?.data?.message || '비밀번호 변경에 실패했습니다.',
+        );
+      } else {
+        alert('비밀번호 변경에 실패했습니다.');
+      }
+      changePasswordMutation.reset();
+    }
+  }, [
+    changePasswordMutation.isError,
+    changePasswordMutation.error,
+    changePasswordMutation.reset,
+    changePasswordMutation,
+  ]);
+
+  const handleSubmit = () => {
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      return;
+    }
+    changePasswordMutation.mutate({
+      currentPassword,
+      newPassword,
+      confirmPassword,
+    });
+  };
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent className='sm:max-w-md'>
@@ -49,7 +97,9 @@ const ChangePasswordDialog = () => {
               onChange={(e) => setCurrentPassword(e.target.value)}
             />
           </div>
-          <p className='text-sm text-gray-500'>임시: 1234</p>
+          {process.env.NODE_ENV === 'development' && (
+            <p className='text-sm text-gray-500'>임시: qwer1234!</p>
+          )}
           <div>
             <Label htmlFor='new-password' className='text-sm font-medium'>
               새 비밀번호
@@ -83,16 +133,17 @@ const ChangePasswordDialog = () => {
             취소
           </Button>
           <Button
-            onClick={submit}
+            onClick={handleSubmit}
             disabled={
               !currentPassword ||
               !newPassword ||
               !confirmPassword ||
-              newPassword !== confirmPassword
+              newPassword !== confirmPassword ||
+              changePasswordMutation.isPending
             }
             className='bg-green-600 hover:bg-green-700'
           >
-            변경하기
+            {changePasswordMutation.isPending ? '처리 중...' : '변경하기'}
           </Button>
         </DialogFooter>
       </DialogContent>

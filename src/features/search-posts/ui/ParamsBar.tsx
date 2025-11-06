@@ -1,19 +1,13 @@
-import { Input } from '@/shared/ui/shadcn/input';
-import { Button } from '@/shared/ui/shadcn/button';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/shared/ui/shadcn/select';
-import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/shadcn/popover';
-import { Calendar } from '@/shared/ui/shadcn/calendar';
+import { Input } from '@/shared/ui/input';
+import { Button } from '@/shared/ui/button';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/shared/ui/select';
+import { Popover, PopoverTrigger, PopoverContent } from '@/shared/ui/popover';
+import { Calendar } from '@/shared/ui/calendar';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import type { CategoryCode } from '@/entities/post';
 import type { Params, SortKey } from '@/widgets/PostList/model/type';
-import { useCategoriesQuery } from '../lib/useCategoriesQuery';
+import { useCategoriesQuery } from '../model/useCategoriesQuery';
 
 type Props = {
   value: Params;
@@ -23,7 +17,7 @@ type Props = {
   className?: string;
 };
 
-export function ParamsBar({ value, onChange, onApply, onReset, className }: Props) {
+export function ParamsBar({ value, onChange, onApply, className }: Props) {
   const pretty = (d?: string) => (d ? format(new Date(d), 'yyyy-MM-dd') : '기간 선택');
   const { data } = useCategoriesQuery();
   if (!data || data.length === 0) {
@@ -131,12 +125,6 @@ export function ParamsBar({ value, onChange, onApply, onReset, className }: Prop
           ))}
         </SelectContent>
       </Select>
-
-      {/* 실행/초기화 */}
-      <Button onClick={onApply}>적용</Button>
-      <Button variant='outline' onClick={onReset}>
-        초기화
-      </Button>
     </div>
   );
 }

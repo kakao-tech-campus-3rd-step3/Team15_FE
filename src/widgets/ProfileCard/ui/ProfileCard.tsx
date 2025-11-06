@@ -1,17 +1,19 @@
-import { useUserProfile } from '@/entities/user';
+import { useUserProfile, useUserProfileEdit } from '@/entities/user';
 import { useProfileStore } from '@/features/my/ChangeProfileInfo/model/useProfileStore';
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import { Badge } from '@/shared/ui/shadcn/badge';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Progress } from '@/shared/ui/shadcn/progress';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Progress } from '@/shared/ui/progress';
 import { Award, Edit3, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SmallBadge from './SmallBadge';
-import { StatCard } from '@/shared/ui/stats/StatCard';
+import { StatCard } from '@/shared/ui/stat-card';
+import { getLevelProgress } from '../util/levelUtils';
 
 export const ProfileCard = () => {
   const { setIsModalOpen } = useProfileStore();
+  const { data: profileEdit } = useUserProfileEdit();
 
   const { data, isPending, isError } = useUserProfile();
   if (isPending) return <div>로딩중...</div>;
@@ -34,6 +36,7 @@ export const ProfileCard = () => {
     { label: '좋아요 받은 수', value: stats.totalLikes, color: 'text-red-600' },
     { label: '완료한 미션', value: stats.totalMissionClear, color: 'text-blue-600' },
   ];
+  const { progress, remainPercent } = getLevelProgress(user.points);
 
   return (
     <Card className='border-green-200 bg-gradient-to-r from-green-50 to-emerald-50'>
@@ -60,11 +63,10 @@ export const ProfileCard = () => {
                 활동일: {diffDays}일
               </Badge>
             </div>
-            <p className='mb-2 text-sm text-gray-600'>함께 성장하는 것을 좋아해요! 🌱</p>
-            {/* 이 데이터도 달라고 요청하기 */}
+            <p className='mb-2 text-sm text-gray-600'>{profileEdit?.introduction}</p>
             <div className='flex items-center space-x-4 text-sm text-gray-500'>
               <span>가입일: {joinDate}</span>
-              <span>활동점수: {user.score}점</span>
+              <span>활동점수: {user.points}점</span>
               <span>레벨: {user.level}레벨</span>
             </div>
           </div>
@@ -72,12 +74,10 @@ export const ProfileCard = () => {
             variant='outline'
             size='sm'
             className='border-green-300 bg-transparent text-green-700 hover:bg-green-50'
-            asChild
+            onClick={() => setIsModalOpen(true)}
           >
-            <Button variant='outline' size='sm' onClick={() => setIsModalOpen(true)}>
-              <Edit3 className='mr-1 h-4 w-4' />
-              프로필 수정
-            </Button>
+            <Edit3 className='mr-1 h-4 w-4' />
+            프로필 수정
           </Button>
         </div>
 
@@ -98,10 +98,10 @@ export const ProfileCard = () => {
               {user.level}레벨 → {user.level + 1}레벨
             </span>
           </div>
-          <Progress value={(1200 / 2000) * 100} className='mb-2 h-3' />
+          <Progress value={progress} className='mb-2 h-3' />
           {/* 추후 테이블로 리팩토링 */}
           <p className='text-sm text-gray-600'>
-            다음 레벨까지 {(1 - 1200 / 2000) * 100}% 남았어요!
+            다음 레벨까지 {remainPercent.toFixed(1)}% 남았어요!
           </p>
         </div>
 

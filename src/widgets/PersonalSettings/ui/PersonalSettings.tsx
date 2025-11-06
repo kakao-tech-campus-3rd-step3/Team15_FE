@@ -1,12 +1,16 @@
-import { useUserProfile } from '@/entities/user';
+import {
+  useUserProfile,
+  useUpdateCommentNotification,
+  useUpdateLikeNotification,
+} from '@/entities/user';
 import { useChangeEmail } from '@/features/my/ChangeEmail/model/useChangeEmail';
 import { useChangePassword } from '@/features/my/ChangePassword/model/useChangePassword';
 import { useDeleteAccount } from '@/features/my/DeleteAccount/model/useDeleteAccount';
 import { formatDate } from '@/shared/lib/date';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/shadcn/card';
-import { Separator } from '@/shared/ui/shadcn/separator';
-import { Switch } from '@/shared/ui/shadcn/switch';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Separator } from '@/shared/ui/separator';
+import { Switch } from '@/shared/ui/switch';
 import { Bell, Heart, Lock, Mail, Settings, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -20,6 +24,9 @@ export const PersonalSettings = () => {
 
   const { data, isPending, isError } = useUserProfile();
   const { account } = data ?? {};
+
+  const updateCommentNotification = useUpdateCommentNotification();
+  const updateLikeNotification = useUpdateLikeNotification();
 
   useEffect(() => {
     if (account) {
@@ -97,7 +104,19 @@ export const PersonalSettings = () => {
               </div>
               <Switch
                 checked={newCommentNotification}
-                onCheckedChange={setNewCommentNotification}
+                onCheckedChange={(checked) => {
+                  setNewCommentNotification(checked);
+                  updateCommentNotification.mutate(
+                    { enabled: checked },
+                    {
+                      onError: () => {
+                        setNewCommentNotification(!checked);
+                        alert('알림 설정 변경에 실패했습니다.');
+                      },
+                    },
+                  );
+                }}
+                disabled={updateCommentNotification.isPending}
               />
             </div>
             <div className='flex items-center justify-between'>
@@ -107,7 +126,19 @@ export const PersonalSettings = () => {
               </div>
               <Switch
                 checked={likeNoticeNotification}
-                onCheckedChange={setLikeNoticeNotification}
+                onCheckedChange={(checked) => {
+                  setLikeNoticeNotification(checked);
+                  updateLikeNotification.mutate(
+                    { enabled: checked },
+                    {
+                      onError: () => {
+                        setLikeNoticeNotification(!checked);
+                        alert('알림 설정 변경에 실패했습니다.');
+                      },
+                    },
+                  );
+                }}
+                disabled={updateLikeNotification.isPending}
               />
             </div>
           </div>

@@ -1,10 +1,12 @@
-import { Avatar, AvatarFallback } from '@/shared/ui/shadcn/avatar';
-import { Button } from '@/shared/ui/shadcn/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/ui/shadcn/dialog';
-import { Input } from '@/shared/ui/shadcn/input';
-import { Label } from '@/shared/ui/shadcn/label';
-import { Textarea } from '@/shared/ui/shadcn/textarea';
+import { useUserProfileEdit, useUpdateProfile } from '@/entities/user';
+import { Avatar, AvatarFallback } from '@/shared/ui/avatar';
+import { Button } from '@/shared/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/shared/ui/dialog';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
+import { Textarea } from '@/shared/ui/textarea';
 import { Save, X } from 'lucide-react';
+import { useEffect } from 'react';
 import { useProfileStore } from '../model/useProfileStore';
 
 const ChangeProfileInfoDialog = () => {
@@ -13,10 +15,36 @@ const ChangeProfileInfoDialog = () => {
     setIsModalOpen,
     profileData,
     handleInputChange,
-    handleSave,
     handleCancel,
     isChanged,
+    setProfileData,
   } = useProfileStore();
+
+  // API 훅
+  const { data: editData } = useUserProfileEdit();
+  const updateProfile = useUpdateProfile();
+
+  // 다이얼로그가 열릴 때 최신 데이터로 초기화
+  useEffect(() => {
+    if (isModalOpen && editData) {
+      setProfileData({
+        nickname: editData.nickname,
+        introduction: editData.introduction,
+      });
+    }
+  }, [isModalOpen, editData, setProfileData]);
+
+  // 저장 핸들러 수정
+  const handleSaveClick = async () => {
+    try {
+      await updateProfile.mutateAsync(profileData);
+      alert('프로필이 성공적으로 저장되었습니다.');
+      handleCancel(); // 다이얼로그 닫기
+    } catch (error) {
+      console.error('프로필 저장 실패:', error);
+      alert('프로필 저장에 실패했습니다.');
+    }
+  };
 
   return (
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
@@ -69,12 +97,12 @@ const ChangeProfileInfoDialog = () => {
               취소
             </Button>
             <Button
-              onClick={handleSave}
+              onClick={handleSaveClick}
               className='bg-green-600 hover:bg-green-700'
-              disabled={!isChanged}
+              disabled={!isChanged || updateProfile.isPending}
             >
               <Save className='mr-2 h-4 w-4' />
-              저장
+              {updateProfile.isPending ? '저장 중...' : '저장'}
             </Button>
           </div>
         </div>
