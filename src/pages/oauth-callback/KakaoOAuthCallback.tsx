@@ -23,6 +23,12 @@ export const KakaoOAuthCallback = () => {
         console.log('카카오 로그인', res);
 
         const { accessToken } = res.data;
+        if (!accessToken) {
+          console.error('accessToken이 응답에 없습니다:', res.data);
+          alert('로그인에 실패했습니다. 다시 시도해주세요.');
+          // navigate('/login');
+          return;
+        }
 
         login(accessToken);
         console.log(accessToken);
