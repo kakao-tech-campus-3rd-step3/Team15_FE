@@ -3,6 +3,7 @@ import { Badge } from '@/shared/ui//badge';
 import { Button } from '@/shared/ui/button';
 import { getTypeColor, getTypeLabel } from '../lib/notificationUtils';
 import type { Notification } from '../types/notification';
+import { formatDateRelative } from '@/shared/lib/date';
 
 interface TempProps {
   notifications: Notification[];
@@ -24,7 +25,7 @@ export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete
             <div
               key={notification.id}
               className={`rounded-lg border p-4 transition-colors ${
-                notification.isRead ? 'bg-white' : 'border-green-200 bg-green-50'
+                notification.read ? 'bg-white' : 'border-green-200 bg-green-50'
               }`}
             >
               <div className='mb-2 flex items-start justify-between'>
@@ -32,18 +33,20 @@ export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete
                   <Badge className={getTypeColor(notification.type)} variant='secondary'>
                     {getTypeLabel(notification.type)}
                   </Badge>
-                  {!notification.isRead && (
+                  {!notification.read && (
                     <div className='h-2 w-2 animate-pulse rounded-full bg-green-500'></div>
                   )}
                 </div>
-                <span className='text-xs text-gray-500'>{notification.time}</span>
+                <span className='text-xs text-gray-500'>
+                  {formatDateRelative(notification.createdAt)}
+                </span>
               </div>
 
-              <h4 className='mb-1 font-semibold text-gray-900'>{notification.title}</h4>
-              <p className='mb-3 text-sm text-gray-600'>{notification.message}</p>
+              <h4 className='mb-1 font-semibold text-gray-900'>{notification.payload}</h4>
+              {/* <p className='mb-3 text-sm text-gray-600'>{notification.payload}</p> */}
 
               <div className='flex items-center gap-2'>
-                {!notification.isRead && (
+                {!notification.read && (
                   <Button
                     variant='outline'
                     size='sm'

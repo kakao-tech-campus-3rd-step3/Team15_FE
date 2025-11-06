@@ -5,67 +5,99 @@ import type { Notification } from '@/features/notification/types/notification';
 let mockNotifications: Notification[] = [
   {
     id: 1,
-    title: '새로운 미션이 도착했어요!',
-    message: "오늘의 미션 '하루 30분 산책하기'를 시작해보세요.",
-    time: '5분 전',
-    isRead: false,
-    type: 'mission',
+    type: 'MISSION',
+    actorId: 0,
+    actorNickname: '시스템',
+    receiverId: 1,
+    targetId: 101,
+    targetType: 'MISSION',
+    payload: "오늘의 미션 '하루 30분 산책하기'를 시작해보세요.",
+    createdAt: '2025-11-06T:55:00.000000',
+    read: false,
   },
   {
     id: 2,
-    title: '댓글이 달렸어요',
-    message: '김철수님이 회원님의 글에 댓글을 남겼습니다.',
-    time: '1시간 전',
-    isRead: false,
-    type: 'comment',
+    type: 'COMMENT',
+    actorId: 3,
+    actorNickname: '김철수',
+    receiverId: 1,
+    targetId: 16,
+    targetType: 'POST',
+    payload: '회원님의 글에 댓글이 달렸습니다.',
+    createdAt: '2025-11-06T00:00:00.000000',
+    read: false,
   },
   {
     id: 3,
-    title: '좋아요를 받았어요',
-    message: "회원님의 글 '개발자 모임 후기'에 좋아요 5개가 추가되었습니다.",
-    time: '2시간 전',
-    isRead: true,
-    type: 'like',
+    type: 'LIKE',
+    actorId: 4,
+    actorNickname: '유저A',
+    receiverId: 1,
+    targetId: 20,
+    targetType: 'POST',
+    payload: "회원님의 글 '개발자 모임 후기'에 좋아요 5개가 추가되었습니다.",
+    createdAt: '2025-11-05T17:00:00.000000',
+    read: true,
   },
   {
     id: 4,
-    title: '미션 완료!',
-    message: "'하루 10분 명상하기' 미션을 완료했습니다. 50 포인트를 획득했어요!",
-    time: '어제',
-    isRead: true,
-    type: 'mission',
+    type: 'MISSION',
+    actorId: 0,
+    actorNickname: '시스템',
+    receiverId: 1,
+    targetId: 102,
+    targetType: 'MISSION',
+    payload: "'하루 10분 명상하기' 미션을 완료했습니다. 50 포인트를 획득했어요!",
+    createdAt: '2025-11-05T15:00:00.000000',
+    read: true,
   },
   {
     id: 5,
-    title: '시스템 공지',
-    message: '새로운 기능이 추가되었습니다. 확인해보세요!',
-    time: '2일 전',
-    isRead: false,
-    type: 'system',
+    type: 'SYSTEM',
+    actorId: 0,
+    actorNickname: '시스템',
+    receiverId: 1,
+    targetId: 0,
+    targetType: 'SYSTEM',
+    payload: '새로운 기능이 추가되었습니다. 확인해보세요!',
+    createdAt: '2025-11-04T12:00:00.000000',
+    read: false,
   },
   {
     id: 6,
-    title: '새로운 댓글',
-    message: '이영희님이 회원님의 댓글에 답글을 남겼습니다.',
-    time: '3일 전',
-    isRead: true,
-    type: 'comment',
+    type: 'COMMENT',
+    actorId: 5,
+    actorNickname: '이영희',
+    receiverId: 1,
+    targetId: 17,
+    targetType: 'POST',
+    payload: '회원님의 댓글에 답글을 남겼습니다.',
+    createdAt: '2025-11-03T12:00:00.000000',
+    read: true,
   },
   {
     id: 7,
-    title: '미션 알림',
-    message: '연속 7일 미션 달성! 특별 뱃지를 획득했습니다.',
-    time: '4일 전',
-    isRead: true,
-    type: 'mission',
+    type: 'MISSION',
+    actorId: 0,
+    actorNickname: '시스템',
+    receiverId: 1,
+    targetId: 103,
+    targetType: 'MISSION',
+    payload: '연속 7일 미션 달성! 특별 뱃지를 획득했습니다.',
+    createdAt: '2025-11-02T12:00:00.000000',
+    read: true,
   },
   {
     id: 8,
-    title: '좋아요 알림',
-    message: '회원님의 댓글에 좋아요 3개가 추가되었습니다.',
-    time: '5일 전',
-    isRead: true,
-    type: 'like',
+    type: 'LIKE',
+    actorId: 6,
+    actorNickname: '유저B',
+    receiverId: 1,
+    targetId: 21,
+    targetType: 'POST',
+    payload: '회원님의 댓글에 좋아요 3개가 추가되었습니다.',
+    createdAt: '2025-11-01T12:00:00.000000',
+    read: true,
   },
 ];
 
@@ -77,7 +109,7 @@ export const notificationHandlers = [
 
   // 읽지 않은 알림 수 조회
   http.get('/api/notifications/unread-count', () => {
-    const unreadCount = mockNotifications.filter((n) => !n.isRead).length;
+    const unreadCount = mockNotifications.filter((n) => !n.read).length;
     return HttpResponse.json({ unreadCount }, { status: 200 });
   }),
 
@@ -90,13 +122,13 @@ export const notificationHandlers = [
       return HttpResponse.json({ message: '해당 알림을 찾을 수 없습니다.' }, { status: 404 });
     }
 
-    target.isRead = true;
+    target.read = true;
     return new HttpResponse(null, { status: 204 });
   }),
 
   // 전체 읽음 처리
   http.patch('/api/notifications/read', async () => {
-    mockNotifications = mockNotifications.map((n) => ({ ...n, isRead: true }));
+    mockNotifications = mockNotifications.map((n) => ({ ...n, read: true }));
     return new HttpResponse(null, { status: 204 });
   }),
 

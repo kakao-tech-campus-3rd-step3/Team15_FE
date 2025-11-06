@@ -1,10 +1,15 @@
-export type NotificationType = 'mission' | 'comment' | 'like' | 'system';
+export type NotificationType = 'MISSION' | 'COMMENT' | 'LIKE' | 'REPLY' | 'SYSTEM';
+export type TargetType = 'POST' | 'COMMENT' | 'MISSION' | 'SYSTEM';
 
 export interface Notification {
   id: number;
-  title: string;
-  message: string;
-  time: string;
-  isRead: boolean;
   type: NotificationType;
+  actorId: number;
+  actorNickname: string;
+  receiverId: number;
+  targetId: number;
+  targetType: TargetType;
+  payload: string;
+  createdAt: string;
+  read: boolean;
 }
