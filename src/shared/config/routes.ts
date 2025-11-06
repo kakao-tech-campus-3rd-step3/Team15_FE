@@ -16,6 +16,7 @@ export const ROUTES = {
   support: '/support',
   supportDetail: '/support/:id',
   chatBot: '/chatbot',
+  oauthGoogle: '/oauth/callback/google',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [
