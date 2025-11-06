@@ -13,8 +13,9 @@ export const commentHandlers = [
           postId: Number(postId),
           author: '새싹이',
           handle: '@ayk974',
-          authorTag: 'AUTHOR',
+          authorTag: 'AI',
           content: '댓글 내용입니다',
+          isAuthor: true,
           isAnonymous: false,
           createdAt: '2025-09-14T20:40:54.94442',
           updatedAt: '2025-09-14T20:40:54.94442',
@@ -79,5 +80,54 @@ export const commentHandlers = [
       return HttpResponse.json(multiComments);
     }
     return HttpResponse.json(singleComment);
+  }),
+  // 대댓글 조회 핸들러
+  http.get('/api/posts/:parentId/replies', () => {
+    const mockReplies = [
+      {
+        id: 2,
+        postId: 1,
+        content: '대댓글 내용입니다',
+        author: 'test',
+        authorTag: 'AUTHOR',
+        isAuthor: true,
+        createdAt: '2025-09-14T02:43:48.504354',
+        updatedAt: '2025-09-14T02:43:48.504354',
+        children: [],
+        deleted: false,
+      },
+      {
+        id: 3,
+        postId: 1,
+        content: '대댓글 내용입니다',
+        author: 'test',
+        createdAt: '2025-09-14T02:43:50.672712',
+        updatedAt: '2025-09-14T02:43:50.672712',
+        children: [],
+        deleted: false,
+      },
+      {
+        id: 4,
+        postId: 1,
+        content: '추가 대댓글 예시입니다',
+        author: 'user123',
+        createdAt: '2025-09-15T12:00:00.000000',
+        updatedAt: '2025-09-15T12:00:00.000000',
+        children: [],
+        deleted: false,
+      },
+      {
+        id: 5,
+        postId: 1,
+        content: '삭제된 대댓글 예시입니다',
+        author: '익명',
+        createdAt: '2025-09-15T12:05:00.000000',
+        updatedAt: '2025-09-15T12:05:00.000000',
+        children: [],
+        deleted: true,
+      },
+    ];
+
+    return HttpResponse.json(mockReplies);
   }),
 ];

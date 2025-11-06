@@ -1,0 +1,29 @@
+import { useSupportListQuery } from '@/entities/support/model/useSupportListQuery';
+import type { SupportProgram } from '@/entities/support/model/supportProgram.type';
+import SupportProgramCard from '@/widgets/SupportProgramCard/ui/SupportProgramCard';
+
+interface SupportProgramListProps {
+  limit?: number;
+}
+
+export function SupportProgramList({ limit }: SupportProgramListProps) {
+  const { data } = useSupportListQuery();
+  const items: SupportProgram[] = Array.isArray(data) ? (data as SupportProgram[]) : data.items;
+  const displayedItems = limit ? items.slice(0, limit) : items;
+
+  if (!items || items.length === 0) {
+    return (
+      <div className='rounded-xl border p-10 px-6 text-center text-slate-500'>
+        표시할 지원사업이 없습니다.
+      </div>
+    );
+  }
+
+  return (
+    <div className='grid gap-6 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'>
+      {displayedItems.map((p) => (
+        <SupportProgramCard key={p.id} program={p} />
+      ))}
+    </div>
+  );
+}

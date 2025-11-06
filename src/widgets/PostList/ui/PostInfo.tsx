@@ -1,8 +1,15 @@
 import { ViewSwitch } from '@/features/switch-post-view';
 import { ParamsBar } from '@/features/search-posts/ui/ParamsBar';
 import type { PostStatisticsProps } from '../model/type';
+import type { ViewMode } from '@/features/switch-post-view/ui/ViewSwitch';
 
-export function PostInfo({ className, params, onParamsChange }: PostStatisticsProps) {
+export function PostInfo({
+  className,
+  params,
+  onParamsChange,
+  view,
+  onViewChange,
+}: PostStatisticsProps & { view?: ViewMode; onViewChange?: (v: ViewMode) => void }) {
   return (
     <div className={`flex items-center px-5 ${className ?? ''}`}>
       {/* 좌측: 탭 (가로 스크롤 허용) */}
@@ -32,7 +39,7 @@ export function PostInfo({ className, params, onParamsChange }: PostStatisticsPr
 
       {/* 우측: 툴바 */}
       <div className='ml-3 flex items-center gap-3 border-l pl-3'>
-        <ViewSwitch />
+        <ViewSwitch value={view} onChange={onViewChange} />
       </div>
     </div>
   );

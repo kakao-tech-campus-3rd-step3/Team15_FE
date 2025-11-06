@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/utils';
-import { TextSkeleton } from '@/shared/ui/skeleton/primitives';
+import { TextSkeleton } from '@/shared/ui/skeleton/primitives.skeleton';
 
 export function PostCardSkeleton({ className }: { className?: string }) {
   return (
