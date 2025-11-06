@@ -27,13 +27,14 @@ export const getColorClasses = (color: string, earned = true) => {
   return colors[color] || colors.gray;
 };
 
-export const getRarityColor = (rarity: string) => {
+export const getBadgeKindColor = (kind: string) => {
   const colors: Record<string, string> = {
     일반: 'bg-gray-100 text-gray-700',
-    희귀: 'bg-blue-100 text-blue-700',
-    전설: 'bg-purple-100 text-purple-700',
-    특별: 'bg-yellow-100 text-yellow-700',
+    LOVE_EVANGELIST: 'bg-red-100 text-red-700',
+    DILIGENT_COMMENTER: 'bg-purple-100 text-purple-700',
+    MISSION_KILLER: 'bg-yellow-100 text-yellow-700',
+    PERFECT_ATTENDANCE: 'bg-green-100 text-green-700',
   };
 
-  return colors[rarity] || colors.일반;
+  return colors[kind] || colors.일반;
 };

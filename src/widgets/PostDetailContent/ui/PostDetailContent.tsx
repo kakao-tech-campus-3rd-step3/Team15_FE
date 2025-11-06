@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { usePostDetailQuery, PostDetail } from '@/entities/post';
 import { AddCommentForm } from '@/features/add-comment/';
-// import { CommentList } from '@/entities/comment';
+import { CommentList } from '@/entities/comment';
 import { useToggleLike } from '@/features/like-post';
 import { EditPostForm, useUpdatePost, type PostEditValues } from '@/features/edit-post';
 import { Button } from '@/shared/ui/button';
@@ -82,7 +82,7 @@ export function PostDetailContent({ postId }: Props) {
       {!isRevise && (
         <>
           <AddCommentForm postId={postId} />
-          {/* <CommentList postId={postId} /> */}
+          <CommentList postId={postId} />
         </>
       )}
       <ConfirmDeleteModal

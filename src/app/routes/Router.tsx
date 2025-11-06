@@ -12,6 +12,10 @@ import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
 import { MissionPage } from '@/pages/mission';
 import AuthGuard from './AuthGuard';
+import { SupportPage } from '@/pages/support';
+import { SupportDetailPage } from '@/pages/support-detail';
+import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
+import ChatLayout from '../layout/ChatLayout';
 
 function Router() {
   return (
@@ -21,8 +25,10 @@ function Router() {
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
           <Route path={ROUTES.login} element={<AuthPage />} />
-          <Route path={ROUTES.createpost} element={<Post />} />
+          <Route path={ROUTES.support} element={<SupportPage />} />
+          <Route path={ROUTES.supportDetail} element={<SupportDetailPage />} />
           <Route element={<AuthGuard />}>
+            <Route path={ROUTES.createpost} element={<Post />} />
             <Route path={ROUTES.activity} element={<ActivityPage />} />
             <Route path={ROUTES.badge} element={<BadgePage />} />
             <Route path={ROUTES.my} element={<MyPage />} />
@@ -30,6 +36,9 @@ function Router() {
           <Route path={ROUTES.postdetail} element={<PostDetailPage />} />
           <Route path={ROUTES.badge} element={<BadgePage />} />
           <Route path={ROUTES.mission} element={<MissionPage />} />
+        </Route>
+        <Route element={<ChatLayout />}>
+          <Route path={ROUTES.chatBot} element={<ChatbotPage />} />
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>

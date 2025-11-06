@@ -6,16 +6,21 @@ import { PostCard } from './PostCard';
 import { EmptyState } from '@/shared/ui/states/EmptyState';
 import { Search } from 'lucide-react';
 import { ROUTES } from '@/shared/config';
+import type { ViewMode } from '@/features/switch-post-view/ui/ViewSwitch';
 
 export function PostListInHeartNews({
   className = '',
   params,
   showPagination = true,
   limit,
-}: PostListInHeartNewsProps) {
+  view,
+}: PostListInHeartNewsProps & { view?: ViewMode }) {
   const { data, page, setPage } = useSearchPosts(params);
 
   const list = limit ? data.content.slice(0, limit) : data.content;
+
+  const isList = view === 'list';
+  const gridCols = isList ? 'grid-cols-1' : 'sm:grid-cols-2 lg:grid-cols-3';
 
   if (!list || list.length === 0) {
     return (
@@ -32,7 +37,7 @@ export function PostListInHeartNews({
   }
 
   return (
-    <div className={className + ' grid gap-4 px-6 pb-10 sm:grid-cols-2 lg:grid-cols-3'}>
+    <div className={`${className} grid gap-4 px-6 pb-10 ${gridCols}`}>
       {list.map((p) => (
         <PostCard key={p.id} post={p} />
       ))}

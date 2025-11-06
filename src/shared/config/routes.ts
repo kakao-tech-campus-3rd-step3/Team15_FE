@@ -1,4 +1,4 @@
-import { NotebookText, Home, MessageCircle, FileText } from 'lucide-react';
+import { NotebookText, Home, MessageCircle, FileText, Bot } from 'lucide-react';
 
 export const ROUTES = {
   landing: '/',
@@ -14,6 +14,8 @@ export const ROUTES = {
   badge: '/badges',
   mission: '/mission',
   support: '/support',
+  supportDetail: '/support/:id',
+  chatBot: '/chatbot',
 } as const;
 
 export const ROUTE_LIST: { label: string; path: string }[] = [
@@ -52,5 +54,10 @@ export const MENU_ITEMS = [
     title: '지원사업',
     url: ROUTES.support,
     icon: FileText,
+  },
+  {
+    title: '상담챗봇',
+    url: ROUTES.chatBot,
+    icon: Bot,
   },
 ];
