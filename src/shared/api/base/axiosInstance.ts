@@ -34,6 +34,9 @@ const publicRules: PublicRule[] = [
   { pattern: /^\/auth\/email\/verify$/, methods: ['post'] },
   { pattern: /^\/auth\/google\/url$/, methods: ['get'] },
   { pattern: /^\/auth\/logout$/, methods: ['post'] },
+  { pattern: /^\/auth\/kakao\/url$/, methods: ['get'] },
+  { pattern: /^\/auth\/kakao\/url$/, methods: ['get'] },
+  { pattern: /^\/auth\/kakao\/callback(\/)?(\?.*)?$/, methods: ['get'] },
 
   // 미션 관련
 
