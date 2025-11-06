@@ -4,14 +4,28 @@ import { Button } from '@/shared/ui/button';
 import { getTypeColor, getTypeLabel } from '../lib/notificationUtils';
 import type { Notification } from '../types/notification';
 import { formatDateRelative } from '@/shared/lib/date';
+import { useNavigate } from 'react-router-dom';
+import { getTargetUrl } from '../lib/getTargetUrl';
 
 interface TempProps {
   notifications: Notification[];
   handleMarkAsRead: (id: number) => void;
   handleDelete: (id: number) => void;
+  setIsOpen: (open: boolean) => void;
 }
 
-export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete }: TempProps) => {
+export const NotificationList = ({
+  notifications,
+  handleMarkAsRead,
+  handleDelete,
+  setIsOpen,
+}: TempProps) => {
+  const navigate = useNavigate();
+  const handleCardClick = (notification: Notification) => {
+    const url = getTargetUrl(notification);
+    setIsOpen(false);
+    navigate(url);
+  };
   return (
     <div className='flex-1 overflow-y-auto'>
       <div className='space-y-3 p-4'>
@@ -24,8 +38,11 @@ export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete
           notifications.map((notification) => (
             <div
               key={notification.id}
-              className={`rounded-lg border p-4 transition-colors ${
-                notification.read ? 'bg-white' : 'border-green-200 bg-green-50'
+              onClick={() => handleCardClick(notification)}
+              className={`cursor-pointer rounded-lg border p-4 transition-colors ${
+                notification.read
+                  ? 'bg-white hover:bg-gray-50'
+                  : 'border-green-200 bg-green-50 hover:bg-green-100'
               }`}
             >
               <div className='mb-2 flex items-start justify-between'>
@@ -43,14 +60,16 @@ export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete
               </div>
 
               <h4 className='mb-1 font-semibold text-gray-900'>{notification.payload}</h4>
-              {/* <p className='mb-3 text-sm text-gray-600'>{notification.payload}</p> */}
 
-              <div className='flex items-center gap-2'>
+              <div className='mt-2 flex items-center gap-2'>
                 {!notification.read && (
                   <Button
                     variant='outline'
                     size='sm'
-                    onClick={() => handleMarkAsRead(notification.id)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // 클릭 이벤트 버블링 방지
+                      handleMarkAsRead(notification.id);
+                    }}
                     className='border-green-300 text-green-600 hover:bg-green-50'
                   >
                     <Check className='mr-1 h-3 w-3' />
@@ -60,7 +79,10 @@ export const NotificationList = ({ notifications, handleMarkAsRead, handleDelete
                 <Button
                   variant='outline'
                   size='sm'
-                  onClick={() => handleDelete(notification.id)}
+                  onClick={(e) => {
+                    e.stopPropagation(); // 클릭 시 카드 이동 막기
+                    handleDelete(notification.id);
+                  }}
                   className='border-red-300 text-red-600 hover:bg-red-50'
                 >
                   <Trash2 className='mr-1 h-3 w-3' />

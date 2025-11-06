@@ -87,6 +87,7 @@ export function NotificationModal() {
           notifications={notifications}
           handleDelete={handleDelete}
           handleMarkAsRead={handleMarkAsRead}
+          setIsOpen={setIsOpen}
         />
       </DialogContent>
     </Dialog>
