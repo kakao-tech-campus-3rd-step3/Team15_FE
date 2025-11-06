@@ -9,7 +9,7 @@ import {
 
 export function GuideFAQSection() {
   return (
-    <section className='mx-auto mb-16 max-w-3xl'>
+    <section className='mx-auto mb-16 max-w-6xl'>
       <AnimatedSection from='left'>
         <h2 className='text-2xl font-bold'>자주 묻는 질문</h2>
         <p className='text-muted-foreground mt-2 text-sm'>핵심 기능에 대한 빠른 답변을 모았어요.</p>

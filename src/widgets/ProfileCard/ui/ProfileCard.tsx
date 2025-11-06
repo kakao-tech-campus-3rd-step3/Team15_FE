@@ -9,6 +9,7 @@ import { Award, Edit3, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SmallBadge from './SmallBadge';
 import { StatCard } from '@/shared/ui/stat-card';
+import { getLevelProgress } from '../util/levelUtils';
 
 export const ProfileCard = () => {
   const { setIsModalOpen } = useProfileStore();
@@ -35,6 +36,7 @@ export const ProfileCard = () => {
     { label: '좋아요 받은 수', value: stats.totalLikes, color: 'text-red-600' },
     { label: '완료한 미션', value: stats.totalMissionClear, color: 'text-blue-600' },
   ];
+  const { progress, remainPercent } = getLevelProgress(user.points);
 
   return (
     <Card className='border-green-200 bg-gradient-to-r from-green-50 to-emerald-50'>
@@ -64,7 +66,7 @@ export const ProfileCard = () => {
             <p className='mb-2 text-sm text-gray-600'>{profileEdit?.introduction}</p>
             <div className='flex items-center space-x-4 text-sm text-gray-500'>
               <span>가입일: {joinDate}</span>
-              <span>활동점수: {user.score}점</span>
+              <span>활동점수: {user.points}점</span>
               <span>레벨: {user.level}레벨</span>
             </div>
           </div>
@@ -96,10 +98,10 @@ export const ProfileCard = () => {
               {user.level}레벨 → {user.level + 1}레벨
             </span>
           </div>
-          <Progress value={(1200 / 2000) * 100} className='mb-2 h-3' />
+          <Progress value={progress} className='mb-2 h-3' />
           {/* 추후 테이블로 리팩토링 */}
           <p className='text-sm text-gray-600'>
-            다음 레벨까지 {(1 - 1200 / 2000) * 100}% 남았어요!
+            다음 레벨까지 {remainPercent.toFixed(1)}% 남았어요!
           </p>
         </div>
 
