@@ -49,7 +49,6 @@ function Router() {
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
-      {process.env.NODE_ENV === 'development' && <DevPanel />}
     </BrowserRouter>
   );
 }
