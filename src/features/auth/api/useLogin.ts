@@ -15,7 +15,7 @@ export const useLogin = () => {
     onSuccess: (data: LoginResponse) => {
       // accessToken을 상태 관리로 저장
       loginStore(data.accessToken);
-      alert('로그인 성공, 메인페이지로 이동합니다.');
+      // alert('로그인 성공, 메인페이지로 이동합니다.');
       navigate(ROUTES.landing);
     },
     onError: (error) => {

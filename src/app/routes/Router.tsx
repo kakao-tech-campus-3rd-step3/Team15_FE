@@ -16,8 +16,8 @@ import { SupportPage } from '@/pages/support';
 import { SupportDetailPage } from '@/pages/support-detail';
 import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
 import ChatLayout from '../layout/ChatLayout';
-import GoogleOAuthCallback from '@/pages/oauth-callback/GoogleOAuthCallback';
-import { KakaoOAuthCallback } from '@/pages/oauth-callback/KakaoOAuthCallback';
+import GoogleOAuthCallback from '@/pages/OAuthCallback/GoogleOAuthCallback';
+import { KakaoOAuthCallback } from '@/pages/OAuthCallback/KakaoOAuthCallback';
 
 function Router() {
   return (
@@ -26,6 +26,8 @@ function Router() {
         <Route element={<AppLayout />}>
           <Route path={ROUTES.oauthGoogle} element={<GoogleOAuthCallback />} />
           <Route path='/kakao/login/callback' element={<KakaoOAuthCallback />} />
+
+          <Route path='/oauth/callback/kakao' element={<GoogleOAuthCallback />} />
 
           <Route path={ROUTES.landing} element={<LandingPage />} />
           <Route path={ROUTES.post} element={<HeartNewsPage />} />
@@ -47,7 +49,7 @@ function Router() {
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
-      {/* <DevPanel /> */}
+      {process.env.NODE_ENV === 'development' && <DevPanel />}
     </BrowserRouter>
   );
 }

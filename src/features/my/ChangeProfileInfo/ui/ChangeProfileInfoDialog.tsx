@@ -87,7 +87,7 @@ const ChangeProfileInfoDialog = () => {
               maxLength={200}
             />
             <p className='text-right text-xs text-gray-500'>
-              {profileData.introduction.length}/200자
+              {profileData.introduction?.length}/200자
             </p>
           </div>
 

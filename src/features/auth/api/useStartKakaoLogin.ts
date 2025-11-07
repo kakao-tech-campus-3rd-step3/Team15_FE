@@ -11,7 +11,9 @@ export const startKakaoLoginMutationOptions = () => {
     mutationFn: fetchKakaoLoginUrl,
     onSuccess: (url) => {
       if (!url) throw new Error('로그인 url을 받지 못했습니다.');
-      window.location.href = url;
+      // 프론트에서 prompt=consent 붙이기
+      const urlWithConsent = `${url}&prompt=login`;
+      window.location.href = urlWithConsent;
     },
     onError: (error) => {
       console.log('카카오 로그인 시작 실패', error);

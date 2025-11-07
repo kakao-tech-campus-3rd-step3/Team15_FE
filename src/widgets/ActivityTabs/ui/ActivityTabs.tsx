@@ -18,7 +18,7 @@ export const ActivityTabs = () => {
   if (isError || !data) return <div>데이터를 불러오지 못했습니다.</div>;
 
   const { comments, likePosts, posts } = data ?? {}; //추후 select 이용해서 리팩토링
-
+  console.log(likePosts);
   return (
     <Card>
       <CardHeader>
@@ -92,14 +92,23 @@ export const ActivityTabs = () => {
           <TabsContent value='likes' className='mt-6 space-y-4'>
             {likePosts.map((post) => (
               <div
-                key={post.likeId}
+                key={post.postId}
                 className='rounded-lg border p-4 transition-colors hover:bg-gray-50'
               >
                 <div className='mb-2 flex items-start justify-between'>
                   <h4 className='font-medium text-gray-900'>{post.title}</h4>
                   <span className='text-sm text-gray-500'>{formatDate(post.createdAt)}</span>
                 </div>
-                <p className='text-sm text-gray-600'>작성자: {'null'}</p>
+                <div className='flex items-center space-x-4 text-sm text-gray-600'>
+                  <span className='flex items-center'>
+                    <Heart className='mr-1 h-4 w-4' />
+                    {post.likeCount}
+                  </span>
+                  <span className='flex items-center'>
+                    <MessageCircle className='mr-1 h-4 w-4' />
+                    {post.commentCount}
+                  </span>
+                </div>
               </div>
             ))}
           </TabsContent>

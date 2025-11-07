@@ -15,7 +15,7 @@ export const useSignup = (onSuccess?: () => void) => {
   return useMutation({
     mutationFn: (data: PostSignupParams) => postSignup(data),
     onSuccess: () => {
-      alert('회원가입 완료');
+      // alert('회원가입 완료');
       onSuccess?.();
     },
     onError: (error) => {
