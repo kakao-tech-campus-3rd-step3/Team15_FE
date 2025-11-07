@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "http://api.hyuswim.com:8080/api/$1"
+      "destination": "https://api.hyuswim.com:8080/api/$1"
     },
     { "source": "/(.*)", "destination": "/" }
   ]
