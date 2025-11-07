@@ -22,7 +22,7 @@ export function BadgeCard({ badge }: { badge: BadgeType }) {
           <img
             src={`${BASE_URL}${badge.iconUrl}`}
             alt={badge.name}
-            className='h-10 w-10 object-contain'
+            className='h-full w-full object-cover'
           />
         </div>
 
