@@ -1,11 +1,10 @@
 import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
-import type { BaseBadge, EarnedBadge } from '../types/badge';
 import { getBadgeKindColor } from '../lib/badgeUtils';
+import { BadgeImage } from '../api/badgeImage';
+import type { BadgeType } from '../types/badge';
 
 // 획득 여부에 따라 스타일을 달리 보여주는 공통 배지 카드
-type BadgeType = BaseBadge | EarnedBadge;
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function BadgeCard({ badge }: { badge: BadgeType }) {
   const isEarned = 'earnedAt' in badge;
@@ -19,11 +18,7 @@ export function BadgeCard({ badge }: { badge: BadgeType }) {
       <CardContent className='flex items-center space-x-4 p-6'>
         {/* 배지 아이콘 */}
         <div className='flex h-16 w-16 items-center justify-center rounded-full bg-gray-100'>
-          <img
-            src={`${BASE_URL}${badge.iconUrl}`}
-            alt={badge.name}
-            className='h-full w-full object-cover'
-          />
+          <BadgeImage badge={badge} />
         </div>
 
         {/* 텍스트 영역 */}
