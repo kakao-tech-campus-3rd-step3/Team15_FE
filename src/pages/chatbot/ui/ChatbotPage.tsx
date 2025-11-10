@@ -157,7 +157,13 @@ export function ChatbotPage() {
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isInitialLoading}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && !isInitialLoading && !isSending) {
+              if (
+                e.key === 'Enter' &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing &&
+                !isInitialLoading &&
+                !isSending
+              ) {
                 const text = inputValue.trim();
                 if (!text) return;
                 e.preventDefault();
@@ -181,12 +187,11 @@ export function ChatbotPage() {
               const text = inputValue.trim();
               if (!text) return;
               setShowSuggestions(false);
-              // Optimistic update: show user's message immediately
+              // Optimistic update: show user message immediately and clear input fully
               setMessages((prev) => [...prev, { role: 'user', content: text }]);
               setInputValue('');
               sendMutation.mutate(text, {
                 onSuccess: (data: { reply: string }) => {
-                  // Append only the AI reply when it arrives
                   setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
                 },
               });
