@@ -155,7 +155,22 @@ export function ChatbotPage() {
             className={cn('h-11 flex-1')}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            disabled={isSending || isInitialLoading}
+            disabled={isInitialLoading}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey && !isInitialLoading && !isSending) {
+                const text = inputValue.trim();
+                if (!text) return;
+                e.preventDefault();
+                setShowSuggestions(false);
+                setMessages((prev) => [...prev, { role: 'user', content: text }]);
+                setInputValue('');
+                sendMutation.mutate(text, {
+                  onSuccess: (data: { reply: string }) => {
+                    setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
+                  },
+                });
+              }
+            }}
           />
           <Button
             size='icon'
@@ -166,14 +181,13 @@ export function ChatbotPage() {
               const text = inputValue.trim();
               if (!text) return;
               setShowSuggestions(false);
+              // Optimistic update: show user's message immediately
+              setMessages((prev) => [...prev, { role: 'user', content: text }]);
+              setInputValue('');
               sendMutation.mutate(text, {
                 onSuccess: (data: { reply: string }) => {
-                  setMessages((prev) => [
-                    ...prev,
-                    { role: 'user', content: text },
-                    { role: 'ai', content: data.reply },
-                  ]);
-                  setInputValue('');
+                  // Append only the AI reply when it arrives
+                  setMessages((prev) => [...prev, { role: 'ai', content: data.reply }]);
                 },
               });
             }}
