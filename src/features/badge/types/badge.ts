@@ -17,6 +17,4 @@ export interface BadgeResponse {
   allBadges: BaseBadge[];
 }
 
-export type BadgeType = (BaseBadge | EarnedBadge) & {
-  status: 'earned' | 'unearned';
-};
+export type BadgeType = BaseBadge | EarnedBadge;
