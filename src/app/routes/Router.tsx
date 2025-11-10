@@ -18,6 +18,8 @@ import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
 import ChatLayout from '../layout/ChatLayout';
 import GoogleOAuthCallback from '@/pages/OAuthCallback/GoogleOAuthCallback';
 import { KakaoOAuthCallback } from '@/pages/OAuthCallback/KakaoOAuthCallback';
+import ErrorBoundary from '@/shared/ui/boundary/ErrorBoundary';
+import FallbackError from '@/shared/ui/states/FallbackError';
 
 function Router() {
   return (
@@ -45,7 +47,14 @@ function Router() {
           <Route path={ROUTES.mission} element={<MissionPage />} />
         </Route>
         <Route element={<ChatLayout />}>
-          <Route path={ROUTES.chatBot} element={<ChatbotPage />} />
+          <Route
+            path={ROUTES.chatBot}
+            element={
+              <ErrorBoundary fallback={FallbackError}>
+                <ChatbotPage />
+              </ErrorBoundary>
+            }
+          />
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
