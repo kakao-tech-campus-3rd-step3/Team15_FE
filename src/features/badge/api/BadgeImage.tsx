@@ -6,19 +6,36 @@ export const BadgeImage = ({ badge }: { badge: BadgeType }) => {
   const [imageSrc, setImageSrc] = useState<string>('');
 
   useEffect(() => {
+    if (!badge.iconUrl) return;
+
+    const controller = new AbortController();
+    let objectUrl: string | null = null;
+
     const fetchImage = async () => {
       try {
-        const res = await axios.get(`${badge.iconUrl}`, {
-          responseType: 'blob', // 이미지 바이너리로 받음
+        const res = await axios.get(badge.iconUrl, {
+          responseType: 'blob',
+          signal: controller.signal,
         });
-        const url = URL.createObjectURL(res.data);
-        setImageSrc(url);
+        objectUrl = URL.createObjectURL(res.data);
+        setImageSrc(objectUrl);
       } catch (err) {
-        console.error(err);
+        if (!axios.isCancel(err)) console.error(err);
       }
     };
+
     fetchImage();
+
+    return () => {
+      controller.abort();
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+        objectUrl = null; // 명시적으로 정리
+      }
+    };
   }, [badge.iconUrl]);
 
-  return <img src={imageSrc} alt={badge.name} className='h-full w-full object-cover' />;
+  return imageSrc ? (
+    <img src={imageSrc} alt={badge.name} className='h-full w-full object-cover' />
+  ) : null;
 };
