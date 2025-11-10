@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/images/(.*)",
+      "destination": "http://api.hyuswim.com:8080/images/$1"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "http://api.hyuswim.com:8080/api/$1"
     },
