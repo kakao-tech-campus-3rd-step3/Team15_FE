@@ -1,8 +1,8 @@
 import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import { getBadgeKindColor } from '../lib/badgeUtils';
-import { BadgeImage } from '../api/badgeImage';
 import type { BadgeType } from '../types/badge';
+import { BadgeImage } from '../api/BadgeImage';
 
 // 획득 여부에 따라 스타일을 달리 보여주는 공통 배지 카드
 
