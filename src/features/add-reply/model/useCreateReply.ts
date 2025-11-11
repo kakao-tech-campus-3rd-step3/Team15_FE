@@ -4,7 +4,7 @@ import type {
   CreateReplyResponse,
   CreateReplyVariables,
 } from '../../../entities/comment/model/reply.type';
-import { commentKeys } from '@/entities/comment/model/queryKeys';
+import { commentKeys, replyKeys } from '@/entities/comment/model/queryKeys';
 import { commentService } from '@/entities/comment/lib/commentService';
 
 export const useCreateReply = () => {
@@ -14,7 +14,8 @@ export const useCreateReply = () => {
     mutationFn: ({ parentId, data }) => commentService.postReplyComment(parentId, data),
     onSuccess: (_data, variables) => {
       const { parentId } = variables;
-      queryClient.invalidateQueries({ queryKey: commentKeys.listByPost(parentId) });
+      queryClient.invalidateQueries({ queryKey: replyKeys.listByPost(parentId) });
+      queryClient.refetchQueries({ queryKey: commentKeys.all });
     },
   });
 };

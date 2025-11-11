@@ -29,7 +29,6 @@ export function ReplyItem({
 }: ReplyItemProps) {
   const tag = reply.authorTag ? authorTagLabel[reply.authorTag] : null;
   const displayAuthor = reply.isAnonymous ? '익명' : reply.author;
-
   return (
     <li className='flex gap-3 p-3'>
       {/* <Avatar className='h-8 w-8'>
@@ -39,7 +38,10 @@ export function ReplyItem({
       </Avatar> */}
       <div className='flex-1'>
         <div className='flex items-center gap-2'>
-          <span className='text-sm font-medium'>{displayAuthor + ' ' + reply.handle}</span>
+          <span className='text-sm font-medium'>
+            {' '}
+            {reply.isAnonymous ? displayAuthor : displayAuthor + ' ' + reply.handle}
+          </span>
           <span className='text-muted-foreground inline-flex items-center gap-1.5 text-xs'>
             {tag && (
               <Badge
