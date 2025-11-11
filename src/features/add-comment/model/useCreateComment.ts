@@ -12,6 +12,9 @@ export function useCreateComment(postId: number) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
       queryClient.invalidateQueries({ queryKey: postKeys.detail(postId) });
+      if (postId) {
+        queryClient.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
+      }
     },
   });
 }
