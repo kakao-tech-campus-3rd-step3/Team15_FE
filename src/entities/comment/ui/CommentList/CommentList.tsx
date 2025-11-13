@@ -87,7 +87,7 @@ export function CommentList({ postId, className }: CommentListProps) {
   return (
     <Card className={className}>
       <CardHeader className='flex-row items-center justify-between space-y-0'>
-        <CardTitle>댓글 {items.length}</CardTitle>
+        <CardTitle>댓글</CardTitle>
       </CardHeader>
       <CardContent>
         {items.length === 0 ? (
