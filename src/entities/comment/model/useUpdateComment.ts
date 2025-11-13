@@ -15,10 +15,8 @@ export const useUpdateComment = () => {
     mutationFn: ({ commentId, body }: UpdateCommentVars) =>
       commentService.updateComment(commentId, body),
     onSuccess: (_data, variables) => {
-      const { commentId, postId } = variables as UpdateCommentVars;
-      // 개별 댓글 상세 및 목록 계열 무효화
-      qc.invalidateQueries({ queryKey: commentKeys.detail(commentId) });
-      qc.invalidateQueries({ queryKey: commentKeys.lists() });
+      const { postId } = variables as UpdateCommentVars;
+      // 개별 댓글 상세 및 목록 계열 무효화]
       if (postId) {
         qc.invalidateQueries({ queryKey: commentKeys.listByPost(postId) });
       }

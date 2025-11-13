@@ -8,7 +8,7 @@ export const useDeleteComment = () => {
   return useMutation({
     mutationFn: (commentId: number) => commentService.deleteComment(commentId),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: commentKeys.lists() });
+      qc.invalidateQueries({ queryKey: commentKeys.all });
     },
   });
 };
