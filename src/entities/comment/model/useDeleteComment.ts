@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { commentService } from '../lib/commentService';
-import { replyKeys } from './queryKeys';
+import { commentKeys, replyKeys } from './queryKeys';
 
 export const useDeleteComment = () => {
   const qc = useQueryClient();
@@ -9,6 +9,7 @@ export const useDeleteComment = () => {
     mutationFn: (commentId: number) => commentService.deleteComment(commentId),
 
     onSuccess: () => {
+      qc.invalidateQueries({ queryKey: commentKeys.all });
       qc.invalidateQueries({ queryKey: replyKeys.all });
     },
   });
