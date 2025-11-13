@@ -17,7 +17,9 @@ export function Header({ comment }: HeaderProps) {
 
   return (
     <div className='flex items-center gap-2 text-sm'>
-      <span className='font-medium'>{displayAuthor + ' ' + comment.handle}</span>
+      <span className='font-medium'>
+        {comment.isAnonymous ? displayAuthor : displayAuthor + ' ' + comment.handle}
+      </span>
 
       {tag && (
         <Badge
