@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { commentService } from '../lib/commentService';
-import { replyKeys } from './queryKeys';
+import { commentKeys, replyKeys } from './queryKeys';
 
 export const useUpdateComment = () => {
   const qc = useQueryClient();
@@ -20,7 +20,6 @@ export const useUpdateComment = () => {
       if (postId) {
         qc.invalidateQueries({ queryKey: commentKeys.all });
         qc.invalidateQueries({ queryKey: replyKeys.all });
-
       }
     },
   });
