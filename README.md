@@ -1,5 +1,18 @@
 # Team15_FE
 
+## 프로젝트 소개
+
+<img width="2690" height="1006" alt="image" src="https://github.com/user-attachments/assets/38b4d5ef-1135-457a-91aa-70eac07e4ad5" />
+<strong>고립·은둔 청년들</strong>이 다시 사회와 연결될 수 있도록 돕는 감정 공유 기반 커뮤니티입니다.
+
+## 개발 기간
+
+2025/09 ~ 2025/11
+
+## 시연 영상
+
+[![YouTube Video](https://img.youtube.com/vi/UfS9uYg0rpY/0.jpg?refresh=1)](https://youtu.be/UfS9uYg0rpY)
+
 ## 팀원 소개
 
 |                                 프로필 이미지                                 |  이름  |         역할         |                     GitHub                      |

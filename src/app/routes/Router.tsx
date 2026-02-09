@@ -1,3 +1,4 @@
+// import { DevPanel } from '@/shared/ui';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppLayout from '../layout/AppLayout';
 import { LandingPage } from '@/pages/landing';
@@ -11,7 +12,6 @@ import { ActivityPage } from '@/pages/activity';
 import { BadgePage } from '@/pages/badge';
 import { MissionPage } from '@/pages/mission';
 import AuthGuard from './AuthGuard';
-import { DevPanel } from '@/shared/ui/dev-panner/DevPanel';
 import { SupportPage } from '@/pages/support';
 import { SupportDetailPage } from '@/pages/support-detail';
 import { ChatbotPage } from '@/pages/chatbot/ui/ChatbotPage';
@@ -58,7 +58,6 @@ function Router() {
         </Route>
         <Route path={ROUTES.login} element={<AuthPage />} />
       </Routes>
-      {process.env.NODE_ENV === 'development' && <DevPanel />}
     </BrowserRouter>
   );
 }

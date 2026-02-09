@@ -6,7 +6,7 @@
     },
     {
       "source": "/api/(.*)",
-      "destination": "http://98.80.129.245:8080/api/$1"
+      "destination": "http://api.hyuswim.com:8080/api/$1"
     },
     { "source": "/(.*)", "destination": "/" }
   ]
